@@ -1,0 +1,367 @@
+import express from 'express';
+import cors from 'cors';
+
+const app = express();
+
+app.use(cors());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'online',
+    app: 'APEX-QA™ Serverless Engine (Vercel)',
+    auditor: 'Faik Bajsair, S.Kom., M.Kom.',
+    prodi: 'Sistem Informasi',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Helper: Hosting detection
+function detectHostingPlatform(targetUrl, headers) {
+  const urlLower = targetUrl.toLowerCase();
+  const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
+  const serverHeader = (headers['server'] || '').toLowerCase();
+
+  if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
+    return {
+      provider: 'Vercel',
+      badge: 'Vercel Edge Network',
+      description: 'Aplikasi di-deploy pada infrastruktur serverless Vercel dengan Edge CDN global.'
+    };
+  }
+  if (urlLower.includes('.github.io') || serverHeader.includes('github.com')) {
+    return {
+      provider: 'GitHub Pages',
+      badge: 'GitHub Pages CDN',
+      description: 'Aplikasi web statis / SPA di-hosting di GitHub Pages.'
+    };
+  }
+  if (urlLower.includes('.netlify.app') || headerKeys.includes('x-nf-request-id')) {
+    return {
+      provider: 'Netlify',
+      badge: 'Netlify Cloud CDN',
+      description: 'Aplikasi di-hosting pada Netlify Jamstack CDN.'
+    };
+  }
+  return {
+    provider: 'Cloud Hosting / VPS',
+    badge: 'Cloud Deployed',
+    description: 'Server cloud dengan protokol web standar.'
+  };
+}
+
+// 1. URL Scanner
+app.post('/api/scan-url', async (req, res) => {
+  const { url } = req.body;
+  if (!url) return res.status(400).json({ error: 'URL target wajib diisi' });
+
+  const startTime = Date.now();
+  let targetUrl = url.trim();
+  if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
+    targetUrl = 'https://' + targetUrl;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9000);
+
+    const response = await fetch(targetUrl, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)'
+      }
+    });
+    clearTimeout(timeout);
+
+    const html = await response.text();
+    const responseTime = Date.now() - startTime;
+    const headers = Object.fromEntries(response.headers.entries());
+
+    const hosting = detectHostingPlatform(targetUrl, headers);
+    const isHttps = targetUrl.startsWith('https://');
+    const hasViewport = /<meta\s+name=["']viewport["']/i.test(html);
+    const hasTitle = /<title>(.*?)<\/title>/i.test(html);
+    const pageTitle = hasTitle ? html.match(/<title>(.*?)<\/title>/i)[1].trim() : 'Tidak ditemukan judul';
+
+    const securityHeaders = {
+      xFrameOptions: !!headers['x-frame-options'],
+      contentSecurityPolicy: !!headers['content-security-policy'],
+      strictTransportSecurity: !!headers['strict-transport-security'],
+      xContentTypeOptions: !!headers['x-content-type-options'],
+      referrerPolicy: !!headers['referrer-policy']
+    };
+
+    const allButtons = (html.match(/<button\b[^>]*>([\s\S]*?)<\/button>/gi) || []);
+    const deadButtons = allButtons.filter(b => !/onclick|type=["']submit["']|data-|wire:|@click|v-on/i.test(b));
+    const allLinks = (html.match(/<a\b[^>]*href=["']([^"']*)["'][^>]*>/gi) || []);
+    const hashLinks = (html.match(/href=["']#["']/gi) || []).length;
+    const javascriptVoidLinks = (html.match(/href=["']javascript:void\(0\)["']/gi) || []).length;
+
+    const allForms = (html.match(/<form\b[^>]*>([\s\S]*?)<\/form>/gi) || []);
+    const formAudit = allForms.map((formHtml, idx) => {
+      const hasCsrf = /csrf|token|_token/i.test(formHtml);
+      const method = (formHtml.match(/method=["']([^"']+)["']/i) || [])[1] || 'GET';
+      const inputs = (formHtml.match(/<input\b[^>]*>/gi) || []);
+      const inputsWithoutName = inputs.filter(inp => !/name=["'][^"']+["']/i.test(inp)).length;
+      return {
+        formId: idx + 1,
+        method: method.toUpperCase(),
+        inputCount: inputs.length,
+        hasCsrf,
+        inputsWithoutName
+      };
+    });
+
+    const detectedKeywords = {
+      beranda: /beranda|home/i.test(html),
+      tentangKami: /tentang kami|about us|visi.*misi/i.test(html),
+      kontak: /kontak|contact|hubungi/i.test(html),
+      faq: /faq|frequently asked/i.test(html),
+      terms: /syarat.*ketentuan|terms.*condition/i.test(html),
+      privacy: /kebijakan privasi|privacy policy/i.test(html),
+      testimoni: /testimoni|review|ulasan/i.test(html),
+      blog: /blog|artikel|berita|news/i.test(html),
+      promo: /promo|diskon|voucher|coupon/i.test(html),
+      wishlist: /wishlist|favorit/i.test(html),
+      cart: /keranjang|cart|troli/i.test(html),
+      checkout: /checkout|bayar sekarang/i.test(html),
+      account: /akun|profile|profil|pengaturan/i.test(html),
+      login: /login|masuk|sign in/i.test(html),
+      admin: /admin|dashboard|kelola|manajemen/i.test(html),
+    };
+
+    res.json({
+      success: true,
+      url: targetUrl,
+      isHttps,
+      hosting,
+      status: response.status,
+      statusText: response.statusText,
+      responseTime: `${responseTime} ms`,
+      pageTitle,
+      hasViewport,
+      securityHeaders,
+      stats: {
+        htmlSizeKb: (Buffer.byteLength(html, 'utf8') / 1024).toFixed(2),
+        totalButtons: allButtons.length,
+        deadButtonsCount: deadButtons.length,
+        totalLinks: allLinks.length,
+        deadLinksCount: hashLinks + javascriptVoidLinks,
+        formsCount: allForms.length
+      },
+      formAudit,
+      detectedKeywords
+    });
+  } catch (err) {
+    res.json({
+      success: false,
+      url: targetUrl,
+      error: err.name === 'AbortError' ? 'Koneksi timeout (>9 detik)' : err.message
+    });
+  }
+});
+
+// 2. Multi-Route Scanner
+app.post('/api/scan-all-routes', async (req, res) => {
+  const { baseUrl, routes } = req.body;
+  if (!baseUrl) return res.status(400).json({ error: 'Base URL wajib diisi' });
+
+  let base = baseUrl.trim().replace(/\/+$/, '');
+  if (!base.startsWith('http://') && !base.startsWith('https://')) base = 'https://' + base;
+
+  const routesToTest = routes || [
+    { route: '/', name: 'Halaman Beranda', section: 'Frontend 1' },
+    { route: '/about', name: 'Halaman Tentang Kami', section: 'Frontend 1' },
+    { route: '/contact', name: 'Halaman Kontak Kami', section: 'Frontend 1' },
+    { route: '/faq', name: 'Halaman FAQ', section: 'Frontend 1' },
+    { route: '/terms', name: 'Halaman Syarat & Ketentuan', section: 'Frontend 1' },
+    { route: '/privacy', name: 'Halaman Kebijakan Privasi', section: 'Frontend 1' },
+    { route: '/testimonials', name: 'Halaman Testimoni Pelanggan', section: 'Frontend 1' },
+    { route: '/blog', name: 'Halaman Blog / Berita', section: 'Frontend 1' },
+    { route: '/promo', name: 'Halaman Promo & Diskon', section: 'Frontend 1' },
+    { route: '/wishlist', name: 'Halaman Wishlist', section: 'Frontend 1' },
+    { route: '/products', name: 'Halaman Katalog Produk', section: 'Frontend 2' },
+    { route: '/cart', name: 'Halaman Keranjang (Cart)', section: 'Frontend 2' },
+    { route: '/checkout', name: 'Halaman Checkout', section: 'Frontend 2' },
+    { route: '/account/orders', name: 'Halaman Riwayat Pesanan', section: 'Frontend 2' },
+    { route: '/track-order', name: 'Halaman Lacak Pesanan', section: 'ERP Backend 2' },
+    { route: '/admin/products', name: 'Manajemen Produk (CRUD)', section: 'ERP Backend 1' },
+    { route: '/admin/customers', name: 'Manajemen Pelanggan', section: 'ERP Backend 1' },
+    { route: '/admin/inventory', name: 'Manajemen Stok & Alert', section: 'ERP Backend 1' },
+    { route: '/admin/orders', name: 'Manajemen Pesanan', section: 'ERP Backend 1' },
+    { route: '/admin/finance', name: 'Laporan Keuangan', section: 'ERP Backend 2' },
+    { route: '/admin/crm', name: 'Modul CRM & Leads', section: 'ERP Backend 2' },
+    { route: '/admin/analytics', name: 'Analitik & Statistik', section: 'ERP Backend 2' }
+  ];
+
+  const promises = routesToTest.map(async (item) => {
+    const fullUrl = `${base}${item.route}`;
+    const start = Date.now();
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
+      const resp = await fetch(fullUrl, {
+        signal: controller.signal,
+        headers: { 'User-Agent': 'APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)' }
+      });
+      clearTimeout(timeout);
+      const htmlText = await resp.text();
+      return {
+        ...item,
+        fullUrl,
+        status: resp.status,
+        statusText: resp.statusText,
+        ok: resp.ok,
+        duration: `${Date.now() - start} ms`,
+        sizeKb: (Buffer.byteLength(htmlText, 'utf8') / 1024).toFixed(1)
+      };
+    } catch (e) {
+      return {
+        ...item,
+        fullUrl,
+        status: 0,
+        statusText: e.name === 'AbortError' ? 'Timeout' : 'Unreachable',
+        ok: false,
+        duration: '>6000 ms',
+        sizeKb: '0'
+      };
+    }
+  });
+
+  const resolved = await Promise.all(promises);
+  res.json({
+    success: true,
+    baseUrl: base,
+    totalScanned: resolved.length,
+    passedCount: resolved.filter(r => r.ok).length,
+    failedCount: resolved.filter(r => !r.ok).length,
+    results: resolved
+  });
+});
+
+// 3. Reverse Proxy
+app.get('/api/proxy-preview', async (req, res) => {
+  const targetUrl = req.query.url;
+  if (!targetUrl) return res.status(400).send('Param ?url= wajib diisi');
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const response = await fetch(targetUrl, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    });
+    clearTimeout(timeout);
+    let html = await response.text();
+    const baseTag = `<base href="${targetUrl}">`;
+    html = html.includes('<head>') ? html.replace('<head>', `<head>${baseTag}`) : baseTag + html;
+
+    res.removeHeader('X-Frame-Options');
+    res.removeHeader('Content-Security-Policy');
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.send(html);
+  } catch (err) {
+    res.status(502).send(`<p>Gagal memuat preview proxy: ${err.message}</p>`);
+  }
+});
+
+// 4. Remote GitHub Scanner
+app.post('/api/scan-github-repo', async (req, res) => {
+  const { repoUrl } = req.body;
+  if (!repoUrl) return res.status(400).json({ error: 'URL GitHub wajib diisi' });
+
+  const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+  if (!match) return res.status(400).json({ error: 'Format URL GitHub tidak valid' });
+
+  const owner = match[1];
+  const repo = match[2].replace(/\.git$/, '');
+
+  try {
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+    const treeUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/main?recursive=1`;
+
+    const repoResp = await fetch(apiUrl, {
+      headers: { 'User-Agent': 'APEX-QA-Auditor' }
+    });
+    if (!repoResp.ok) return res.status(404).json({ error: 'Repositori tidak ditemukan atau bersifat Private.' });
+
+    const repoInfo = await repoResp.json();
+    let treeResp = await fetch(treeUrl, { headers: { 'User-Agent': 'APEX-QA-Auditor' } });
+    if (!treeResp.ok) {
+      treeResp = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/master?recursive=1`, {
+        headers: { 'User-Agent': 'APEX-QA-Auditor' }
+      });
+    }
+
+    const treeData = await treeResp.json();
+    const files = (treeData.tree || []).map(f => f.path);
+
+    let framework = 'Web Application';
+    if (files.some(f => f.includes('artisan') || f.includes('app/Http/Controllers'))) framework = 'PHP / Laravel MVC';
+    else if (files.some(f => f.includes('next.config'))) framework = 'Node.js / Next.js';
+    else if (files.some(f => f.includes('vite.config'))) framework = 'Vite / React SPA';
+
+    const findings = [];
+    if (files.some(f => f === '.env' || f.endsWith('/.env'))) {
+      findings.push({
+        rule: 'EXPOSED_ENV_FILE',
+        severity: 'CRITICAL',
+        file: '.env',
+        description: 'File .env ditemukan ter-commit ke GitHub publik! Kredensial rahasia bocor.',
+        remediation: 'Segera hapus .env dari git cache dan masukkan ke .gitignore.'
+      });
+    }
+
+    res.json({
+      success: true,
+      repo: `${owner}/${repo}`,
+      htmlUrl: repoInfo.html_url,
+      description: repoInfo.description || '',
+      stars: repoInfo.stargazers_count,
+      framework,
+      totalFiles: files.length,
+      hasGitignore: files.some(f => f === '.gitignore'),
+      hasReadme: files.some(f => f.toLowerCase() === 'readme.md'),
+      hasMigrations: files.some(f => f.includes('migrations') || f.includes('schema.sql')),
+      findings
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 5. Flow Simulator
+app.post('/api/simulate-erp-flow', (req, res) => {
+  const { testType, params } = req.body;
+  if (testType === 'inventory-sync') {
+    const initialStock = Number(params?.initialStock || 15);
+    const orderQty = Number(params?.orderQty || 3);
+    const threshold = Number(params?.threshold || 5);
+    const finalStock = initialStock - orderQty;
+    res.json({
+      success: true,
+      finalStock,
+      isLowStock: finalStock <= threshold,
+      status: finalStock >= 0 ? 'PASSED' : 'FAILED',
+      auditLog: [`Stok awal: ${initialStock}, dibeli: ${orderQty}, sisa: ${finalStock}.`]
+    });
+  } else if (testType === 'finance-sync') {
+    const amount = Number(params?.amount || 750000);
+    const cogs = Number(params?.cogs || 450000);
+    res.json({
+      success: true,
+      grossProfit: amount - cogs,
+      journalEntries: [
+        { akun: 'Kas / Bank', debit: amount, kredit: 0 },
+        { akun: 'Pendapatan', debit: 0, kredit: amount }
+      ],
+      status: 'PASSED'
+    });
+  } else {
+    res.status(400).json({ error: 'Unknown test type' });
+  }
+});
+
+export default app;
