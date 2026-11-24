@@ -567,5 +567,68 @@ export const INITIAL_PRESET_PROJECTS = [
         remediation: 'Pasang middleware verifyAdminToken pada rute admin.'
       }
     ]
+  },
+  {
+    id: 'student-zam-jagad',
+    studentName: 'Zam Jagad',
+    studentNim: '2023510018',
+    courseName: 'Pemrograman Web Enterprise & ERP',
+    prodi: 'Sistem Informasi',
+    academicYear: 'Semester Ganjil 2026/2027',
+    projectName: 'Jagad Store - E-Commerce ERP Model Enterprise',
+    targetUrl: 'http://chickencruncyroll.free.nf',
+    githubRepoUrl: 'https://github.com/zamjagad/jagad-store-erp',
+    hostingPlatform: 'InfinityFree / Web Cloud Hosting',
+    framework: 'PHP MVC & MySQL Web ERP',
+    evaluationDate: '2026-11-24',
+    scores: {
+      fe_beranda: { status: 'PASSED', score: 95, note: 'Halaman Beranda responsif, banner produk unggulan dan navigasi jelas.' },
+      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Profil perusahaan dan visi misi terstruktur.' },
+      fe_kontak_kami: { status: 'PASSED', score: 90, note: 'Form kontak dan alamat toko tersedia.' },
+      fe_faq: { status: 'PASSED', score: 85, note: 'Pertanyaan umum seputar pemesanan tersedia.' },
+      fe_terms: { status: 'PASSED', score: 85, note: 'Syarat dan ketentuan pemesanan produk.' },
+      fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pelanggan.' },
+      fe_testimoni: { status: 'PASSED', score: 90, note: 'Ulasan testimoni pelanggan aktif.' },
+      fe_blog: { status: 'PASSED', score: 85, note: 'Halaman artikel dan berita produk.' },
+      fe_promo: { status: 'PASSED', score: 90, note: 'Banner voucher promo dan diskon belanja.' },
+      fe_wishlist: { status: 'PASSED', score: 85, note: 'Fitur simpan produk favorit.' },
+
+      fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Menu akun profil dan autentikasi login.' },
+      fe_riwayat_pesanan: { status: 'PASSED', score: 90, note: 'Riwayat transaksi belanja pelanggan lengkap.' },
+      fe_pembayaran_info: { status: 'PASSED', score: 90, note: 'Metode transfer bank, QRIS, dan dompet digital.' },
+      fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Pengaturan opsi kurir pengiriman barang.' },
+      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog produk lengkap dengan harga, varian, dan stok.' },
+      fe_keranjang: { status: 'PASSED', score: 90, note: 'Keranjang belanja dan kalkulasi total biaya.' },
+      fe_payment_action: { status: 'PASSED', score: 85, note: 'Form konfirmasi transfer dan upload bukti bayar.' },
+      fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Opsi Bayar di Tempat (COD) / Ambil di Toko.' },
+      fe_checkout: { status: 'PASSED', score: 90, note: 'Alur checkout terpadu dengan form alamat penerima.' },
+
+      erp_produk: { status: 'PASSED', score: 90, note: 'CRUD Manajemen data produk, kategori, dan foto.' },
+      erp_pelanggan: { status: 'PASSED', score: 85, note: 'Manajemen database pelanggan dan riwayat pesanan.' },
+      erp_pengiriman: { status: 'PASSED', score: 85, note: 'Manajemen ekspedisi, ongkos kirim, dan status pengiriman.' },
+      erp_pembayaran: { status: 'PASSED', score: 85, note: 'Verifikasi konfirmasi pembayaran masuk dari pelanggan.' },
+      erp_stok: { status: 'PASSED', score: 90, note: 'Pencatatan stok gudang dan sistem peringatan stok menipis.' },
+      erp_kategori: { status: 'PASSED', score: 90, note: 'Manajemen kategori produk dan varian barang.' },
+      erp_pesanan: { status: 'PASSED', score: 90, note: 'Manajemen status pemrosesan pesanan (Pending -> Diproses -> Selesai).' },
+
+      erp_pengembalian: { status: 'PARTIAL', score: 70, note: 'Prosedur retur komplain barang sudah dirancang.' },
+      erp_lacak_pesanan: { status: 'PASSED', score: 85, note: 'Fitur pelacakan status pesanan pelanggan.' },
+      erp_users_admin: { status: 'PASSED', score: 85, note: 'Manajemen pengguna backoffice dengan hak akses bertingkat.' },
+      erp_pengaturan_website: { status: 'PASSED', score: 85, note: 'Pengaturan identitas toko, logo, dan profil web.' },
+      erp_laporan_keuangan: { status: 'PASSED', score: 85, note: 'Laporan pendapatan dan rekap omzet penjualan.' },
+      erp_crm: { status: 'PARTIAL', score: 70, note: 'Database pelanggan dan interaksi layanan konsumen.' },
+      erp_analitik_statistik: { status: 'PASSED', score: 85, note: 'Statistik grafik produk terlaris dan tren penjualan.' },
+
+      ux_responsif: { status: 'PASSED', score: 95, note: 'Tampilan responsif pada perangkat desktop, tablet, dan smartphone.' },
+      ux_ui_bersih: { status: 'PASSED', score: 90, note: 'Desain visual bersih dan tipografi mudah dibaca.' },
+      ux_intuitif: { status: 'PASSED', score: 90, note: 'Navigasi belanja intuitif dan alur checkout mudah.' },
+      ux_informasi_jelas: { status: 'PASSED', score: 90, note: 'Pemberitahuan toast dan status transaksi jelas.' },
+
+      erp_sync_inventaris: { status: 'PASSED', score: 90, note: 'Sinkronisasi pengurangan stok otomatis saat pesanan dikonfirmasi.' },
+      erp_sync_logistik: { status: 'PASSED', score: 85, note: 'Integrasi status pengiriman barang dengan kurir.' },
+      erp_sync_keuangan: { status: 'PASSED', score: 85, note: 'Pencatatan kas masuk terhubung dengan jurnal pendapatan toko.' }
+    },
+    lecturerNotes: 'Aplikasi Zam Jagad Store memenuhi seluruh ketentuan rubrik silabus ERP Slide 1 s.d. Slide 6 dengan baik. Desain responsif, alur transaksi lengkap, dan integrasi stok berjalan lancar.',
+    vulnerabilities: []
   }
 ];
