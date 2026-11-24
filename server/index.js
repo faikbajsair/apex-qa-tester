@@ -415,13 +415,60 @@ app.get('/api/proxy-preview', async (req, res) => {
     let html = result.html;
     const workingUrl = result.workingUrl;
 
-    // Inject <base href="..."> so relative paths (css, js, images) load from original host
-    const baseTag = `<base href="${workingUrl}">`;
-    if (html.includes('<head>')) {
-      html = html.replace('<head>', `<head>${baseTag}`);
-    } else {
-      html = baseTag + html;
+    let targetOrigin = '';
+    try {
+      const u = new URL(workingUrl);
+      targetOrigin = u.origin;
+    } catch (e) {
+      targetOrigin = targetUrl.startsWith('http') ? targetUrl : 'http://' + targetUrl;
     }
+
+    // 1. Automatically Inline External Stylesheets to Eliminate Mixed-Content Block
+    const linkMatches = [...html.matchAll(/<link\b[^>]*href=["']([^"']+\.css[^"']*)["'][^>]*>/gi)];
+    for (const match of linkMatches) {
+      let cssHref = match[1];
+      let fullCssUrl = cssHref.startsWith('http') ? cssHref : (targetOrigin + (cssHref.startsWith('/') ? '' : '/') + cssHref);
+      try {
+        const cssController = new AbortController();
+        const cssTimeout = setTimeout(() => cssController.abort(), 4000);
+        const cssRes = await fetch(fullCssUrl, {
+          signal: cssController.signal,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        clearTimeout(cssTimeout);
+        const cssText = await cssRes.text();
+        html = html.replace(match[0], `<style>/* Inlined: ${cssHref} */\n${cssText}</style>`);
+      } catch (e) {
+        html = html.replace(match[0], `<link rel="stylesheet" href="/api/proxy-asset?url=${encodeURIComponent(fullCssUrl)}">`);
+      }
+    }
+
+    // 2. Automatically Inline Scripts to Prevent Script Block
+    const scriptMatches = [...html.matchAll(/<script\b[^>]*src=["']([^"']+\.js[^"']*)["'][^>]*><\/script>/gi)];
+    for (const match of scriptMatches) {
+      let jsSrc = match[1];
+      let fullJsUrl = jsSrc.startsWith('http') ? jsSrc : (targetOrigin + (jsSrc.startsWith('/') ? '' : '/') + jsSrc);
+      try {
+        const jsController = new AbortController();
+        const jsTimeout = setTimeout(() => jsController.abort(), 4000);
+        const jsRes = await fetch(fullJsUrl, {
+          signal: jsController.signal,
+          headers: { 'User-Agent': 'Mozilla/5.0' }
+        });
+        clearTimeout(jsTimeout);
+        const jsText = await jsRes.text();
+        html = html.replace(match[0], `<script>/* Inlined: ${jsSrc} */\n${jsText}</script>`);
+      } catch (e) {
+        html = html.replace(match[0], `<script src="/api/proxy-asset?url=${encodeURIComponent(fullJsUrl)}"></script>`);
+      }
+    }
+
+    // 3. Rewrite Relative Images to Proxy-Asset (Zero Insecure HTTP calls)
+    html = html.replace(/(<img\b[^>]*src=["'])([^"']+)(["'])/gi, (m, p1, srcVal, p3) => {
+      if (srcVal.startsWith('data:')) return m;
+      const fullImgUrl = srcVal.startsWith('http') ? srcVal : (targetOrigin + (srcVal.startsWith('/') ? '' : '/') + srcVal);
+      return `${p1}/api/proxy-asset?url=${encodeURIComponent(fullImgUrl)}${p3}`;
+    });
 
     // Strip frame-blocking headers
     res.removeHeader('X-Frame-Options');
@@ -441,6 +488,30 @@ app.get('/api/proxy-preview', async (req, res) => {
         </p>
       </div>
     `);
+  }
+});
+
+// 3b. Proxy Asset (Serves images, fonts, and subresources over HTTPS)
+app.get('/api/proxy-asset', async (req, res) => {
+  const assetUrl = req.query.url;
+  if (!assetUrl) return res.status(400).send('Param ?url= wajib diisi');
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const resp = await fetch(assetUrl, {
+      signal: controller.signal,
+      headers: { 'User-Agent': 'Mozilla/5.0' }
+    });
+    clearTimeout(timeout);
+
+    const contentType = resp.headers.get('content-type') || 'application/octet-stream';
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    const arrayBuffer = await resp.arrayBuffer();
+    res.send(Buffer.from(arrayBuffer));
+  } catch (err) {
+    res.status(404).send('Asset not found');
   }
 });
 
