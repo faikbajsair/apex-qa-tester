@@ -40,6 +40,8 @@ export default function App() {
             return {
               ...fresh,
               ...p,
+              classGroup: fresh.classGroup || p.classGroup,
+              studentName: fresh.studentName || p.studentName,
               targetUrl: fresh.targetUrl || p.targetUrl,
               adminUrl: fresh.adminUrl || p.adminUrl,
               orderUrl: fresh.orderUrl || p.orderUrl,

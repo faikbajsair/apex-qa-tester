@@ -511,14 +511,14 @@ export function generateDefaultDescriptiveEvaluation(project = {}) {
 }
 
 const RAW_PRESET_PROJECTS = [
-  // 1. Tokopi (Kerja Praktik)
+  // 1. Tokopi (Kerja Praktik) - Kelas S5A
   {
     id: 'project-tokopi-kp',
     isGroup: true,
     groupType: 'Kerja Praktik (KP)',
-    classGroup: 'Kelas R5I',
-    groupNumber: 'KP-Tokopi',
-    studentName: 'Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelas S5A (Tokopi)',
+    studentName: 'Kelas S5A - Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu)',
     studentNim: '202433500002 / 003 / 011 / 947',
     teamMembers: [
       { nim: '202433500002', name: 'Nadia Kusumawati' },
@@ -540,15 +540,96 @@ const RAW_PRESET_PROJECTS = [
     ],
     demoCredentials: {
       admin: { username: 'owner@tokopi.test', password: 'password' },
-      user: { username: '[email pelanggan demo]', password: '[password]' }
+      user: { username: 'hidayatrayhan212@gmail.com', password: 'password' }
     },
     githubRepoUrl: 'https://github.com/RIOFIKRIRAMADHAN/TOKOPI',
     hostingPlatform: 'Cloud (Rumahweb)',
     framework: 'PHP 7.4 native + Bootstrap 5, Chart.js, Midtrans QRIS (sandbox) / MySQL',
     evaluationDate: '2026-11-24',
     scores: generateRubricScores({ domain: 'Coffee Shop Tokopi Multi Cabang' }),
-    lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelompok Tokopi. Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
-    vulnerabilities: []
+    lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelas S5A (Kelompok Tokopi). Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 68,
+      classification: 'Kombinasi AI & Kustomisasi Mandiri yang Baik (Moderate AI-Assisted, 68%)',
+      summaryAnalysis: 'Aplikasi Tokopi dari Kelas S5A menunjukkan tingkat kematangan arsitektur yang tinggi. Penggunaan generative AI terdeteksi pada pembuatan layout Bootstrap 5, konfigurasi charting Chart.js, dan penataan routing multi-subdomain. Namun terdapat banyak sentuhan kustomisasi manual pada integrasi token QR ordering (t.php?token=...) dan SDK Midtrans QRIS sandbox.',
+      featureBreakdown: [
+        {
+          feature: 'Landing Page & Company Profile (tokopi.my.id)',
+          aiPercentage: 70,
+          indicator: 'Layout Bootstrap 5 card responsif dan navigasi hero banner khas prompt generator template.',
+          whatAiDid: 'Menyusun halaman profil UMKM coffee shop multi-cabang.'
+        },
+        {
+          feature: 'Sistem Pemesanan Pelanggan (QR Ordering dengan Token)',
+          aiPercentage: 60,
+          indicator: 'Logika token URL parameter (?token=4fc72fb...) menunjukkan perancangan alur kustom untuk mencegah pesanan tanpa kehadiran fisik di meja kafe.',
+          whatAiDid: 'Membuat alur validasi token meja dan katalog pesanan kopi.'
+        },
+        {
+          feature: 'Backoffice / ERP Admin (admin.tokopi.my.id)',
+          aiPercentage: 70,
+          indicator: 'Dashboard analitik dengan Chart.js dan tabel manajemen cabang dengan struktur CRUD standar.',
+          whatAiDid: 'Menampilkan grafik omzet penjualan dan manajemen data cabang kafe.'
+        },
+        {
+          feature: 'Integrasi Payment Gateway Midtrans QRIS',
+          aiPercentage: 65,
+          indicator: 'Integrasi Snap API Midtrans sandbox yang disesuaikan dengan webhook callback.',
+          whatAiDid: 'Menyediakan pembayaran QRIS otomatis bagi pelanggan kafe.'
+        },
+        {
+          feature: 'Skema Database Multi-Cabang',
+          aiPercentage: 70,
+          indicator: 'Struktur database relasional dengan kolom branch_id dan foreign key pesanan.',
+          whatAiDid: 'Menyusun DDL MySQL untuk mendukung toko multi-cabang.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Biarlah AI sudah mewakili kalian dalam mempercepat pengerjaan fiturnya saat ini, namun tugas utama kalian sebagai calon Sarjana Sistem Informasi adalah mampu belajar dan menguasai bagaimana cara AI tersebut menyusun dan menyelesaikan setiap fitur tersebut.',
+      homeworkScope: [
+        {
+          topic: 'Mekanisme Keamanan Token QR & Validasi Session Meja',
+          description: 'Pelajari bagaimana token QR dibuat secara kriptografis (misal: sha256/random_bytes), disimpan di database meja, dan dibatasi masa berlakunya (TTL expiration).',
+          guidingQuestions: 'Bagaimana jika pelanggan menyalin link order dengan token meja lalu memesan dari rumah? Bagaimana sistem memvalidasi bahwa pelanggan benar-benar ada di kafe?'
+        },
+        {
+          topic: 'Alur Webhook & Idempotensi Payment Gateway Midtrans',
+          description: 'Pahami alur komunikasi asinkron antara server Midtrans dan backend Tokopi saat status transaksi berubah menjadi settlement.',
+          guidingQuestions: 'Apa itu webhook signature key? Bagaimana jika Midtrans mengirim notifikasi pembayaran sukses 2 kali secara beruntun?'
+        },
+        {
+          topic: 'Sinkronisasi Multi-Cabang & Inventori Bahan Baku ERP',
+          description: 'Pelajari bagaimana pengurangan stok biji kopi, susu, dan sirup dihitung per cabang kafe (Slide 6 ERP).',
+          guidingQuestions: 'Di query mana stok cabang berkurang saat transaksi selesai? Bagaimana struktur tabel inventori per cabang?'
+        },
+        {
+          topic: 'Code Literacy & Penguasaan Arsitektur Multi-Domain',
+          description: 'Mahasiswa wajib mampu menjelaskan arsitektur routing antara tokopi.my.id, admin.tokopi.my.id, dan order.tokopi.my.id di papan tulis tanpa bantuan AI.',
+          guidingQuestions: 'Bagaimana sesi login admin di admin.tokopi.my.id diisolasi agar tidak bercampur dengan sesi pelanggan di order.tokopi.my.id?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Tokopi (Coffee Shop Multi Cabang) dari Kelas S5A karya Nadia Kusumawati, Rayhan Hidayat, Rio Fikri Ramadhan, dan Wisnu Mahardika merupakan salah satu karya Kerja Praktik paling komprehensif. Pemisahan multi-portal subdomain (Landing, Admin ERP, dan QR Ordering Meja) serta integrasi Midtrans QRIS sandbox dan cloud hosting Rumahweb menunjukkan implementasi nyata yang sangat siap pakai.',
+      businessModelEvaluation: 'Model bisnis ERP coffee shop multi-cabang diimplementasikan dengan sangat baik. Solusi QR ordering dengan token meja sangat relevan menyelesaikan antrean kasir di jam sibuk UMKM kopi.',
+      technicalArchitectureEvaluation: 'Penggunaan PHP 7.4 native, Bootstrap 5, Chart.js, dan MySQL berjalan stabil di cloud server Rumahweb. Pemisahan domain (tokopi.my.id, admin.tokopi.my.id, order.tokopi.my.id) memberikan arsitektur yang terisolasi dengan rapi. Aspek keamanan webhook dan sanitasi query tetap perlu dijaga.',
+      strengths: [
+        'Arsitektur multi-portal subdomain profesional (Company Profile, Admin ERP, dan QR Ordering)',
+        'Inovasi QR Ordering berbasis token meja yang melindungi dari pesanan fiktif',
+        'Integrasi payment gateway Midtrans QRIS sandbox aktif dan visualisasi grafik Chart.js',
+        'Hosting cloud Rumahweb yang stabil dengan domain resmi berbayar .my.id'
+      ],
+      weaknesses: [
+        'Masa berlaku (TTL) token meja QR perlu ditambahkan batas kedaluwarsa otomatis (misal: 2 jam)',
+        'Logika pengurangan stok bahan baku resep (BOM - Bill of Materials) perlu diperinci lebih mendalam',
+        'Perlu penguatan sanitasi prepared statement pada seluruh endpoint query order'
+      ],
+      finalVerdict: 'DITERIMA DENGAN NILAI SANGAT MEMUASKAN (EXCELLENT PRACTICE-READY ERP)',
+      recommendations: 'Kelompok Tokopi Kelas S5A dinyatakan sangat siap untuk sidang Kerja Praktik. Mahasiswa diarahkan untuk mematangkan pemahaman arsitektur webhook payment dan modul resep bahan baku saat presentasi sidang.'
+    }
   },
 
   // 2. Kelompok 1 - Mamah Catering

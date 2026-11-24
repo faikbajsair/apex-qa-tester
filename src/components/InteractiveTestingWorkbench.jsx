@@ -501,18 +501,17 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1">
                 Portal:
               </span>
-              
+
               <button
                 type="button"
                 onClick={() => {
                   setPreviewUrl(currentProject.targetUrl);
                   setIframeKey(Date.now());
                 }}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
-                  previewUrl === currentProject.targetUrl
-                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
-                    : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
-                }`}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${previewUrl === currentProject.targetUrl
+                  ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
+                  : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                  }`}
               >
                 <span>🌐 Landing / Profile</span>
               </button>
@@ -525,11 +524,10 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
                     setPreviewUrl(url);
                     setIframeKey(Date.now());
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
-                    previewUrl === (currentProject.adminUrl || currentProject.portals?.find(p => p.url.includes('admin'))?.url)
-                      ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-                      : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
-                  }`}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${previewUrl === (currentProject.adminUrl || currentProject.portals?.find(p => p.url.includes('admin'))?.url)
+                    ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                    : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                    }`}
                 >
                   <span>🏢 Backoffice ERP</span>
                 </button>
@@ -543,11 +541,10 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
                     setPreviewUrl(url);
                     setIframeKey(Date.now());
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
-                    previewUrl === (currentProject.orderUrl || currentProject.portals?.find(p => p.url.includes('order'))?.url)
-                      ? 'bg-amber-600 text-white border-amber-500 shadow-sm'
-                      : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
-                  }`}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${previewUrl === (currentProject.orderUrl || currentProject.portals?.find(p => p.url.includes('order'))?.url)
+                    ? 'bg-amber-600 text-white border-amber-500 shadow-sm'
+                    : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                    }`}
                 >
                   <span>📱 QR Ordering (Token)</span>
                 </button>
