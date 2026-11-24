@@ -32,10 +32,20 @@ export default function App() {
           const existingIds = new Set(parsed.map(p => p.id));
           const missingPresets = INITIAL_PRESET_PROJECTS.filter(p => !existingIds.has(p.id));
           
-          // Re-hydrate any preset with latest credentials and team members
+          // Re-hydrate any preset with latest credentials, URLs, and team members
           const refreshedParsed = parsed.map(p => {
             const fresh = INITIAL_PRESET_PROJECTS.find(ip => ip.id === p.id);
-            return fresh ? { ...fresh, ...p, teamMembers: fresh.teamMembers || p.teamMembers, demoCredentials: fresh.demoCredentials || p.demoCredentials } : p;
+            if (!fresh) return p;
+            return {
+              ...fresh,
+              ...p,
+              targetUrl: fresh.targetUrl || p.targetUrl,
+              adminUrl: fresh.adminUrl || p.adminUrl,
+              orderUrl: fresh.orderUrl || p.orderUrl,
+              portals: fresh.portals || p.portals,
+              teamMembers: fresh.teamMembers || p.teamMembers,
+              demoCredentials: fresh.demoCredentials || p.demoCredentials
+            };
           });
 
           return [...missingPresets, ...refreshedParsed];

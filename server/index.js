@@ -32,6 +32,20 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Cache session cookies for InfinityFree / ByetHost domains to reuse across asset requests
+const domainSessionCache = new Map();
+
+function saveDomainSession(targetUrl, cookie, userAgent) {
+  try {
+    const host = new URL(targetUrl).hostname;
+    domainSessionCache.set(host, {
+      cookie,
+      userAgent: userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)',
+      timestamp: Date.now()
+    });
+  } catch (e) {}
+}
+
 // Helper: Universal Fetcher with Auto-Fallback (HTTPS -> HTTP) and InfinityFree Anti-Bot Solver
 async function fetchWithBypass(rawUrl, options = {}) {
   let targetUrl = rawUrl.trim();
@@ -74,6 +88,12 @@ async function fetchWithBypass(rawUrl, options = {}) {
       let finalUrl = resp.url || url;
       let finalHeaders = Object.fromEntries(resp.headers.entries());
 
+      // Save cookie if available
+      const setCookie = resp.headers.get('set-cookie');
+      if (setCookie) {
+        saveDomainSession(finalUrl, setCookie, userAgent);
+      }
+
       // Check for InfinityFree / ByetHost AES anti-bot challenge
       if (html.includes('/aes.js') && html.includes('toNumbers(')) {
         const matches = [...html.matchAll(/toNumbers\(["']([a-f0-9]+)["']\)/g)];
@@ -89,6 +109,9 @@ async function fetchWithBypass(rawUrl, options = {}) {
             const decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
             decipher.setAutoPadding(false);
             const decryptedHex = Buffer.concat([decipher.update(cipher), decipher.final()]).toString('hex');
+
+            // Save solved __test cookie in domain session cache immediately!
+            saveDomainSession(finalUrl, `__test=${decryptedHex}`, userAgent);
 
             const nextUrl = finalUrl.includes('?') ? `${finalUrl}&i=1` : `${finalUrl}/?i=1`;
             const controller2 = new AbortController();
@@ -106,6 +129,10 @@ async function fetchWithBypass(rawUrl, options = {}) {
             html = await resp2.text();
             finalUrl = resp2.url || nextUrl;
             finalHeaders = Object.fromEntries(resp2.headers.entries());
+
+            if (resp2.headers.get('set-cookie')) {
+              saveDomainSession(finalUrl, `__test=${decryptedHex}; ${resp2.headers.get('set-cookie')}`, userAgent);
+            }
           } catch (e) {
             console.warn('InfinityFree AES solve failed:', e.message);
           }
@@ -126,6 +153,74 @@ async function fetchWithBypass(rawUrl, options = {}) {
   }
 
   throw lastError || new Error(`Gagal menghubungi ${rawUrl}`);
+}
+
+// Fetcher for subresources (CSS, JS, images) with domain session cookie support
+async function fetchAssetWithBypass(assetUrl, referer = '') {
+  let hostname = '';
+  try {
+    hostname = new URL(assetUrl).hostname;
+  } catch (e) {
+    throw new Error('Invalid URL');
+  }
+
+  const session = domainSessionCache.get(hostname);
+  const defaultUA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)';
+  const userAgent = session?.userAgent || defaultUA;
+
+  const headers = {
+    'User-Agent': userAgent,
+    'Accept': '*/*',
+    'Referer': referer || assetUrl,
+  };
+  if (session?.cookie) {
+    headers['Cookie'] = session.cookie;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 6000);
+  try {
+    const resp = await fetch(assetUrl, {
+      signal: controller.signal,
+      headers
+    });
+    clearTimeout(timeout);
+
+    const contentType = resp.headers.get('content-type') || '';
+    
+    // Check if challenge HTML was returned instead of the real asset
+    if (contentType.includes('text/html') || contentType.includes('application/xhtml+xml')) {
+      const text = await resp.text();
+      if (text.includes('/aes.js') && text.includes('toNumbers(')) {
+        const solved = await fetchWithBypass(assetUrl, { timeoutMs: 6000 });
+        return {
+          status: solved.status,
+          contentType: solved.headers['content-type'] || 'text/plain',
+          data: Buffer.from(solved.html, 'utf-8'),
+          text: solved.html,
+          isHtmlChallenge: false
+        };
+      }
+      return {
+        status: resp.status,
+        contentType,
+        data: Buffer.from(text, 'utf-8'),
+        text,
+        isHtmlChallenge: text.includes('<html') || text.includes('<!DOCTYPE')
+      };
+    }
+
+    const arrayBuffer = await resp.arrayBuffer();
+    return {
+      status: resp.status,
+      contentType: contentType || 'application/octet-stream',
+      data: Buffer.from(arrayBuffer),
+      text: null,
+      isHtmlChallenge: false
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 // Helper to detect hosting platform from URL and response headers
@@ -403,12 +498,10 @@ app.post('/api/scan-all-routes', async (req, res) => {
   });
 });
 
-// 3. Reverse Proxy for Frame-Busting (renders any student hosting inside split-screen preview)
+// 3. Reverse Proxy with Frame-Busting, Anti-Bot Bypass & Mixed-Content Inliner
 app.get('/api/proxy-preview', async (req, res) => {
   const targetUrl = req.query.url;
-  if (!targetUrl) {
-    return res.status(400).send('Param ?url= wajib diisi');
-  }
+  if (!targetUrl) return res.status(400).send('Param ?url= wajib diisi');
 
   try {
     const result = await fetchWithBypass(targetUrl, { timeoutMs: 9000 });
@@ -423,54 +516,134 @@ app.get('/api/proxy-preview', async (req, res) => {
       targetOrigin = targetUrl.startsWith('http') ? targetUrl : 'http://' + targetUrl;
     }
 
-    // 1. Automatically Inline External Stylesheets to Eliminate Mixed-Content Block
-    const linkMatches = [...html.matchAll(/<link\b[^>]*href=["']([^"']+\.css[^"']*)["'][^>]*>/gi)];
+    // 0. Remove any frame-blocking or CSP meta tags and strip <base>
+    html = html.replace(/<meta\b[^>]*http-equiv=["'](?:Content-Security-Policy|X-Frame-Options)["'][^>]*>/gi, '');
+    html = html.replace(/<base\b[^>]*>/gi, '');
+
+    // 1. Process and Inline Stylesheets (with relative URL rewriting to avoid Mixed Content)
+    const linkMatches = [...html.matchAll(/<link\b([^>]*)\/?>/gi)];
     for (const match of linkMatches) {
-      let cssHref = match[1];
-      let fullCssUrl = cssHref.startsWith('http') ? cssHref : (targetOrigin + (cssHref.startsWith('/') ? '' : '/') + cssHref);
+      const fullTag = match[0];
+      const attrs = match[1];
+      const hrefMatch = attrs.match(/href=["']([^"']+)["']/i);
+      const relMatch = attrs.match(/rel=["']([^"']+)["']/i);
+      if (!hrefMatch) continue;
+
+      const cssHref = hrefMatch[1];
+      const isCss = cssHref.includes('.css') || (relMatch && relMatch[1].toLowerCase().includes('stylesheet'));
+      if (!isCss) continue;
+
+      let fullCssUrl = cssHref;
       try {
-        const cssController = new AbortController();
-        const cssTimeout = setTimeout(() => cssController.abort(), 4000);
-        const cssRes = await fetch(fullCssUrl, {
-          signal: cssController.signal,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        clearTimeout(cssTimeout);
-        const cssText = await cssRes.text();
-        html = html.replace(match[0], `<style>/* Inlined: ${cssHref} */\n${cssText}</style>`);
+        fullCssUrl = new URL(cssHref, workingUrl).href;
       } catch (e) {
-        html = html.replace(match[0], `<link rel="stylesheet" href="/api/proxy-asset?url=${encodeURIComponent(fullCssUrl)}">`);
+        fullCssUrl = cssHref.startsWith('http') ? cssHref : (targetOrigin + (cssHref.startsWith('/') ? '' : '/') + cssHref);
+      }
+
+      try {
+        const cssRes = await fetchAssetWithBypass(fullCssUrl, workingUrl);
+        if (cssRes.text && !cssRes.isHtmlChallenge && !cssRes.text.includes('/aes.js') && !cssRes.text.includes('<html')) {
+          // Rewrite relative url(...) in the CSS to /api/proxy-asset?url=...
+          let inlinedCss = cssRes.text.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi, (m, quote, innerUrl) => {
+            innerUrl = innerUrl.trim();
+            if (innerUrl.startsWith('data:') || innerUrl.startsWith('#')) return m;
+            try {
+              const absAssetUrl = new URL(innerUrl, fullCssUrl).href;
+              return `url('/api/proxy-asset?url=${encodeURIComponent(absAssetUrl)}')`;
+            } catch (e) {
+              return m;
+            }
+          });
+          html = html.replace(fullTag, `<style data-source="${cssHref}">/* Inlined by APEX-QA */\n${inlinedCss}\n</style>`);
+        } else {
+          html = html.replace(fullTag, `<link rel="stylesheet" href="/api/proxy-asset?url=${encodeURIComponent(fullCssUrl)}">`);
+        }
+      } catch (e) {
+        html = html.replace(fullTag, `<link rel="stylesheet" href="/api/proxy-asset?url=${encodeURIComponent(fullCssUrl)}">`);
       }
     }
 
-    // 2. Automatically Inline Scripts to Prevent Script Block
-    const scriptMatches = [...html.matchAll(/<script\b[^>]*src=["']([^"']+\.js[^"']*)["'][^>]*><\/script>/gi)];
+    // 2. Process and Inline Scripts (Prevent Mixed-Content blocks on HTTP scripts)
+    const scriptMatches = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
     for (const match of scriptMatches) {
-      let jsSrc = match[1];
-      let fullJsUrl = jsSrc.startsWith('http') ? jsSrc : (targetOrigin + (jsSrc.startsWith('/') ? '' : '/') + jsSrc);
+      const fullTag = match[0];
+      const attrs = match[1];
+      const srcMatch = attrs.match(/src=["']([^"']+)["']/i);
+      if (!srcMatch) continue;
+
+      const jsSrc = srcMatch[1];
+      let fullJsUrl = jsSrc;
       try {
-        const jsController = new AbortController();
-        const jsTimeout = setTimeout(() => jsController.abort(), 4000);
-        const jsRes = await fetch(fullJsUrl, {
-          signal: jsController.signal,
-          headers: { 'User-Agent': 'Mozilla/5.0' }
-        });
-        clearTimeout(jsTimeout);
-        const jsText = await jsRes.text();
-        html = html.replace(match[0], `<script>/* Inlined: ${jsSrc} */\n${jsText}</script>`);
+        fullJsUrl = new URL(jsSrc, workingUrl).href;
       } catch (e) {
-        html = html.replace(match[0], `<script src="/api/proxy-asset?url=${encodeURIComponent(fullJsUrl)}"></script>`);
+        fullJsUrl = jsSrc.startsWith('http') ? jsSrc : (targetOrigin + (jsSrc.startsWith('/') ? '' : '/') + jsSrc);
+      }
+
+      try {
+        const jsRes = await fetchAssetWithBypass(fullJsUrl, workingUrl);
+        if (jsRes.text && !jsRes.isHtmlChallenge && !jsRes.text.includes('/aes.js') && !jsRes.text.includes('<html')) {
+          html = html.replace(fullTag, `<script data-source="${jsSrc}">/* Inlined by APEX-QA */\n${jsRes.text}\n</script>`);
+        } else {
+          html = html.replace(fullTag, `<script src="/api/proxy-asset?url=${encodeURIComponent(fullJsUrl)}"></script>`);
+        }
+      } catch (e) {
+        html = html.replace(fullTag, `<script src="/api/proxy-asset?url=${encodeURIComponent(fullJsUrl)}"></script>`);
       }
     }
 
-    // 3. Rewrite Relative Images to Proxy-Asset (Zero Insecure HTTP calls)
-    html = html.replace(/(<img\b[^>]*src=["'])([^"']+)(["'])/gi, (m, p1, srcVal, p3) => {
+    // 3. Rewrite Images (src & srcset) to Proxy-Asset
+    html = html.replace(/(<img\b[^>]*?\bsrc=["'])([^"']+)(["'][^>]*>)/gi, (m, p1, srcVal, p3) => {
       if (srcVal.startsWith('data:')) return m;
-      const fullImgUrl = srcVal.startsWith('http') ? srcVal : (targetOrigin + (srcVal.startsWith('/') ? '' : '/') + srcVal);
-      return `${p1}/api/proxy-asset?url=${encodeURIComponent(fullImgUrl)}${p3}`;
+      try {
+        const absImgUrl = new URL(srcVal, workingUrl).href;
+        return `${p1}/api/proxy-asset?url=${encodeURIComponent(absImgUrl)}${p3}`;
+      } catch (e) {
+        return m;
+      }
     });
 
-    // Strip frame-blocking headers
+    // 4. Rewrite Favicons
+    html = html.replace(/(<link\b[^>]*?\bhref=["'])([^"']+)(["'][^>]*>)/gi, (m, p1, hrefVal, p3) => {
+      if (hrefVal.startsWith('data:') || hrefVal.startsWith('#')) return m;
+      if (m.toLowerCase().includes('icon')) {
+        try {
+          const abs = new URL(hrefVal, workingUrl).href;
+          return `${p1}/api/proxy-asset?url=${encodeURIComponent(abs)}${p3}`;
+        } catch (e) {
+          return m;
+        }
+      }
+      return m;
+    });
+
+    // 5. Rewrite inline style background url(...)
+    html = html.replace(/style=["']([^"']*background(?:-image)?\s*:\s*url\([^)]+\)[^"']*)["']/gi, (m, styleContent) => {
+      const rewritten = styleContent.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi, (uMatch, quote, inner) => {
+        if (inner.startsWith('data:') || inner.startsWith('#')) return uMatch;
+        try {
+          const abs = new URL(inner.trim(), workingUrl).href;
+          return `url('/api/proxy-asset?url=${encodeURIComponent(abs)}')`;
+        } catch (e) {
+          return uMatch;
+        }
+      });
+      return `style="${rewritten}"`;
+    });
+
+    // 6. Inject Security / Breakout Prevention Header
+    const helperHeader = `
+<meta name="referrer" content="no-referrer">
+<script>
+window.onbeforeunload = null;
+</script>
+`;
+    if (html.includes('<head>')) {
+      html = html.replace('<head>', `<head>${helperHeader}`);
+    } else if (html.includes('<html>')) {
+      html = html.replace('<html>', `<html><head>${helperHeader}</head>`);
+    }
+
+    // Strip frame-blocking and upgrade headers
     res.removeHeader('X-Frame-Options');
     res.removeHeader('Content-Security-Policy');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
@@ -491,25 +664,17 @@ app.get('/api/proxy-preview', async (req, res) => {
   }
 });
 
-// 3b. Proxy Asset (Serves images, fonts, and subresources over HTTPS)
+// 3b. Proxy Asset (Serves images, fonts, and subresources over HTTPS with session cookie)
 app.get('/api/proxy-asset', async (req, res) => {
   const assetUrl = req.query.url;
   if (!assetUrl) return res.status(400).send('Param ?url= wajib diisi');
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-    const resp = await fetch(assetUrl, {
-      signal: controller.signal,
-      headers: { 'User-Agent': 'Mozilla/5.0' }
-    });
-    clearTimeout(timeout);
-
-    const contentType = resp.headers.get('content-type') || 'application/octet-stream';
-    res.setHeader('Content-Type', contentType);
+    const assetResult = await fetchAssetWithBypass(assetUrl);
+    res.setHeader('Content-Type', assetResult.contentType);
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'public, max-age=86400');
-    const arrayBuffer = await resp.arrayBuffer();
-    res.send(Buffer.from(arrayBuffer));
+    res.send(assetResult.data);
   } catch (err) {
     res.status(404).send('Asset not found');
   }

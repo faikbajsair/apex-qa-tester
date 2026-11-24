@@ -589,13 +589,13 @@ export const INITIAL_PRESET_PROJECTS = [
     prodi: 'Sistem Informasi',
     academicYear: '2026 / Semester 5',
     projectName: 'Perancangan Sistem Informasi Model ERP pada chicken crunchy roll',
-    targetUrl: 'https://chickencruncyroll.free.nf',
-    adminUrl: 'https://chickencruncyroll.free.nf/auth/login.php',
-    orderUrl: 'https://chickencruncyroll.free.nf/user/menu.php',
+    targetUrl: 'http://chickencruncyroll.free.nf',
+    adminUrl: 'http://chickencruncyroll.free.nf/auth/login.php',
+    orderUrl: 'http://chickencruncyroll.free.nf/user/menu.php',
     portals: [
-      { title: 'Live Crunchy Roll', url: 'https://chickencruncyroll.free.nf', badge: 'InfinityFree' },
-      { title: 'Login Admin', url: 'https://chickencruncyroll.free.nf/auth/login.php', badge: 'Admin ERP' },
-      { title: 'Menu Pelanggan', url: 'https://chickencruncyroll.free.nf/user/menu.php', badge: 'Customer Menu' }
+      { title: 'Live Crunchy Roll', url: 'http://chickencruncyroll.free.nf', badge: 'InfinityFree' },
+      { title: 'Login Admin', url: 'http://chickencruncyroll.free.nf/auth/login.php', badge: 'Admin ERP' },
+      { title: 'Menu Pelanggan', url: 'http://chickencruncyroll.free.nf/user/menu.php', badge: 'Customer Menu' }
     ],
     demoCredentials: {
       admin: { username: 'damarardimansyah@gmail.com', password: 'damar123456' },
@@ -661,11 +661,11 @@ export const INITIAL_PRESET_PROJECTS = [
     prodi: 'Sistem Informasi',
     academicYear: '2026 / Semester 5',
     projectName: 'Sistem Informasi Toko Malaya',
-    targetUrl: 'https://tokomalaya.free.nf/?i=1',
-    adminUrl: 'https://tokomalaya.free.nf/admin',
-    orderUrl: 'https://tokomalaya.free.nf/',
+    targetUrl: 'http://tokomalaya.free.nf/?i=1',
+    adminUrl: 'http://tokomalaya.free.nf/admin',
+    orderUrl: 'http://tokomalaya.free.nf/',
     portals: [
-      { title: 'Live Store', url: 'https://tokomalaya.free.nf/?i=1', badge: 'InfinityFree' }
+      { title: 'Live Store', url: 'http://tokomalaya.free.nf/?i=1', badge: 'InfinityFree' }
     ],
     demoCredentials: {
       admin: { username: 'admin@sembakoku.com', password: 'admin123' },
@@ -699,11 +699,11 @@ export const INITIAL_PRESET_PROJECTS = [
     prodi: 'Sistem Informasi',
     academicYear: '2026 / Semester 5',
     projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP Mampir Kopi',
-    targetUrl: 'https://mampirkopi.free.nf',
-    adminUrl: 'https://mampirkopi.free.nf/admin',
-    orderUrl: 'https://mampirkopi.free.nf/',
+    targetUrl: 'http://mampirkopi.free.nf',
+    adminUrl: 'http://mampirkopi.free.nf/admin',
+    orderUrl: 'http://mampirkopi.free.nf/',
     portals: [
-      { title: 'Live Mampir Kopi', url: 'https://mampirkopi.free.nf', badge: 'InfinityFree' }
+      { title: 'Live Mampir Kopi', url: 'http://mampirkopi.free.nf', badge: 'InfinityFree' }
     ],
     demoCredentials: {
       admin: { username: 'admin', password: 'admin123' },
