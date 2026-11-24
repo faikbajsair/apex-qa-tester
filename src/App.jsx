@@ -48,7 +48,9 @@ export default function App() {
   });
 
   const [currentProjectId, setCurrentProjectId] = useState(() => {
-    return localStorage.getItem('apex_current_project_id') || 'project-tokopi-kp';
+    const saved = localStorage.getItem('apex_current_project_id');
+    if (saved === 'demo-chicken-crunchy') return 'project-r5i-kelompok-5';
+    return saved || 'project-tokopi-kp';
   });
 
   const [activeTab, setActiveTab] = useState('workbench');

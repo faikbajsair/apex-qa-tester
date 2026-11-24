@@ -570,7 +570,47 @@ export const INITIAL_PRESET_PROJECTS = [
     vulnerabilities: []
   },
 
-  // 5. Kelompok 6 - Cemilan Nusantara Jangekkita
+  // 5. Kelompok 5 - Chicken Crunchy Roll (Evi, Damar, Alexa, Jasmine)
+  {
+    id: 'project-r5i-kelompok-5',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 5',
+    studentName: 'Kelompok 5 - Chicken Crunchy Roll (Evi, Damar, Alexa, Jasmine)',
+    studentNim: '202433500470 / 467 / 465 / 466',
+    teamMembers: [
+      { nim: '202433500470', name: 'Evi Solemah Ariyanti' },
+      { nim: '202433500467', name: 'Damar Ganang Ardimansyah' },
+      { nim: '202433500465', name: 'Alexa Nayla Diandrazka' },
+      { nim: '202433500466', name: 'Jasmine Putri Raissa' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi Model ERP pada chicken crunchy roll',
+    targetUrl: 'https://chickencruncyroll.free.nf',
+    adminUrl: 'https://chickencruncyroll.free.nf/auth/login.php',
+    orderUrl: 'https://chickencruncyroll.free.nf/user/menu.php',
+    portals: [
+      { title: 'Live Crunchy Roll', url: 'https://chickencruncyroll.free.nf', badge: 'InfinityFree' },
+      { title: 'Login Admin', url: 'https://chickencruncyroll.free.nf/auth/login.php', badge: 'Admin ERP' },
+      { title: 'Menu Pelanggan', url: 'https://chickencruncyroll.free.nf/user/menu.php', badge: 'Customer Menu' }
+    ],
+    demoCredentials: {
+      admin: { username: 'damarardimansyah@gmail.com', password: 'damar123456' },
+      user: { username: 'emmaemma@gmail.com', password: 'emmaemma123' }
+    },
+    githubRepoUrl: 'https://github.com/damarardimansyah-bit/chicken-crunchy-roll',
+    hostingPlatform: 'InfinityFree',
+    framework: 'PHP Native (Tanpa Framework), HTML, CSS, JavaScript, dan MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Chicken Crunchy Roll' }),
+    lecturerNotes: 'Aplikasi Chicken Crunchy Roll dari Kelompok 5 memiliki desain antarmuka yang tematik, responsif, dilengkapi form pemesanan pelanggan, serta backoffice admin terproteksi.',
+    vulnerabilities: []
+  },
+
+  // 6. Kelompok 6 - Cemilan Nusantara Jangekkita
   {
     id: 'project-r5i-kelompok-6',
     isGroup: true,
@@ -675,41 +715,6 @@ export const INITIAL_PRESET_PROJECTS = [
     evaluationDate: '2026-11-24',
     scores: generateRubricScores({ domain: 'Mampir Kopi UMKM' }),
     lecturerNotes: 'Aplikasi Mampir Kopi memiliki konsep e-commerce ERP kedai kopi lokal dengan alur belanja, katalog minuman, dan manajemen kasir.',
-    vulnerabilities: []
-  },
-
-  // 8. Chicken Crunchy Roll
-  {
-    id: 'demo-chicken-crunchy',
-    isGroup: true,
-    groupType: 'Kerja Praktik (KP)',
-    classGroup: 'Kelas R5I',
-    groupNumber: 'Demo Kuliner',
-    studentName: 'Kelompok Chicken Crunchy Roll',
-    studentNim: '2023510012',
-    teamMembers: [
-      { nim: '2023510012', name: 'Tim Chicken Crunchy Roll' }
-    ],
-    courseName: 'Kerja Praktik (KP)',
-    prodi: 'Sistem Informasi',
-    academicYear: '2026 / Semester 5',
-    projectName: 'Chicken Crunchy Roll - E-Commerce Model ERP Kuliner',
-    targetUrl: 'http://chickencruncyroll.free.nf',
-    adminUrl: 'http://chickencruncyroll.free.nf/auth/login.php',
-    orderUrl: 'http://chickencruncyroll.free.nf/user/menu.php',
-    portals: [
-      { title: 'Live Crunchy Roll', url: 'http://chickencruncyroll.free.nf', badge: 'Free Hosting' }
-    ],
-    demoCredentials: {
-      admin: { username: 'admin@chicken.test', password: 'password123' },
-      user: { username: 'pelanggan@chicken.test', password: 'password123' }
-    },
-    githubRepoUrl: 'https://github.com/mahasiswa/chickencruncyroll-erp',
-    hostingPlatform: 'InfinityFree / Free Web Hosting (HTTP)',
-    framework: 'PHP MVC / Web Base Application',
-    evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Chicken Crunchy Roll' }),
-    lecturerNotes: 'Aplikasi Chicken Crunchy Roll memiliki desain UI/UX yang sangat menarik, bersih, dan sesuai dengan identitas bisnis kuliner. Alur pemesanan makanan mulai dari pemilihan menu, keranjang, hingga konfirmasi pesanan sudah berjalan baik.',
     vulnerabilities: []
   }
 ];
