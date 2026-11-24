@@ -17,7 +17,9 @@ import {
   ShieldCheck,
   Cloud,
   Zap,
-  CheckCheck
+  CheckCheck,
+  Key,
+  Copy
 } from 'lucide-react';
 
 export default function InteractiveTestingWorkbench({ currentProject, onUpdateScores }) {
@@ -497,6 +499,94 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
               </a>
             </div>
           </div>
+
+          {/* Multi-Portal Quick Switcher Tabs */}
+          {(currentProject.portals || currentProject.adminUrl || currentProject.orderUrl) && (
+            <div className="pt-2.5 pb-1 flex items-center gap-1.5 overflow-x-auto scrollbar-thin">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1">
+                Portal:
+              </span>
+              
+              <button
+                type="button"
+                onClick={() => {
+                  setPreviewUrl(currentProject.targetUrl);
+                  setIframeKey(Date.now());
+                }}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
+                  previewUrl === currentProject.targetUrl
+                    ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
+                    : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                }`}
+              >
+                <span>🌐 Landing / Profile</span>
+              </button>
+
+              {(currentProject.adminUrl || currentProject.portals?.find(p => p.url.includes('admin'))) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const url = currentProject.adminUrl || currentProject.portals?.find(p => p.url.includes('admin'))?.url;
+                    setPreviewUrl(url);
+                    setIframeKey(Date.now());
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
+                    previewUrl === (currentProject.adminUrl || currentProject.portals?.find(p => p.url.includes('admin'))?.url)
+                      ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                      : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                  }`}
+                >
+                  <span>🏢 Backoffice ERP</span>
+                </button>
+              )}
+
+              {(currentProject.orderUrl || currentProject.portals?.find(p => p.url.includes('order'))) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const url = currentProject.orderUrl || currentProject.portals?.find(p => p.url.includes('order'))?.url;
+                    setPreviewUrl(url);
+                    setIframeKey(Date.now());
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border transition shrink-0 ${
+                    previewUrl === (currentProject.orderUrl || currentProject.portals?.find(p => p.url.includes('order'))?.url)
+                      ? 'bg-amber-600 text-white border-amber-500 shadow-sm'
+                      : 'bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800'
+                  }`}
+                >
+                  <span>📱 QR Ordering (Token)</span>
+                </button>
+              )}
+            </div>
+          )}
+
+          {/* Quick Demo Credentials Box */}
+          {currentProject.demoCredentials && (
+            <div className="my-1.5 p-2 bg-slate-950/80 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+              <div className="flex items-center gap-1.5 text-slate-300">
+                <Key className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="font-semibold text-white">Login Admin:</span>
+                <code className="text-amber-300 font-mono text-[10px] bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                  {currentProject.demoCredentials.admin?.username || 'owner@tokopi.test'}
+                </code>
+                <span className="text-slate-500">/</span>
+                <code className="text-slate-200 font-mono text-[10px] bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">
+                  {currentProject.demoCredentials.admin?.password || 'password'}
+                </code>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard.writeText(`User: ${currentProject.demoCredentials.admin?.username}\nPassword: ${currentProject.demoCredentials.admin?.password}`);
+                  alert('✓ Kredensial Admin berhasil disalin!');
+                }}
+                className="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-medium border border-slate-700 flex items-center gap-1 transition shrink-0"
+              >
+                <Copy className="w-3 h-3 text-brand-400" />
+                Salin Kredensial
+              </button>
+            </div>
+          )}
 
           {/* Cloud Address Bar */}
           <div className="py-2.5">

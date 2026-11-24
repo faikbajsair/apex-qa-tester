@@ -31,7 +31,7 @@ export default function App() {
           // Ensure default preset projects exist in list if not already
           const existingIds = new Set(parsed.map(p => p.id));
           const missingPresets = INITIAL_PRESET_PROJECTS.filter(p => !existingIds.has(p.id));
-          return [...parsed, ...missingPresets];
+          return [...missingPresets, ...parsed];
         }
       }
     } catch (e) {
@@ -41,7 +41,7 @@ export default function App() {
   });
 
   const [currentProjectId, setCurrentProjectId] = useState(() => {
-    return localStorage.getItem('apex_current_project_id') || INITIAL_PRESET_PROJECTS[0]?.id || 'demo-chicken-crunchy';
+    return localStorage.getItem('apex_current_project_id') || 'project-tokopi-kp';
   });
 
   const [activeTab, setActiveTab] = useState('workbench');

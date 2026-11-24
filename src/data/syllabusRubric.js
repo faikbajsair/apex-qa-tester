@@ -364,6 +364,88 @@ export const SYLLABUS_SECTIONS = [
 
 export const INITIAL_PRESET_PROJECTS = [
   {
+    id: 'project-tokopi-kp',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    studentName: 'Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu)',
+    studentNim: '202433500002 / 003 / 011 / 947',
+    teamMembers: [
+      { nim: '202433500002', name: 'Nadia Kusumawati' },
+      { nim: '202433500003', name: 'Rayhan Hidayat' },
+      { nim: '202433500011', name: 'Rio Fikri Ramadhan' },
+      { nim: '202333500947', name: 'Wisnu Mahardika' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026/2027 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP UMKM Coffee Shop Multi Cabang (Tokopi)',
+    targetUrl: 'https://tokopi.my.id',
+    adminUrl: 'https://admin.tokopi.my.id',
+    orderUrl: 'https://order.tokopi.my.id/t.php?token=4fc72fb30a6193b7b7fa69cf',
+    portals: [
+      { title: 'Company Profile', url: 'https://tokopi.my.id', badge: 'Public' },
+      { title: 'Backoffice / ERP Admin', url: 'https://admin.tokopi.my.id', badge: 'Admin ERP' },
+      { title: 'QR Ordering (Token)', url: 'https://order.tokopi.my.id/t.php?token=4fc72fb30a6193b7b7fa69cf', badge: 'QR Customer' }
+    ],
+    demoCredentials: {
+      admin: { username: 'owner@tokopi.test', password: 'password' },
+      user: { username: '[email pelanggan demo]', password: '[password]' }
+    },
+    githubRepoUrl: 'https://github.com/RIOFIKRIRAMADHAN/TOKOPI',
+    hostingPlatform: 'Cloud (Rumahweb)',
+    framework: 'PHP 7.4 native + Bootstrap 5, Chart.js, Midtrans QRIS (sandbox) / MySQL',
+    evaluationDate: '2026-11-24',
+    scores: {
+      fe_beranda: { status: 'PASSED', score: 95, note: 'Landing page company profile coffee shop aktif di https://tokopi.my.id dengan hero section dan menu coffee.' },
+      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Visi, misi, dan identitas UMKM Tokopi multi cabang tercantum rapi.' },
+      fe_kontak_kami: { status: 'PASSED', score: 90, note: 'Form kontak, jam operasional, dan lokasi cabang kedai kopi tertera.' },
+      fe_faq: { status: 'PASSED', score: 85, note: 'Informasi pemesanan dan layanan kedai kopi.' },
+      fe_terms: { status: 'PASSED', score: 85, note: 'Syarat pemesanan via QR dine-in dan takeaway.' },
+      fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pemesanan.' },
+      fe_testimoni: { status: 'PASSED', score: 90, note: 'Ulasan pelanggan penikmat kopi Tokopi.' },
+      fe_blog: { status: 'PASSED', score: 85, note: 'Artikel seputar edukasi biji kopi dan menu seasonal.' },
+      fe_promo: { status: 'PASSED', score: 90, note: 'Promo bundle coffee & snack tertera di landing page.' },
+      fe_wishlist: { status: 'PASSED', score: 85, note: 'Penyimpanan menu favorit pelanggan.' },
+
+      fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Autentikasi customer dan login backoffice di https://admin.tokopi.my.id.' },
+      fe_riwayat_pesanan: { status: 'PASSED', score: 95, note: 'Pelacakan histori pesanan meja dan status transaksi di order portal.' },
+      fe_pembayaran_info: { status: 'PASSED', score: 95, note: 'Integrasi Midtrans QRIS (sandbox) dan transfer/tunai kasir.' },
+      fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Pilihan layanan Dine-in (nomor meja token) & Takeaway.' },
+      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog menu kopi, manual brew, pastry dengan varian rasa dan stok.' },
+      fe_keranjang: { status: 'PASSED', score: 95, note: 'Keranjang pemesanan QR order langsung terhitung subtotal dan PPN.' },
+      fe_payment_action: { status: 'PASSED', score: 95, note: 'Payment gateway Midtrans QRIS terintegrasi pada alur checkout.' },
+      fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Opsi bayar langsung di kasir / Barista.' },
+      fe_checkout: { status: 'PASSED', score: 95, note: 'QR Ordering token valid (t.php?token=4fc72fb30a6193b7b7fa69cf).' },
+
+      erp_produk: { status: 'PASSED', score: 95, note: 'CRUD Manajemen menu kopi, harga multi cabang, dan bahan baku.' },
+      erp_pelanggan: { status: 'PASSED', score: 90, note: 'Database pelanggan, nomor meja, dan histori pesanan.' },
+      erp_pengiriman: { status: 'PASSED', score: 85, note: 'Alur penyajian barista ke meja pelanggan (Kitchen Display).' },
+      erp_pembayaran: { status: 'PASSED', score: 95, note: 'Verifikasi webhook Midtrans & rekonsiliasi kasir harian.' },
+      erp_stok: { status: 'PASSED', score: 95, note: 'Manajemen stok biji kopi, susu, cup, dan peringatan stok menipis (Low Stock Alert).' },
+      erp_kategori: { status: 'PASSED', score: 90, note: 'Kategori Espresso Based, Non-Coffee, Food & Pastry.' },
+      erp_pesanan: { status: 'PASSED', score: 95, note: 'Status pesanan realtime multi cabang (Menunggu -> Dibuat -> Disajikan).' },
+
+      erp_pengembalian: { status: 'PARTIAL', score: 75, note: 'Prosedur pembatalan/void pesanan salah racik.' },
+      erp_lacak_pesanan: { status: 'PASSED', score: 90, note: 'Live status pesanan meja via token QR.' },
+      erp_users_admin: { status: 'PASSED', score: 90, note: 'Hak akses: Owner (owner@tokopi.test), Supervisor, Kasir, dan Barista.' },
+      erp_pengaturan_website: { status: 'PASSED', score: 90, note: 'Pengaturan profil kedai, jam buka, dan cabang toko.' },
+      erp_laporan_keuangan: { status: 'PASSED', score: 95, note: 'Dashboard analitik Chart.js grafik omzet harian & bulanan multi cabang.' },
+      erp_crm: { status: 'PASSED', score: 85, note: 'Riwayat belanja pelanggan dan program poin loyalty.' },
+      erp_analitik_statistik: { status: 'PASSED', score: 95, note: 'Visualisasi Chart.js menu terlaris dan jam sibuk kunjungan.' },
+
+      ux_responsif: { status: 'PASSED', score: 95, note: 'Desain responsif mobile-first untuk QR ordering di meja kedai.' },
+      ux_ui_bersih: { status: 'PASSED', score: 95, note: 'Bootstrap 5 estetik dengan skema warna warm coffee.' },
+      ux_intuitif: { status: 'PASSED', score: 95, note: 'Alur pesan lewat scan QR sangat praktis dan cepat.' },
+      ux_informasi_jelas: { status: 'PASSED', score: 95, note: 'Rincian nota digital dan instruksi pembayaran QRIS transparan.' },
+
+      erp_sync_inventaris: { status: 'PASSED', score: 95, note: 'Stok bahan baku terpotong otomatis per porsi pesanan (BOM Kopi).' },
+      erp_sync_logistik: { status: 'PASSED', score: 90, note: 'Sinkronisasi pesanan ke display barista dan server kasir.' },
+      erp_sync_keuangan: { status: 'PASSED', score: 95, note: 'Integrasi laporan keuangan otomatis dari transaksi Midtrans & tunai.' }
+    },
+    lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu). Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
+    vulnerabilities: []
+  },
+  {
     id: 'demo-chicken-crunchy',
     studentName: 'Kelompok Chicken Crunchy Roll',
     studentNim: '2023510012',

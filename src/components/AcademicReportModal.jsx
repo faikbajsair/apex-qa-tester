@@ -71,6 +71,16 @@ export default function AcademicReportModal({
   };
 
   const handleDownloadMarkdown = () => {
+    let teamMembersMd = '';
+    if (currentProject.teamMembers && currentProject.teamMembers.length > 0) {
+      teamMembersMd = '\n**Anggota Kelompok Kerja Praktik:**\n' + 
+        currentProject.teamMembers.map((m, idx) => `${idx + 1}. ${m.nim} - ${m.name}`).join('\n') + '\n';
+    }
+
+    let extraUrlsMd = '';
+    if (currentProject.adminUrl) extraUrlsMd += `- **URL Backoffice ERP:** ${currentProject.adminUrl}\n`;
+    if (currentProject.orderUrl) extraUrlsMd += `- **URL QR Ordering:** ${currentProject.orderUrl}\n`;
+
     const md = `# LEMBAR HASIL PENILAIAN & AUDIT KUALITAS APLIKASI
 **Mata Kuliah:** ${currentProject.courseName}
 **Dosen Pengampu / Quality Analyst:** Faik Bajsair, S.Kom., M.Kom.
@@ -78,13 +88,14 @@ export default function AcademicReportModal({
 
 ---
 ### I. IDENTITAS MAHASISWA & PROYEK
-- **Nama Mahasiswa:** ${currentProject.studentName}
+- **Nama Submisi:** ${currentProject.studentName}
 - **NIM:** ${currentProject.studentNim}
-- **Judul Proyek:** ${currentProject.projectName}
+${teamMembersMd}- **Judul Proyek:** ${currentProject.projectName}
+- **Mata Kuliah / Program:** ${currentProject.courseName}
 - **Tahun Akademik:** ${currentProject.academicYear}
 - **Framework & Database:** ${currentProject.framework}
 - **Target URL Uji:** ${currentProject.targetUrl}
-- **Tanggal Penilaian:** ${currentProject.evaluationDate || new Date().toISOString().split('T')[0]}
+${extraUrlsMd}- **Tanggal Penilaian:** ${currentProject.evaluationDate || new Date().toISOString().split('T')[0]}
 
 ---
 ### II. HASIL PENILAIAN AKHIR
@@ -109,7 +120,9 @@ ${vulnerabilities.length === 0 ? '- Tidak ada kerentanan kritis yang terdeteksi.
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Laporan_Nilai_QA_${currentProject.studentNim}_${currentProject.studentName.replace(/\s+/g, '_')}.md`;
+    const safeNim = (currentProject.studentNim || 'KP').replace(/[^a-zA-Z0-9]/g, '_');
+    const safeName = (currentProject.studentName || 'Mahasiswa').replace(/[^a-zA-Z0-9]/g, '_');
+    link.download = `Laporan_Nilai_QA_${safeNim}_${safeName}.md`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -293,6 +306,39 @@ Silakan buka file laporan detail untuk melihat rincian modul yang harus diperbai
                 <span className="font-semibold text-slate-800">{currentProject.evaluationDate || '2026-11-22'}</span>
               </div>
             </div>
+
+            {/* Tim Anggota Kelompok Kerja Praktik (Jika Ada) */}
+            {currentProject.teamMembers && currentProject.teamMembers.length > 0 && (
+              <div className="mt-3 pt-3 border-t border-slate-200">
+                <span className="font-bold text-slate-700 block text-[11px] uppercase tracking-wider mb-2">
+                  Daftar Anggota Kelompok Kerja Praktik ({currentProject.teamMembers.length} Mahasiswa):
+                </span>
+                <div className="overflow-hidden rounded-lg border border-slate-200">
+                  <table className="min-w-full divide-y divide-slate-200 text-left text-xs">
+                    <thead className="bg-slate-100 font-semibold text-slate-700">
+                      <tr>
+                        <th className="py-1.5 px-3 w-12 text-center">No</th>
+                        <th className="py-1.5 px-3 w-36">NIM</th>
+                        <th className="py-1.5 px-3">Nama Lengkap Mahasiswa</th>
+                        <th className="py-1.5 px-3 w-40 text-center">Peran Tim</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 bg-white">
+                      {currentProject.teamMembers.map((m, idx) => (
+                        <tr key={idx} className="hover:bg-slate-50/80">
+                          <td className="py-1.5 px-3 text-center font-bold text-slate-500">{idx + 1}</td>
+                          <td className="py-1.5 px-3 font-mono font-bold text-slate-900">{m.nim}</td>
+                          <td className="py-1.5 px-3 font-medium text-slate-800">{m.name}</td>
+                          <td className="py-1.5 px-3 text-center text-[11px] text-slate-600">
+                            {idx === 0 ? 'Ketua / Lead Developer' : 'Anggota Pengembang'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Final Score Banner */}
