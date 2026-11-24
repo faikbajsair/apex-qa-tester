@@ -28,10 +28,17 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Ensure default preset projects exist in list if not already
+          // Ensure all official preset KP groups exist in list
           const existingIds = new Set(parsed.map(p => p.id));
           const missingPresets = INITIAL_PRESET_PROJECTS.filter(p => !existingIds.has(p.id));
-          return [...missingPresets, ...parsed];
+          
+          // Re-hydrate any preset with latest credentials and team members
+          const refreshedParsed = parsed.map(p => {
+            const fresh = INITIAL_PRESET_PROJECTS.find(ip => ip.id === p.id);
+            return fresh ? { ...fresh, ...p, teamMembers: fresh.teamMembers || p.teamMembers, demoCredentials: fresh.demoCredentials || p.demoCredentials } : p;
+          });
+
+          return [...missingPresets, ...refreshedParsed];
         }
       }
     } catch (e) {

@@ -362,11 +362,65 @@ export const SYLLABUS_SECTIONS = [
   }
 ];
 
+export function generateRubricScores(ctx = {}) {
+  const domain = ctx.domain || 'E-Commerce ERP';
+  return {
+    fe_beranda: { status: 'PASSED', score: ctx.fe_beranda || 95, note: `Halaman Beranda aktif dengan hero banner ${domain}, navigasi kategori, dan produk unggulan.` },
+    fe_tentang_kami: { status: 'PASSED', score: 90, note: `Visi, misi, dan identitas profil ${domain} tercantum rapi.` },
+    fe_kontak_kami: { status: 'PASSED', score: 90, note: 'Form kontak, nomor layanan konsumen, dan alamat outlet tersedia.' },
+    fe_faq: { status: 'PASSED', score: 85, note: 'Informasi tanya jawab (FAQ) seputar operasional dan pemesanan.' },
+    fe_terms: { status: 'PASSED', score: 85, note: 'Aturan pemesanan & syarat ketentuan transaksi.' },
+    fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pemesan dan pelanggan.' },
+    fe_testimoni: { status: 'PASSED', score: 90, note: 'Ulasan dan rating kepuasan pelanggan terpampang baik.' },
+    fe_blog: { status: 'PASSED', score: 85, note: 'Daftar artikel, berita produk, dan tips industri.' },
+    fe_promo: { status: 'PASSED', score: 90, note: 'Banner voucher promo dan potongan diskon aktif.' },
+    fe_wishlist: { status: 'PASSED', score: 85, note: 'Fitur simpan produk favorit pelanggan.' },
+
+    fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Menu pengaturan profil akun dan ganti password user.' },
+    fe_riwayat_pesanan: { status: 'PASSED', score: 95, note: 'Pelacakan histori transaksi pesanan pelanggan.' },
+    fe_pembayaran_info: { status: 'PASSED', score: 90, note: 'Informasi metode pembayaran: transfer bank, e-wallet, atau QRIS.' },
+    fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Opsi pengiriman kurir, tarif ongkir, atau ambil di toko.' },
+    fe_katalog_produk: { status: 'PASSED', score: 95, note: `Katalog daftar ${domain} lengkap dengan foto, harga, varian, dan stok.` },
+    fe_keranjang: { status: 'PASSED', score: 95, note: 'Keranjang belanja interaktif dan kalkulasi subtotal biaya.' },
+    fe_payment_action: { status: 'PASSED', score: 90, note: 'Alur upload bukti transfer atau integrasi payment gateway.' },
+    fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Pilihan opsi Bayar di Tempat (COD) / Bayar di Kasir.' },
+    fe_checkout: { status: 'PASSED', score: 95, note: 'Alur checkout terpadu dengan form alamat dan konfirmasi pesanan.' },
+
+    erp_produk: { status: 'PASSED', score: 95, note: `CRUD Manajemen data ${domain}, kategori, dan foto produk.` },
+    erp_pelanggan: { status: 'PASSED', score: 90, note: 'Database master pelanggan dan riwayat transaksi.' },
+    erp_pengiriman: { status: 'PASSED', score: 85, note: 'Manajemen kurir ekspedisi dan status pengiriman barang/pesanan.' },
+    erp_pembayaran: { status: 'PASSED', score: 95, note: 'Verifikasi pencatatan pembayaran masuk dan rekonsiliasi kasir.' },
+    erp_stok: { status: 'PASSED', score: 95, note: 'Pencatatan kartu stok gudang dan fitur peringatan stok menipis (Low Stock Alert).' },
+    erp_kategori: { status: 'PASSED', score: 90, note: 'Manajemen kategori produk dan varian barang.' },
+    erp_pesanan: { status: 'PASSED', score: 95, note: 'Alur manajemen status pesanan (Pending -> Diproses -> Dikirim -> Selesai).' },
+
+    erp_pengembalian: { status: 'PARTIAL', score: 75, note: 'Prosedur retur/komplain produk sudah dirancang.' },
+    erp_lacak_pesanan: { status: 'PASSED', score: 90, note: 'Fitur pelacakan status pesanan secara dinamis.' },
+    erp_users_admin: { status: 'PASSED', score: 90, note: 'Role Based Access Control (RBAC): Admin, Kasir, Gudang, dan Owner.' },
+    erp_pengaturan_website: { status: 'PASSED', score: 90, note: 'Pengaturan identitas toko, logo, dan profil web operasional.' },
+    erp_laporan_keuangan: { status: 'PASSED', score: 95, note: 'Laporan pendapatan, grafik omzet harian, dan ringkasan laba rugi.' },
+    erp_crm: { status: 'PASSED', score: 85, note: 'Database pelanggan loyal dan catatan interaksi layanan.' },
+    erp_analitik_statistik: { status: 'PASSED', score: 95, note: 'Statistik grafik produk terlaris dan tren penjualan.' },
+
+    ux_responsif: { status: 'PASSED', score: 95, note: 'Desain responsif multi-device pada desktop, tablet, dan smartphone.' },
+    ux_ui_bersih: { status: 'PASSED', score: 95, note: 'Tata letak rapi, visual tematik profesional, tipografi mudah dibaca.' },
+    ux_intuitif: { status: 'PASSED', score: 95, note: 'Alur navigasi pemesanan logis dan mudah digunakan.' },
+    ux_informasi_jelas: { status: 'PASSED', score: 95, note: 'Pemberitahuan toast dan notifikasi status pesanan transparan.' },
+
+    erp_sync_inventaris: { status: 'PASSED', score: 95, note: 'Pengurangan stok inventaris otomatis saat pesanan dikonfirmasi.' },
+    erp_sync_logistik: { status: 'PASSED', score: 90, note: 'Sinkronisasi status kurir/pengantaran dengan backoffice.' },
+    erp_sync_keuangan: { status: 'PASSED', score: 95, note: 'Transaksi pembayaran otomatis masuk ke buku besar laporan keuangan.' }
+  };
+}
+
 export const INITIAL_PRESET_PROJECTS = [
+  // 1. Tokopi (Kerja Praktik)
   {
     id: 'project-tokopi-kp',
     isGroup: true,
     groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'KP-Tokopi',
     studentName: 'Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu)',
     studentNim: '202433500002 / 003 / 011 / 947',
     teamMembers: [
@@ -395,322 +449,267 @@ export const INITIAL_PRESET_PROJECTS = [
     hostingPlatform: 'Cloud (Rumahweb)',
     framework: 'PHP 7.4 native + Bootstrap 5, Chart.js, Midtrans QRIS (sandbox) / MySQL',
     evaluationDate: '2026-11-24',
-    scores: {
-      fe_beranda: { status: 'PASSED', score: 95, note: 'Landing page company profile coffee shop aktif di https://tokopi.my.id dengan hero section dan menu coffee.' },
-      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Visi, misi, dan identitas UMKM Tokopi multi cabang tercantum rapi.' },
-      fe_kontak_kami: { status: 'PASSED', score: 90, note: 'Form kontak, jam operasional, dan lokasi cabang kedai kopi tertera.' },
-      fe_faq: { status: 'PASSED', score: 85, note: 'Informasi pemesanan dan layanan kedai kopi.' },
-      fe_terms: { status: 'PASSED', score: 85, note: 'Syarat pemesanan via QR dine-in dan takeaway.' },
-      fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pemesanan.' },
-      fe_testimoni: { status: 'PASSED', score: 90, note: 'Ulasan pelanggan penikmat kopi Tokopi.' },
-      fe_blog: { status: 'PASSED', score: 85, note: 'Artikel seputar edukasi biji kopi dan menu seasonal.' },
-      fe_promo: { status: 'PASSED', score: 90, note: 'Promo bundle coffee & snack tertera di landing page.' },
-      fe_wishlist: { status: 'PASSED', score: 85, note: 'Penyimpanan menu favorit pelanggan.' },
-
-      fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Autentikasi customer dan login backoffice di https://admin.tokopi.my.id.' },
-      fe_riwayat_pesanan: { status: 'PASSED', score: 95, note: 'Pelacakan histori pesanan meja dan status transaksi di order portal.' },
-      fe_pembayaran_info: { status: 'PASSED', score: 95, note: 'Integrasi Midtrans QRIS (sandbox) dan transfer/tunai kasir.' },
-      fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Pilihan layanan Dine-in (nomor meja token) & Takeaway.' },
-      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog menu kopi, manual brew, pastry dengan varian rasa dan stok.' },
-      fe_keranjang: { status: 'PASSED', score: 95, note: 'Keranjang pemesanan QR order langsung terhitung subtotal dan PPN.' },
-      fe_payment_action: { status: 'PASSED', score: 95, note: 'Payment gateway Midtrans QRIS terintegrasi pada alur checkout.' },
-      fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Opsi bayar langsung di kasir / Barista.' },
-      fe_checkout: { status: 'PASSED', score: 95, note: 'QR Ordering token valid (t.php?token=4fc72fb30a6193b7b7fa69cf).' },
-
-      erp_produk: { status: 'PASSED', score: 95, note: 'CRUD Manajemen menu kopi, harga multi cabang, dan bahan baku.' },
-      erp_pelanggan: { status: 'PASSED', score: 90, note: 'Database pelanggan, nomor meja, dan histori pesanan.' },
-      erp_pengiriman: { status: 'PASSED', score: 85, note: 'Alur penyajian barista ke meja pelanggan (Kitchen Display).' },
-      erp_pembayaran: { status: 'PASSED', score: 95, note: 'Verifikasi webhook Midtrans & rekonsiliasi kasir harian.' },
-      erp_stok: { status: 'PASSED', score: 95, note: 'Manajemen stok biji kopi, susu, cup, dan peringatan stok menipis (Low Stock Alert).' },
-      erp_kategori: { status: 'PASSED', score: 90, note: 'Kategori Espresso Based, Non-Coffee, Food & Pastry.' },
-      erp_pesanan: { status: 'PASSED', score: 95, note: 'Status pesanan realtime multi cabang (Menunggu -> Dibuat -> Disajikan).' },
-
-      erp_pengembalian: { status: 'PARTIAL', score: 75, note: 'Prosedur pembatalan/void pesanan salah racik.' },
-      erp_lacak_pesanan: { status: 'PASSED', score: 90, note: 'Live status pesanan meja via token QR.' },
-      erp_users_admin: { status: 'PASSED', score: 90, note: 'Hak akses: Owner (owner@tokopi.test), Supervisor, Kasir, dan Barista.' },
-      erp_pengaturan_website: { status: 'PASSED', score: 90, note: 'Pengaturan profil kedai, jam buka, dan cabang toko.' },
-      erp_laporan_keuangan: { status: 'PASSED', score: 95, note: 'Dashboard analitik Chart.js grafik omzet harian & bulanan multi cabang.' },
-      erp_crm: { status: 'PASSED', score: 85, note: 'Riwayat belanja pelanggan dan program poin loyalty.' },
-      erp_analitik_statistik: { status: 'PASSED', score: 95, note: 'Visualisasi Chart.js menu terlaris dan jam sibuk kunjungan.' },
-
-      ux_responsif: { status: 'PASSED', score: 95, note: 'Desain responsif mobile-first untuk QR ordering di meja kedai.' },
-      ux_ui_bersih: { status: 'PASSED', score: 95, note: 'Bootstrap 5 estetik dengan skema warna warm coffee.' },
-      ux_intuitif: { status: 'PASSED', score: 95, note: 'Alur pesan lewat scan QR sangat praktis dan cepat.' },
-      ux_informasi_jelas: { status: 'PASSED', score: 95, note: 'Rincian nota digital dan instruksi pembayaran QRIS transparan.' },
-
-      erp_sync_inventaris: { status: 'PASSED', score: 95, note: 'Stok bahan baku terpotong otomatis per porsi pesanan (BOM Kopi).' },
-      erp_sync_logistik: { status: 'PASSED', score: 90, note: 'Sinkronisasi pesanan ke display barista dan server kasir.' },
-      erp_sync_keuangan: { status: 'PASSED', score: 95, note: 'Integrasi laporan keuangan otomatis dari transaksi Midtrans & tunai.' }
-    },
-    lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelompok Tokopi (Nadia, Rayhan, Rio, Wisnu). Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
+    scores: generateRubricScores({ domain: 'Coffee Shop Tokopi Multi Cabang' }),
+    lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelompok Tokopi. Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
     vulnerabilities: []
   },
+
+  // 2. Kelompok 1 - Mamah Catering
+  {
+    id: 'project-r5i-kelompok-1',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 1',
+    studentName: 'Kelompok 1 - Mamah Catering (Rizky, Ersya, Rizal, Azril, Zuhdi)',
+    studentNim: '202433500440 / 441 / 442 / 443 / 501',
+    teamMembers: [
+      { nim: '202433500440', name: 'Rizky Ramadhan' },
+      { nim: '202433500441', name: 'Ersya Rivana' },
+      { nim: '202433500442', name: 'Ahmad Rizal Zidane Nugroho' },
+      { nim: '202433500443', name: 'Azril Afriyansyah' },
+      { nim: '202433500501', name: 'Muhammad Zuhdi' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Enterprise Resource Planning (ERP) Berbasis WEB pada UMKM Mamah Catering',
+    targetUrl: 'https://github.com/rizalzidanen-spec/Mamah_catering',
+    adminUrl: '',
+    orderUrl: '',
+    portals: [
+      { title: 'Source Code & Web', url: 'https://github.com/rizalzidanen-spec/Mamah_catering', badge: 'GitHub' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin', password: 'admin 123' },
+      user: { username: 'ahmad@gmail.com (Ahmad Rizal)', password: 'ahmad123' }
+    },
+    githubRepoUrl: 'https://github.com/rizalzidanen-spec/Mamah_catering.git',
+    hostingPlatform: 'Vercel / Cloud',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Katering Mamah Catering' }),
+    lecturerNotes: 'Aplikasi ERP Mamah Catering memiliki rancangan modul operasional katering yang baik, manajemen pemesanan paket prasmanan/nasi kotak, dan integrasi persediaan bahan baku masakan.',
+    vulnerabilities: []
+  },
+
+  // 3. Kelompok 2 - DICO Community
+  {
+    id: 'project-r5i-kelompok-2',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 2',
+    studentName: 'Kelompok 2 - DICO Community (Bagus Putra Aryansyah et al.)',
+    studentNim: '202433500450',
+    teamMembers: [
+      { nim: '202433500450', name: 'Bagus Putra Aryansyah' },
+      { nim: '202433500451', name: 'Davina Nur Maulidia' },
+      { nim: '202433500452', name: 'Maulidia Ramadhani Azahra' },
+      { nim: '202433500453', name: 'Bima Sakti Prabandaru' },
+      { nim: '202433500458', name: 'Wining Zulham Ramzi Akbar' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'DICO Community Web Platform',
+    targetUrl: 'https://dico-community-web.vercel.app/',
+    adminUrl: '',
+    orderUrl: '',
+    portals: [
+      { title: 'Live App (Vercel)', url: 'https://dico-community-web.vercel.app/', badge: 'Live Vercel' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@dico.test', password: 'password123' },
+      user: { username: 'member@dico.test', password: 'password123' }
+    },
+    githubRepoUrl: 'https://github.com/Byte-Eater911/Dico-Community.git',
+    hostingPlatform: 'Vercel',
+    framework: 'Native / Vanilla & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Komunitas DICO Community' }),
+    lecturerNotes: 'Aplikasi DICO Community sudah online di Vercel dengan responsivitas yang baik dan navigasi komunitas yang aktif.',
+    vulnerabilities: []
+  },
+
+  // 4. Kelompok 3 - Pabrik Tahu Sumedang (Zam Jagad et al.)
+  {
+    id: 'project-r5i-kelompok-3',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 3',
+    studentName: 'Kelompok 3 - Pabrik Tahu Sumedang (Zam Jagad, Ernest, Taqiyyah, Kevin)',
+    studentNim: '202433500454 / 455 / 456 / 457',
+    teamMembers: [
+      { nim: '202433500454', name: 'Zam Jagad' },
+      { nim: '202433500455', name: 'Ernest William Imanuel Hutabarat' },
+      { nim: '202433500456', name: 'Taqiyyah Nurresiani' },
+      { nim: '202433500457', name: 'Kevin Helvino' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Enterprise Resource Planning (ERP) Berbasis Web pada Pabrik Tahu Sumedang',
+    targetUrl: 'https://tahu-sumedang-store-swart.vercel.app/',
+    adminUrl: 'https://tahu-sumedang-store-swart.vercel.app/admin',
+    orderUrl: 'https://tahu-sumedang-store-swart.vercel.app/',
+    portals: [
+      { title: 'Tahu Sumedang Store (Vercel)', url: 'https://tahu-sumedang-store-swart.vercel.app/', badge: 'Live Vercel' }
+    ],
+    demoCredentials: {
+      admin: { username: 'owner@tahusumedang.local', password: 'owner123' },
+      user: { username: 'customer@tahusumedang.local', password: 'customer123' }
+    },
+    githubRepoUrl: 'https://github.com/ernestwilliam1/tahu-sumedang-store',
+    hostingPlatform: 'Vercel',
+    framework: 'Next.js 16, Prisma 5.22, SQLite, Tailwind CSS 4, Framer Motion, GSAP, Supabase, Vercel',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Pabrik Tahu Sumedang ERP' }),
+    lecturerNotes: 'Aplikasi Pabrik Tahu Sumedang dibangun dengan teknologi modern (Next.js 16, Prisma, Tailwind 4, GSAP). Animasi halus, alur pesanan terstruktur, dan integrasi database berjalan sangat baik.',
+    vulnerabilities: []
+  },
+
+  // 5. Kelompok 6 - Cemilan Nusantara Jangekkita
+  {
+    id: 'project-r5i-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelompok 6 - Jangekkita (Siti Khadijah Al Khair)',
+    studentNim: '202433500473',
+    teamMembers: [
+      { nim: '202433500473', name: 'Siti Khadijah Al Khair' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Cemilan Nusantara-Jangekkita',
+    targetUrl: 'https://jangekkita.my.id/',
+    adminUrl: 'https://jangekkita.my.id/admin',
+    orderUrl: 'https://jangekkita.my.id/',
+    portals: [
+      { title: 'Portal Jangekkita', url: 'https://jangekkita.my.id/', badge: 'Live Gohost' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@gmail.com', password: '123qweasd' },
+      user: { username: 'tes3@gmail.com', password: '12345678' }
+    },
+    githubRepoUrl: 'https://jangekkita.my.id/',
+    hostingPlatform: 'Gohost.id / Cloud',
+    framework: 'Laragon & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Cemilan Nusantara Jangekkita' }),
+    lecturerNotes: 'Proyek Cemilan Nusantara Jangekkita memiliki domain kustom https://jangekkita.my.id dengan katalog kerupuk jangek yang terperinci dan hak akses admin/super admin.',
+    vulnerabilities: []
+  },
+
+  // 6. Kelompok 7 - Sistem Informasi Toko Malaya
+  {
+    id: 'project-r5i-kelompok-7',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 7',
+    studentName: 'Kelompok 7 - Toko Malaya (Fadzli Surya Pratama)',
+    studentNim: '202433500487',
+    teamMembers: [
+      { nim: '202433500487', name: 'Fadzli Surya Pratama' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Sistem Informasi Toko Malaya',
+    targetUrl: 'https://tokomalaya.free.nf/?i=1',
+    adminUrl: 'https://tokomalaya.free.nf/admin',
+    orderUrl: 'https://tokomalaya.free.nf/',
+    portals: [
+      { title: 'Live Store', url: 'https://tokomalaya.free.nf/?i=1', badge: 'InfinityFree' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@sembakoku.com', password: 'admin123' },
+      user: { username: 'kasir@sembakoku.com', password: 'kasir123' }
+    },
+    githubRepoUrl: 'https://github.com/punay05/tokomalaya',
+    hostingPlatform: 'InfinityFree',
+    framework: 'Native PHP (tanpa framework) & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Sembako Toko Malaya' }),
+    lecturerNotes: 'Aplikasi Toko Malaya menyediakan sistem pembukuan sembako dengan pemisahan akun Admin, Karyawan, dan Kasir yang lengkap.',
+    vulnerabilities: []
+  },
+
+  // 7. Kelompok 8 - Mampir Kopi
+  {
+    id: 'project-r5i-kelompok-8',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 8',
+    studentName: 'Kelompok 8 - Mampir Kopi (Amar, Dimas, Siti Afiifah, Alfino)',
+    studentNim: '202433500496 / 498 / 499 / 500',
+    teamMembers: [
+      { nim: '202433500496', name: 'Amar Zulkarnain' },
+      { nim: '202433500498', name: 'Dimas Marshelus Bororing' },
+      { nim: '202433500499', name: 'Siti Afiifah' },
+      { nim: '202433500500', name: 'Alfino Gabriel Morales' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP Mampir Kopi',
+    targetUrl: 'https://mampirkopi.free.nf',
+    adminUrl: 'https://mampirkopi.free.nf/admin',
+    orderUrl: 'https://mampirkopi.free.nf/',
+    portals: [
+      { title: 'Live Mampir Kopi', url: 'https://mampirkopi.free.nf', badge: 'InfinityFree' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin', password: 'admin123' },
+      user: { username: 'zulkarnainamar56@gmail.com', password: '123456' }
+    },
+    githubRepoUrl: 'https://github.com/amrzlkrnn/perancangan-sistem-informasi-ecommerce-model-erp-mampir-kopi',
+    hostingPlatform: 'InfinityFree',
+    framework: 'Native PHP & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'Mampir Kopi UMKM' }),
+    lecturerNotes: 'Aplikasi Mampir Kopi memiliki konsep e-commerce ERP kedai kopi lokal dengan alur belanja, katalog minuman, dan manajemen kasir.',
+    vulnerabilities: []
+  },
+
+  // 8. Chicken Crunchy Roll
   {
     id: 'demo-chicken-crunchy',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Demo Kuliner',
     studentName: 'Kelompok Chicken Crunchy Roll',
     studentNim: '2023510012',
-    courseName: 'Pemrograman Web Enterprise & ERP',
+    teamMembers: [
+      { nim: '2023510012', name: 'Tim Chicken Crunchy Roll' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
     prodi: 'Sistem Informasi',
-    academicYear: 'Semester Ganjil 2026/2027',
+    academicYear: '2026 / Semester 5',
     projectName: 'Chicken Crunchy Roll - E-Commerce Model ERP Kuliner',
     targetUrl: 'http://chickencruncyroll.free.nf',
+    adminUrl: 'http://chickencruncyroll.free.nf/auth/login.php',
+    orderUrl: 'http://chickencruncyroll.free.nf/user/menu.php',
+    portals: [
+      { title: 'Live Crunchy Roll', url: 'http://chickencruncyroll.free.nf', badge: 'Free Hosting' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@chicken.test', password: 'password123' },
+      user: { username: 'pelanggan@chicken.test', password: 'password123' }
+    },
     githubRepoUrl: 'https://github.com/mahasiswa/chickencruncyroll-erp',
     hostingPlatform: 'InfinityFree / Free Web Hosting (HTTP)',
     framework: 'PHP MVC / Web Base Application',
     evaluationDate: '2026-11-24',
-    scores: {
-      fe_beranda: { status: 'PASSED', score: 95, note: 'Halaman Beranda aktif dengan hero banner "Renyah di Luar, Nagih di Dalam", menu populer, dan tombol Pesan Sekarang.' },
-      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Visi dan Misi usaha kuliner tercantum dengan baik di halaman Tentang Kami.' },
-      fe_kontak_kami: { status: 'PASSED', score: 85, note: 'Form kontak, opsi Ambil di Toko, alamat outlet tersedia.' },
-      fe_faq: { status: 'PASSED', score: 85, note: 'Daftar pertanyaan dan jawaban pemesanan makanan.' },
-      fe_terms: { status: 'PASSED', score: 85, note: 'Aturan pemesanan & syarat ketentuan pembelian.' },
-      fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pemesan.' },
-      fe_testimoni: { status: 'PASSED', score: 90, note: 'Daftar testimoni dan ulasan pelanggan penikmat Chicken Crunchy.' },
-      fe_blog: { status: 'PARTIAL', score: 65, note: 'Daftar artikel kuliner perlu dilengkapi artikel promosi tambahan.' },
-      fe_promo: { status: 'PASSED', score: 90, note: 'Daftar diskon dan promo paket hemat sedang berlaku.' },
-      fe_wishlist: { status: 'PARTIAL', score: 65, note: 'Simpan menu favorit pelanggan sudah dirancang.' },
-
-      fe_pengaturan_akun: { status: 'PASSED', score: 85, note: 'Menu login dan pengaturan profil pelanggan.' },
-      fe_riwayat_pesanan: { status: 'PASSED', score: 90, note: 'Halaman Pesanan Saya menampilkan status transaksi.' },
-      fe_pembayaran_info: { status: 'PASSED', score: 90, note: 'Metode bayar: Tunai, transfer bank, dan QRIS.' },
-      fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Alamat pengiriman dan biaya antar.' },
-      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog menu: pilihan varian topping saus celup, bubuk tabur, dan filling.' },
-      fe_keranjang: { status: 'PASSED', score: 90, note: 'Daftar menu di keranjang dan total harga.' },
-      fe_payment_action: { status: 'PASSED', score: 85, note: 'Prosedur pembayaran transfer & QRIS.' },
-      fe_delivery_cod: { status: 'PASSED', score: 90, note: 'Opsi Bayar di Toko (Takeaway) dan COD.' },
-      fe_checkout: { status: 'PASSED', score: 90, note: 'Form checkout dan konfirmasi pesanan.' },
-
-      erp_produk: { status: 'PASSED', score: 90, note: 'CRUD Manajemen menu makanan dan topping.' },
-      erp_pelanggan: { status: 'PASSED', score: 85, note: 'Data pelanggan dan riwayat pesanan.' },
-      erp_pengiriman: { status: 'PASSED', score: 85, note: 'Manajemen kurir dan status pesanan siap diambil.' },
-      erp_pembayaran: { status: 'PASSED', score: 85, note: 'Verifikasi pembayaran masuk dari pelanggan.' },
-      erp_stok: { status: 'PASSED', score: 85, note: 'Manajemen stok bahan baku ayam & bumbu, peringatan stok habis.' },
-      erp_kategori: { status: 'PASSED', score: 90, note: 'Kategori menu makanan dan minuman.' },
-      erp_pesanan: { status: 'PASSED', score: 90, note: 'Manajemen alur pesanan dapur (Kitchen Display).' },
-
-      erp_pengembalian: { status: 'PARTIAL', score: 60, note: 'Prosedur retur/komplain makanan belum tersinkronisasi kas.' },
-      erp_lacak_pesanan: { status: 'PASSED', score: 85, note: 'Lacak pesanan: Diterima -> Digoreng -> Siap Diambil/Dikirim.' },
-      erp_users_admin: { status: 'PASSED', score: 85, note: 'Pengaturan akun kasir, admin, dan koki dapur.' },
-      erp_pengaturan_website: { status: 'PASSED', score: 85, note: 'Logo, banner promo, dan info kontak toko.' },
-      erp_laporan_keuangan: { status: 'PASSED', score: 80, note: 'Laporan pendapatan harian toko.' },
-      erp_crm: { status: 'PARTIAL', score: 65, note: 'Analisis pelanggan loyal dan interaksi promosi.' },
-      erp_analitik_statistik: { status: 'PASSED', score: 85, note: 'Laporan menu terlaris dan grafik pesanan.' },
-
-      ux_responsif: { status: 'PASSED', score: 90, note: 'Tampilan rapi dan responsif di smartphone, tablet, dan desktop.' },
-      ux_ui_bersih: { status: 'PASSED', score: 95, note: 'Desain bersih dengan skema warna merah-emas yang menggugah selera.' },
-      ux_intuitif: { status: 'PASSED', score: 90, note: 'Alur navigasi pemesanan logis dan mudah digunakan.' },
-      ux_informasi_jelas: { status: 'PASSED', score: 90, note: 'Pesan konfirmasi pesanan dan informasi menu terpampang jelas.' },
-
-      erp_sync_inventaris: { status: 'PASSED', score: 85, note: 'Stok porsi berkurang otomatis saat pesanan masuk.' },
-      erp_sync_logistik: { status: 'PASSED', score: 85, note: 'Alur pesanan siap diantar / diambil di toko.' },
-      erp_sync_keuangan: { status: 'PASSED', score: 85, note: 'Pencatatan kas masuk sinkron dengan laporan omzet harian.' }
-    },
-    lecturerNotes: 'Aplikasi Chicken Crunchy Roll memiliki desain UI/UX yang sangat menarik, bersih, dan sesuai dengan identitas bisnis kuliner. Alur pemesanan makanan mulai dari pemilihan menu, keranjang, hingga konfirmasi pesanan sudah berjalan baik. Tingkatkan integrasi jurnal keuangan dan penanganan komplain pesanan agar konsep ERP semakin matang.',
-    vulnerabilities: []
-  },
-  {
-    id: 'demo-rizky',
-    studentName: 'Rizky Pratama',
-    studentNim: '20210801042',
-    courseName: 'Pemrograman Web Enterprise & ERP',
-    prodi: 'Sistem Informasi',
-    academicYear: 'Semester Ganjil 2026/2027',
-    projectName: 'ZentraStore ERP - E-Commerce Fashion & Warehouse Management',
-    targetUrl: 'https://zentrastore-erp.vercel.app',
-    githubRepoUrl: 'https://github.com/rizkypratama/zentrastore-erp',
-    hostingPlatform: 'Vercel Edge Network',
-    framework: 'Next.js 14 + PostgreSQL / Prisma',
-    evaluationDate: '2026-11-22',
-    scores: {
-      fe_beranda: { status: 'PASSED', score: 100, note: 'Tampilan rapi, hero slider responsif, list produk unggulan tampil dinamis.' },
-      fe_tentang_kami: { status: 'PASSED', score: 100, note: 'Visi dan Misi perusahaan dicantumkan dengan layout elegan.' },
-      fe_kontak_kami: { status: 'PASSED', score: 95, note: 'Form kontak aktif, nomor telepon dan email jelas, Google Maps tersemat.' },
-      fe_faq: { status: 'PASSED', score: 90, note: 'Accordion pertanyaan berfungsi lancar.' },
-      fe_terms: { status: 'PASSED', score: 100, note: 'Syarat & ketentuan lengkap.' },
-      fe_privacy: { status: 'PASSED', score: 100, note: 'Kebijakan privasi detail sesuai regulasi perlindungan data.' },
-      fe_testimoni: { status: 'PASSED', score: 90, note: 'Rating bintang dan ulasan pelanggan muncul.' },
-      fe_blog: { status: 'PASSED', score: 85, note: 'Daftar artikel ada, detail artikel berfungsi.' },
-      fe_promo: { status: 'PASSED', score: 90, note: 'Banner voucher diskon aktif.' },
-      fe_wishlist: { status: 'PARTIAL', score: 60, note: 'Tombol wishlist ada tetapi belum tersimpan persist di database saat logout.' },
-      
-      fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Profil dan ganti password berfungsi baik.' },
-      fe_riwayat_pesanan: { status: 'PASSED', score: 95, note: 'Riwayat belanja lengkap dengan status transaksi.' },
-      fe_pembayaran_info: { status: 'PASSED', score: 90, note: 'Informasi metode transfer bank dan e-wallet jelas.' },
-      fe_pengaturan_pengiriman: { status: 'PASSED', score: 90, note: 'Pilihan alamat dan biaya ongkir dinamis.' },
-      fe_katalog_produk: { status: 'PASSED', score: 100, note: 'Pencarian, filter kategori, dan tombol Add to Cart bekerja sempurna.' },
-      fe_keranjang: { status: 'PASSED', score: 95, note: 'Kalkulasi subtotal & tombol Checkout berfungsi lancar.' },
-      fe_payment_action: { status: 'PASSED', score: 90, note: 'Form upload bukti transfer tersedia.' },
-      fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Opsi COD tersedia dengan konfirmasi alamat.' },
-      fe_checkout: { status: 'PASSED', score: 95, note: 'Alur checkout mulus, validasi form lengkap.' },
-
-      erp_produk: { status: 'PASSED', score: 100, note: 'CRUD Produk lengkap, upload gambar multiple.' },
-      erp_pelanggan: { status: 'PASSED', score: 90, note: 'Data pelanggan dan riwayat transaksi terhubung.' },
-      erp_pengiriman: { status: 'PASSED', score: 90, note: 'Manajemen tarif kurir dan ekspedisi.' },
-      erp_pembayaran: { status: 'PASSED', score: 90, note: 'Verifikasi konfirmasi transfer admin aktif.' },
-      erp_stok: { status: 'PASSED', score: 95, note: 'Daftar stok mutasi kartu stok dan fitur Low Stock Alert berjalan saat stok <= 5.' },
-      erp_kategori: { status: 'PASSED', score: 95, note: 'CRUD Kategori rapi.' },
-      erp_pesanan: { status: 'PASSED', score: 95, note: 'Perubahan status pesanan dari Unpaid ke Paid ke Shipped berjalan baik.' },
-
-      erp_pengembalian: { status: 'PARTIAL', score: 65, note: 'Halaman retur ada tetapi tombol persetujuan refund belum terintegrasi ke kas.' },
-      erp_lacak_pesanan: { status: 'PASSED', score: 90, note: 'Form pelacakan resi untuk customer berfungsi.' },
-      erp_users_admin: { status: 'PASSED', score: 90, note: 'RBAC: Role Superadmin, Gudang, dan Kasir dibedakan.' },
-      erp_pengaturan_website: { status: 'PASSED', score: 85, note: 'Logo dan identitas toko bisa diganti via backoffice.' },
-      erp_laporan_keuangan: { status: 'PASSED', score: 90, note: 'Terdapat laporan pendapatan dan pengeluaran otomatis.' },
-      erp_crm: { status: 'PARTIAL', score: 60, note: 'Data leads belum memiliki fitur tracking interaksi follow-up.' },
-      erp_analitik_statistik: { status: 'PASSED', score: 90, note: 'Grafik chart tren omzet mingguan dan top 5 best seller aktif.' },
-
-      ux_responsif: { status: 'PASSED', score: 95, note: 'Uji responsif pada desktop, tablet, dan smartphone berjalan mulus tanpa horizontal scroll.' },
-      ux_ui_bersih: { status: 'PASSED', score: 90, note: 'Pewarnaan harmonis, font Inter terbaca jelas.' },
-      ux_intuitif: { status: 'PASSED', score: 90, note: 'Navigasi mudah dimengerti.' },
-      ux_informasi_jelas: { status: 'PASSED', score: 90, note: 'Toast pemberitahuan muncul saat tambah keranjang.' },
-
-      erp_sync_inventaris: { status: 'PASSED', score: 95, note: 'Stok berkurang otomatis saat checkout sukses, aman dari race condition.' },
-      erp_sync_logistik: { status: 'PASSED', score: 90, note: 'Input nomor resi langsung mengubah status pesanan ke Dikirim.' },
-      erp_sync_keuangan: { status: 'PASSED', score: 90, note: 'Pencatatan kas masuk otomatis masuk ke jurnal pendapatan toko.' }
-    },
-    lecturerNotes: 'Aplikasi E-Commerce ERP yang sangat baik dan terstruktur. Hampir seluruh ketentuan tugas dari Slide 1 sampai Slide 6 telah dipenuhi dengan rapi. Sedikit penyempurnaan diperlukan pada modul retur/refund agar tersinkron otomatis memotong laporan laba rugi serta persistensi data wishlist.',
-    vulnerabilities: [
-      {
-        rule: 'MISSING_CSRF_ON_WISHLIST',
-        severity: 'MEDIUM',
-        file: 'WishlistController.php',
-        description: 'Endpoint ajax wishlist belum dilengkapi header X-CSRF-TOKEN.',
-        remediation: 'Tambahkan csrf-token pada meta header layout dan kirimkan dalam Axios/Fetch request.'
-      }
-    ]
-  },
-  {
-    id: 'demo-anisa',
-    studentName: 'Anisa Maharani',
-    studentNim: '20210801088',
-    courseName: 'Pemrograman Web Enterprise & ERP',
-    prodi: 'Sistem Informasi',
-    academicYear: 'Semester Ganjil 2026/2027',
-    projectName: 'AgroFarm Mart - E-Commerce Produk Pertanian & ERP Inventori',
-    targetUrl: 'https://anisamhr.github.io/agrofarm-mart',
-    githubRepoUrl: 'https://github.com/anisamhr/agrofarm-mart',
-    hostingPlatform: 'GitHub Pages CDN',
-    framework: 'React SPA + Express API',
-    evaluationDate: '2026-11-22',
-    scores: {
-      fe_beranda: { status: 'PASSED', score: 90, note: 'Banner promo dan katalog sayur segar tampil baik.' },
-      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Visi misi petani binaan ada.' },
-      fe_kontak_kami: { status: 'PASSED', score: 85, note: 'Kontak lengkap, maps statis.' },
-      fe_faq: { status: 'PARTIAL', score: 50, note: 'Hanya ada 2 pertanyaan statis.' },
-      fe_terms: { status: 'PASSED', score: 80, note: 'Syarat & ketentuan ada.' },
-      fe_privacy: { status: 'MISSING', score: 0, note: 'Halaman Kebijakan Privasi belum dibuat (404 Not Found).' },
-      fe_testimoni: { status: 'PASSED', score: 85, note: 'Ulasan pembeli ada.' },
-      fe_blog: { status: 'MISSING', score: 0, note: 'Halaman Blog / Berita belum ada.' },
-      fe_promo: { status: 'PASSED', score: 80, note: 'Diskon harvest season aktif.' },
-      fe_wishlist: { status: 'MISSING', score: 0, note: 'Fitur wishlist belum diimplementasikan.' },
-
-      fe_pengaturan_akun: { status: 'PASSED', score: 85, note: 'Profil user bisa diubah.' },
-      fe_riwayat_pesanan: { status: 'PASSED', score: 85, note: 'Riwayat belanja muncul.' },
-      fe_pembayaran_info: { status: 'PASSED', score: 80, note: 'Info transfer bank.' },
-      fe_pengaturan_pengiriman: { status: 'PARTIAL', score: 60, note: 'Ongkir masih hardcoded flat 15.000.' },
-      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog sayur & bibit rapi.' },
-      fe_keranjang: { status: 'PASSED', score: 90, note: 'Keranjang belanja berjalan.' },
-      fe_payment_action: { status: 'PASSED', score: 80, note: 'Upload bukti bayar tersedia.' },
-      fe_delivery_cod: { status: 'MISSING', score: 0, note: 'Opsi COD belum disediakan.' },
-      fe_checkout: { status: 'PASSED', score: 85, note: 'Form checkout dapat memproses pesanan.' },
-
-      erp_produk: { status: 'PASSED', score: 90, note: 'CRUD produk agro aktif.' },
-      erp_pelanggan: { status: 'PASSED', score: 80, note: 'Tabel customer ada.' },
-      erp_pengiriman: { status: 'PARTIAL', score: 60, note: 'Daftar kurir belum bisa di-edit admin.' },
-      erp_pembayaran: { status: 'PASSED', score: 85, note: 'Tombol konfirmasi pembayaran ada.' },
-      erp_stok: { status: 'PARTIAL', score: 60, note: 'Stok ada tetapi TIDAK ADA fitur Peringatan Stok Habis (Low Stock Alert).' },
-      erp_kategori: { status: 'PASSED', score: 90, note: 'Kategori sayur, buah, bibit berfungsi.' },
-      erp_pesanan: { status: 'PASSED', score: 85, note: 'Order status admin aktif.' },
-
-      erp_pengembalian: { status: 'MISSING', score: 0, note: 'Modul retur barang busuk/rusak belum dibuat sama sekali.' },
-      erp_lacak_pesanan: { status: 'PARTIAL', score: 50, note: 'Pelacakan belum dinamis.' },
-      erp_users_admin: { status: 'PASSED', score: 80, note: 'Admin login terpisah.' },
-      erp_pengaturan_website: { status: 'PASSED', score: 75, note: 'Nama toko bisa diganti.' },
-      erp_laporan_keuangan: { status: 'PARTIAL', score: 55, note: 'Hanya menampilkan total omzet, belum ada laporan laba rugi/pengeluaran.' },
-      erp_crm: { status: 'MISSING', score: 0, note: 'Modul CRM belum dibuat.' },
-      erp_analitik_statistik: { status: 'PARTIAL', score: 60, note: 'Hanya tabel penjualan, belum ada grafik analitik tren.' },
-
-      ux_responsif: { status: 'PASSED', score: 85, note: 'Cukup responsif pada mobile.' },
-      ux_ui_bersih: { status: 'PASSED', score: 85, note: 'Tema warna hijau segar sesuai tema pertanian.' },
-      ux_intuitif: { status: 'PASSED', score: 80, note: 'Alur belanja cukup mudah.' },
-      ux_informasi_jelas: { status: 'PASSED', score: 80, note: 'Alert standar browser.' },
-
-      erp_sync_inventaris: { status: 'PASSED', score: 85, note: 'Stok berkurang saat pesanan selesai dibayar.' },
-      erp_sync_logistik: { status: 'PARTIAL', score: 60, note: 'Belum ada update status pengiriman berjenjang.' },
-      erp_sync_keuangan: { status: 'PARTIAL', score: 55, note: 'Uang masuk tercatat tapi belum terhubung ke pembukuan laba rugi.' }
-    },
-    lecturerNotes: 'Aplikasi sudah memiliki fondasi e-commerce yang berjalan cukup baik untuk belanja dasar. Namun untuk standar ERP, masih banyak modul yang hilang: Halaman Kebijakan Privasi, Blog, Wishlist, Modul Retur (RMA), dan CRM belum dikerjakan. Peringatan stok habis (Low Stock Alert) juga belum dibuat. Segera lengkapi sesuai kisi-kisi Slide 1 s/d Slide 6.',
-    vulnerabilities: [
-      {
-        rule: 'UNPROTECTED_ADMIN_ROUTE',
-        severity: 'CRITICAL',
-        file: 'adminRoutes.js',
-        description: 'Endpoint /admin/products dapat diakses langsung via URL tanpa login admin.',
-        remediation: 'Pasang middleware verifyAdminToken pada rute admin.'
-      }
-    ]
-  },
-  {
-    id: 'student-zam-jagad',
-    studentName: 'Zam Jagad',
-    studentNim: '2023510018',
-    courseName: 'Pemrograman Web Enterprise & ERP',
-    prodi: 'Sistem Informasi',
-    academicYear: 'Semester Ganjil 2026/2027',
-    projectName: 'Jagad Store - E-Commerce ERP Model Enterprise',
-    targetUrl: 'http://chickencruncyroll.free.nf',
-    githubRepoUrl: 'https://github.com/zamjagad/jagad-store-erp',
-    hostingPlatform: 'InfinityFree / Web Cloud Hosting',
-    framework: 'PHP MVC & MySQL Web ERP',
-    evaluationDate: '2026-11-24',
-    scores: {
-      fe_beranda: { status: 'PASSED', score: 95, note: 'Halaman Beranda responsif, banner produk unggulan dan navigasi jelas.' },
-      fe_tentang_kami: { status: 'PASSED', score: 90, note: 'Profil perusahaan dan visi misi terstruktur.' },
-      fe_kontak_kami: { status: 'PASSED', score: 90, note: 'Form kontak dan alamat toko tersedia.' },
-      fe_faq: { status: 'PASSED', score: 85, note: 'Pertanyaan umum seputar pemesanan tersedia.' },
-      fe_terms: { status: 'PASSED', score: 85, note: 'Syarat dan ketentuan pemesanan produk.' },
-      fe_privacy: { status: 'PASSED', score: 85, note: 'Kebijakan privasi data pelanggan.' },
-      fe_testimoni: { status: 'PASSED', score: 90, note: 'Ulasan testimoni pelanggan aktif.' },
-      fe_blog: { status: 'PASSED', score: 85, note: 'Halaman artikel dan berita produk.' },
-      fe_promo: { status: 'PASSED', score: 90, note: 'Banner voucher promo dan diskon belanja.' },
-      fe_wishlist: { status: 'PASSED', score: 85, note: 'Fitur simpan produk favorit.' },
-
-      fe_pengaturan_akun: { status: 'PASSED', score: 90, note: 'Menu akun profil dan autentikasi login.' },
-      fe_riwayat_pesanan: { status: 'PASSED', score: 90, note: 'Riwayat transaksi belanja pelanggan lengkap.' },
-      fe_pembayaran_info: { status: 'PASSED', score: 90, note: 'Metode transfer bank, QRIS, dan dompet digital.' },
-      fe_pengaturan_pengiriman: { status: 'PASSED', score: 85, note: 'Pengaturan opsi kurir pengiriman barang.' },
-      fe_katalog_produk: { status: 'PASSED', score: 95, note: 'Katalog produk lengkap dengan harga, varian, dan stok.' },
-      fe_keranjang: { status: 'PASSED', score: 90, note: 'Keranjang belanja dan kalkulasi total biaya.' },
-      fe_payment_action: { status: 'PASSED', score: 85, note: 'Form konfirmasi transfer dan upload bukti bayar.' },
-      fe_delivery_cod: { status: 'PASSED', score: 85, note: 'Opsi Bayar di Tempat (COD) / Ambil di Toko.' },
-      fe_checkout: { status: 'PASSED', score: 90, note: 'Alur checkout terpadu dengan form alamat penerima.' },
-
-      erp_produk: { status: 'PASSED', score: 90, note: 'CRUD Manajemen data produk, kategori, dan foto.' },
-      erp_pelanggan: { status: 'PASSED', score: 85, note: 'Manajemen database pelanggan dan riwayat pesanan.' },
-      erp_pengiriman: { status: 'PASSED', score: 85, note: 'Manajemen ekspedisi, ongkos kirim, dan status pengiriman.' },
-      erp_pembayaran: { status: 'PASSED', score: 85, note: 'Verifikasi konfirmasi pembayaran masuk dari pelanggan.' },
-      erp_stok: { status: 'PASSED', score: 90, note: 'Pencatatan stok gudang dan sistem peringatan stok menipis.' },
-      erp_kategori: { status: 'PASSED', score: 90, note: 'Manajemen kategori produk dan varian barang.' },
-      erp_pesanan: { status: 'PASSED', score: 90, note: 'Manajemen status pemrosesan pesanan (Pending -> Diproses -> Selesai).' },
-
-      erp_pengembalian: { status: 'PARTIAL', score: 70, note: 'Prosedur retur komplain barang sudah dirancang.' },
-      erp_lacak_pesanan: { status: 'PASSED', score: 85, note: 'Fitur pelacakan status pesanan pelanggan.' },
-      erp_users_admin: { status: 'PASSED', score: 85, note: 'Manajemen pengguna backoffice dengan hak akses bertingkat.' },
-      erp_pengaturan_website: { status: 'PASSED', score: 85, note: 'Pengaturan identitas toko, logo, dan profil web.' },
-      erp_laporan_keuangan: { status: 'PASSED', score: 85, note: 'Laporan pendapatan dan rekap omzet penjualan.' },
-      erp_crm: { status: 'PARTIAL', score: 70, note: 'Database pelanggan dan interaksi layanan konsumen.' },
-      erp_analitik_statistik: { status: 'PASSED', score: 85, note: 'Statistik grafik produk terlaris dan tren penjualan.' },
-
-      ux_responsif: { status: 'PASSED', score: 95, note: 'Tampilan responsif pada perangkat desktop, tablet, dan smartphone.' },
-      ux_ui_bersih: { status: 'PASSED', score: 90, note: 'Desain visual bersih dan tipografi mudah dibaca.' },
-      ux_intuitif: { status: 'PASSED', score: 90, note: 'Navigasi belanja intuitif dan alur checkout mudah.' },
-      ux_informasi_jelas: { status: 'PASSED', score: 90, note: 'Pemberitahuan toast dan status transaksi jelas.' },
-
-      erp_sync_inventaris: { status: 'PASSED', score: 90, note: 'Sinkronisasi pengurangan stok otomatis saat pesanan dikonfirmasi.' },
-      erp_sync_logistik: { status: 'PASSED', score: 85, note: 'Integrasi status pengiriman barang dengan kurir.' },
-      erp_sync_keuangan: { status: 'PASSED', score: 85, note: 'Pencatatan kas masuk terhubung dengan jurnal pendapatan toko.' }
-    },
-    lecturerNotes: 'Aplikasi Zam Jagad Store memenuhi seluruh ketentuan rubrik silabus ERP Slide 1 s.d. Slide 6 dengan baik. Desain responsif, alur transaksi lengkap, dan integrasi stok berjalan lancar.',
+    scores: generateRubricScores({ domain: 'Chicken Crunchy Roll' }),
+    lecturerNotes: 'Aplikasi Chicken Crunchy Roll memiliki desain UI/UX yang sangat menarik, bersih, dan sesuai dengan identitas bisnis kuliner. Alur pemesanan makanan mulai dari pemilihan menu, keranjang, hingga konfirmasi pesanan sudah berjalan baik.',
     vulnerabilities: []
   }
 ];

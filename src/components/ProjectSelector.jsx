@@ -85,14 +85,17 @@ export default function ProjectSelector({
             onChange={(e) => onSelectProject(e.target.value)}
             className="bg-slate-800 text-white font-medium text-sm rounded-lg px-3 py-1.5 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 max-w-lg truncate"
           >
-            {projects.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.teamMembers && p.teamMembers.length > 0 
-                  ? `[KP ${p.teamMembers.length} Anggota] ${p.projectName} — ${p.teamMembers.map(m => m.name.split(' ')[0]).join(', ')}`
-                  : `${p.studentName} (${p.studentNim}) — ${p.projectName}`
-                }
-              </option>
-            ))}
+            {projects.map((p) => {
+              const prefix = p.classGroup ? `[${p.classGroup} - ${p.groupNumber || 'KP'}] ` : (p.teamMembers?.length > 0 ? `[KP ${p.teamMembers.length} Anggota] ` : '');
+              const membersShort = p.teamMembers && p.teamMembers.length > 0 
+                ? ` (${p.teamMembers.map(m => m.name.split(' ')[0]).join(', ')})`
+                : ` (${p.studentName})`;
+              return (
+                <option key={p.id} value={p.id}>
+                  {prefix}{p.projectName}{membersShort}
+                </option>
+              );
+            })}
           </select>
         </div>
 
