@@ -20,13 +20,49 @@ export default function App() {
   const [masterPassphrase, setMasterPassphrase] = useState(() => {
     return sessionStorage.getItem('apex_master_pass') || 'FaikBajsair@2026!';
   });
-  const [projects, setProjects] = useState(INITIAL_PRESET_PROJECTS);
-  const [currentProjectId, setCurrentProjectId] = useState(INITIAL_PRESET_PROJECTS[0]?.id || 'demo-rizky');
+  
+  // Synchronous, bulletproof persistence from localStorage
+  const [projects, setProjects] = useState(() => {
+    try {
+      const saved = localStorage.getItem('apex_qa_projects_data');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Ensure default preset projects exist in list if not already
+          const existingIds = new Set(parsed.map(p => p.id));
+          const missingPresets = INITIAL_PRESET_PROJECTS.filter(p => !existingIds.has(p.id));
+          return [...parsed, ...missingPresets];
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load saved projects from localStorage:', e);
+    }
+    return INITIAL_PRESET_PROJECTS;
+  });
+
+  const [currentProjectId, setCurrentProjectId] = useState(() => {
+    return localStorage.getItem('apex_current_project_id') || INITIAL_PRESET_PROJECTS[0]?.id || 'demo-chicken-crunchy';
+  });
+
   const [activeTab, setActiveTab] = useState('workbench');
   const [isReportOpen, setIsReportOpen] = useState(false);
   const [isNewProjectOpen, setIsNewProjectOpen] = useState(false);
 
-  // Decrypt vault upon master unlock
+  // Synchronous persistence to localStorage whenever projects or currentProjectId changes
+  useEffect(() => {
+    try {
+      if (projects && projects.length > 0) {
+        localStorage.setItem('apex_qa_projects_data', JSON.stringify(projects));
+      }
+      if (currentProjectId) {
+        localStorage.setItem('apex_current_project_id', currentProjectId);
+      }
+    } catch (e) {
+      console.error('Failed to sync projects to localStorage:', e);
+    }
+  }, [projects, currentProjectId]);
+
+  // Decrypt vault upon master unlock (extra encryption layer)
   const handleUnlock = async (passphrase) => {
     setMasterPassphrase(passphrase);
     sessionStorage.setItem('apex_unlocked', 'true');
@@ -37,7 +73,7 @@ export default function App() {
         const decrypted = await decryptData(JSON.parse(encryptedVault), passphrase);
         if (decrypted && Array.isArray(decrypted) && decrypted.length > 0) {
           setProjects(decrypted);
-          setCurrentProjectId(decrypted[0]?.id || 'demo-rizky');
+          localStorage.setItem('apex_qa_projects_data', JSON.stringify(decrypted));
         }
       }
     } catch (e) {
@@ -53,9 +89,9 @@ export default function App() {
     setMasterPassphrase('');
   };
 
-  // Encrypt and persist to localStorage whenever projects change while unlocked
+  // Encrypt backup to localStorage whenever projects change while unlocked
   useEffect(() => {
-    if (!isLocked && masterPassphrase) {
+    if (!isLocked && masterPassphrase && projects && projects.length > 0) {
       const saveEncrypted = async () => {
         try {
           const cipherPayload = await encryptData(projects, masterPassphrase);
@@ -71,19 +107,34 @@ export default function App() {
   const currentProject = projects.find((p) => p.id === currentProjectId) || projects[0];
 
   const handleUpdateScores = (updatedScores) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === currentProject.id ? { ...p, scores: updatedScores } : p))
-    );
+    setProjects((prev) => {
+      const updated = prev.map((p) => (p.id === currentProject.id ? { ...p, scores: updatedScores } : p));
+      try {
+        localStorage.setItem('apex_qa_projects_data', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
   };
 
   const handleUpdateProject = (updatedProject) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === updatedProject.id ? updatedProject : p))
-    );
+    setProjects((prev) => {
+      const updated = prev.map((p) => (p.id === updatedProject.id ? updatedProject : p));
+      try {
+        localStorage.setItem('apex_qa_projects_data', JSON.stringify(updated));
+      } catch (e) {}
+      return updated;
+    });
   };
 
   const handleCreateProject = (newProject) => {
-    setProjects((prev) => [newProject, ...prev]);
+    setProjects((prev) => {
+      const updated = [newProject, ...prev];
+      try {
+        localStorage.setItem('apex_qa_projects_data', JSON.stringify(updated));
+        localStorage.setItem('apex_current_project_id', newProject.id);
+      } catch (e) {}
+      return updated;
+    });
     setCurrentProjectId(newProject.id);
   };
 

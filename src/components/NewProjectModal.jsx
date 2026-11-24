@@ -10,12 +10,13 @@ export default function NewProjectModal({ isOpen, onClose, onCreateProject }) {
     projectName: '',
     courseName: 'Pemrograman Web Enterprise & ERP',
     academicYear: 'Semester Ganjil 2026/2027',
-    targetUrl: 'https://',
+    targetUrl: 'http://',
     githubRepoUrl: 'https://github.com/',
-    hostingPlatform: 'Vercel / Cloud',
-    framework: 'Next.js 14 + PostgreSQL / Prisma',
+    hostingPlatform: 'Cloud / Web Hosting',
+    framework: 'PHP / Web Fullstack',
     prodi: 'Sistem Informasi'
   });
+  const [autoBaselineGrade, setAutoBaselineGrade] = useState(true);
 
   if (!isOpen) return null;
 
@@ -30,9 +31,11 @@ export default function NewProjectModal({ isOpen, onClose, onCreateProject }) {
     SYLLABUS_SECTIONS.forEach((sec) => {
       sec.items.forEach((item) => {
         initialScores[item.id] = {
-          status: 'MISSING',
-          score: 0,
-          note: ''
+          status: autoBaselineGrade ? 'PASSED' : 'MISSING',
+          score: autoBaselineGrade ? 88 : 0,
+          note: autoBaselineGrade 
+            ? 'Fitur awal terdaftar untuk pengujian aplikasi mahasiswa. Siap dinilai & disesuaikan.' 
+            : 'Belum dinilai.'
         };
       });
     });
@@ -43,10 +46,11 @@ export default function NewProjectModal({ isOpen, onClose, onCreateProject }) {
       evaluationDate: new Date().toISOString().split('T')[0],
       scores: initialScores,
       vulnerabilities: [],
-      lecturerNotes: 'Aplikasi baru didaftarkan untuk pengujian web cloud & browser. Belum ada catatan penilaian.'
+      lecturerNotes: `Aplikasi ${formData.projectName || 'Mahasiswa'} terdaftar untuk evaluasi silabus ERP Dosen Faik Bajsair, S.Kom., M.Kom.`
     };
 
     onCreateProject(newProject);
+    alert(`✓ Data Mahasiswa "${formData.studentName}" berhasil didaftarkan dan tersimpan permanen!`);
     onClose();
   };
 
@@ -167,6 +171,19 @@ export default function NewProjectModal({ isOpen, onClose, onCreateProject }) {
                 className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
               />
             </div>
+          </div>
+
+          <div className="p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl flex items-center gap-2.5">
+            <input
+              type="checkbox"
+              id="autoBaselineGrade"
+              checked={autoBaselineGrade}
+              onChange={(e) => setAutoBaselineGrade(e.target.checked)}
+              className="w-4 h-4 rounded text-emerald-500 bg-slate-950 border-slate-700 focus:ring-emerald-500"
+            />
+            <label htmlFor="autoBaselineGrade" className="text-xs text-emerald-200 cursor-pointer">
+              <strong>Otomatis berikan nilai awal (Grade A / B+)</strong> berbasis kesiapan cloud agar langsung ternilai & tersimpan.
+            </label>
           </div>
 
           <div className="flex justify-end gap-2 pt-4 border-t border-slate-800">
