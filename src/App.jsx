@@ -8,6 +8,7 @@ import CrawlerPanel from './components/CrawlerPanel';
 import CodeAuditorPanel from './components/CodeAuditorPanel';
 import ERPIntegrationTester from './components/ERPIntegrationTester';
 import RemediationActionPlan from './components/RemediationActionPlan';
+import AIAuditPanel from './components/AIAuditPanel';
 import AcademicReportModal from './components/AcademicReportModal';
 import NewProjectModal from './components/NewProjectModal';
 import AuthGateModal from './components/AuthGateModal';
@@ -44,7 +45,9 @@ export default function App() {
               orderUrl: fresh.orderUrl || p.orderUrl,
               portals: fresh.portals || p.portals,
               teamMembers: fresh.teamMembers || p.teamMembers,
-              demoCredentials: fresh.demoCredentials || p.demoCredentials
+              demoCredentials: fresh.demoCredentials || p.demoCredentials,
+              aiAudit: fresh.aiAudit || p.aiAudit,
+              descriptiveEvaluation: fresh.descriptiveEvaluation || p.descriptiveEvaluation
             };
           });
 
@@ -244,6 +247,13 @@ export default function App() {
                 <InteractiveTestingWorkbench
                   currentProject={currentProject}
                   onUpdateScores={handleUpdateScores}
+                />
+              )}
+
+              {activeTab === 'ai_audit' && (
+                <AIAuditPanel
+                  currentProject={currentProject}
+                  onOpenReport={() => setIsReportOpen(true)}
                 />
               )}
 

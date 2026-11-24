@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { SYLLABUS_SECTIONS } from '../data/syllabusRubric';
+import { 
+  SYLLABUS_SECTIONS, 
+  generateDefaultAiAudit, 
+  generateDefaultDescriptiveEvaluation 
+} from '../data/syllabusRubric';
 import { 
   Printer, 
   Download, 
@@ -11,7 +15,14 @@ import {
   Award,
   AlertTriangle,
   CheckCircle2,
-  FileText
+  FileText,
+  BrainCircuit,
+  Bot,
+  Sparkles,
+  BookOpen,
+  Compass,
+  HelpCircle,
+  Code2
 } from 'lucide-react';
 
 export default function AcademicReportModal({ 
@@ -27,6 +38,8 @@ export default function AcademicReportModal({
 
   const scores = currentProject.scores || {};
   const vulnerabilities = currentProject.vulnerabilities || [];
+  const aiAudit = currentProject.aiAudit || generateDefaultAiAudit(currentProject);
+  const descriptive = currentProject.descriptiveEvaluation || generateDefaultDescriptiveEvaluation(currentProject);
 
   // Calculate final score
   let totalWeightedScore = 0;
@@ -81,6 +94,20 @@ export default function AcademicReportModal({
     if (currentProject.adminUrl) extraUrlsMd += `- **URL Backoffice ERP:** ${currentProject.adminUrl}\n`;
     if (currentProject.orderUrl) extraUrlsMd += `- **URL QR Ordering:** ${currentProject.orderUrl}\n`;
 
+    let aiBreakdownMd = '';
+    if (aiAudit.featureBreakdown && aiAudit.featureBreakdown.length > 0) {
+      aiBreakdownMd = aiAudit.featureBreakdown.map((f, i) => 
+        `${i+1}. **${f.feature}** (Estimasi AI: ${f.aiPercentage}%)\n   - *Indikator Kenapa Diasumsikan AI:* ${f.indicator}\n   - *Yang Diwakili / Dibuat oleh AI:* ${f.whatAiDid}`
+      ).join('\n\n');
+    }
+
+    let homeworkScopeMd = '';
+    if (aiAudit.homeworkScope && aiAudit.homeworkScope.length > 0) {
+      homeworkScopeMd = aiAudit.homeworkScope.map((hw, i) =>
+        `${i+1}. **${hw.topic}**\n   - *Deskripsi PR:* ${hw.description}\n   - *Pertanyaan Kunci Sidang:* "${hw.guidingQuestions}"`
+      ).join('\n\n');
+    }
+
     const md = `# LEMBAR HASIL PENILAIAN & AUDIT KUALITAS APLIKASI
 **Mata Kuliah:** ${currentProject.courseName}
 **Dosen Pengampu / Quality Analyst:** Faik Bajsair, S.Kom., M.Kom.
@@ -104,11 +131,44 @@ ${extraUrlsMd}- **Tanggal Penilaian:** ${currentProject.evaluationDate || new Da
 - **Rasio Capaian:** ${passedCount} Tuntas | ${partialCount} Sebagian | ${missingCount} Belum Ada dari ${totalItems} kriteria
 
 ---
-### III. CATATAN & ARAHAN DOSEN
+### III. AUDIT & DETEKSI PEMANFAATAN AI (AI-ASSISTED DEVELOPMENT)
+- **Estimasi Pemanfaatan AI Keseluruhan:** ${aiAudit.overallPercentage}%
+- **Klasifikasi:** ${aiAudit.classification}
+- **Ringkasan Deteksi:** ${aiAudit.summaryAnalysis}
+
+#### Penilaian per Fitur / Modul (Indikator Deteksi AI):
+${aiBreakdownMd}
+
+#### Nasihat Manusiawi Dosen Penguji & Pembimbing (Faik Bajsair, S.Kom., M.Kom.):
+> "${aiAudit.dosenAdvice}"
+
+#### Daftar PR (Scope Materi yang Wajib Dipelajari Mahasiswa Sebelum Sidang):
+${homeworkScopeMd}
+
+---
+### IV. PENILAIAN DESKRIPTIF RESMI DOSEN PENGUJI (Faik Bajsair, S.Kom., M.Kom.)
+- **Ringkasan Eksekutif:** ${descriptive.executiveSummary}
+- **Kesesuaian Model Bisnis ERP & UMKM:** ${descriptive.businessModelEvaluation}
+- **Evaluasi Kualitas Arsitektur Teknis:** ${descriptive.technicalArchitectureEvaluation}
+
+#### Poin Kekuatan & Keunggulan Proyek:
+${(descriptive.strengths || []).map(s => `- ${s}`).join('\n')}
+
+#### Poin Celah & Kelemahan yang Perlu Diperbaiki:
+${(descriptive.weaknesses || []).map(w => `- ${w}`).join('\n')}
+
+#### Keputusan Akhir Evaluasi:
+**${descriptive.finalVerdict}**
+
+#### Rekomendasi Tindak Lanjut:
+${descriptive.recommendations}
+
+---
+### V. CATATAN & ARAHAN DOSEN
 ${lecturerNotes}
 
 ---
-### IV. TEMUAN KERENTANAN KEAMANAN (OWASP)
+### VI. TEMUAN KERENTANAN KEAMANAN (OWASP)
 ${vulnerabilities.length === 0 ? '- Tidak ada kerentanan kritis yang terdeteksi.' : vulnerabilities.map((v, i) => `${i+1}. [${v.severity}] ${v.rule} (${v.file}): ${v.description}\n   Saran Perbaikan: ${v.remediation}`).join('\n\n')}
 
 ---
@@ -443,6 +503,158 @@ Silakan buka file laporan detail untuk melihat rincian modul yang harus diperbai
               </div>
             </div>
           )}
+
+          {/* Section: Audit Deteksi Pemanfaatan AI & Bimbingan Pedagogis */}
+          <div className="mb-6 p-4 rounded-xl border border-purple-200 bg-purple-50/50 text-xs space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-200 pb-3">
+              <div className="flex items-center gap-2">
+                <BrainCircuit className="w-5 h-5 text-purple-700 shrink-0" />
+                <div>
+                  <h4 className="font-bold text-sm text-purple-950">
+                    Audit Deteksi Pemanfaatan Generative AI & Bimbingan Pedagogis
+                  </h4>
+                  <span className="text-[11px] text-purple-700">
+                    Analisis Estimasi AI, Indikator per Modul, Nasihat Akademik, dan Scope PR Mahasiswa
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="px-2.5 py-1 rounded-lg bg-purple-100 text-purple-900 font-mono font-bold text-xs border border-purple-300">
+                  {aiAudit.overallPercentage}% AI-Assisted
+                </span>
+                <span className="text-[10px] font-semibold text-purple-800 bg-purple-200/60 px-2 py-0.5 rounded">
+                  {aiAudit.classification}
+                </span>
+              </div>
+            </div>
+
+            <p className="text-slate-700 text-[11px] leading-relaxed">
+              <strong>Ringkasan Deteksi:</strong> {aiAudit.summaryAnalysis}
+            </p>
+
+            {/* Feature Breakdown Table */}
+            <div className="border border-purple-200 rounded-lg overflow-hidden bg-white">
+              <div className="bg-purple-100/70 p-2 font-bold text-purple-950 text-[11px]">
+                Tabel Rincian Fitur & Indikator Deteksi AI:
+              </div>
+              <table className="w-full text-left border-collapse text-[11px]">
+                <thead>
+                  <tr className="bg-purple-50 text-purple-900 border-b border-purple-200 font-semibold">
+                    <th className="p-2 w-1/4">Modul / Fitur</th>
+                    <th className="p-2 w-1/12 text-center">Estimasi AI</th>
+                    <th className="p-2 w-1/3">Kenapa Diasumsikan AI?</th>
+                    <th className="p-2 w-1/3">Fitur yang Diwakili AI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {aiAudit.featureBreakdown && aiAudit.featureBreakdown.map((f, i) => (
+                    <tr key={i} className="border-b border-slate-100 hover:bg-purple-50/30">
+                      <td className="p-2 font-semibold text-slate-900">{f.feature}</td>
+                      <td className="p-2 text-center font-mono font-bold text-purple-800">{f.aiPercentage}%</td>
+                      <td className="p-2 text-slate-700 text-[10px] leading-tight">{f.indicator}</td>
+                      <td className="p-2 text-slate-700 text-[10px] leading-tight">{f.whatAiDid}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Dosen Human Advice Box */}
+            <div className="p-3.5 rounded-lg border border-amber-300 bg-amber-50/80 text-amber-950 space-y-1.5">
+              <span className="font-bold text-xs text-amber-900 flex items-center gap-1.5">
+                <GraduationCap className="w-4 h-4 text-amber-700" />
+                Nasihat Manusiawi Dosen Penguji & Pembimbing (Faik Bajsair, S.Kom., M.Kom.):
+              </span>
+              <p className="italic text-[11px] leading-relaxed font-serif bg-white/70 p-2.5 rounded border border-amber-200">
+                "{aiAudit.dosenAdvice}"
+              </p>
+            </div>
+
+            {/* Homework PR Scope */}
+            <div className="space-y-2">
+              <span className="font-bold text-xs text-indigo-950 flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4 text-indigo-700" />
+                Daftar PR (Scope Materi yang Wajib Dipelajari Mahasiswa Sebelum Sidang):
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                {aiAudit.homeworkScope && aiAudit.homeworkScope.map((hw, i) => (
+                  <div key={i} className="p-2.5 rounded-lg border border-indigo-200 bg-white">
+                    <span className="font-bold text-indigo-900 block mb-0.5">
+                      PR {i + 1}: {hw.topic}
+                    </span>
+                    <p className="text-slate-600 text-[10px] leading-tight mb-1.5">
+                      {hw.description}
+                    </p>
+                    <div className="text-[10px] text-amber-900 bg-amber-50 p-1.5 rounded border border-amber-200 italic font-mono">
+                      Pertanyaan Uji: "{hw.guidingQuestions}"
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Section: Penilaian Deskriptif Resmi Dosen Penguji */}
+          <div className="mb-6 p-4 rounded-xl border border-slate-300 bg-slate-50 text-xs space-y-3">
+            <div className="border-b border-slate-200 pb-2 flex items-center justify-between">
+              <div>
+                <h4 className="font-bold text-sm text-slate-900">
+                  Penilaian Deskriptif Resmi Dosen Penguji (Faik Bajsair, S.Kom., M.Kom.)
+                </h4>
+                <span className="text-[11px] text-slate-600">
+                  Evaluasi Holistik Capaian Kerja Praktik & Kesiapan Aplikasi
+                </span>
+              </div>
+              <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold text-[10px]">
+                {descriptive.academicRole}
+              </span>
+            </div>
+
+            <p className="text-slate-800 leading-relaxed text-[11px]">
+              <strong>Ringkasan Eksekutif:</strong> {descriptive.executiveSummary}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
+              <div className="p-2.5 rounded bg-white border border-slate-200">
+                <strong className="text-blue-900 block mb-1">🏢 Kesesuaian Bisnis ERP UMKM:</strong>
+                <p className="text-slate-700 leading-tight text-[10px]">{descriptive.businessModelEvaluation}</p>
+              </div>
+              <div className="p-2.5 rounded bg-white border border-slate-200">
+                <strong className="text-teal-900 block mb-1">⚙️ Kualitas Arsitektur Teknis:</strong>
+                <p className="text-slate-700 leading-tight text-[10px]">{descriptive.technicalArchitectureEvaluation}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px]">
+              <div className="p-2.5 rounded bg-emerald-50 border border-emerald-200">
+                <strong className="text-emerald-900 block mb-1">✓ Poin Keunggulan Proyek:</strong>
+                <ul className="space-y-1 text-slate-700 text-[10px]">
+                  {descriptive.strengths && descriptive.strengths.map((s, i) => (
+                    <li key={i}>• {s}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-2.5 rounded bg-amber-50 border border-amber-200">
+                <strong className="text-amber-900 block mb-1">! Celah yang Perlu Diperbaiki:</strong>
+                <ul className="space-y-1 text-slate-700 text-[10px]">
+                  {descriptive.weaknesses && descriptive.weaknesses.map((w, i) => (
+                    <li key={i}>• {w}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-2.5 rounded-lg bg-indigo-50 border border-indigo-200 text-[11px]">
+              <strong className="text-indigo-950 block">Keputusan Sidang / Evaluasi:</strong>
+              <span className="font-bold text-indigo-900 text-xs block mt-0.5">
+                {descriptive.finalVerdict}
+              </span>
+              <p className="text-slate-700 text-[10px] mt-1 leading-tight">
+                {descriptive.recommendations}
+              </p>
+            </div>
+          </div>
 
           {/* Lecturer Notes & Signature Section */}
           <div className="mb-6">

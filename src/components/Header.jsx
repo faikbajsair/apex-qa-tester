@@ -10,7 +10,8 @@ import {
   Code2,
   CheckCircle2,
   Lock,
-  LogOut
+  LogOut,
+  BrainCircuit
 } from 'lucide-react';
 
 export default function Header({ 
@@ -89,6 +90,7 @@ export default function Header({
         <div className="flex space-x-1 border-t border-slate-800/80 pt-1 -mb-px overflow-x-auto">
           {[
             { id: 'workbench', label: 'Workbench Pengujian Halaman & Tombol', icon: Layers },
+            { id: 'ai_audit', label: 'Audit Deteksi AI & Bimbingan Dosen', icon: BrainCircuit },
             { id: 'crawler', label: 'Live Cloud & Multi-Route Deep Scanner', icon: Sparkles },
             { id: 'code_security', label: 'Audit GitHub & Kode (OWASP Top 10)', icon: Code2 },
             { id: 'erp_simulator', label: 'Simulator Integrasi ERP (Slide 6)', icon: CheckCircle2 },

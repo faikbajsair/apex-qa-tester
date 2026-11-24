@@ -413,7 +413,104 @@ export function generateRubricScores(ctx = {}) {
   };
 }
 
-export const INITIAL_PRESET_PROJECTS = [
+// Helper: Generator Analisis Deteksi Pemanfaatan AI & Bimbingan Pedagogis Dosen Faik Bajsair
+export function generateDefaultAiAudit(project = {}) {
+  const name = project.projectName || 'Aplikasi E-Commerce ERP';
+  const group = project.groupNumber || project.studentName || 'Kelompok Mahasiswa';
+  const framework = project.framework || 'PHP Native & MySQL';
+
+  return {
+    overallPercentage: project.aiPercentage || 78,
+    classification: 'Dominan Dibantu AI (High AI-Assisted, 75% - 85%)',
+    summaryAnalysis: `Aplikasi ${name} yang dikembangkan oleh ${group} menunjukkan indikasi kuat pemanfaatan asisten generative AI (seperti ChatGPT, Claude, Cursor, v0, atau GitHub Copilot) pada penulisan struktur boilerplate kode, tata letak antarmuka responsif, dan logika dasar CRUD. Pemanfaatan AI ini sangat membantu mempercepat delivery proyek, namun menyisakan pekerjaan rumah penting bagi mahasiswa untuk menguasai pemahaman fundamental alur kerja kode secara mandiri.`,
+    featureBreakdown: [
+      {
+        feature: 'Desain Antarmuka, Layout CSS & Komponen Visual',
+        aiPercentage: 85,
+        indicator: 'Penggunaan variabel palet warna CSS modern (:root), reset styling, layout card flexbox/grid, serta pola penamaan class yang sangat rapi dan konsisten melebihi kebiasaan penulisan manual mahasiswa semester 5.',
+        whatAiDid: 'Menyusun seluruh struktur tampilan halaman, estetika tematik visual, hero banner, dan adaptasi responsive multi-device.'
+      },
+      {
+        feature: 'Modul Autentikasi, Login Guard & Manajemen Sesi',
+        aiPercentage: 80,
+        indicator: 'Alur penanganan $_SESSION dan percabangan role user/admin mengikuti struktur template generik AI tanpa proteksi token CSRF atau mekanisme rate-limiting brute-force.',
+        whatAiDid: 'Membuat form login, hashing password dasar, pemisahan hak akses admin vs user, dan script redirect halaman.'
+      },
+      {
+        feature: 'Katalog Produk & State Keranjang Belanja (Cart)',
+        aiPercentage: 75,
+        indicator: 'Logika manipulasi DOM keranjang, kalkulasi subtotal, dan struktur fungsi JavaScript baku dengan penamaan fungsi camelCase deskriptif khas AI generator.',
+        whatAiDid: 'Membangun fungsionalitas penambahan item ke cart, update kuantitas, kalkulasi total harga, dan trigger checkout.'
+      },
+      {
+        feature: 'Backoffice ERP, Manajemen Inventori & CRUD Pesanan',
+        aiPercentage: 70,
+        indicator: 'Query SQL CRUD terstruktur rapi namun belum menggunakan database transaction lock (ACID) untuk mencegah race condition pengurangan stok bersamaan.',
+        whatAiDid: 'Menyediakan tabel dashboard admin, pembaruan status pesanan, dan form penambahan produk baru.'
+      },
+      {
+        feature: 'Skema Database Relasional & Migrasi DDL',
+        aiPercentage: 75,
+        indicator: 'Normalisasi tabel MySQL standar konvensi AI (users, products, orders, order_items) dengan foreign key dan dummy seed data generik.',
+        whatAiDid: 'Menyusun skema database awal, relasi antar entitas, dan struktur kolom master data.'
+      }
+    ],
+    dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Biarlah AI sudah mewakili kalian dalam mempercepat pengerjaan fiturnya saat ini, namun tugas utama kalian sebagai calon Sarjana Sistem Informasi adalah mampu belajar dan menguasai bagaimana cara AI tersebut menyusun dan menyelesaikan setiap fitur tersebut.',
+    homeworkScope: [
+      {
+        topic: 'Mekanisme Autentikasi, Session, & Proteksi Role-Based Access Control (RBAC)',
+        description: 'Pelajari secara mendalam bagaimana session disimpan di server, kenapa password harus di-hash (misal: password_hash & password_verify), serta bagaimana mencegah bypass URL admin.',
+        guidingQuestions: 'Jika seseorang mengetik langsung URL /admin/dashboard tanpa login, baris kode mana yang menolaknya? Bagaimana session ID diamankan dari pembajakan (session hijacking)?'
+      },
+      {
+        topic: 'Alur Data Checkout ke Database (Relasi One-to-Many & Transaksi ACID)',
+        description: 'Pahami bagaimana satu transaksi checkout memecah data ke tabel pesanan (header) dan tabel detail_pesanan (items) secara atomik.',
+        guidingQuestions: 'Apa yang terjadi jika koneksi terputus saat pesanan utama tersimpan tetapi rincian item pesanan gagal tersimpan? Mengapa kita membutuhkan Database Transaction (COMMIT / ROLLBACK)?'
+      },
+      {
+        topic: 'Logika Sinkronisasi Inventaris Otomatis (Slide 6 ERP)',
+        description: 'Pahami logika decrement stok saat pelanggan berhasil melakukan checkout atau pembayaran disetujui admin.',
+        guidingQuestions: 'Di file mana pengurangan kolom `stock` terjadi? Bagaimana cara mencegah stok bernilai negatif jika 2 pengguna membeli stok terakhir pada detik yang sama?'
+      },
+      {
+        topic: 'Kemampuan Tracing, Debugging & Code Literacy Mandiri',
+        description: 'Mahasiswa wajib mampu membaca setiap fungsi dan baris kode tanpa ketergantungan pada prompt AI, sehingga siap saat ditanya detail implementasi saat sidang KP.',
+        guidingQuestions: 'Dapatkah kamu menjelaskan alur data dari form HTML hingga dieksekusi di database di papan tulis tanpa membuka ChatGPT/Cursor?'
+      }
+    ]
+  };
+}
+
+// Helper: Generator Penilaian Deskriptif Resmi Dosen Penguji Faik Bajsair, S.Kom., M.Kom.
+export function generateDefaultDescriptiveEvaluation(project = {}) {
+  const name = project.projectName || 'Aplikasi E-Commerce Model ERP';
+  const group = project.groupNumber || project.studentName || 'Kelompok Kerja Praktik';
+  const hosting = project.hostingPlatform || 'Cloud Hosting';
+
+  return {
+    evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+    prodi: 'Program Studi Sistem Informasi',
+    academicRole: 'Dosen Penguji / Academic Quality Analyst',
+    executiveSummary: `Proyek "${name}" yang diajukan oleh ${group} dinilai telah berhasil merealisasikan prototipe fungsional aplikasi berbasis web yang memadukan storefront E-Commerce dan backoffice ERP sederhana. Implementasi antarmuka telah memenuhi kriteria usability dan alur bisnis UMKM yang ditargetkan, serta berhasil dipublikasikan pada infrastruktur live ${hosting}.`,
+    businessModelEvaluation: `Aplikasi berhasil mengidentifikasi kebutuhan spesifik model bisnis UMKM mitra, mencakup katalog produk, pemesanan pelanggan, hingga pencatatan transaksi penjualan. Konsep ERP terwujud dalam pemisahan modul operasional front-end dan panel admin operasional.`,
+    technicalArchitectureEvaluation: `Arsitektur sistem dibangun dengan fondasi yang cukup rapi. Tata letak visual responsif dan mudah digunakan. Dari perspektif rekayasa perangkat lunak, aplikasi masih memerlukan penyempurnaan pada aspek sanitasi input, validasi parameter SQL, penanganan transaksi ACID pada pemesanan multi-item, serta penguatan protokol transmisi HTTPS.`,
+    strengths: [
+      'Antarmuka pengguna (UI/UX) dirancang tematik, bersih, dan representatif terhadap identitas produk UMKM mitra',
+      'Alur pemesanan produk dari pemilihan menu hingga pengisian data transaksi berjalan dengan lancar',
+      'Telah berhasil di-deploy pada lingkungan cloud hosting publik dan dapat diuji secara langsung',
+      'Terdapat pembagian hak akses operasional yang jelas antara pelanggan dan pengelola admin toko'
+    ],
+    weaknesses: [
+      'Pemanfaatan generatif AI cukup dominan sehingga pemahaman mahasiswa terhadap setiap baris kode perlu diperdalam sebelum sidang',
+      'Belum dilengkapi database transaction locking untuk mencegah race condition pada saat pengurangan stok produk secara bersamaan',
+      'Perlu penambahan proteksi keamanan web standar (seperti CSRF protection, sanitasi query input, dan sertifikat HTTPS aman)'
+    ],
+    finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN PR PENDALAMAN LOGIKA KODE)',
+    recommendations: 'Kelompok mahasiswa dinyatakan memenuhi kriteria capaian Kerja Praktik (KP). Namun, seluruh anggota kelompok diwajibkan menyelesaikan PR (Tugas Belajar Mandiri) untuk membedah dan memahami seluruh alur logika, sintaks, dan arsitektur kode yang telah diwakili oleh AI, guna kesiapan menghadapi sidang pertanggungjawaban akademik.'
+  };
+}
+
+const RAW_PRESET_PROJECTS = [
   // 1. Tokopi (Kerja Praktik)
   {
     id: 'project-tokopi-kp',
@@ -607,7 +704,88 @@ export const INITIAL_PRESET_PROJECTS = [
     evaluationDate: '2026-11-24',
     scores: generateRubricScores({ domain: 'Chicken Crunchy Roll' }),
     lecturerNotes: 'Aplikasi Chicken Crunchy Roll dari Kelompok 5 memiliki desain antarmuka yang tematik, responsif, dilengkapi form pemesanan pelanggan, serta backoffice admin terproteksi.',
-    vulnerabilities: []
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 78,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 78%)',
+      summaryAnalysis: 'Aplikasi Chicken Crunchy Roll (Kelompok 5) menunjukkan pemanfaatan generatif AI yang dominan pada perancangan CSS tematik modern, kartu menu, alur pemesanan, dan penataan template login. Pola kode sangat terstruktur dan rapi, namun memiliki karakteristik khas generator AI seperti komentar inline deskriptif dalam bahasa Inggris, penamaan class yang baku, dan simplifikasi sanitasi query database.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Antarmuka & CSS Pelanggan',
+          aiPercentage: 85,
+          indicator: 'Palet warna CSS Variable (:root --red, --cream), reset styling, dan efek border-radius 14px sangat rapi dan konsisten, identik dengan prompt styling generator frontend modern (v0/Tailwind).',
+          whatAiDid: 'Menghasilkan seluruh stylesheet style.css dengan layout responsif mobile-friendly.'
+        },
+        {
+          feature: 'Autentikasi & Login Multi-Role',
+          aiPercentage: 80,
+          indicator: 'Struktur verifikasi kredensial di auth/login.php mengikuti pola template generic ChatGPT dengan redirect standar session tanpa proteksi CSRF token atau throttling brute-force.',
+          whatAiDid: 'Membuat alur pemisahan user dan admin login serta session state.'
+        },
+        {
+          feature: 'Katalog Menu & Keranjang Pemesanan',
+          aiPercentage: 75,
+          indicator: 'Algoritma JavaScript penambahan item cart dan perhitungan nominal subtotal mengikuti struktur fungsi fungsional murni khas Copilot.',
+          whatAiDid: 'Menyusun alur klik pesan sekarang, penambahan topping/saus, dan ringkasan pesanan.'
+        },
+        {
+          feature: 'Backoffice ERP & Manajemen Inventori',
+          aiPercentage: 70,
+          indicator: 'Query database menggunakan sintaks query procedural standar tanpa transaction locking (ACID) untuk pengurangan stok bahan baku ayam crispy.',
+          whatAiDid: 'Menyediakan tabel manajemen menu dan status order di sisi admin.'
+        },
+        {
+          feature: 'Skema Database & Migrasi SQL',
+          aiPercentage: 75,
+          indicator: 'Relasi foreign key standar dan penamaan tabel Bahasa Inggris/Indonesia bercampur yang biasa dihasilkan dari prompt perancangan database.',
+          whatAiDid: 'Membuat tabel users, products, orders, dan order_items beserta sample data.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Biarlah AI sudah mewakili kalian dalam mempercepat pengerjaan fiturnya saat ini, namun tugas utama kalian sebagai calon Sarjana Sistem Informasi adalah mampu belajar dan menguasai bagaimana cara AI tersebut menyusun dan menyelesaikan setiap fitur tersebut.',
+      homeworkScope: [
+        {
+          topic: 'Mekanisme Session & Keamanan Autentikasi PHP',
+          description: 'Pelajari secara mendalam bagaimana session_start(), $_SESSION, hashing password (password_hash & password_verify), serta session hijacking bekerja di balik layar.',
+          guidingQuestions: 'Di baris mana session user divalidasi? Bagaimana cara mencegah pengguna yang belum login membuka menu dashboard admin secara langsung lewat URL?'
+        },
+        {
+          topic: 'Relasi Database & Pemrosesan Transaksi Pesanan (ACID)',
+          description: 'Pahami relasi 1-to-Many antara tabel orders dan order_items, serta pentingnya Database Transaction agar saat sistem gagal menyimpan detail pesanan, data tidak menjadi korup.',
+          guidingQuestions: 'Apa yang terjadi jika koneksi terputus tepat setelah data pesanan utama tersimpan tetapi detail produk pesanan belum tersimpan? Mengapa kita membutuhkan START TRANSACTION, COMMIT, dan ROLLBACK?'
+        },
+        {
+          topic: 'Logika Sinkronisasi Inventaris Otomatis (Slide 6 ERP)',
+          description: 'Pelajari alur pengurangan kolom stock pada tabel produk saat status pesanan berubah menjadi Paid/Diproses, serta peringatan Low Stock Alert.',
+          guidingQuestions: 'Di query mana stok ayam berkurang ketika pesanan selesai? Bagaimana jika stok tersisa 1 tetapi ada 2 pelanggan checkout bersamaan?'
+        },
+        {
+          topic: 'Kemampuan Tracing & Debugging Kode Sendiri (Code Literacy)',
+          description: 'Mahasiswa wajib mampu membaca setiap fungsi dan baris kode tanpa ketergantungan pada prompt AI lagi, sehingga siap saat ditanya detail implementasi saat sidang KP.',
+          guidingQuestions: 'Jika dosen menunjuk salah satu baris kode di script.js atau login.php, dapatkah kamu menjelaskan alur eksekusinya di papan tulis?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Secara visual dan fungsional, proyek Chicken Crunchy Roll karya Kelompok 5 berhasil merepresentasikan konsep E-Commerce kuliner kekinian dengan antarmuka yang tematik, responsif, dan alur pemesanan yang jelas. Pemanfaatan AI telah membantu kelompok ini mempercepat pembuatan prototype aplikasi hingga tahap live cloud hosting di InfinityFree.',
+      businessModelEvaluation: 'Aplikasi telah mengadopsi model pemesanan mandiri kuliner UMKM (Online Pickup & Delivery) yang relevan dengan tren industri F&B saat ini. Fitur pemilihan saus celup, bubuk tabur, dan varian rasa menunjukkan pemahaman kelompok terhadap kebutuhan operasional bisnis nyata.',
+      technicalArchitectureEvaluation: 'Penggunaan PHP Native dan MySQL memberikan fondasi pemahaman dasar pemrograman web yang baik. Tampilan CSS terorganisir dengan rapi. Namun demikian, mahasiswa perlu memperdalam aspek keamanan backend (sanitasi input, proteksi SQL Injection, CSRF) serta manajemen transaksi database di sisi ERP.',
+      strengths: [
+        'Desain antarmuka (UI/UX) sangat tematik dengan branding kuliner yang hidup (merah & krem)',
+        'Alur navigasi pemesanan dari katalog hingga form pesanan mudah dipahami oleh pengguna',
+        'Sudah berhasil di-hosting secara live cloud dan dapat diakses publik via internet',
+        'Tersedia pemisahan hak akses antara akun pelanggan dan backoffice admin'
+      ],
+      weaknesses: [
+        'Integrasi backend masih menggunakan HTTP tanpa proteksi SSL aktif pada hosting',
+        'Pengurangan stok bahan baku belum terintegrasi secara otomatis dengan modul akuntansi/ERP',
+        'Belum ada validasi token CSRF pada form autentikasi dan form pesanan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN PR PENDALAMAN LOGIKA KODE)',
+      recommendations: 'Kelompok 5 dinyatakan memenuhi standar fungsionalitas Kerja Praktik. Mahasiswa diwajibkan menyelesaikan PR pendalaman kode (Code Literacy) sesuai scope yang diberikan agar menguasai 100% logika sistem saat sidang evaluasi akhir.'
+    }
   },
 
   // 6. Kelompok 6 - Cemilan Nusantara Jangekkita
@@ -718,3 +896,9 @@ export const INITIAL_PRESET_PROJECTS = [
     vulnerabilities: []
   }
 ];
+
+export const INITIAL_PRESET_PROJECTS = RAW_PRESET_PROJECTS.map(p => ({
+  ...p,
+  aiAudit: p.aiAudit || generateDefaultAiAudit(p),
+  descriptiveEvaluation: p.descriptiveEvaluation || generateDefaultDescriptiveEvaluation(p)
+}));
