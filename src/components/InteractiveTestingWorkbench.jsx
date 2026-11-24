@@ -373,6 +373,23 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
               const updated = { ...scores };
               SYLLABUS_SECTIONS.forEach(s => {
                 s.items.forEach(i => {
+                  updated[i.id] = { status: 'PASSED', score: 88, note: 'Fitur terverifikasi pada standar silabus ERP Dosen Faik Bajsair, S.Kom., M.Kom.' };
+                });
+              });
+              onUpdateScores(updated);
+            }}
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-950/80 hover:bg-blue-900 text-blue-300 border border-blue-700/60 rounded-xl text-xs font-semibold transition"
+            title="Setel seluruh 41 kriteria tugas menjadi Grade A (88%)"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>🎯 Beri Nilai A (88%)</span>
+          </button>
+
+          <button
+            onClick={() => {
+              const updated = { ...scores };
+              SYLLABUS_SECTIONS.forEach(s => {
+                s.items.forEach(i => {
                   updated[i.id] = { status: 'PASSED', score: 100, note: updated[i.id]?.note || 'Fitur terverifikasi tuntas (100%).' };
                 });
               });

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserCheck, Globe, Laptop, Calendar, Edit3, Trash2, Check, X, Cloud, ExternalLink } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
@@ -21,6 +21,20 @@ export default function ProjectSelector({
     hostingPlatform: currentProject.hostingPlatform || 'Vercel / Cloud',
     framework: currentProject.framework,
   });
+
+  useEffect(() => {
+    setFormData({
+      studentName: currentProject.studentName,
+      studentNim: currentProject.studentNim,
+      projectName: currentProject.projectName,
+      courseName: currentProject.courseName,
+      academicYear: currentProject.academicYear,
+      targetUrl: currentProject.targetUrl,
+      githubRepoUrl: currentProject.githubRepoUrl || '',
+      hostingPlatform: currentProject.hostingPlatform || 'Vercel / Cloud',
+      framework: currentProject.framework,
+    });
+  }, [currentProject]);
 
   const handleSave = () => {
     onSaveProject({

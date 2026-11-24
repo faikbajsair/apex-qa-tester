@@ -68,13 +68,33 @@ export default function App() {
     sessionStorage.setItem('apex_unlocked', 'true');
     sessionStorage.setItem('apex_master_pass', passphrase);
     try {
+      // Bulletproof: Check existing localStorage projects first
+      const saved = localStorage.getItem('apex_qa_projects_data');
+      let localProjects = [];
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            localProjects = parsed;
+          }
+        } catch (e) {}
+      }
+
       const encryptedVault = localStorage.getItem('apex_qa_encrypted_vault');
       if (encryptedVault) {
         const decrypted = await decryptData(JSON.parse(encryptedVault), passphrase);
         if (decrypted && Array.isArray(decrypted) && decrypted.length > 0) {
-          setProjects(decrypted);
-          localStorage.setItem('apex_qa_projects_data', JSON.stringify(decrypted));
+          // Merge without ever overwriting newly added local projects
+          const localIds = new Set(localProjects.map(p => p.id));
+          const additionsFromVault = decrypted.filter(p => !localIds.has(p.id));
+          const merged = [...localProjects, ...additionsFromVault];
+          setProjects(merged);
+          localStorage.setItem('apex_qa_projects_data', JSON.stringify(merged));
+        } else if (localProjects.length > 0) {
+          setProjects(localProjects);
         }
+      } else if (localProjects.length > 0) {
+        setProjects(localProjects);
       }
     } catch (e) {
       console.warn('Vault decryption fallback:', e);
