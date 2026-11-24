@@ -54,11 +54,11 @@ async function fetchWithBypass(rawUrl, options = {}) {
   const urlsToTry = [];
   if (targetUrl.startsWith('http://') || targetUrl.startsWith('https://')) {
     urlsToTry.push(targetUrl);
-    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd'))) {
+    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd'))) {
       urlsToTry.push(targetUrl.replace('https://', 'http://'));
     }
   } else {
-    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd')) {
+    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd')) {
       urlsToTry.push('http://' + targetUrl);
       urlsToTry.push('https://' + targetUrl);
     } else {
@@ -228,6 +228,16 @@ function detectHostingPlatform(targetUrl, headers) {
   const urlLower = targetUrl.toLowerCase();
   const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
   const serverHeader = (headers['server'] || '').toLowerCase();
+
+  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('infinityfree')) {
+    return {
+      provider: 'InfinityFree / Free Web Hosting',
+      badge: 'InfinityFree Web Server',
+      icon: 'server',
+      isModernCloud: false,
+      description: 'Aplikasi di-hosting pada layanan gratis InfinityFree (ByetHost). Menggunakan protokol HTTP dan proteksi cookie anti-bot.'
+    };
+  }
 
   if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
     return {

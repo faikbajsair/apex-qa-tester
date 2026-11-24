@@ -602,7 +602,7 @@ export default function InteractiveTestingWorkbench({ currentProject, onUpdateSc
           </div>
 
           {/* Banner Informasi Khusus Hosting Gratis / HTTP (free.nf / ByetHost) */}
-          {(previewUrl.includes('.free.nf') || previewUrl.startsWith('http://') || previewUrl.includes('.epizy.') || previewUrl.includes('.rf.gd')) && (
+          {(previewUrl.includes('.free.nf') || previewUrl.startsWith('http://') || previewUrl.includes('.epizy.') || previewUrl.includes('.rf.gd') || previewUrl.includes('.gamer.gd')) && (
             <div className="mb-2 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2 text-xs">
               <div className="flex items-center gap-2 text-amber-300">
                 <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />

@@ -667,6 +667,126 @@ const RAW_PRESET_PROJECTS = [
     vulnerabilities: []
   },
 
+  // 4. Kelompok 4 - Budiarti Risol (Dela, Nurul, Ananda, Nabilla)
+  {
+    id: 'project-r5i-kelompok-4',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5I',
+    groupNumber: 'Kelompok 4',
+    studentName: 'Kelompok 4 - Budiarti Risol (Dela, Nurul, Ananda, Nabilla)',
+    studentNim: '202433500458 / 459 / 462 / 463',
+    teamMembers: [
+      { nim: '202433500458', name: 'Dela Mareta Ardyaputri' },
+      { nim: '202433500459', name: 'Nurul' },
+      { nim: '202433500462', name: 'Ananda Agustini' },
+      { nim: '202433500463', name: 'Nabilla Nur Sabrina' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Pengembangan Sistem Pemasaran dan Pemesanan Berbasis Web untuk Memperluas Jangkauan Pasar UMKM Budiarti Risol',
+    targetUrl: 'http://budiartirisol.gamer.gd/RisolBudiarti/user/',
+    adminUrl: 'http://budiartirisol.gamer.gd/RisolBudiarti/admin/',
+    orderUrl: 'http://budiartirisol.gamer.gd/RisolBudiarti/user/',
+    portals: [
+      { title: 'Storefront Risol Budiarti', url: 'http://budiartirisol.gamer.gd/RisolBudiarti/user/', badge: 'InfinityFree' },
+      { title: 'Backoffice Admin', url: 'http://budiartirisol.gamer.gd/RisolBudiarti/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@budiarti.com', password: 'admin123' },
+      user: { username: 'delamareta11@gmail.com', password: 'harimauca376' }
+    },
+    githubRepoUrl: 'https://github.com/nurul459/budiarti-risol',
+    hostingPlatform: 'InfinityFree',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-24',
+    scores: generateRubricScores({ domain: 'UMKM Budiarti Risol' }),
+    lecturerNotes: 'Aplikasi Budiarti Risol dari Kelompok 4 dirancang untuk memperluas jangkauan pemasaran UMKM produk risol dengan katalog varian rasa, alur pemesanan pelanggan, serta panel admin pengelola.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 76,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 76%)',
+      summaryAnalysis: 'Aplikasi Budiarti Risol menunjukkan pemanfaatan asisten generative AI yang kuat pada penataan katalog produk, alur pemesanan cart, template form login, dan penataan tabel MySQL. Kode berjalan fungsional di server InfinityFree gamer.gd, namun mahasiswa membutuhkan pendalaman komprehensif pada struktur logika backend dan pengelolaan relasi data.',
+      featureBreakdown: [
+        {
+          feature: 'Halaman Pengguna & Katalog Risol (/user/)',
+          aiPercentage: 80,
+          indicator: 'Penataan kartu produk, grid layout, dan navigasi pemesanan memiliki struktur semantik yang sangat teratur khas scaffolding prompt AI.',
+          whatAiDid: 'Menyusun katalog varian risol (risol mayo, risol sayur, risol smoke beef) dan form order pelanggan.'
+        },
+        {
+          feature: 'Autentikasi Multi-User (Admin & User)',
+          aiPercentage: 80,
+          indicator: 'Sistem login menggunakan percabangan session standar ChatGPT dengan pengalihan header Location tanpa verifikasi CSRF.',
+          whatAiDid: 'Menyediakan halaman login terpisah untuk delamareta11@gmail.com dan admin@budiarti.com.'
+        },
+        {
+          feature: 'Keranjang Belanja & Form Checkout',
+          aiPercentage: 75,
+          indicator: 'Logika kalkulasi total harga belanja dan array session cart mengikuti pola baku Copilot.',
+          whatAiDid: 'Membuat alur penambahan jumlah pcs risol, hitung total harga, dan input alamat pengantaran.'
+        },
+        {
+          feature: 'Panel Pengelola Admin (/admin/)',
+          aiPercentage: 70,
+          indicator: 'Operasi CRUD data menu dan daftar pesanan menggunakan query dasar mysqli tanpa penanganan transaksi atomik saat pesanan masuk.',
+          whatAiDid: 'Menghasilkan tabel data penjualan dan verifikasi status order masuk.'
+        },
+        {
+          feature: 'Struktur Database & Tabel Relasional',
+          aiPercentage: 75,
+          indicator: 'Konvensi nama kolom dan tabel standar perancangan AI untuk e-commerce kuliner.',
+          whatAiDid: 'Menyusun DDL database pesanan, produk risol, dan akun pengguna.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Biarlah AI sudah mewakili kalian dalam mempercepat pengerjaan fiturnya saat ini, namun tugas utama kalian sebagai calon Sarjana Sistem Informasi adalah mampu belajar dan menguasai bagaimana cara AI tersebut menyusun dan menyelesaikan setiap fitur tersebut.',
+      homeworkScope: [
+        {
+          topic: 'Pemahaman Mekanisme Sesi Autentikasi PHP & Cookie',
+          description: 'Pelajari bagaimana session_start(), $_SESSION, dan redirect header Location bekerja saat autentikasi admin dan user.',
+          guidingQuestions: 'Di file mana autentikasi dicek? Jika user langsung mengetik link /admin/ tanpa login, bagaimana kode mencegahnya?'
+        },
+        {
+          topic: 'Relasi Database & Pemisahan Data Pesanan (One-to-Many)',
+          description: 'Pelajari bagaimana data pemesanan risol dipecah antara data induk pesanan (pemesan, tanggal, status) dan rincian varian risol yang dipesan.',
+          guidingQuestions: 'Bagaimana tabel pesanan dan detail_pesanan dihubungkan? Apa fungsi foreign key dalam menjaga keutuhan data?'
+        },
+        {
+          topic: 'Logika Sinkronisasi Stok Risol Harian (Slide 6 ERP)',
+          description: 'Pahami bagaimana stok varian risol berkurang secara otomatis ketika ada pesanan yang divalidasi admin.',
+          guidingQuestions: 'Bagaimana query UPDATE stock dijalankan di sistem saat admin menyetujui pesanan?'
+        },
+        {
+          topic: 'Kemampuan Code Literacy & Tracing Kode Mandiri',
+          description: 'Mahasiswa wajib mampu membaca setiap baris kode yang dibuatkan oleh AI tanpa membuka AI saat diuji di depan papan tulis.',
+          guidingQuestions: 'Dapatkah kamu menggambar flowchart alur data pemesanan dari klik tombol pesan hingga tersimpan di MySQL?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek "Pengembangan Sistem Pemasaran dan Pemesanan Berbasis Web untuk Memperluas Jangkauan Pasar UMKM Budiarti Risol" karya Kelompok 4 berhasil mengangkat studi kasus UMKM kuliner risol lokal. Aplikasi ini telah memiliki storefront pengguna (/user/) dan backoffice admin (/admin/) yang aktif di hosting InfinityFree.',
+      businessModelEvaluation: 'Model bisnis yang diusung sangat tepat guna bagi UMKM produsen risol rumahan yang ingin beralih dari pemesanan manual WhatsApp ke sistem web terpusat. Kategorisasi produk dan alur pemesanan mudah dipahami oleh calon pembeli.',
+      technicalArchitectureEvaluation: 'Aplikasi dibangun dengan arsitektur PHP Native dan MySQL yang sederhana namun fungsional. Struktur folder (/user/ dan /admin/) sudah terpisah dengan baik. Namun aspek sanitasi data, validasi form, dan keamanan koneksi hosting gratis (HTTP) perlu ditingkatkan sebelum masuk tahap produksi skala besar.',
+      strengths: [
+        'Studi kasus nyata yang solutif untuk membantu pemasaran produk UMKM Budiarti Risol',
+        'Pemisahan folder yang jelas antara antarmuka pengguna (/user/) dan panel admin (/admin/)',
+        'Tersedia akun demo pelanggan dan admin yang siap diuji secara fungsional',
+        'Sudah online dan dapat diakses publik melalui domain budiartirisol.gamer.gd'
+      ],
+      weaknesses: [
+        'Pemanfaatan generative AI cukup tinggi (76%), pemahaman logika mendalam mahasiswa harus diuji pada sesi evaluasi',
+        'Sistem belum memiliki integrasi payment gateway otomatis dan masih mengandalkan konfirmasi admin manual',
+        'Koneksi hosting belum terproteksi SSL aktif (masih berjalan pada protokol HTTP)'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN PR PENDALAMAN LOGIKA KODE)',
+      recommendations: 'Kelompok 4 dinyatakan lulus evaluasi Kerja Praktik (KP). Seluruh anggota tim diwajibkan mempelajari dan menyelesaikan PR materi teknis yang telah ditentukan agar menguasai penuh sistem saat sidang akademik.'
+    }
+  },
+
   // 5. Kelompok 5 - Chicken Crunchy Roll (Evi, Damar, Alexa, Jasmine)
   {
     id: 'project-r5i-kelompok-5',
