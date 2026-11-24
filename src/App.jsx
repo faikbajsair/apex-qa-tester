@@ -14,8 +14,12 @@ import AuthGateModal from './components/AuthGateModal';
 import { encryptData, decryptData } from './utils/cryptoSecurity';
 
 export default function App() {
-  const [isLocked, setIsLocked] = useState(true);
-  const [masterPassphrase, setMasterPassphrase] = useState('');
+  const [isLocked, setIsLocked] = useState(() => {
+    return sessionStorage.getItem('apex_unlocked') === 'true' ? false : true;
+  });
+  const [masterPassphrase, setMasterPassphrase] = useState(() => {
+    return sessionStorage.getItem('apex_master_pass') || 'FaikBajsair@2026!';
+  });
   const [projects, setProjects] = useState(INITIAL_PRESET_PROJECTS);
   const [currentProjectId, setCurrentProjectId] = useState(INITIAL_PRESET_PROJECTS[0]?.id || 'demo-rizky');
   const [activeTab, setActiveTab] = useState('workbench');
@@ -25,6 +29,8 @@ export default function App() {
   // Decrypt vault upon master unlock
   const handleUnlock = async (passphrase) => {
     setMasterPassphrase(passphrase);
+    sessionStorage.setItem('apex_unlocked', 'true');
+    sessionStorage.setItem('apex_master_pass', passphrase);
     try {
       const encryptedVault = localStorage.getItem('apex_qa_encrypted_vault');
       if (encryptedVault) {
@@ -41,6 +47,8 @@ export default function App() {
   };
 
   const handleLockSession = () => {
+    sessionStorage.removeItem('apex_unlocked');
+    sessionStorage.removeItem('apex_master_pass');
     setIsLocked(true);
     setMasterPassphrase('');
   };

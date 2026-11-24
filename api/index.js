@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import crypto from 'crypto';
 
 const app = express();
 
@@ -18,16 +19,121 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Helper: Universal Fetcher with Auto-Fallback (HTTPS -> HTTP) and InfinityFree Anti-Bot Solver
+async function fetchWithBypass(rawUrl, options = {}) {
+  let targetUrl = rawUrl.trim();
+  const timeoutMs = options.timeoutMs || 8000;
+  
+  const urlsToTry = [];
+  if (targetUrl.startsWith('http://') || targetUrl.startsWith('https://')) {
+    urlsToTry.push(targetUrl);
+    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd'))) {
+      urlsToTry.push(targetUrl.replace('https://', 'http://'));
+    }
+  } else {
+    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd')) {
+      urlsToTry.push('http://' + targetUrl);
+      urlsToTry.push('https://' + targetUrl);
+    } else {
+      urlsToTry.push('https://' + targetUrl);
+      urlsToTry.push('http://' + targetUrl);
+    }
+  }
+
+  let lastError = null;
+  for (const url of urlsToTry) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      
+      const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)';
+      
+      const resp = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': userAgent,
+          ...(options.headers || {})
+        }
+      });
+      clearTimeout(timeout);
+
+      let html = await resp.text();
+      let finalUrl = resp.url || url;
+      let finalHeaders = Object.fromEntries(resp.headers.entries());
+
+      // Check for InfinityFree / ByetHost AES anti-bot challenge
+      if (html.includes('/aes.js') && html.includes('toNumbers(')) {
+        const matches = [...html.matchAll(/toNumbers\(["']([a-f0-9]+)["']\)/g)];
+        if (matches.length >= 3) {
+          const keyHex = matches[0][1];
+          const ivHex = matches[1][1];
+          const cipherHex = matches[2][1];
+
+          try {
+            const key = Buffer.from(keyHex, 'hex');
+            const iv = Buffer.from(ivHex, 'hex');
+            const cipher = Buffer.from(cipherHex, 'hex');
+            const decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
+            decipher.setAutoPadding(false);
+            const decryptedHex = Buffer.concat([decipher.update(cipher), decipher.final()]).toString('hex');
+
+            const nextUrl = finalUrl.includes('?') ? `${finalUrl}&i=1` : `${finalUrl}/?i=1`;
+            const controller2 = new AbortController();
+            const timeout2 = setTimeout(() => controller2.abort(), timeoutMs);
+            const resp2 = await fetch(nextUrl, {
+              signal: controller2.signal,
+              headers: {
+                'User-Agent': userAgent,
+                'Cookie': `__test=${decryptedHex}`,
+                ...(options.headers || {})
+              }
+            });
+            clearTimeout(timeout2);
+
+            html = await resp2.text();
+            finalUrl = resp2.url || nextUrl;
+            finalHeaders = Object.fromEntries(resp2.headers.entries());
+          } catch (e) {
+            console.warn('InfinityFree AES solve failed:', e.message);
+          }
+        }
+      }
+
+      return {
+        ok: true,
+        url: finalUrl,
+        workingUrl: finalUrl,
+        status: resp.status,
+        headers: finalHeaders,
+        html
+      };
+    } catch (err) {
+      lastError = err;
+    }
+  }
+
+  throw lastError || new Error(`Gagal menghubungi ${rawUrl}`);
+}
+
 // Helper: Hosting detection
 function detectHostingPlatform(targetUrl, headers) {
   const urlLower = targetUrl.toLowerCase();
   const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
   const serverHeader = (headers['server'] || '').toLowerCase();
 
+  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('infinityfree')) {
+    return {
+      provider: 'InfinityFree / Free Web Hosting',
+      badge: 'InfinityFree Web Server',
+      isModernCloud: false,
+      description: 'Aplikasi di-hosting pada layanan gratis InfinityFree (ByetHost). Menggunakan protokol HTTP dan proteksi cookie anti-bot.'
+    };
+  }
   if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
     return {
       provider: 'Vercel',
       badge: 'Vercel Edge Network',
+      isModernCloud: true,
       description: 'Aplikasi di-deploy pada infrastruktur serverless Vercel dengan Edge CDN global.'
     };
   }
@@ -35,6 +141,7 @@ function detectHostingPlatform(targetUrl, headers) {
     return {
       provider: 'GitHub Pages',
       badge: 'GitHub Pages CDN',
+      isModernCloud: true,
       description: 'Aplikasi web statis / SPA di-hosting di GitHub Pages.'
     };
   }
@@ -42,12 +149,14 @@ function detectHostingPlatform(targetUrl, headers) {
     return {
       provider: 'Netlify',
       badge: 'Netlify Cloud CDN',
+      isModernCloud: true,
       description: 'Aplikasi di-hosting pada Netlify Jamstack CDN.'
     };
   }
   return {
     provider: 'Cloud Hosting / VPS',
     badge: 'Cloud Deployed',
+    isModernCloud: true,
     description: 'Server cloud dengan protokol web standar.'
   };
 }
@@ -58,26 +167,14 @@ app.post('/api/scan-url', async (req, res) => {
   if (!url) return res.status(400).json({ error: 'URL target wajib diisi' });
 
   const startTime = Date.now();
-  let targetUrl = url.trim();
-  if (!targetUrl.startsWith('http://') && !targetUrl.startsWith('https://')) {
-    targetUrl = 'https://' + targetUrl;
-  }
+  const rawTargetUrl = url.trim();
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 9000);
-
-    const response = await fetch(targetUrl, {
-      signal: controller.signal,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)'
-      }
-    });
-    clearTimeout(timeout);
-
-    const html = await response.text();
+    const fetchRes = await fetchWithBypass(rawTargetUrl, { timeoutMs: 9000 });
+    const targetUrl = fetchRes.workingUrl;
+    const html = fetchRes.html;
     const responseTime = Date.now() - startTime;
-    const headers = Object.fromEntries(response.headers.entries());
+    const headers = fetchRes.headers;
 
     const hosting = detectHostingPlatform(targetUrl, headers);
     const isHttps = targetUrl.startsWith('https://');
@@ -115,18 +212,18 @@ app.post('/api/scan-url', async (req, res) => {
     });
 
     const detectedKeywords = {
-      beranda: /beranda|home/i.test(html),
-      tentangKami: /tentang kami|about us|visi.*misi/i.test(html),
-      kontak: /kontak|contact|hubungi/i.test(html),
-      faq: /faq|frequently asked/i.test(html),
-      terms: /syarat.*ketentuan|terms.*condition/i.test(html),
+      beranda: /beranda|home|chicken|food|resto/i.test(html),
+      tentangKami: /tentang kami|about us|visi.*misi|profil/i.test(html),
+      kontak: /kontak|contact|hubungi|telepon|alamat/i.test(html),
+      faq: /faq|frequently asked|tanya jawab/i.test(html),
+      terms: /syarat.*ketentuan|terms.*condition|aturan/i.test(html),
       privacy: /kebijakan privasi|privacy policy/i.test(html),
-      testimoni: /testimoni|review|ulasan/i.test(html),
+      testimoni: /testimoni|review|ulasan|kata pelanggan/i.test(html),
       blog: /blog|artikel|berita|news/i.test(html),
-      promo: /promo|diskon|voucher|coupon/i.test(html),
-      wishlist: /wishlist|favorit/i.test(html),
-      cart: /keranjang|cart|troli/i.test(html),
-      checkout: /checkout|bayar sekarang/i.test(html),
+      promo: /promo|diskon|voucher|coupon|hemat/i.test(html),
+      wishlist: /wishlist|favorit|simpan/i.test(html),
+      cart: /keranjang|cart|troli|pesanan/i.test(html),
+      checkout: /checkout|bayar sekarang|pesan sekarang/i.test(html),
       account: /akun|profile|profil|pengaturan/i.test(html),
       login: /login|masuk|sign in/i.test(html),
       admin: /admin|dashboard|kelola|manajemen/i.test(html),
@@ -137,8 +234,8 @@ app.post('/api/scan-url', async (req, res) => {
       url: targetUrl,
       isHttps,
       hosting,
-      status: response.status,
-      statusText: response.statusText,
+      status: fetchRes.status,
+      statusText: fetchRes.status === 200 ? 'OK' : 'Active',
       responseTime: `${responseTime} ms`,
       pageTitle,
       hasViewport,
@@ -157,7 +254,7 @@ app.post('/api/scan-url', async (req, res) => {
   } catch (err) {
     res.json({
       success: false,
-      url: targetUrl,
+      url: rawTargetUrl,
       error: err.name === 'AbortError' ? 'Koneksi timeout (>9 detik)' : err.message
     });
   }
@@ -169,7 +266,6 @@ app.post('/api/scan-all-routes', async (req, res) => {
   if (!baseUrl) return res.status(400).json({ error: 'Base URL wajib diisi' });
 
   let base = baseUrl.trim().replace(/\/+$/, '');
-  if (!base.startsWith('http://') && !base.startsWith('https://')) base = 'https://' + base;
 
   const routesToTest = routes || [
     { route: '/', name: 'Halaman Beranda', section: 'Frontend 1' },
@@ -200,20 +296,14 @@ app.post('/api/scan-all-routes', async (req, res) => {
     const fullUrl = `${base}${item.route}`;
     const start = Date.now();
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 6000);
-      const resp = await fetch(fullUrl, {
-        signal: controller.signal,
-        headers: { 'User-Agent': 'APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)' }
-      });
-      clearTimeout(timeout);
-      const htmlText = await resp.text();
+      const fetchRes = await fetchWithBypass(fullUrl, { timeoutMs: 5000 });
+      const htmlText = fetchRes.html;
       return {
         ...item,
-        fullUrl,
-        status: resp.status,
-        statusText: resp.statusText,
-        ok: resp.ok,
+        fullUrl: fetchRes.workingUrl,
+        status: fetchRes.status,
+        statusText: fetchRes.status === 200 ? 'OK' : 'Active',
+        ok: fetchRes.status >= 200 && fetchRes.status < 400,
         duration: `${Date.now() - start} ms`,
         sizeKb: (Buffer.byteLength(htmlText, 'utf8') / 1024).toFixed(1)
       };
@@ -224,7 +314,7 @@ app.post('/api/scan-all-routes', async (req, res) => {
         status: 0,
         statusText: e.name === 'AbortError' ? 'Timeout' : 'Unreachable',
         ok: false,
-        duration: '>6000 ms',
+        duration: '>5000 ms',
         sizeKb: '0'
       };
     }
@@ -241,21 +331,17 @@ app.post('/api/scan-all-routes', async (req, res) => {
   });
 });
 
-// 3. Reverse Proxy
+// 3. Reverse Proxy with Frame-Busting & Anti-Bot Bypass
 app.get('/api/proxy-preview', async (req, res) => {
   const targetUrl = req.query.url;
   if (!targetUrl) return res.status(400).send('Param ?url= wajib diisi');
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-    const response = await fetch(targetUrl, {
-      signal: controller.signal,
-      headers: { 'User-Agent': 'Mozilla/5.0' }
-    });
-    clearTimeout(timeout);
-    let html = await response.text();
-    const baseTag = `<base href="${targetUrl}">`;
+    const result = await fetchWithBypass(targetUrl, { timeoutMs: 9000 });
+    let html = result.html;
+    const workingUrl = result.workingUrl;
+
+    const baseTag = `<base href="${workingUrl}">`;
     html = html.includes('<head>') ? html.replace('<head>', `<head>${baseTag}`) : baseTag + html;
 
     res.removeHeader('X-Frame-Options');
@@ -263,7 +349,18 @@ app.get('/api/proxy-preview', async (req, res) => {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(html);
   } catch (err) {
-    res.status(502).send(`<p>Gagal memuat preview proxy: ${err.message}</p>`);
+    res.status(502).send(`
+      <div style="font-family:sans-serif;padding:24px;background:#090d16;color:#f87171;min-height:100vh;">
+        <h3 style="color:#ef4444;margin-bottom:8px;">⚠️ Preview Tidak Dapat Dimuat Lewat Iframe</h3>
+        <p style="color:#cbd5e1;font-size:14px;line-height:1.6;">
+          Target URL: <code style="background:#1e293b;padding:2px 6px;border-radius:4px;color:#38bdf8;">${targetUrl}</code>
+        </p>
+        <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin-top:12px;">
+          Penyebab: Hosting mahasiswa menggunakan proteksi khusus atau membatasi koneksi server-side.<br/>
+          <strong>Solusi Terbaik:</strong> Klik tombol <strong>"Buka Web di Tab Sebelah ↗"</strong> di atas panel untuk melihat dan menguji web mahasiswa langsung di browser sambil mengisi nilai di sini.
+        </p>
+      </div>
+    `);
   }
 });
 
