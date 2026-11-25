@@ -608,6 +608,87 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  // --- KELAS S5A (Kelompok Baru) ---
+  if (projectId === 'project-s5a-kelompok-2') {
+    // Kelompok 2 (Milenial Eyewear): 89 / 100 - Grade A
+    const res = createBase(92, 'Implementasi PHP 8.2 Native modular dengan 20 tabel relasional dan dual session isolation sangat baik.');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Katalog kacamata & lensa aktif di cloud hosting page.gd.' };
+    res.fe_faq = { status: 'PARTIAL', score: 75, note: 'FAQ kacamata dan panduan ukuran frame terstruktur.' };
+    res.fe_privacy = { status: 'PARTIAL', score: 75, note: 'Kebijakan privasi resep mata & data optik pasien.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 80, note: 'Alur upload resep dokter mata dan konfirmasi pembayaran transfer.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 75, note: 'Garansi dan penanganan retur lensa salah ukuran/rusak.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 92, note: 'Sinkronisasi 20 tabel relasional stok frame dan lensa otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 80, note: 'Pencatatan kasir optik ke buku besar operasional.' };
+    return res;
+  }
+
+  if (projectId === 'project-s5a-kelompok-3') {
+    // Kelompok 3 (Kinara Studio Pilates): 77 / 100 - Grade B+
+    const res = createBase(86, 'Web studio pilates aktif di hosting InfinityFree dengan pemisahan user dan admin.');
+    res.fe_beranda = { status: 'PASSED', score: 88, note: 'Portal studio pilates aktif di kinarastudiopilates.infinityfreeapp.com.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Belum ada modul blog/artikel kebugaran pilates.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist paket pilates belum tersedia.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 70, note: 'Konfirmasi transfer paket kelas pilates via admin manual.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem refund atau reschedule kelas otomatis.' };
+    res.erp_crm = { status: 'PARTIAL', score: 65, note: 'Data member studio pilates tersimpan sederhana.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 70, note: 'Rekapitulasi transaksi kasir studio pilates.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 65, note: 'Statistik kelas pilates terlaris.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 70, note: 'Sinkronisasi kuota slot peserta per sesi kelas.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 65, note: 'Pencatatan kasir studio manual.' };
+    return res;
+  }
+
+  if (projectId === 'project-s5a-kelompok-6') {
+    // Kelompok 6 (Aplikasi Pemesanan Warjo): 71 / 100 - Grade B
+    const res = createBase(86, 'Aplikasi pemesanan warung kopi warjo di Vercel dengan Cloudflare Workers.');
+    res.fe_beranda = { status: 'PASSED', score: 90, note: 'Landing page interaktif aktif di warjo-ten.vercel.app.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan belum dirancang.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum dibuat.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/artikel tidak tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist tidak ada.' };
+    res.erp_users_admin = { status: 'PARTIAL', score: 50, note: 'Panel admin masih dalam tahap pengembangan (on-progress).' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 55, note: 'Laporan keuangan di sisi admin masih on-progress.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada modul penanganan komplain pesanan.' };
+    res.erp_crm = { status: 'MISSING', score: 0, note: 'Belum ada basis data loyalitas pelanggan warung.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 50, note: 'Analitik penjualan belum diimplementasikan.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 60, note: 'Pengurangan stok menu warjo manual.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 60, note: 'Kasir belum terintegrasi ke buku besar.' };
+    return res;
+  }
+
+  if (projectId === 'project-s5a-kelompok-7') {
+    // Kelompok 7 (Bolang.com): 42 / 100 - Grade D (Belum Ada Live Hosting & Git)
+    const res = createBase(0, 'Belum diimplementasikan.');
+    allIds.forEach(id => {
+      res[id] = { status: 'MISSING', score: 0, note: 'Belum ada URL live hosting publik dan repositori git.' };
+    });
+    [
+      'fe_beranda', 'fe_tentang_kami', 'fe_kontak_kami', 'fe_katalog_produk',
+      'erp_produk', 'erp_kategori', 'erp_users_admin', 'erp_pesanan',
+      'ux_ui_bersih', 'ux_intuitif', 'erp_sync_inventaris'
+    ].forEach(id => {
+      res[id] = { status: 'PARTIAL', score: 45, note: 'Tahap perancangan konseptual proposal (belum ada kode/hosting).' };
+    });
+    return res;
+  }
+
+  if (projectId === 'project-s5a-kelompok-8') {
+    // Kelompok 8 (Ayam Cabe Ijo): 46 / 100 - Grade D (Belum di-Hosting & Tanpa Git)
+    const res = createBase(0, 'Belum diimplementasikan.');
+    allIds.forEach(id => {
+      res[id] = { status: 'MISSING', score: 0, note: 'Aplikasi belum di-hosting di cloud dan tidak menggunakan repositori git publik.' };
+    });
+    [
+      'fe_beranda', 'fe_tentang_kami', 'fe_kontak_kami', 'fe_katalog_produk', 'fe_keranjang', 'fe_checkout',
+      'fe_pengaturan_akun', 'erp_produk', 'erp_pesanan', 'erp_stok', 'erp_kategori',
+      'ux_responsif', 'ux_ui_bersih', 'ux_intuitif', 'ux_informasi_jelas', 'erp_sync_inventaris'
+    ].forEach(id => {
+      res[id] = { status: 'PARTIAL', score: 50, note: 'Rancangan PHP Native & Bootstrap offline (wajib deploy sebelum sidang).' };
+    });
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -827,6 +908,473 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA DENGAN NILAI SANGAT MEMUASKAN (EXCELLENT PRACTICE-READY ERP)',
       recommendations: 'Kelompok Tokopi Kelas S5A dinyatakan sangat siap untuk sidang Kerja Praktik. Mahasiswa diarahkan untuk mematangkan pemahaman arsitektur webhook payment dan modul resep bahan baku saat presentasi sidang.'
+    }
+  },
+
+  // 1b. Kelas S5A - Kelompok 2 (Milenial Eyewear)
+  {
+    id: 'project-s5a-kelompok-2',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 2',
+    studentName: 'Kelas S5A - Kelompok 2 (Milenial Eyewear: Ahmad, Adelia, Helina, Shafwah)',
+    studentNim: '202433500016 / 018 / 020 / 023',
+    teamMembers: [
+      { nim: '202433500016', name: 'Muhammad Ahmad Fadilah' },
+      { nim: '202433500018', name: 'Adelia Syaputri' },
+      { nim: '202433500020', name: 'Helina Dwi Ambarwati' },
+      { nim: '202433500023', name: 'Shafwah Nada' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026/2027 / Semester 5',
+    projectName: 'Milenial Eyewear - Sistem Informasi ERP Optik & Penjualan Kacamata',
+    targetUrl: 'http://milenial-eyewear.page.gd/',
+    adminUrl: 'http://milenial-eyewear.page.gd/admin/login.php',
+    orderUrl: 'http://milenial-eyewear.page.gd/pages/login.php',
+    portals: [
+      { title: 'Storefront Eyewear', url: 'http://milenial-eyewear.page.gd/', badge: 'Live page.gd' },
+      { title: 'Login Pelanggan', url: 'http://milenial-eyewear.page.gd/pages/login.php', badge: 'User Portal' },
+      { title: 'Backoffice Admin', url: 'http://milenial-eyewear.page.gd/admin/login.php', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin (atau admin@milenialeyewear.test)', password: 'admin123' },
+      user: { username: 'bois@gmail.com', password: 'password' }
+    },
+    githubRepoUrl: 'https://github.com/Fadil12121212/ERP-Optik-Kelompok2',
+    hostingPlatform: 'Cloud Web Hosting (Apache & MySQL / page.gd)',
+    framework: 'PHP 8.2 Native (Modular Architecture & Dual Session Isolation), Bootstrap 5.3.3, MySQL / MariaDB (20 Tabel Relasional)',
+    evaluationDate: '2026-11-25',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-2', 'Milenial Eyewear'),
+    lecturerNotes: 'Aplikasi Milenial Eyewear dari Kelas S5A Kelompok 2 memiliki arsitektur modular yang solid pada PHP 8.2, isolasi sesi ganda antara user dan admin, serta skema relasional 20 tabel untuk mendukung manajemen optik (frame, lensa, resep mata).',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Kombinasi AI & Kustomisasi Arsitektur yang Baik (Moderate-High AI, 74%)',
+      summaryAnalysis: 'Aplikasi Milenial Eyewear menunjukkan integrasi yang matang antara template modern Bootstrap 5.3.3 dan penulisan backend PHP 8.2 modular. Pemanfaatan AI teridentifikasi pada penataan skema 20 tabel relasional, alur dual session isolation, dan styling form kacamata. Struktur kode terkelola dengan baik pada repositori GitHub.',
+      featureBreakdown: [
+        {
+          feature: 'Arsitektur Dual Session Isolation & Autentikasi',
+          aiPercentage: 75,
+          indicator: 'Pemisahan sesi session_name() khusus antara halaman admin dan pelanggan untuk mencegah privilege escalation.',
+          whatAiDid: 'Menyusun logika routing login terpisah di /pages/login.php dan /admin/login.php.'
+        },
+        {
+          feature: 'Skema Database Optik Relasional (20 Tabel)',
+          aiPercentage: 78,
+          indicator: 'Rancangan DDL normalisasi tabel produk frame, ukuran lensa (minus/silinder), resep dokter, dan riwayat pesanan.',
+          whatAiDid: 'Menyusun database schema MySQL untuk bisnis kacamata optik.'
+        },
+        {
+          feature: 'Katalog Produk & Form Pemilihan Lensa',
+          aiPercentage: 72,
+          indicator: 'Grid card Bootstrap 5.3.3 responsif dengan modal input ukuran lensa kacamata.',
+          whatAiDid: 'Menyediakan katalog kacamata dengan filter kategori dan harga.'
+        },
+        {
+          feature: 'Backoffice ERP Admin & Manajemen Inventori',
+          aiPercentage: 70,
+          indicator: 'Tabel CRUD persediaan stok frame dan lensa optik serta verifikasi transaksi.',
+          whatAiDid: 'Menampilkan data master optik di panel pengelola.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Biarlah AI sudah mewakili kalian dalam mempercepat pengerjaan fiturnya saat ini, namun tugas utama kalian sebagai calon Sarjana Sistem Informasi adalah mampu belajar dan menguasai bagaimana cara AI tersebut menyusun dan menyelesaikan setiap fitur tersebut.',
+      homeworkScope: [
+        {
+          topic: 'Mekanisme Dual Session Isolation pada PHP',
+          description: 'Pelajari bagaimana session_name(), session_set_cookie_params(), dan session_regenerate_id() bekerja untuk memisahkan sesi admin dan pengguna.',
+          guidingQuestions: 'Bagaimana sistem memastikan session admin tidak bisa disalahgunakan oleh pengguna umum di browser yang sama?'
+        },
+        {
+          topic: 'Relasi 20 Tabel Database & Integritas Referensial (Foreign Keys)',
+          description: 'Pahami relasi antar tabel produk, detail_resep_lensa, orders, dan order_items.',
+          guidingQuestions: 'Bagaimana alur penyimpanan data saat pelanggan memesan kacamata dengan resep lensa silinder khusus?'
+        },
+        {
+          topic: 'Sinkronisasi Stok Frame vs Lensa (Slide 6 ERP)',
+          description: 'Pelajari bagaimana transaksi pemesanan kacamata mengurangi stok frame dan stok lensa secara bersamaan.',
+          guidingQuestions: 'Di query mana stok lensa dan stok frame berkurang? Bagaimana jika salah satu lensa stoknya kosong?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Milenial Eyewear karya Kelompok 2 Kelas S5A (Muhammad Ahmad Fadilah, Adelia Syaputri, Helina Dwi Ambarwati, Shafwah Nada) merupakan karya yang sangat rapi dan berarsitektur kuat. Penggunaan PHP 8.2 modular dengan 20 tabel relasional menunjukkan keseriusan tim dalam memodelkan operasional optik kacamata nyata.',
+      businessModelEvaluation: 'Model bisnis optik kacamata modern dengan fitur unggah resep dokter dan pilihan custom lensa sangat relevan dan memiliki nilai komersial yang tinggi bagi UMKM optik kacamata.',
+      technicalArchitectureEvaluation: 'Pemisahan dual session isolation, struktur folder modular, dan 20 tabel relasional di MySQL berjalan stabil. Penggunaan Bootstrap 5.3.3 memberikan tampilan yang bersih dan profesional.',
+      strengths: [
+        'Arsitektur PHP 8.2 modular dengan dual session isolation yang aman',
+        'Model relasional 20 tabel database komprehensif untuk spesifikasi optik',
+        'Repositori GitHub publik aktif dan terstruktur rapi',
+        'Live hosting aktif di cloud page.gd dengan akun demo lengkap'
+      ],
+      weaknesses: [
+        'Koneksi hosting gratis belum dilengkapi sertifikat SSL (HTTPS)',
+        'Perlu penambahan transaksi atomik (DB Transaction) saat mengurangi stok frame & lensa sekaligus',
+        'Modul retur kacamata rusak perlu dihubungkan otomatis ke jurnal kasir'
+      ],
+      finalVerdict: 'DITERIMA DENGAN NILAI SANGAT MEMUASKAN (EXCELLENT MODULAR ERP)',
+      recommendations: 'Kelompok 2 dinyatakan lulus evaluasi awal Kerja Praktik dengan predikat A. Mahasiswa diarahkan untuk memperdalam pemahaman alur dual session dan relasi foreign key 20 tabel saat sidang.'
+    }
+  },
+
+  // 1c. Kelas S5A - Kelompok 3 (Kinara Studio Pilates)
+  {
+    id: 'project-s5a-kelompok-3',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 3',
+    studentName: 'Kelas S5A - Kelompok 3 (Kinara Studio: Fachri, Cahya, Meisya, Regi)',
+    studentNim: '20243350025 / 029 / 031 / 046',
+    teamMembers: [
+      { nim: '202433500025', name: 'Fachri Fachlia Zaelani' },
+      { nim: '202433500029', name: 'Cahya khairunnisa Palwa' },
+      { nim: '202433500031', name: 'Meisya Dwi Syaputri' },
+      { nim: '202433500046', name: 'Regi Dwi Septia Mawar' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026/2027 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP Pada Kinara Studio',
+    targetUrl: 'https://kinarastudiopilates.infinityfreeapp.com/',
+    adminUrl: 'https://kinarastudiopilates.infinityfreeapp.com/admin/login.php',
+    orderUrl: 'https://kinarastudiopilates.infinityfreeapp.com/',
+    portals: [
+      { title: 'Portal Kinara Studio', url: 'https://kinarastudiopilates.infinityfreeapp.com/', badge: 'Live InfinityFree' },
+      { title: 'Backoffice Admin', url: 'https://kinarastudiopilates.infinityfreeapp.com/admin/login.php', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@kinara.studio', password: 'Admin#2026' },
+      user: { username: 'customer@kinara.studio', password: 'password123' }
+    },
+    githubRepoUrl: '',
+    hostingPlatform: 'InfinityFree',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-25',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-3', 'Kinara Studio Pilates'),
+    lecturerNotes: 'Aplikasi Kinara Studio Pilates dari Kelas S5A Kelompok 3 memodelkan reservasi dan paket kelas pilates kebugaran berbasis ERP. Halaman publik dan admin aktif di hosting InfinityFree.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 76,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 76%)',
+      summaryAnalysis: 'Aplikasi Kinara Studio Pilates menunjukkan pemanfaatan generatif AI pada layout frontend paket kebugaran, template booking kelas, dan dashboard admin login. Sistem berjalan online, namun kelompok mahasiswa belum menyertakan link repositori GitHub publik.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Antarmuka & Paket Kelas Pilates',
+          aiPercentage: 80,
+          indicator: 'Layout card paket sesi pilates dan jadwal instruktur dengan styling Bootstrap terstruktur.',
+          whatAiDid: 'Menyusun katalog kelas studio pilates dan tarif sesi.'
+        },
+        {
+          feature: 'Autentikasi Admin Kinara Studio',
+          aiPercentage: 75,
+          indicator: 'Form login admin terproteksi session di admin/login.php.',
+          whatAiDid: 'Membuat alur masuk admin pengelola studio.'
+        },
+        {
+          feature: 'Alur Pemesanan Kelas & Reservasi',
+          aiPercentage: 75,
+          indicator: 'Form pendaftaran kelas pilates dengan pemilihan jadwal dan konfirmasi.',
+          whatAiDid: 'Mengelola alur pemesanan tiket kelas oleh member.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa wajib membuat repositori GitHub publik dan mengunggah seluruh kode proyek agar dapat ditelusuri riwayat komitnya.',
+      homeworkScope: [
+        {
+          topic: 'Version Control & Publikasi Repositori Git',
+          description: 'Mahasiswa wajib mempelajari alur git init, commit, dan push ke GitHub agar kode memiliki cadangan dan riwayat terpusat.',
+          guidingQuestions: 'Mengapa repositori Git penting dalam pengembangan perangkat lunak kolaboratif tim?'
+        },
+        {
+          topic: 'Logika Kuota Slot Kelas Pilates (Slide 6 ERP)',
+          description: 'Pahami bagaimana kuota kursi sesi pilates berkurang secara dinamis saat ada member yang mendaftar.',
+          guidingQuestions: 'Bagaimana sistem mencegah overbooking jika kuota satu sesi kelas pilates hanya 10 orang?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Kinara Studio Pilates karya Kelompok 3 Kelas S5A mengangkat topik jasa kebugaran studio pilates yang menarik. Portal publik dan admin telah aktif di hosting cloud InfinityFree.',
+      businessModelEvaluation: 'Model bisnis reservasi studio pilates sangat cocok diterapkan dengan konsep ERP untuk mengelola instruktur, jadwal sesi, dan kapasitas ruang studio.',
+      technicalArchitectureEvaluation: 'Aplikasi menggunakan PHP Native dan MySQL yang fungsional. Namun, mahasiswa belum menyertakan repositori GitHub resmi untuk audit kode mendalam.',
+      strengths: [
+        'Tema bisnis pilates studio yang unik dan relevan dengan gaya hidup modern',
+        'Sudah aktif di cloud hosting InfinityFree dan dapat diakses publik',
+        'Tersedia kredensial admin dan alur reservasi kelas'
+      ],
+      weaknesses: [
+        'Belum menyertakan tautan repositori GitHub publik',
+        'Konfirmasi pembayaran masih manual tanpa integrasi gateway otomatis',
+        'Belum ada modul refund atau reschedule kelas otomatis'
+      ],
+      finalVerdict: 'DITERIMA DENGAN CATATAN WAJIB SERAHKAN REPOSITORI GITHUB',
+      recommendations: 'Kelompok 3 dinyatakan lulus evaluasi fungsional (Nilai 77, Grade B+). Mahasiswa diwajibkan segera mengunggah source code ke GitHub sebelum pelaksanaan sidang.'
+    }
+  },
+
+  // 1d. Kelas S5A - Kelompok 6 (Aplikasi Pemesanan Warjo)
+  {
+    id: 'project-s5a-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelas S5A - Kelompok 6 (Warjo: Diah Ayu, Raihan Dzaki, Dimas Arif, Istnadia)',
+    studentNim: '202433500084 / 085 / 087 / 088',
+    teamMembers: [
+      { nim: '202433500084', name: 'Diah Ayu Iragani' },
+      { nim: '202433500085', name: 'Raihan Dzaki Firansyah' },
+      { nim: '202433500087', name: 'Dimas Arif Alamsyah' },
+      { nim: '202433500088', name: 'Istnadia' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Aplikasi Pemesanan Warjo',
+    targetUrl: 'https://warjo-ten.vercel.app/#home',
+    adminUrl: 'https://warjo-ten.vercel.app/',
+    orderUrl: 'https://warjo-ten.vercel.app/#home',
+    portals: [
+      { title: 'Live Warjo (Vercel)', url: 'https://warjo-ten.vercel.app/#home', badge: 'Live Vercel' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin (on progress)', password: 'on progress' },
+      user: { username: 'pelanggan@warjo.local', password: 'password' }
+    },
+    githubRepoUrl: 'https://github.com/raidrean/warjo',
+    hostingPlatform: 'Vercel',
+    framework: 'HTML5, CSS3, Vanilla JavaScript, Asset gambar, Cloudflare workers.dev',
+    evaluationDate: '2026-11-25',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-6', 'Aplikasi Pemesanan Warjo'),
+    lecturerNotes: 'Aplikasi Pemesanan Warjo dari Kelas S5A Kelompok 6 telah di-deploy secara modern di Vercel dengan integrasi Cloudflare Workers. Desain menu interaktif dan responsif, panel admin saat ini masih dalam tahap penyelesaian (on progress).',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 72,
+      classification: 'Kombinasi AI & Frontend Modern (Moderate AI, 72%)',
+      summaryAnalysis: 'Aplikasi Warjo menunjukkan penerapan arsitektur modern Jamstack berbasis Vercel CDN dan serverless Cloudflare Workers. AI dimanfaatkan pada scaffolding antarmuka interaktif JavaScript dan styling CSS responsif. Namun panel admin pengelola toko masih berstatus on-progress.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Katalog Menu & Single Page Application (SPA)',
+          aiPercentage: 75,
+          indicator: 'Navigasi hash routing (#home, #menu) dan animasi UI responsif.',
+          whatAiDid: 'Menyusun katalog makanan & minuman warjo serta tata letak visual.'
+        },
+        {
+          feature: 'Integrasi Cloudflare Workers API',
+          aiPercentage: 70,
+          indicator: 'Penanganan serverless endpoint untuk menerima request pemesanan.',
+          whatAiDid: 'Menghubungkan frontend Vercel dengan Cloudflare Workers backend.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Segera selesaikan panel admin ERP agar pengelolaan data produk dan laporan keuangan dapat dinilai penuh.',
+      homeworkScope: [
+        {
+          topic: 'Penyelesaian Modul Backoffice Admin & RBAC',
+          description: 'Mahasiswa wajib menuntaskan halaman login admin dan dashboard pengelolaan data pesanan.',
+          guidingQuestions: 'Bagaimana admin memverifikasi pesanan yang masuk dan mengubah statusnya menjadi selesai?'
+        },
+        {
+          topic: 'Arsitektur Serverless Cloudflare Workers',
+          description: 'Pahami cara kerja request routing di Cloudflare Workers dan integrasi databasenya (D1/KV/Postgres).',
+          guidingQuestions: 'Di mana data pesanan disimpan saat pelanggan menekan tombol pesan?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Aplikasi Pemesanan Warjo karya Kelompok 6 Kelas S5A telah memiliki antarmuka pelanggan yang menarik dan berhasil di-deploy ke infrastruktur serverless Vercel global. Repositori GitHub publik tersedia.',
+      businessModelEvaluation: 'Model pemesanan mandiri untuk warung kuliner kekinian sangat solutif untuk mempercepat layanan pelanggan.',
+      technicalArchitectureEvaluation: 'Penggunaan Vercel dan Cloudflare Workers menunjukkan adopsi teknologi edge modern. Namun ketiadaan panel admin yang fungsional (masih on-progress) menjadi catatan utama.',
+      strengths: [
+        'Deploy modern ke Vercel CDN dengan kecepatan loading tinggi',
+        'Repositori GitHub publik aktif di github.com/raidrean/warjo',
+        'Tampilan antarmuka single-page yang bersih dan responsif'
+      ],
+      weaknesses: [
+        'Panel admin masih dalam tahap pengerjaan (on-progress) sehingga belum bisa dinilai penuh',
+        'Belum ada modul laporan keuangan dan analitik penjualan di sisi admin',
+        'Mekanisme sinkronisasi stok bahan baku belum terotomatisasi'
+      ],
+      finalVerdict: 'DITERIMA DENGAN CATATAN SELESAIKAN PANEL ADMIN',
+      recommendations: 'Kelompok 6 dinyatakan lulus evaluasi sementara (Nilai 71, Grade B). Mahasiswa wajib menyelesaikan panel admin dan autentikasi sebelum tanggal sidang.'
+    }
+  },
+
+  // 1e. Kelas S5A - Kelompok 7 (Perancangan dan Pembuatan Aplikasi Bolang.com)
+  {
+    id: 'project-s5a-kelompok-7',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 7',
+    studentName: 'Kelas S5A - Kelompok 7 (Bolang.com: James, Nurul Baeihaky, Geovani, Ridwan)',
+    studentNim: '202433500094 / 090 / 097 / 089',
+    teamMembers: [
+      { nim: '202433500094', name: 'James A. Daulima' },
+      { nim: '202433500090', name: 'Nurul Baeihaky R.S' },
+      { nim: '202433500097', name: 'Geovani Rakha Firdaus' },
+      { nim: '202433500089', name: 'Muhammad Ridwan' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026/2027 / Semester 5',
+    projectName: 'Perancangan dan Pembuatan Aplikasi Bolang.com',
+    targetUrl: '',
+    adminUrl: '',
+    orderUrl: '',
+    portals: [
+      { title: 'Status Proposal', url: '', badge: 'Belum Tersedia' }
+    ],
+    demoCredentials: {
+      admin: { username: '-', password: '-' },
+      user: { username: '-', password: '-' }
+    },
+    githubRepoUrl: '',
+    hostingPlatform: 'Belum Tersedia',
+    framework: 'PHP & MySQL',
+    evaluationDate: '2026-11-25',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-7', 'Bolang.com'),
+    lecturerNotes: 'Aplikasi Bolang.com dari Kelompok 7 Kelas S5A saat ini masih dalam tahap perancangan proposal dan belum memiliki tautan live hosting maupun repositori GitHub publik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 60,
+      classification: 'Tahap Perancangan Konseptual (Draft Phase, 60%)',
+      summaryAnalysis: 'Proyek Bolang.com belum dapat diuji secara otomatis karena belum memiliki link live hosting publik maupun repositori GitHub aktif. Mahasiswa baru mengumpulkan deskripsi konseptual aplikasi.',
+      featureBreakdown: [
+        {
+          feature: 'Perancangan Konseptual Halaman Utama & Admin',
+          aiPercentage: 60,
+          indicator: 'Deskripsi proposal dasar perancangan sistem berbasis web.',
+          whatAiDid: 'Menyusun gambaran umum sistem informasi Bolang.com.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Kelompok 7 wajib segera merealisasikan coding aplikasi, mengunggah ke GitHub, dan men-deploy ke cloud hosting agar dapat dinilai secara komprehensif.',
+      homeworkScope: [
+        {
+          topic: 'Realisasi Coding Backend PHP & Database MySQL',
+          description: 'Segera bangun struktur CRUD database MySQL dan form antarmuka web.',
+          guidingQuestions: 'Fitur utama apa yang akan disediakan di Bolang.com untuk membedakannya dengan sistem lain?'
+        },
+        {
+          topic: 'Deployment Cloud & Repositori Git Publik',
+          description: 'Deploy aplikasi ke hosting gratis (Vercel / InfinityFree) dan buat repositori publik di GitHub.',
+          guidingQuestions: 'Mengapa live cloud hosting menjadi syarat wajib kelulusan Kerja Praktik?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Bolang.com karya Kelompok 7 Kelas S5A masih dalam tahap konseptual. Belum ada bukti implementasi kode di GitHub maupun deploy cloud aktif.',
+      businessModelEvaluation: 'Ide awal sistem manajemen informasi Bolang.com memiliki potensi, namun memerlukan rincian modul bisnis ERP yang lebih konkrit.',
+      technicalArchitectureEvaluation: 'Rencana teknologi PHP dan MySQL merupakan standar yang baik, tetapi belum ada artefak kode yang dapat diuji.',
+      strengths: [
+        'Konsep ide awal telah dirumuskan dengan pembagian halaman utama dan admin',
+        'Tim terdiri dari 4 anggota mahasiswa yang lengkap'
+      ],
+      weaknesses: [
+        'Belum memiliki URL live cloud hosting aktif',
+        'Belum memiliki repositori GitHub publik',
+        'Kredensial pengujian belum tersedia'
+      ],
+      finalVerdict: 'PERLU AKSELERASI SEGERA (GRADE D / BELUM MEMENUHI STANDAR PENGUJIAN)',
+      recommendations: 'Kelompok 7 diberikan waktu perpanjangan untuk segera menyelesaikan coding, membuat repo GitHub, dan mendeploy aplikasi ke hosting cloud sebelum masa penilaian ditutup.'
+    }
+  },
+
+  // 1f. Kelas S5A - Kelompok 8 (Ayam Cabe Ijo)
+  {
+    id: 'project-s5a-kelompok-8',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 8',
+    studentName: 'Kelas S5A - Kelompok 8 (Ayam Cabe Ijo: Nauraleza & Rofiatul Lutfi)',
+    studentNim: '202433500105 / 104',
+    teamMembers: [
+      { nim: '202433500105', name: 'Muhammad Nauraleza Nadjad' },
+      { nim: '202433500104', name: 'Rofiatul Lutfi' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Ayam Cabe Ijo',
+    targetUrl: '',
+    adminUrl: '',
+    orderUrl: '',
+    portals: [
+      { title: 'Aplikasi Offline Lokal', url: '', badge: 'Belum di-Hosting' }
+    ],
+    demoCredentials: {
+      admin: { username: '-', password: '-' },
+      user: { username: 'kamis123@gmail.com', password: '123454321' }
+    },
+    githubRepoUrl: '',
+    hostingPlatform: 'Belum di-Hosting (Lokal)',
+    framework: 'Bootstrap 5, PHP Native, MySQL',
+    evaluationDate: '2026-11-25',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-8', 'Ayam Cabe Ijo'),
+    lecturerNotes: 'Aplikasi Ayam Cabe Ijo karya Kelompok 8 Kelas S5A dibangun menggunakan Bootstrap 5 dan PHP Native secara offline/lokal. Mahasiswa belum melakukan deployment cloud dan tidak menyertakan repositori Git publik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 65,
+      classification: 'Aplikasi Lokal Offline (Local Offline, 65%)',
+      summaryAnalysis: 'Aplikasi Ayam Cabe Ijo sudah memiliki rancangan kode PHP dan antarmuka Bootstrap 5, namun masih berada di lingkungan komputer lokal dan belum di-deploy ke server cloud publik serta tidak menggunakan repositori GitHub.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Antarmuka Menu Ayam Cabe Ijo',
+          aiPercentage: 70,
+          indicator: 'Layout Bootstrap 5 card daftar makanan dan tombol pemesanan.',
+          whatAiDid: 'Menyusun tampilan katalog menu kuliner lokal.'
+        },
+        {
+          feature: 'Autentikasi Pengguna Demo',
+          aiPercentage: 65,
+          indicator: 'Akun pelanggan kamis123@gmail.com tersimpan di database lokal MySQL.',
+          whatAiDid: 'Menyediakan data autentikasi user demo.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa diwajibkan segera men-deploy aplikasi ini ke hosting publik (seperti InfinityFree atau Vercel) dan membuat repositori GitHub sebelum sidang evaluasi.',
+      homeworkScope: [
+        {
+          topic: 'Deployment Aplikasi Web ke Server Cloud',
+          description: 'Pelajari cara mengunggah file PHP dan database MySQL lokal (phpMyAdmin) ke hosting cloud.',
+          guidingQuestions: 'Bagaimana cara mengekspor database .sql lokal dan mengimpornya ke hosting server publik?'
+        },
+        {
+          topic: 'Penggunaan Git dan GitHub',
+          description: 'Pahami pentingnya Git sebagai portofolio dan pelacak kode versi.',
+          guidingQuestions: 'Mengapa calon lulusan Sistem Informasi wajib memiliki akun dan portofolio di GitHub?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Ayam Cabe Ijo karya Kelompok 8 Kelas S5A (Muhammad Nauraleza Nadjad & Rofiatul Lutfi) memiliki konsep kuliner yang baik dengan Bootstrap 5 dan PHP Native. Namun belum adanya hosting cloud dan repositori git publik menjadi kendala penilaian utama.',
+      businessModelEvaluation: 'Ide kuliner ayam cabe ijo sangat potensial untuk UMKM rumah makan, namun memerlukan alur pemesanan online yang dapat diakses publik.',
+      technicalArchitectureEvaluation: 'Penggunaan Bootstrap 5 dan PHP native memberikan fondasi yang baik, tetapi harus segera dipindahkan dari localhost ke server cloud.',
+      strengths: [
+        'Konsep kuliner ayam cabe ijo yang mudah dipahami',
+        'Tersedia akun user demo (kamis123@gmail.com)'
+      ],
+      weaknesses: [
+        'Belum di-deploy ke cloud hosting publik (masih di localhost)',
+        'Tidak menggunakan repositori Git publik',
+        'Belum ada akun admin yang aktif'
+      ],
+      finalVerdict: 'DITERIMA DENGAN CATATAN WAJIB DEPLOY KE CLOUD HOSTING',
+      recommendations: 'Kelompok 8 diberikan nilai pembinaan (46, Grade D). Mahasiswa diwajibkan segera men-deploy aplikasi ke cloud dan membuat repositori GitHub sebelum sidang Kerja Praktik.'
     }
   },
 
