@@ -113,7 +113,8 @@ async function fetchWithBypass(rawUrl, options = {}) {
             // Save solved __test cookie in domain session cache immediately!
             saveDomainSession(finalUrl, `__test=${decryptedHex}`, userAgent);
 
-            const nextUrl = finalUrl.includes('?') ? `${finalUrl}&i=1` : `${finalUrl}/?i=1`;
+            const cleanBase = finalUrl.replace(/\/+$/, '');
+            const nextUrl = finalUrl.includes('?') ? `${finalUrl}&i=1` : `${cleanBase}/?i=1`;
             const controller2 = new AbortController();
             const timeout2 = setTimeout(() => controller2.abort(), timeoutMs);
             const resp2 = await fetch(nextUrl, {
@@ -127,7 +128,7 @@ async function fetchWithBypass(rawUrl, options = {}) {
             clearTimeout(timeout2);
 
             html = await resp2.text();
-            finalUrl = resp2.url || nextUrl;
+            finalUrl = (resp2.url || nextUrl).replace(/([^:]\/)\/+/g, '$1');
             finalHeaders = Object.fromEntries(resp2.headers.entries());
 
             if (resp2.headers.get('set-cookie')) {
@@ -516,7 +517,8 @@ app.get('/api/proxy-preview', async (req, res) => {
   try {
     const result = await fetchWithBypass(targetUrl, { timeoutMs: 9000 });
     let html = result.html;
-    const workingUrl = result.workingUrl;
+    const rawWorking = result.workingUrl || targetUrl;
+    const workingUrl = rawWorking.replace(/([^:]\/)\/+/g, '$1');
 
     let targetOrigin = '';
     try {
@@ -545,9 +547,9 @@ app.get('/api/proxy-preview', async (req, res) => {
 
       let fullCssUrl = cssHref;
       try {
-        fullCssUrl = new URL(cssHref, workingUrl).href;
+        fullCssUrl = new URL(cssHref, workingUrl).href.replace(/([^:]\/)\/+/g, '$1');
       } catch (e) {
-        fullCssUrl = cssHref.startsWith('http') ? cssHref : (targetOrigin + (cssHref.startsWith('/') ? '' : '/') + cssHref);
+        fullCssUrl = (cssHref.startsWith('http') ? cssHref : (targetOrigin + (cssHref.startsWith('/') ? '' : '/') + cssHref)).replace(/([^:]\/)\/+/g, '$1');
       }
 
       try {
@@ -558,7 +560,7 @@ app.get('/api/proxy-preview', async (req, res) => {
             innerUrl = innerUrl.trim();
             if (innerUrl.startsWith('data:') || innerUrl.startsWith('#')) return m;
             try {
-              const absAssetUrl = new URL(innerUrl, fullCssUrl).href;
+              const absAssetUrl = new URL(innerUrl, fullCssUrl).href.replace(/([^:]\/)\/+/g, '$1');
               return `url('/api/proxy-asset?url=${encodeURIComponent(absAssetUrl)}')`;
             } catch (e) {
               return m;
@@ -584,9 +586,9 @@ app.get('/api/proxy-preview', async (req, res) => {
       const jsSrc = srcMatch[1];
       let fullJsUrl = jsSrc;
       try {
-        fullJsUrl = new URL(jsSrc, workingUrl).href;
+        fullJsUrl = new URL(jsSrc, workingUrl).href.replace(/([^:]\/)\/+/g, '$1');
       } catch (e) {
-        fullJsUrl = jsSrc.startsWith('http') ? jsSrc : (targetOrigin + (jsSrc.startsWith('/') ? '' : '/') + jsSrc);
+        fullJsUrl = (jsSrc.startsWith('http') ? jsSrc : (targetOrigin + (jsSrc.startsWith('/') ? '' : '/') + jsSrc)).replace(/([^:]\/)\/+/g, '$1');
       }
 
       try {
@@ -605,7 +607,7 @@ app.get('/api/proxy-preview', async (req, res) => {
     html = html.replace(/(<img\b[^>]*?\bsrc=["'])([^"']+)(["'][^>]*>)/gi, (m, p1, srcVal, p3) => {
       if (srcVal.startsWith('data:')) return m;
       try {
-        const absImgUrl = new URL(srcVal, workingUrl).href;
+        const absImgUrl = new URL(srcVal, workingUrl).href.replace(/([^:]\/)\/+/g, '$1');
         return `${p1}/api/proxy-asset?url=${encodeURIComponent(absImgUrl)}${p3}`;
       } catch (e) {
         return m;
@@ -617,7 +619,7 @@ app.get('/api/proxy-preview', async (req, res) => {
       if (hrefVal.startsWith('data:') || hrefVal.startsWith('#')) return m;
       if (m.toLowerCase().includes('icon')) {
         try {
-          const abs = new URL(hrefVal, workingUrl).href;
+          const abs = new URL(hrefVal, workingUrl).href.replace(/([^:]\/)\/+/g, '$1');
           return `${p1}/api/proxy-asset?url=${encodeURIComponent(abs)}${p3}`;
         } catch (e) {
           return m;
@@ -631,7 +633,7 @@ app.get('/api/proxy-preview', async (req, res) => {
       const rewritten = styleContent.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/gi, (uMatch, quote, inner) => {
         if (inner.startsWith('data:') || inner.startsWith('#')) return uMatch;
         try {
-          const abs = new URL(inner.trim(), workingUrl).href;
+          const abs = new URL(inner.trim(), workingUrl).href.replace(/([^:]\/)\/+/g, '$1');
           return `url('/api/proxy-asset?url=${encodeURIComponent(abs)}')`;
         } catch (e) {
           return uMatch;
@@ -757,8 +759,22 @@ app.get('/api/proxy-asset', async (req, res) => {
   if (!assetUrl) return res.status(400).send('Param ?url= wajib diisi');
 
   try {
-    const assetResult = await fetchAssetWithBypass(assetUrl);
-    res.setHeader('Content-Type', assetResult.contentType);
+    const cleanUrl = assetUrl.replace(/([^:]\/)\/+/g, '$1');
+    const assetResult = await fetchAssetWithBypass(cleanUrl);
+
+    // Auto-detect correct MIME type based on file extension to avoid text/plain blocks
+    const ext = cleanUrl.split('?')[0].split('.').pop().toLowerCase();
+    let contentType = assetResult.contentType;
+    if (ext === 'css') contentType = 'text/css; charset=utf-8';
+    else if (ext === 'js') contentType = 'application/javascript; charset=utf-8';
+    else if (['jpg', 'jpeg'].includes(ext)) contentType = 'image/jpeg';
+    else if (ext === 'png') contentType = 'image/png';
+    else if (ext === 'gif') contentType = 'image/gif';
+    else if (ext === 'webp') contentType = 'image/webp';
+    else if (ext === 'svg') contentType = 'image/svg+xml';
+    else if (['woff', 'woff2', 'ttf', 'otf'].includes(ext)) contentType = `font/${ext}`;
+
+    res.setHeader('Content-Type', contentType);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'public, max-age=86400');
     res.send(assetResult.data);
