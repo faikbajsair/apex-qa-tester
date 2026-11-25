@@ -40,6 +40,8 @@ export default function App() {
             return {
               ...fresh,
               ...p,
+              scores: p._hasUserManualEdits ? p.scores : fresh.scores,
+              _hasUserManualEdits: p._hasUserManualEdits || false,
               classGroup: fresh.classGroup || p.classGroup,
               studentName: fresh.studentName || p.studentName,
               targetUrl: fresh.targetUrl || p.targetUrl,
@@ -152,7 +154,7 @@ export default function App() {
 
   const handleUpdateScores = (updatedScores) => {
     setProjects((prev) => {
-      const updated = prev.map((p) => (p.id === currentProject.id ? { ...p, scores: updatedScores } : p));
+      const updated = prev.map((p) => (p.id === currentProject.id ? { ...p, scores: updatedScores, _hasUserManualEdits: true } : p));
       try {
         localStorage.setItem('apex_qa_projects_data', JSON.stringify(updated));
       } catch (e) {}
@@ -162,7 +164,7 @@ export default function App() {
 
   const handleUpdateProject = (updatedProject) => {
     setProjects((prev) => {
-      const updated = prev.map((p) => (p.id === updatedProject.id ? updatedProject : p));
+      const updated = prev.map((p) => (p.id === updatedProject.id ? { ...updatedProject, _hasUserManualEdits: true } : p));
       try {
         localStorage.setItem('apex_qa_projects_data', JSON.stringify(updated));
       } catch (e) {}

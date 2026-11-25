@@ -413,6 +413,204 @@ export function generateRubricScores(ctx = {}) {
   };
 }
 
+// Generator Skor Rubrik Otentik & Terkalibrasi per Kelompok Mahasiswa (Berdasarkan Implementasi Nyata)
+export function generateGroupSpecificScores(projectId, domain = '') {
+  const allIds = [
+    'fe_beranda', 'fe_tentang_kami', 'fe_kontak_kami', 'fe_faq', 'fe_terms', 'fe_privacy',
+    'fe_testimoni', 'fe_blog', 'fe_promo', 'fe_wishlist', 'fe_pengaturan_akun', 'fe_riwayat_pesanan',
+    'fe_pembayaran_info', 'fe_pengaturan_pengiriman', 'fe_katalog_produk', 'fe_keranjang',
+    'fe_payment_action', 'fe_delivery_cod', 'fe_checkout', 'erp_produk', 'erp_pelanggan',
+    'erp_pengiriman', 'erp_pembayaran', 'erp_stok', 'erp_kategori', 'erp_pesanan',
+    'erp_pengembalian', 'erp_lacak_pesanan', 'erp_users_admin', 'erp_pengaturan_website',
+    'erp_laporan_keuangan', 'erp_crm', 'erp_analitik_statistik', 'ux_responsif', 'ux_ui_bersih',
+    'ux_intuitif', 'ux_informasi_jelas', 'erp_sync_inventaris', 'erp_sync_logistik', 'erp_sync_keuangan'
+  ];
+
+  const createBase = (baseScore, noteDefault = 'Memenuhi standar capaian.') => {
+    const res = {};
+    allIds.forEach(id => {
+      res[id] = { status: 'PASSED', score: baseScore, note: noteDefault };
+    });
+    return res;
+  };
+
+  if (projectId === 'project-tokopi-kp') {
+    // 1. Tokopi (Kelas S5A): 96 / 100 - Grade A
+    const res = createBase(96, 'Modul multi-portal coffee shop Tokopi terverifikasi sangat baik.');
+    res.fe_beranda = { status: 'PASSED', score: 98, note: 'Landing page multi-portal tokopi.my.id sangat rapi dan profesional.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 98, note: 'Katalog produk kopi multi-cabang lengkap dengan varian dan foto.' };
+    res.fe_checkout = { status: 'PASSED', score: 98, note: 'Checkout terintegrasi token meja QR ordering (order.tokopi.my.id).' };
+    res.fe_payment_action = { status: 'PASSED', score: 98, note: 'Integrasi Midtrans QRIS sandbox aktif dengan respon instan.' };
+    res.erp_analitik_statistik = { status: 'PASSED', score: 98, note: 'Visualisasi grafik omzet harian menggunakan Chart.js di panel admin.' };
+    res.erp_users_admin = { status: 'PASSED', score: 96, note: 'Multi role Owner dan Kasir cabang kafe terkelola rapi.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 98, note: 'Sinkronisasi kasir ke buku besar otomatis saat settlement pembayaran.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 85, note: 'Kebijakan retur komplain minuman rusak dirancang secara parsial.' };
+    res.erp_sync_logistik = { status: 'PARTIAL', score: 88, note: 'Fokus operasional pada dine-in QR ordering dan pickup kafe lokal.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-3') {
+    // 2. Kelompok 3 - Pabrik Tahu Sumedang: 93 / 100 - Grade A
+    const res = createBase(95, 'Implementasi modern Next.js 16 + Prisma + Tailwind CSS 4 berjalan sangat baik.');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Antarmuka responsif modern dengan animasi Framer Motion & GSAP.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog produk tahu sumedang terstruktur rapi.' };
+    res.fe_checkout = { status: 'PASSED', score: 94, note: 'Alur checkout terpadu dengan formulir pengiriman pabrik.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 75, note: 'Modul retur tahu rusak/basi belum otomatis terintegrasi ke jurnal akuntansi.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 82, note: 'Perlu sinkronisasi batch produksi harian pabrik ke SQLite/Supabase.' };
+    res.erp_pengaturan_pengiriman = { status: 'PARTIAL', score: 82, note: 'Pengaturan armada kurir lokal pabrik masih manual.' };
+    res.erp_crm = { status: 'PARTIAL', score: 82, note: 'Pencatatan data langganan reseller tahu manual.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-5') {
+    // 3. Kelompok 5 - Chicken Crunchy Roll: 81 / 100 - Grade B+
+    const res = createBase(90, 'Modul kuliner chicken crunchy roll berjalan baik di hosting InfinityFree.');
+    res.fe_beranda = { status: 'PASSED', score: 92, note: 'Hero banner kuliner ayam krispi aktif dengan palet warna merah-krem tematik.' };
+    res.fe_faq = { status: 'PARTIAL', score: 70, note: 'Daftar FAQ kuliner masih ringkas.' };
+    res.fe_terms = { status: 'PARTIAL', score: 70, note: 'Syarat pemesanan katering/dine-in dasar.' };
+    res.fe_privacy = { status: 'PARTIAL', score: 70, note: 'Kebijakan privasi perlindungan data konsumen dasar.' };
+    res.fe_blog = { status: 'PARTIAL', score: 65, note: 'Artikel resep/tips kuliner dasar.' };
+    res.fe_wishlist = { status: 'PARTIAL', score: 65, note: 'Belum ada penyimpanan menu favorit.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 75, note: 'Konfirmasi upload bukti transfer manual via form/WhatsApp.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum tersedia fitur komplain atau retur pesanan rusak.' };
+    res.erp_crm = { status: 'PARTIAL', score: 60, note: 'Master data pelanggan sederhana tanpa program loyalty.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 70, note: 'Statistik grafik penjualan dasar belum multi-dimensi.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 70, note: 'Stok ayam berkurang per order tanpa transaction locking ACID.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 70, note: 'Laporan kasir belum otomatis masuk buku besar neraca.' };
+    res.erp_sync_logistik = { status: 'PARTIAL', score: 70, note: 'Status pickup ambil di outlet kuliner.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-4') {
+    // 4. Kelompok 4 - Budiarti Risol: 78 / 100 - Grade B+
+    const res = createBase(90, 'Storefront /user/ dan admin /admin/ aktif di domain budiartirisol.gamer.gd.');
+    res.fe_beranda = { status: 'PASSED', score: 90, note: 'Halaman toko risol mayo/sayur aktif di subdirektori /user/.' };
+    res.fe_faq = { status: 'PARTIAL', score: 65, note: 'FAQ seputar pengantaran risol masih terbatas.' };
+    res.fe_terms = { status: 'PARTIAL', score: 65, note: 'Syarat minimum order risol dasar.' };
+    res.fe_privacy = { status: 'PARTIAL', score: 65, note: 'Kebijakan privasi data pemesan dasar.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Belum tersedia modul blog atau artikel promosi UMKM.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist varian risol belum ada.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 65, note: 'Konfirmasi transfer rekening BCA manual via form/chat.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 70, note: 'COD terbatas di sekitar area produksi UMKM.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada prosedur retur produk risol basi/rusak.' };
+    res.erp_crm = { status: 'PARTIAL', score: 60, note: 'Data pelanggan tersimpan tanpa riwayat frekuensi beli.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 65, note: 'Tabel riwayat pembayaran saja, belum ada buku besar laba rugi.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 65, note: 'Ringkasan total transaksi sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 65, note: 'Pengurangan stok risol belum otomatis terhubung dengan stok bahan kulit/mayo.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 65, note: 'Pencatatan kasir masih manual oleh admin.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-7') {
+    // 5. Kelompok 7 - Toko Malaya (Sembako): 75 / 100 - Grade B+
+    const res = createBase(86, 'Sistem informasi toko sembako aktif dengan pembagian peran Admin, Karyawan, dan Kasir.');
+    res.fe_beranda = { status: 'PASSED', score: 78, note: 'Antarmuka katalog sembako sederhana tanpa CSS framework modern.' };
+    res.fe_testimoni = { status: 'MISSING', score: 0, note: 'Belum ada modul ulasan pembeli sembako.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Tidak ada modul berita atau artikel toko.' };
+    res.fe_promo = { status: 'PARTIAL', score: 65, note: 'Potongan harga promo diinput manual di kasir.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur simpan barang belanjaan favorit belum ada.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 65, note: 'Pembayaran kasir fisik langsung / tunai.' };
+    res.ux_ui_bersih = { status: 'PARTIAL', score: 70, note: 'Tampilan antarmuka native fungsional namun belum tematik modern.' };
+    res.ux_responsif = { status: 'PARTIAL', score: 70, note: 'Tata letak tabel kurang responsif di layar smartphone.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur barang kadaluarsa/cacat.' };
+    res.erp_crm = { status: 'PARTIAL', score: 60, note: 'Master data pelanggan grosir sembako sederhana.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 65, note: 'Pencatatan kasir harian belum rekonsiliasi neraca.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 65, note: 'Statistik kasir sembako terlaris sederhana.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 65, note: 'Jurnal kasir manual belum otomatis debit-kredit.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-6') {
+    // 6. Kelompok 6 - Cemilan Nusantara Jangekkita: 74 / 100 - Grade B
+    const res = createBase(88, 'Portal cemilan jangekkita.my.id aktif dengan katalog kerupuk jangek.');
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ produk kerupuk belum tersedia.' };
+    res.fe_terms = { status: 'PARTIAL', score: 60, note: 'Aturan pemesanan ringkas di footer.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum dicantumkan.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Tidak ada modul blog atau edukasi kerupuk kulit.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist produk belum ada.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 65, note: 'Instruksi transfer bank manual.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada fitur komplain pesanan cemilan remuk/rusak.' };
+    res.erp_crm = { status: 'PARTIAL', score: 60, note: 'Database pembeli belum memiliki tracking loyalti.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 65, note: 'Laporan omzet penjualan harian sederhana.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 65, note: 'Grafik penjualan sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 65, note: 'Pengurangan stok jangek manual.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 60, note: 'Belum otomatis tersinkronisasi ke neraca laba rugi.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-2') {
+    // 7. Kelompok 2 - DICO Community: 70 / 100 - Grade B
+    const res = createBase(93, 'Aplikasi web DICO Community aktif di Vercel dengan responsivitas tinggi.');
+    res.fe_katalog_produk = { status: 'PARTIAL', score: 60, note: 'Katalog berupa direktori forum/topik komunitas, bukan produk komersial ERP.' };
+    res.fe_keranjang = { status: 'MISSING', score: 0, note: 'Tidak tersedia modul keranjang belanja (cart) fisik.' };
+    res.fe_checkout = { status: 'MISSING', score: 0, note: 'Tidak tersedia alur checkout transaksi barang e-commerce.' };
+    res.fe_delivery_cod = { status: 'MISSING', score: 0, note: 'Tidak ada modul pengiriman logistik / COD barang.' };
+    res.fe_pembayaran_info = { status: 'PARTIAL', score: 60, note: 'Informasi donasi/iuran keanggotaan komunitas.' };
+    res.fe_payment_action = { status: 'MISSING', score: 0, note: 'Tidak ada alur pembayaran pembelian produk.' };
+    res.erp_stok = { status: 'PARTIAL', score: 55, note: 'Tidak ada modul stok fisik inventaris gudang.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Tidak ada penanganan retur barang e-commerce.' };
+    res.erp_sync_inventaris = { status: 'MISSING', score: 0, note: 'Tidak ada sinkronisasi stok barang dagang otomatis.' };
+    res.erp_sync_logistik = { status: 'MISSING', score: 0, note: 'Tidak ada pelacakan resi pengiriman kurir.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-8') {
+    // 8. Kelompok 8 - Mampir Kopi: 70 / 100 - Grade B
+    const res = createBase(87, 'Aplikasi kedai kopi Mampir Kopi aktif dengan alur portal tamu.html dan admin kasir.');
+    res.fe_beranda = { status: 'PASSED', score: 75, note: 'Beranda mengarahkan ke portal tamu.html, navigasi menu kopi aktif.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ kedai kopi belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Ketentuan layanan pemesanan belum ada.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum tersedia.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Tidak ada artikel kopi.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Belum ada fitur wishlist menu.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 65, note: 'Pencatatan kasir manual / bayar di bar kopi.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 65, note: 'Layanan antar meja di kedai.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada modul retur minuman salah racik.' };
+    res.erp_crm = { status: 'MISSING', score: 0, note: 'Belum ada basis data loyalitas pelanggan.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 65, note: 'Laporan penjualan kasir sederhana.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 65, note: 'Grafik menu terlaris sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 60, note: 'Stok biji kopi dan cup belum tersinkronisasi otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 60, note: 'Pencatatan kasir belum otomatis ke neraca keuangan.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5i-kelompok-1') {
+    // 9. Kelompok 1 - Mamah Catering: 60 / 100 - Grade C+ (Belum Ada Live Hosting)
+    const res = createBase(82, 'Verifikasi statis melalui repositori GitHub (belum deploy cloud publik).');
+    res.fe_beranda = { status: 'PARTIAL', score: 65, note: 'Source code di GitHub lengkap, namun mahasiswa belum deploy ke hosting publik aktif.' };
+    res.fe_tentang_kami = { status: 'PARTIAL', score: 65, note: 'Profil katering terverifikasi di berkas repositori.' };
+    res.fe_kontak_kami = { status: 'PARTIAL', score: 65, note: 'Kontak katering tertera di source code.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Belum ada halaman FAQ.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan katering belum dirancang.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum ada.' };
+    res.fe_testimoni = { status: 'PARTIAL', score: 60, note: 'Ulasan statis di file template.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Tidak ada modul blog.' };
+    res.fe_promo = { status: 'PARTIAL', score: 60, note: 'Paket promo prasmanan di script php.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Tidak ada fitur simpan paket katering.' };
+    res.fe_katalog_produk = { status: 'PARTIAL', score: 70, note: 'Katalog paket nasi kotak & prasmanan di skrip PHP.' };
+    res.fe_keranjang = { status: 'PARTIAL', score: 65, note: 'Fungsi keranjang belanja di repositori.' };
+    res.fe_checkout = { status: 'PARTIAL', score: 65, note: 'Form checkout paket pesanan.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 60, note: 'Transfer bank di kode backend.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 60, note: 'Pilihan pengantaran prasmanan.' };
+    res.fe_pengaturan_pengiriman = { status: 'PARTIAL', score: 60, note: 'Alamat pengantaran katering.' };
+    res.fe_riwayat_pesanan = { status: 'PARTIAL', score: 65, note: 'Histori pemesanan katering di database.' };
+    res.ux_responsif = { status: 'PARTIAL', score: 55, note: 'Belum dapat diuji langsung di browser cloud publik.' };
+    res.ux_ui_bersih = { status: 'PARTIAL', score: 60, note: 'Tata letak HTML/Bootstrap standar.' };
+    res.ux_intuitif = { status: 'PARTIAL', score: 60, note: 'Alur pesanan katering logis di kode.' };
+    res.ux_informasi_jelas = { status: 'PARTIAL', score: 60, note: 'Informasi paket katering tertera di kode.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain katering basi.' };
+    res.erp_crm = { status: 'MISSING', score: 0, note: 'Belum ada modul CRM loyalitas pelanggan.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 60, note: 'Rekap pesanan kasir di database.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 55, note: 'Belum ada visualisasi grafik statistik.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 55, note: 'Stok beras dan bahan baku belum terintegrasi otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 55, note: 'Pembukuan keuangan belum otomatis terhubung ke jurnal.' };
+    res.erp_sync_logistik = { status: 'PARTIAL', score: 55, note: 'Jadwal armada mobil katering belum ada.' };
+    return res;
+  }
+
+  return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
+}
+
 // Helper: Generator Analisis Deteksi Pemanfaatan AI & Bimbingan Pedagogis Dosen Faik Bajsair
 export function generateDefaultAiAudit(project = {}) {
   const name = project.projectName || 'Aplikasi E-Commerce ERP';
@@ -546,7 +744,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'Cloud (Rumahweb)',
     framework: 'PHP 7.4 native + Bootstrap 5, Chart.js, Midtrans QRIS (sandbox) / MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Coffee Shop Tokopi Multi Cabang' }),
+    scores: generateGroupSpecificScores('project-tokopi-kp', 'Coffee Shop Tokopi Multi Cabang'),
     lecturerNotes: 'Proyek Kerja Praktik (KP) yang sangat komprehensif dari Kelas S5A (Kelompok Tokopi). Arsitektur multi-portal (Landing Page, ERP Backoffice, dan QR Customer Ordering) sangat matang dan siap diimplementasikan untuk operasional coffee shop nyata. Integrasi Midtrans QRIS dan visualisasi Chart.js berjalan sangat baik.',
     vulnerabilities: [],
     aiAudit: {
@@ -666,7 +864,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'Vercel / Cloud',
     framework: 'PHP Native & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Katering Mamah Catering' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-1', 'Katering Mamah Catering'),
     lecturerNotes: 'Aplikasi ERP Mamah Catering memiliki rancangan modul operasional katering yang baik, manajemen pemesanan paket prasmanan/nasi kotak, dan integrasi persediaan bahan baku masakan.',
     vulnerabilities: []
   },
@@ -705,7 +903,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'Vercel',
     framework: 'Native / Vanilla & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Komunitas DICO Community' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-2', 'Komunitas DICO Community'),
     lecturerNotes: 'Aplikasi DICO Community sudah online di Vercel dengan responsivitas yang baik dan navigasi komunitas yang aktif.',
     vulnerabilities: []
   },
@@ -743,7 +941,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'Vercel',
     framework: 'Next.js 16, Prisma 5.22, SQLite, Tailwind CSS 4, Framer Motion, GSAP, Supabase, Vercel',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Pabrik Tahu Sumedang ERP' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-3', 'Pabrik Tahu Sumedang ERP'),
     lecturerNotes: 'Aplikasi Pabrik Tahu Sumedang dibangun dengan teknologi modern (Next.js 16, Prisma, Tailwind 4, GSAP). Animasi halus, alur pesanan terstruktur, dan integrasi database berjalan sangat baik.',
     vulnerabilities: []
   },
@@ -782,7 +980,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'InfinityFree',
     framework: 'PHP Native & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'UMKM Budiarti Risol' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-4', 'UMKM Budiarti Risol'),
     lecturerNotes: 'Aplikasi Budiarti Risol dari Kelompok 4 dirancang untuk memperluas jangkauan pemasaran UMKM produk risol dengan katalog varian rasa, alur pemesanan pelanggan, serta panel admin pengelola.',
     vulnerabilities: [],
     aiAudit: {
@@ -903,7 +1101,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'InfinityFree',
     framework: 'PHP Native (Tanpa Framework), HTML, CSS, JavaScript, dan MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Chicken Crunchy Roll' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-5', 'Chicken Crunchy Roll'),
     lecturerNotes: 'Aplikasi Chicken Crunchy Roll dari Kelompok 5 memiliki desain antarmuka yang tematik, responsif, dilengkapi form pemesanan pelanggan, serta backoffice admin terproteksi.',
     vulnerabilities: [],
     aiAudit: {
@@ -1019,7 +1217,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'Gohost.id / Cloud',
     framework: 'Laragon & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Cemilan Nusantara Jangekkita' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-6', 'Cemilan Nusantara Jangekkita'),
     lecturerNotes: 'Proyek Cemilan Nusantara Jangekkita memiliki domain kustom https://jangekkita.my.id dengan katalog kerupuk jangek yang terperinci dan hak akses admin/super admin.',
     vulnerabilities: []
   },
@@ -1054,7 +1252,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'InfinityFree',
     framework: 'Native PHP (tanpa framework) & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Sembako Toko Malaya' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-7', 'Sembako Toko Malaya'),
     lecturerNotes: 'Aplikasi Toko Malaya menyediakan sistem pembukuan sembako dengan pemisahan akun Admin, Karyawan, dan Kasir yang lengkap.',
     vulnerabilities: []
   },
@@ -1092,7 +1290,7 @@ const RAW_PRESET_PROJECTS = [
     hostingPlatform: 'InfinityFree',
     framework: 'Native PHP & MySQL',
     evaluationDate: '2026-11-24',
-    scores: generateRubricScores({ domain: 'Mampir Kopi UMKM' }),
+    scores: generateGroupSpecificScores('project-r5i-kelompok-8', 'Mampir Kopi UMKM'),
     lecturerNotes: 'Aplikasi Mampir Kopi memiliki konsep e-commerce ERP kedai kopi lokal dengan alur belanja, katalog minuman, dan manajemen kasir.',
     vulnerabilities: []
   }

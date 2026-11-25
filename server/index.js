@@ -640,11 +640,88 @@ app.get('/api/proxy-preview', async (req, res) => {
       return `style="${rewritten}"`;
     });
 
-    // 6. Inject Security / Breakout Prevention Header
+    // 6. Rewrite <meta http-equiv="refresh"> tags to route through proxy-preview
+    html = html.replace(/<meta\b[^>]*http-equiv=["']refresh["'][^>]*content=["']([^"']+)["'][^>]*>/gi, (match, content) => {
+      const parts = content.split(/;\s*url=/i);
+      if (parts.length === 2) {
+        const delay = parts[0];
+        const target = parts[1].trim().replace(/^['"]|['"]$/g, '');
+        try {
+          const abs = new URL(target, workingUrl).href;
+          return `<meta http-equiv="refresh" content="${delay};url=/api/proxy-preview?url=${encodeURIComponent(abs)}">`;
+        } catch (e) {
+          return match;
+        }
+      }
+      return match;
+    });
+
+    // 7. Rewrite Relative Links <a href="..."> and Forms <form action="...">
+    html = html.replace(/(<a\b[^>]*?\bhref=["'])([^"']+)(["'][^>]*>)/gi, (m, p1, hrefVal, p3) => {
+      const trimmed = hrefVal.trim();
+      if (trimmed.startsWith('#') || trimmed.startsWith('javascript:') || trimmed.startsWith('mailto:') || trimmed.startsWith('tel:') || trimmed.startsWith('/api/proxy-preview')) return m;
+      try {
+        const absUrl = new URL(trimmed, workingUrl).href;
+        return `${p1}/api/proxy-preview?url=${encodeURIComponent(absUrl)}${p3}`;
+      } catch (e) {
+        return m;
+      }
+    });
+
+    html = html.replace(/(<form\b[^>]*?\baction=["'])([^"']+)(["'][^>]*>)/gi, (m, p1, actVal, p3) => {
+      const trimmed = actVal.trim();
+      if (!trimmed || trimmed.startsWith('#') || trimmed.startsWith('javascript:') || trimmed.startsWith('/api/proxy-preview')) return m;
+      try {
+        const absUrl = new URL(trimmed, workingUrl).href;
+        return `${p1}/api/proxy-preview?url=${encodeURIComponent(absUrl)}${p3}`;
+      } catch (e) {
+        return m;
+      }
+    });
+
+    // 8. Inject Security, Navigation Interception & Breakout Prevention Header
     const helperHeader = `
 <meta name="referrer" content="no-referrer">
 <script>
-window.onbeforeunload = null;
+(function() {
+  window.onbeforeunload = null;
+  const baseUrl = ${JSON.stringify(workingUrl)};
+
+  // Intercept all link clicks so relative links don't hit /api/
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    if (href.startsWith('/api/proxy-preview')) return;
+    e.preventDefault();
+    try {
+      const abs = new URL(href, baseUrl).href;
+      window.location.href = '/api/proxy-preview?url=' + encodeURIComponent(abs);
+    } catch(err) {
+      window.location.href = href;
+    }
+  }, true);
+
+  // Intercept form submissions
+  document.addEventListener('submit', function(e) {
+    const form = e.target;
+    const act = form.getAttribute('action') || '';
+    if (act.startsWith('/api/proxy-preview')) return;
+    const method = (form.method || 'GET').toUpperCase();
+    if (method === 'GET') {
+      e.preventDefault();
+      try {
+        const abs = new URL(act || window.location.href, baseUrl);
+        const formData = new FormData(form);
+        for (const [k, v] of formData.entries()) {
+          abs.searchParams.set(k, v);
+        }
+        window.location.href = '/api/proxy-preview?url=' + encodeURIComponent(abs.href);
+      } catch(err){}
+    }
+  }, true);
+})();
 </script>
 `;
     if (html.includes('<head>')) {
@@ -1062,6 +1139,46 @@ app.post('/api/simulate-erp-flow', (req, res) => {
   } else {
     res.status(400).json({ error: 'Tipe pengujian tidak dikenal.' });
   }
+});
+
+// 6. Catch-all fallback for relative navigations & subresources from proxied iframe (e.g. /api/tamu.html or /api/login.php)
+app.all('/api/*', async (req, res) => {
+  const referer = req.headers.referer || '';
+  let targetBaseUrl = '';
+
+  if (referer) {
+    try {
+      const refUrl = new URL(referer);
+      targetBaseUrl = refUrl.searchParams.get('url') || '';
+    } catch (e) {
+      const match = referer.match(/[?&]url=([^&]+)/);
+      if (match) targetBaseUrl = decodeURIComponent(match[1]);
+    }
+  }
+
+  // Fallback to domainSessionCache if available
+  if (!targetBaseUrl && domainSessionCache.size > 0) {
+    const lastHost = [...domainSessionCache.keys()].pop();
+    if (lastHost) targetBaseUrl = 'http://' + lastHost;
+  }
+
+  if (targetBaseUrl) {
+    try {
+      const subpath = req.path.replace(/^\/api\//, '');
+      const search = req._parsedUrl ? (req._parsedUrl.search || '') : '';
+      const resolvedTarget = new URL(subpath + search, targetBaseUrl).href;
+
+      const isAsset = /\.(css|js|png|jpg|jpeg|gif|svg|woff|woff2|ttf|ico|webp)$/i.test(subpath);
+      if (isAsset) {
+        return res.redirect(302, `/api/proxy-asset?url=${encodeURIComponent(resolvedTarget)}`);
+      }
+      return res.redirect(302, `/api/proxy-preview?url=${encodeURIComponent(resolvedTarget)}`);
+    } catch (err) {
+      console.error('Fallback proxy routing error:', err);
+    }
+  }
+
+  res.status(404).send(`Cannot ${req.method} ${req.path}`);
 });
 
 // Fallback to index.html for SPA routing
