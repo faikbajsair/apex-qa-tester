@@ -689,6 +689,59 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5a-kelompok-1') {
+    // Kelas R5A - Kelompok 1 (Web FilosofiKopi): 76 / 100 - Grade B+
+    const res = createBase(94, 'Aplikasi web e-commerce FilosofiKopi aktif di InfinityFree (42web.io).');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Tampilan etalase kedai kopi aktif, katalog varian biji dan minuman kopi rapi.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Informasi profil dan filosofi kedai kopi tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak kedai kopi tertera jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 94, note: 'Katalog produk minuman dan biji kopi tertata rapi.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja aktif.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout dan pemesanan berfungsi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Informasi instruksi pembayaran.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian kopi belum dibuat.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Belum ada modul blog/cerita kopi.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist produk favorit belum ada.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Opsi pengiriman kurir lokal / pick-up di outlet.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem pengajuan komplain / retur pesanan cacat.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Data pelanggan tercatat di database namun belum ada sistem loyalty poin.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 80, note: 'Rekapitulasi transaksi penjualan harian/bulanan di dashboard admin.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik tren penjualan kopi sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Stok berkurang saat checkout namun belum terhubung ke batch roasting.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir manual belum otomatis ke buku besar keuangan.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5a-kelompok-3') {
+    // Kelas R5A - Kelompok 3 (UMKM Warung Sayur Pulungan): 95 / 100 - Grade A
+    const res = createBase(100, 'Aplikasi modern Laravel 12 + React Inertia aktif di cloud Railway PaaS.');
+    res.fe_beranda = { status: 'PASSED', score: 100, note: 'SPA responsif dan instan dengan React Inertia, navigasi katalog sayur sangat cepat.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 98, note: 'Profil UMKM Warung Sayur Pulungan informatif.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 96, note: 'Kontak pemesanan dan alamat toko tertera lengkap.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 100, note: 'Filter kategori sayuran segar, bumbu dapur, dan sembako sangat interaktif.' };
+    res.fe_keranjang = { status: 'PASSED', score: 100, note: 'Keranjang belanja reaktif state management Inertia.' };
+    res.fe_checkout = { status: 'PASSED', score: 100, note: 'Form checkout tervalidasi Laravel FormRequest.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 98, note: 'Informasi nomor rekening dan pembayaran jelas.' };
+    res.fe_payment_action = { status: 'PASSED', score: 98, note: 'Konfirmasi bukti pembayaran aktif.' };
+    res.fe_delivery_cod = { status: 'PASSED', score: 98, note: 'Opsi pengiriman kurir lokal / ambil di toko.' };
+    res.erp_produk = { status: 'PASSED', score: 100, note: 'CRUD produk lengkap dengan gambar, harga modal, harga jual, dan satuan gram/ikat.' };
+    res.erp_pelanggan = { status: 'PASSED', score: 98, note: 'Manajemen data pelanggan rapi.' };
+    res.erp_pesanan = { status: 'PASSED', score: 100, note: 'Manajemen pesanan masuk dan update status pengiriman.' };
+    res.erp_stok = { status: 'PASSED', score: 98, note: 'Notifikasi stok sayur menipis dan kadaluarsa otomatis.' };
+    res.erp_kategori = { status: 'PASSED', score: 100, note: 'Manajemen kategori sayuran lengkap.' };
+    res.erp_users_admin = { status: 'PASSED', score: 100, note: 'Manajemen pengguna dan hak akses admin/kasir.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 98, note: 'Laporan laba kotor harian dan mingguan otomatis.' };
+    res.erp_analitik_statistik = { status: 'PASSED', score: 96, note: 'Visualisasi analitik penjualan sayur.' };
+    res.erp_crm = { status: 'PASSED', score: 95, note: 'Database pelanggan dan histori order repeat.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 98, note: 'Stok tersinkronisasi atomik via Laravel DB Transaction.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 96, note: 'Omzet tercatat otomatis ke modul keuangan.' };
+    res.fe_faq = { status: 'PASSED', score: 90, note: 'FAQ panduan pemesanan sayur segar.' };
+    res.fe_blog = { status: 'PASSED', score: 88, note: 'Artikel tips menyimpan sayuran segar.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -790,6 +843,191 @@ export function generateDefaultDescriptiveEvaluation(project = {}) {
 }
 
 const RAW_PRESET_PROJECTS = [
+  // 0a. Kelas R5A - Kelompok 1 (Web FilosofiKopi)
+  {
+    id: 'project-r5a-kelompok-1',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 1',
+    studentName: 'Kelas R5A - Kelompok 1 (Web FilosofiKopi: Ryandhi, Kristina, Meutia, Satrio, Hasril)',
+    studentNim: '202433500001 / 004 / 006 / 059 / 005',
+    teamMembers: [
+      { nim: '202433500001', name: 'Ryandhi Kumala Irsa' },
+      { nim: '202433500004', name: 'Kristina Sinaga' },
+      { nim: '202433500006', name: 'Meutia Dwi Septiani' },
+      { nim: '202433500059', name: 'Satrio Widyan Hadi Wibowo' },
+      { nim: '202433500005', name: 'Hasril Labasri' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2024-2026 / Semester 5',
+    projectName: 'Web FilosofiKopi - Sistem Informasi Penjualan Kopi Berbasis Web',
+    targetUrl: 'https://filosofikopii.42web.io/',
+    adminUrl: 'https://filosofikopii.42web.io/admin',
+    orderUrl: 'https://filosofikopii.42web.io/',
+    portals: [
+      { title: 'Storefront FilosofiKopi', url: 'https://filosofikopii.42web.io/', badge: 'InfinityFree (42web.io)' },
+      { title: 'Login Pengguna / User', url: 'https://filosofikopii.42web.io/login', badge: 'User Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@gmail.com', password: 'admin123' },
+      user: { username: 'ryandhikumallairsa@gmail.com', password: 'ryankumall' }
+    },
+    githubRepoUrl: 'https://github.com/hasrillabaaasri-lab/Projeck-Web-E-Commerce-Filosofi/tree/main/kopi',
+    hostingPlatform: 'InfinityFree (42web.io)',
+    framework: 'PHP Native, HTML, CSS, JavaScript & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-1', 'FilosofiKopi Kedai'),
+    lecturerNotes: 'Aplikasi Web FilosofiKopi dari Kelas R5A Kelompok 1 memiliki katalog produk kopi dan etalase kedai yang rapi. Fitur login pengguna dan panel admin sudah berfungsi di InfinityFree (42web.io). Mahasiswa perlu meningkatkan aspek validasi stok real-time dan modul pelaporan keuangan.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 78%)',
+      summaryAnalysis: 'Aplikasi Web FilosofiKopi menunjukkan pemanfaatan generative AI yang cukup dominan pada styling katalog minuman kopi, struktur HTML form otentikasi login/registrasi, dan query dasar database MySQL. Alur bisnis pemesanan kopi berjalan standar namun logika transaksi dan validasi sesi perlu dikuasai secara mendalam oleh mahasiswa.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Produk & Etalase Kopi',
+          aiPercentage: 75,
+          reason: 'Grid produk responsif dengan card menu kopi, foto produk, dan harga modal/jual memiliki struktur boilerplate umum Tailwind/Bootstrap hasil prompt AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Pengguna & Admin (Login/Register)',
+          aiPercentage: 72,
+          reason: 'Pola skrip otentikasi PHP session menggunakan struktur standar yang umum digenerate oleh AI, namun perlu dipastikan implementasi password hashing (bcrypt) dan sanitasi input.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Form Pemesanan',
+          aiPercentage: 76,
+          reason: 'Mekanisme session cart penampung pesanan kopi menggunakan pola generik PHP native.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Struktur Database MySQL Kedai Kopi',
+          aiPercentage: 70,
+          reason: 'Skema tabel users, produk_kopi, dan transaksi mengikuti rancangan dasar yang lazim dibuat melalui prompt AI.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Kamu boleh dan sangat wajar memanfaatkan AI di era modern ini untuk mempercepat pembuatan tampilan etalase FilosofiKopi dan logika CRUD dasar. Namun yang paling penting adalah kamu memahami alur data dari form pembelian sampai tersimpan di database MySQL, logika session login, serta tujuan bisnis setiap fiturnya. Jangan hanya terima hasil generate AI tanpa tahu cara membaca dan membangun kodenya dari nol.',
+      studentHomework: [
+        'Pelajari alur siklus PHP session ($_SESSION) dalam memisahkan hak akses pembeli biasa dan administrator.',
+        'Pahami cara kerja query Prepared Statements (PDO / MySQLi) untuk melindungi database dari celah SQL Injection.',
+        'Pelajari logika pengurangan stok kopi secara otomatis saat checkout berhasil dilakukan agar tidak terjadi overselling.',
+        'Kuasai cara membaca struktur kode di repositori GitHub cabang /kopi agar siap menjawab pertanyaan teknis saat sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Web FilosofiKopi karya Kelas R5A Kelompok 1 berhasil menyajikan etalase toko kopi online yang menarik dan fungsional di hosting InfinityFree. Pengguna dapat mendaftar akun baru, login dengan kredensial teruji, dan memilih menu kopi yang diinginkan. Panel admin juga tersedia untuk pengelolaan data.',
+      strengths: [
+        'Desain antarmuka etalase kedai kopi bersih dan responsif diakses dari perangkat mobile maupun desktop',
+        'Tersedia autentikasi dua pintu (pelanggan dan admin) yang sudah aktif dan dapat diverifikasi langsung',
+        'Repositori GitHub publik terstruktur dan memuat source code aplikasi pada direktori proyek'
+      ],
+      weaknesses: [
+        'Integrasi pembayaran masih bersifat konfirmasi manual dan belum dilengkapi notifikasi otomatis',
+        'Perlu penambahan proteksi CSRF token pada setiap form POST di halaman login dan checkout',
+        'Modul analitik dan rekapitulasi penjualan di sisi admin masih perlu diperluas'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN TUGAS PENDALAMAN LOGIKA)',
+      recommendations: 'Kelompok 1 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 76, Grade B+). Setiap anggota kelompok diwajibkan mempelajari arsitektur session dan sanitasi database agar percaya diri saat mempresentasikan proyek di hadapan dewan penguji sidang.'
+    }
+  },
+
+  // 0b. Kelas R5A - Kelompok 3 (UMKM Warung Sayur Pulungan)
+  {
+    id: 'project-r5a-kelompok-3',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 3',
+    studentName: 'Kelas R5A - Kelompok 3 (Warung Sayur Pulungan: Ammar, Abizar, Triya, Rahadian)',
+    studentNim: '202433500012 / 013 / 014 / 015',
+    teamMembers: [
+      { nim: '202433500012', name: 'Muhammad Ammar Ghani Suhairi' },
+      { nim: '202433500013', name: 'Muhammad Abizar Giffari Isnaini' },
+      { nim: '202433500014', name: 'Triya Agustina' },
+      { nim: '202433500015', name: 'Rahadian Yusuf' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Warung Sayur Pulungan',
+    targetUrl: 'https://projectreb-production.up.railway.app/',
+    adminUrl: 'https://projectreb-production.up.railway.app/login',
+    orderUrl: 'https://projectreb-production.up.railway.app/',
+    portals: [
+      { title: 'E-Commerce Warung Sayur', url: 'https://projectreb-production.up.railway.app/', badge: 'Railway Cloud PaaS' },
+      { title: 'Login Terpadu (Admin & User)', url: 'https://projectreb-production.up.railway.app/login', badge: 'Inertia React SPA' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@example.test', password: 'password' },
+      user: { username: 'endar@example.test', password: 'password' }
+    },
+    githubRepoUrl: 'https://github.com/abizargiffari/project_reb',
+    hostingPlatform: 'Railway Cloud PaaS',
+    framework: 'Laravel v12 (PHP) + React via Inertia.js & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-3', 'Warung Sayur Pulungan ERP'),
+    lecturerNotes: 'Aplikasi kelas enterprise yang sangat impresif dari Kelas R5A Kelompok 3. Memanfaatkan tech stack modern Laravel v12 dipadukan dengan React via Inertia.js dan di-deploy secara profesional di cloud Railway PaaS. Arsitektur MVC, reactivity frontend, dan modul manajemen ERP sayuran sangat komprehensif.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 62,
+      classification: 'Pemanfaatan AI Modern & Rekayasa Perangkat Lunak Mandiri Sangat Baik (62%)',
+      summaryAnalysis: 'Aplikasi Warung Sayur Pulungan menunjukkan penguasaan teknologi tingkat tinggi dari mahasiswa. Penggunaan generative AI terindikasi pada scaffolding komponen React via Inertia dan boilerplate model/controller Laravel v12. Namun rekayasa bisnis internal ERP (manajemen pasokan sayur segar, relasi database, middleware otentikasi) terbukti dikonfigurasi dan diintegrasikan secara mandiri dengan rapi.',
+      featureBreakdown: [
+        {
+          feature: 'Fullstack Single Page Application (Laravel 12 + React Inertia)',
+          aiPercentage: 60,
+          reason: 'Penggunaan Inertia.js menghubungkan Laravel Controller langsung ke komponen React tanpa membuat REST API manual—struktur setup modern yang sangat bersih.',
+          status: 'AI Assisted + Manual Engineering'
+        },
+        {
+          feature: 'Katalog Sayur & Filter Kategori Interaktif',
+          aiPercentage: 65,
+          reason: 'Komponen filter pencarian reaktif React yang mulus tanpa reload halaman, dengan rendering state yang presisi.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Modul ERP Manajemen Stok & Kadaluarsa Sayuran',
+          aiPercentage: 58,
+          reason: 'Logika bisnis komoditas sayur basah/kering dengan perlakuan stok dinamis menunjukkan pemahaman mendalam tentang kebutuhan riil UMKM.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Deployment Cloud Railway PaaS dengan CI/CD',
+          aiPercentage: 62,
+          reason: 'Konfigurasi environment Nixpacks/Dockerfile dan database pool di Railway berjalan sempurna tanpa hambatan runtime.',
+          status: 'Advanced DevOps'
+        }
+      ],
+      aiAdvice: 'Luar biasa! Penggunaan AI yang kalian lakukan sudah pada level profesional: menjadikan AI sebagai asisten akselerasi pembuatan boilerplate Laravel dan komponen React, sementara kalian memegang kendali penuh atas arsitektur, relasi database, dan alur proses bisnis UMKM sayur. Pertahankan standar rekayasa software seperti ini.',
+      studentHomework: [
+        'Pelajari mendalam lifecycle komunikasi Inertia.js (router.visit, useForm, preserveScroll) antara Laravel dan React.',
+        'Pahami implementasi Database Transactions di Laravel (DB::transaction) saat terjadi checkout multi-item sayur untuk menjaga integritas data.',
+        'Eksplorasi optimasi caching data katalog dengan Redis di Railway untuk menjaga performa saat traffic pembeli tinggi.',
+        'Persiapkan demonstrasi alur live checkout dan demonstrasi kode controller saat sesi tanya jawab sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Warung Sayur Pulungan oleh Kelas R5A Kelompok 3 merupakan salah satu proyek KP terbaik. Menggunakan Laravel 12 terbaru dengan frontend React via Inertia.js serta di-hosting di Railway PaaS, sistem ini sangat responsif, memiliki keamanan tinggi bawaan Laravel (CSRF, Eloquent ORM, Password Hashing Argon2/Bcrypt), dan siap dipakai operasional nyata.',
+      strengths: [
+        'Tech stack modern kelas industri: Laravel 12 Backend + React via Inertia.js SPA Frontend',
+        'Hosting cloud Railway PaaS yang tangguh dengan SSL HTTPS otomatis dan performa tinggi',
+        'Fitur ERP komprehensif: manajemen produk sayur segar, stok dinamis, dan laporan penjualan',
+        'Repositori GitHub publik sangat aktif, rapi, dan mencerminkan kolaborasi tim yang solid'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ dan artikel tips sayuran segar masih dapat diperkaya kontennya',
+        'Dapat ditambahkan fitur integrasi payment gateway otomatis (seperti Midtrans atau Tripay) untuk melengkapi transfer manual'
+      ],
+      finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
+      recommendations: 'Kelompok 3 Kelas R5A dinyatakan lulus dengan predikat A (Nilai 95). Proyek ini sangat layak dijadikan model percontohan implementasi Kerja Praktik modern di Program Studi Sistem Informasi.'
+    }
+  },
+
   // 1. Tokopi (Kerja Praktik) - Kelas S5A
   {
     id: 'project-tokopi-kp',
