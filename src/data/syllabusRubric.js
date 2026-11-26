@@ -1029,6 +1029,62 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5b-kelompok-6') {
+    // Kelas R5B - Kelompok 6 (UMKM Ngemil Dimsum): 80 / 100 - Grade B+
+    const res = createBase(92, 'Sistem e-commerce Ngemil Dimsum aktif di InfinityFree (ngemildimsum.infinityfreeapp.com).');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Landing page etalase aneka dimsum (siomay, hakau, lumpia) menarik dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil UMKM Ngemil Dimsum tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak kedai dimsum dan informasi outlet jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog varian dimsum kukus/goreng lengkap dengan foto dan harga.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja pemesanan porsi dimsum berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pesanan tervalidasi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran transfer/bank.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Pengiriman kurir lokal / take away.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD manajemen varian dimsum di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori dimsum kukus, goreng, dan paket party box.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen antrean pesanan dapur dimsum.' };
+    res.erp_users_admin = { status: 'PASSED', score: 90, note: 'Otentikasi user jarwo@gmail.com dan admin 2@gmail.com aktif.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 80, note: 'Laporan omzet penjualan harian kedai.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik rekapitulasi transaksi sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok porsi dimsum saat checkout.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir ke pembukuan sederhana.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian belum tersedia.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/cerita kuliner belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain makanan rusak.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Database pembeli tercatat namun belum ada loyalty poin.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5b-kelompok-8') {
+    // Kelas R5B - Kelompok 8 (Kedai Mie Racik): 96 / 100 - Grade A (Paling Lengkap & Terintegrasi)
+    const res = createBase(98, 'Sistem ERP Kedai Mie Racik aktif di Railway Cloud PaaS dengan integrasi Midtrans dan Biteship.');
+    res.fe_beranda = { status: 'PASSED', score: 100, note: 'Landing page etalase mie racik interaktif, responsif, dan sangat cepat di Railway Cloud.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 98, note: 'Profil sejarah dan identitas kuliner Kedai Mie Racik lengkap.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 98, note: 'Kontak kedai, live chat, dan integrasi peta lokasi jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 100, note: 'Katalog mie racik dengan fitur kustomisasi topping, level pedas, dan kuah.' };
+    res.fe_keranjang = { status: 'PASSED', score: 100, note: 'Keranjang belanja reaktif menampung kustomisasi pesanan.' };
+    res.fe_checkout = { status: 'PASSED', score: 100, note: 'Form checkout terintegrasi ongkir realtime Biteship API.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 100, note: 'Payment Gateway Midtrans Snap QRIS & Virtual Account sandbox terintegrasi.' };
+    res.fe_payment_action = { status: 'PASSED', score: 100, note: 'Otomasi verifikasi pembayaran via Midtrans webhook callback.' };
+    res.fe_delivery_cod = { status: 'PASSED', score: 100, note: 'Integrasi Delivery API Biteship (sandbox) untuk cek tarif dan pelacakan kurir.' };
+    res.erp_produk = { status: 'PASSED', score: 100, note: 'CRUD manajemen menu mie, topping, dan bahan baku dapur terhubung TablePlus/MySQL Railway.' };
+    res.erp_pelanggan = { status: 'PASSED', score: 98, note: 'Manajemen basis data pelanggan terdaftar.' };
+    res.erp_pesanan = { status: 'PASSED', score: 100, note: 'Manajemen antrean dapur dan kasir realtime.' };
+    res.erp_stok = { status: 'PASSED', score: 98, note: 'Sistem peringatan stok mie dan bumbu racik menipis otomatis.' };
+    res.erp_kategori = { status: 'PASSED', score: 100, note: 'Kategori mie kuah, mie goreng, topping, dan minuman.' };
+    res.erp_users_admin = { status: 'PASSED', score: 100, note: 'Multi-role authentication: Admin (admin123), Kasir (kasir123), dan Pelanggan (089531433748).' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 98, note: 'Laporan laba kotor, omzet harian, dan mutasi kasir otomatis.' };
+    res.erp_analitik_statistik = { status: 'PASSED', score: 96, note: 'Visualisasi analitik grafik penjualan menu terlaris.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 98, note: 'Stok tersinkronisasi atomik dengan Database Transaction saat order lunas.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 96, note: 'Sinkronisasi pembayaran Midtrans langsung ke jurnal keuangan toko.' };
+    res.fe_faq = { status: 'PASSED', score: 90, note: 'FAQ panduan pemesanan dan pengiriman mie racik.' };
+    res.fe_blog = { status: 'PASSED', score: 88, note: 'Artikel ulasan kuliner mie nusantara.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -2252,6 +2308,194 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
       recommendations: 'Kelompok 5 Kelas R5B dinyatakan lulus evaluasi KP (Nilai 79, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan tugas pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0l. Kelas R5B - Kelompok 6 (UMKM Ngemil Dimsum)
+  {
+    id: 'project-r5b-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelas R5B - Kelompok 6 (Ngemil Dimsum: Syahrul, Luna, Adinda, Veronica)',
+    studentNim: '202433500098 / 099 / 101 / 102',
+    teamMembers: [
+      { nim: '202433500098', name: 'Syahrul Firmansyah', role: 'Frontend Developer' },
+      { nim: '202433500099', name: 'Luna Shyfa Rahmawati', role: 'Sekretaris' },
+      { nim: '202433500101', name: 'Adinda Rizkia Putri', role: 'Project Manager' },
+      { nim: '202433500102', name: 'Veronica Jessica Sabrina', role: 'Backend Developer' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2024 / Semester 5',
+    projectName: 'Pengembangan Sistem E-Commerce pada UMKM Ngemil Dimsum',
+    targetUrl: 'https://ngemildimsum.infinityfreeapp.com/',
+    adminUrl: 'https://ngemildimsum.infinityfreeapp.com/admin',
+    orderUrl: 'https://ngemildimsum.infinityfreeapp.com/',
+    portals: [
+      { title: 'Storefront Ngemil Dimsum', url: 'https://ngemildimsum.infinityfreeapp.com/', badge: 'InfinityFree' },
+      { title: 'Login Pembeli', url: 'https://ngemildimsum.infinityfreeapp.com/login.php', badge: 'User Portal' },
+      { title: 'Backoffice Admin Dimsum', url: 'https://ngemildimsum.infinityfreeapp.com/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: '2@gmail.com', password: 'qwaszxc' },
+      user: { username: 'jarwo@gmail.com', password: '999999' }
+    },
+    githubRepoUrl: 'https://github.com/adindarzp16/Ngemil-Dimsum.git',
+    hostingPlatform: 'InfinityFree',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-6', 'Ngemil Dimsum Kuliner'),
+    lecturerNotes: 'Aplikasi Ngemil Dimsum dari Kelas R5B Kelompok 6 menyajikan etalase kuliner dimsum yang menarik dan fungsional di InfinityFree. Pembagian peran dalam tim (PM, Frontend, Backend, Sekretaris) terorganisasi dengan baik. Otentikasi pembeli jarwo@gmail.com dan admin 2@gmail.com aktif.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 72,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 75%)',
+      summaryAnalysis: 'Aplikasi Ngemil Dimsum memanfaatkan asisten generative AI terutama dalam penyusunan tata letak etalase dimsum, styling komponen card produk makanan, dan query dasar database MySQL. Alur bisnis pemesanan makanan ringan berjalan teratur.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Menu Dimsum Kukus & Goreng',
+          aiPercentage: 74,
+          reason: 'Komponen tampilan grid porsi dimsum dengan foto, badge kategori, dan harga menggunakan template CSS modern hasil prompt AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Session User (jarwo@gmail.com) & Admin',
+          aiPercentage: 70,
+          reason: 'Pola skrip login PHP session standar untuk memisahkan hak akses pelanggan dan admin kedai.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Form Transaksi Pesanan',
+          aiPercentage: 75,
+          reason: 'Mekanisme session cart untuk menampung pesanan porsi dimsum dan kuantiti sebelum checkout.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Struktur Database MySQL Produk & Penjualan',
+          aiPercentage: 68,
+          reason: 'Skema tabel kategori, menu dimsum, dan transaksi mengikuti rancangan relasional standar.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk menyusun etalase Ngemil Dimsum sudah cukup baik. Yang paling penting: Adinda, Syahrul, Veronica, dan Luna harus benar-benar menguasai logika di balik kode PHP native-nya: alur data dari form pembelian sampai tersimpan di database MySQL, alur session login, serta logika pengelolaan stok dimsum. Kuasai kodenya agar percaya diri saat mempresentasikan proyek di hadapan penguji sidang.',
+      studentHomework: [
+        'Pelajari alur data PHP session ($_SESSION[\'cart\']) saat menambah porsi, mengurangi, atau menghapus item dimsum.',
+        'Pahami cara mengamankan panel admin agar tidak dapat diakses tanpa login sebagai 2@gmail.com.',
+        'Pelajari penerapan Prepared Statements untuk melindungi database dari celah SQL Injection.',
+        'Kuasai cara membaca struktur file di repositori GitHub Ngemil-Dimsum agar lancar saat demonstrasi sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Pengembangan Sistem E-Commerce pada UMKM Ngemil Dimsum karya Kelompok 6 Kelas R5B berhasil merealisasikan website e-commerce kuliner dimsum yang fungsional di hosting InfinityFree. Pengguna dapat login dengan akun terdaftar, memilih menu dimsum, dan melakukan checkout pesanan.',
+      strengths: [
+        'Desain antarmuka etalase produk dimsum bersih, responsif, dan mudah dipahami pembeli',
+        'Kredensial pengguna (jarwo@gmail.com) dan admin (2@gmail.com) teruji aktif di lingkungan cloud publik',
+        'Struktur tim terorganisasi dengan pembagian peran yang jelas (PM, Frontend, Backend, Sekretaris)',
+        'Repositori GitHub publik aktif memuat source code aplikasi'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi belum dibuat',
+        'Metode pembayaran masih berupa konfirmasi transfer manual tanpa payment gateway instan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 6 Kelas R5B dinyatakan lulus evaluasi KP (Nilai 80, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan PR pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0m. Kelas R5B - Kelompok 8 (Kedai Mie Racik)
+  {
+    id: 'project-r5b-kelompok-8',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 8',
+    studentName: 'Kelas R5B - Kelompok 8 (Kedai Mie Racik: Muhamad Rifal, Zaskia, Zikri, Alponsus)',
+    studentNim: '202433500116 / 112 / 113 / 111',
+    teamMembers: [
+      { nim: '202433500116', name: 'Muhamad Rifal Firdaus', role: 'Project Manager' },
+      { nim: '202433500112', name: 'Zaskia Ananda Fahra', role: 'Sekretaris' },
+      { nim: '202433500113', name: 'Muhammad Zikri Abdul Malik', role: 'Frontend Developer' },
+      { nim: '202433500111', name: 'Alponsus Sinulingga', role: 'Backend Developer' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Kedai Mie Racik',
+    targetUrl: 'https://kedaimieracikk.up.railway.app/',
+    adminUrl: 'https://kedaimieracikk.up.railway.app/admin',
+    orderUrl: 'https://kedaimieracikk.up.railway.app/',
+    portals: [
+      { title: 'Storefront Kedai Mie Racik', url: 'https://kedaimieracikk.up.railway.app/', badge: 'Railway Cloud PaaS' },
+      { title: 'Login Multi-Role', url: 'https://kedaimieracikk.up.railway.app/login', badge: 'User/Admin/Kasir' },
+      { title: 'Backoffice ERP Admin', url: 'https://kedaimieracikk.up.railway.app/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin', password: 'admin123' },
+      user: { username: '089531433748', password: '123456' },
+      kasir: { username: 'kasir', password: 'kasir123' }
+    },
+    githubRepoUrl: 'https://github.com/Mrifalfirdaus11/kedaimieracik.git',
+    hostingPlatform: 'Railway Cloud PaaS',
+    framework: 'PHP Native, MySQL on Railway, Midtrans Sandbox, Biteship API, TablePlus',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-8', 'Kedai Mie Racik ERP'),
+    lecturerNotes: 'Aplikasi kelas enterprise yang sangat luar biasa dari Kelas R5B Kelompok 8! Mengintegrasikan Midtrans QRIS sandbox dan Delivery API Biteship untuk cek tarif ongkir otomatis. Database di-hosting di Railway Cloud dengan TablePlus dan multi-role access (Admin, Kasir, User). Ini adalah salah satu implementasi ERP kuliner paling komprehensif.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 60,
+      classification: 'Pemanfaatan AI Modern & Rekayasa Perangkat Lunak Mandiri Sangat Baik (60%)',
+      summaryAnalysis: 'Aplikasi Kedai Mie Racik menunjukkan tingkat rekayasa perangkat lunak yang sangat matang. Asisten AI digunakan untuk mempercepat styling UI dan konfigurasi dasar cURL API. Namun mahasiswa berhasil mengintegrasikan 2 API eksternal pihak ketiga (Midtrans Snap & Biteship Delivery), multi-role authentication (Admin, Kasir, Pelanggan), dan cloud database MySQL di Railway secara mandiri.',
+      featureBreakdown: [
+        {
+          feature: 'Integrasi Payment Gateway Midtrans (Snap QRIS & VA Sandbox)',
+          aiPercentage: 58,
+          reason: 'Integrasi Snap JS token dan handling webhook callback notifikasi pembayaran berhasil dihubungkan ke status transaksi database.',
+          status: 'Advanced Integration'
+        },
+        {
+          feature: 'Integrasi Delivery API Biteship (Cek Ongkir & Kurir Sandbox)',
+          aiPercentage: 55,
+          reason: 'Koneksi REST API Biteship menggunakan cURL PHP untuk mendapatkan kalkulasi tarif ongkir pengiriman mie secara realtime.',
+          status: 'Advanced Integration'
+        },
+        {
+          feature: 'Multi-Role Authentication (Admin, Kasir, Pelanggan)',
+          aiPercentage: 62,
+          reason: 'Pemisahan hak akses tiga tingkat: admin untuk kendali penuh, kasir untuk transaksi POS, dan pelanggan berbasis nomor WhatsApp.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Arsitektur Cloud PaaS Railway & Database TablePlus',
+          aiPercentage: 65,
+          reason: 'Deployment di Railway Cloud dengan koneksi database MySQL cloud yang stabil dan aman.',
+          status: 'DevOps & Cloud'
+        }
+      ],
+      aiAdvice: 'Luar biasa! Proyek Kedai Mie Racik ini membuktikan bahwa mahasiswa mampu memanfaatkan AI sebagai pengakselerasi, bukan sekadar copy-paste. Mengintegrasikan Midtrans dan Biteship API sekaligus menunjukkan penguasaan teknologi tingkat tinggi. Pertahankan pemahaman arsitektur ini dan pastikan seluruh anggota tim memahami alur API dan alur database-nya saat sidang.',
+      studentHomework: [
+        'Pelajari alur komunikasi webhook signature key dari server Midtrans ke backend Kedai Mie Racik saat status berubah menjadi settlement.',
+        'Pahami alur request dan response JSON pada Biteship API saat menghitung estimasi ongkir pengiriman mie.',
+        'Pelajari Database Transactions (COMMIT/ROLLBACK) saat transaksi melibatkan pengurangan stok bahan baku dan status kasir.',
+        'Pastikan PM, Sekretaris, Frontend, dan Backend siap mendemonstrasikan live transaksi saat sesi tanya jawab sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Kedai Mie Racik yang dikembangkan oleh Kelompok 8 Kelas R5B merupakan karya luar biasa dan menjadi salah satu standar terbaik proyek Kerja Praktik. Dengan integrasi Midtrans Sandbox, Biteship Delivery API, multi-role (Admin, Kasir, User), dan cloud hosting Railway, sistem ini sudah berada pada level production-ready.',
+      strengths: [
+        'Integrasi ganda dua layanan industri terkemuka: Payment Gateway Midtrans dan Delivery API Biteship',
+        'Multi-role authentication lengkap memisahkan akses Administrator, Kasir POS, dan Pelanggan',
+        'Infrastruktur cloud modern Railway PaaS dengan performa tinggi dan SSL HTTPS otomatis',
+        'Manajemen tim sangat solid dengan peran terdefinisi (PM, Sekretaris, Frontend, Backend)',
+        'Repositori GitHub publik sangat rapi dan aktif'
+      ],
+      weaknesses: [
+        'Dapat ditambahkan modul laporan laba rugi lanjutan berbasis metode FIFO/LIFO persediaan',
+        'Halaman FAQ dan artikel kuliner dapat terus diperkaya'
+      ],
+      finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
+      recommendations: 'Kelompok 8 Kelas R5B dinyatakan lulus dengan predikat A (Nilai 96). Proyek ini sangat layak dijadikan rujukan utama penerapan E-Commerce ERP pada UMKM kuliner di Program Studi Sistem Informasi.'
     }
   },
 
