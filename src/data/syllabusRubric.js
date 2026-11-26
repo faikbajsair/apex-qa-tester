@@ -1000,6 +1000,35 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5a-kelompok-2') {
+    // Kelas R5A - Kelompok 2 (Fluffy Chicken): 74 / 100 - Grade B
+    const res = createBase(90, 'Aplikasi web pemesanan Fluffy Chicken aktif di InfinityFree (fluffychicken123456.rf.gd).');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Landing page etalase kuliner ayam Fluffy Chicken aktif dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 88, note: 'Profil brand Fluffy Chicken tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 88, note: 'Informasi kontak pemesanan ayam tertera.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 92, note: 'Katalog varian ayam crispy, saus, dan minuman tersaji dengan harga.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja pemesanan menu berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 88, note: 'Form checkout dan konfirmasi pesanan aktif.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 86, note: 'Instruksi pembayaran transfer/tunai.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Pengiriman kurir lokal / take away di gerai.' };
+    res.erp_produk = { status: 'PASSED', score: 90, note: 'CRUD manajemen menu ayam di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori paket ayam, ala carte, dan minuman.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Manajemen antrean pesanan dapur.' };
+    res.erp_users_admin = { status: 'PARTIAL', score: 65, note: 'Panel admin belum dilindungi kata sandi yang kuat (kredensial tanpa password).' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 75, note: 'Rekapitulasi penjualan harian sederhana.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 70, note: 'Grafik transaksi harian kedai.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Pengurangan stok porsi ayam manual/semi-otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 70, note: 'Pencatatan kasir ke pembukuan sederhana.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian belum tersedia.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/cerita kuliner belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain pesanan.' };
+    res.erp_crm = { status: 'PARTIAL', score: 65, note: 'Belum ada basis data loyalitas pelanggan/member.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -1191,6 +1220,109 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN TUGAS PENDALAMAN LOGIKA)',
       recommendations: 'Kelompok 1 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 76, Grade B+). Setiap anggota kelompok diwajibkan mempelajari arsitektur session dan sanitasi database agar percaya diri saat mempresentasikan proyek di hadapan dewan penguji sidang.'
+    }
+  },
+
+  // 0a2. Kelas R5A - Kelompok 2 (Fluffy Chicken)
+  {
+    id: 'project-r5a-kelompok-2',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 2',
+    studentName: 'Kelas R5A - Kelompok 2 (Fluffy Chicken: Anis, Dzikra, Dyka, Fauzan, Fajar)',
+    studentNim: '202433500007 / 008 / 009 / 010 / 061',
+    teamMembers: [
+      { nim: '202433500007', name: 'Anis Rizky Yusriyah' },
+      { nim: '202433500008', name: 'Muhammad Dzikra Aditya' },
+      { nim: '202433500009', name: 'Dyka Erdila Puteri' },
+      { nim: '202433500010', name: 'Muhammad Fauzan Alghifari' },
+      { nim: '202433500061', name: 'Fajar Anugrah Ramadhan' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2024-2026 / Semester 5',
+    projectName: 'Fluffy Chicken – Sistem Informasi Penjualan dan Pemesanan Kuliner Ayam Berbasis Web',
+    targetUrl: 'http://fluffychicken123456.rf.gd/',
+    adminUrl: 'http://fluffychicken123456.rf.gd/admin',
+    orderUrl: 'http://fluffychicken123456.rf.gd/',
+    portals: [
+      { title: 'Storefront Fluffy Chicken', url: 'http://fluffychicken123456.rf.gd/', badge: 'InfinityFree (rf.gd)' },
+      { title: 'Pemesanan Pelanggan (noname)', url: 'http://fluffychicken123456.rf.gd/', badge: 'Guest Order' },
+      { title: 'Backoffice Admin (no password)', url: 'http://fluffychicken123456.rf.gd/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: '( no password )', password: '-' },
+      user: { username: '( noname )', password: '-' }
+    },
+    githubRepoUrl: 'https://github.com/fznalg28/fluffy-chick.git',
+    hostingPlatform: 'InfinityFree',
+    framework: 'PHP, MySQL / MariaDB',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-2', 'Fluffy Chicken Kuliner'),
+    lecturerNotes: 'Aplikasi Fluffy Chicken dari Kelas R5A Kelompok 2 memiliki etalase penjualan ayam yang menarik. Namun terdapat catatan keamanan penting dari dosen: panel admin saat ini dapat diakses tanpa autentikasi kata sandi (no password) dan pemesanan pelanggan bersifat tamu (noname). Mahasiswa diwajibkan mengimplementasikan session otentikasi ketat sebelum pelaksanaan sidang KP.',
+    vulnerabilities: [
+      {
+        id: 'vuln-fluffy-auth',
+        severity: 'HIGH',
+        title: 'Panel Admin Tanpa Proteksi Password (Broken Authentication)',
+        description: 'Panel admin kedai dapat diakses tanpa validasi kata sandi yang memadai, memungkinkan siapa saja mengubah master produk dan harga.',
+        remediation: 'Implementasikan session login dengan password hashing (bcrypt) dan batasi hak akses file admin.'
+      }
+    ],
+    aiAudit: {
+      overallPercentage: 76,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 72% - 80%)',
+      summaryAnalysis: 'Aplikasi Fluffy Chicken menunjukkan pemanfaatan asisten generative AI yang cukup dominan pada perancangan antarmuka etalase kuliner ayam, styling card menu CSS, dan struktur form pemesanan tamu. Kurangnya otentikasi password pada panel admin mengindikasikan bahwa mahasiswa baru mengadopsi template dasar AI tanpa menyempurnakan modul keamanannya.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Menu Ayam Crispy & Etalase Kuliner',
+          aiPercentage: 78,
+          reason: 'Tata letak grid menu makanan dengan foto ayam goreng, deskripsi, dan tombol pesan mengikuti pola umum template CSS hasil generate AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Alur Pemesanan Tamu (Noname)',
+          aiPercentage: 74,
+          reason: 'Pola penyimpanan item belanja ke session PHP tanpa mewajibkan registrasi akun pengguna.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Akses Panel Pengelolaan Admin (No Password)',
+          aiPercentage: 80,
+          reason: 'Struktur halaman dashboard admin sederhana yang belum dilengkapi middleware/skrip pemeriksaan session login.',
+          status: 'Incomplete / AI Boilerplate'
+        },
+        {
+          feature: 'Skema Database MySQL Fluffy Chicken',
+          aiPercentage: 72,
+          reason: 'Tabel menu, kategori, dan pesanan mengikuti arsitektur dasar CRUD kuliner.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Kalian boleh menggunakan AI untuk mempercepat pembuatan desain dan tampilan etalase Fluffy Chicken. Tapi ingat nasihat Pak Faik: kalian harus paham alur kerja kodingannya! Jangan sampai modul admin dibiarkan tanpa password (no password) dan pelanggan tanpa identitas akun. Dosen penguji di sidang pasti akan menguji aspek keamanan dan validasi sesi. Segera perbaiki modul otentikasinya.',
+      studentHomework: [
+        'Wajib membuat form login admin lengkap dengan username, password, dan session PHP ($_SESSION[\'admin\']) agar panel admin terlindungi.',
+        'Implementasikan sistem login/registrasi pengguna pelanggan agar riwayat pemesanan ayam dapat dilacak per pengguna.',
+        'Pelajari cara kerja Prepared Statements (PDO / MySQLi) untuk melindungi query database dari ancaman SQL Injection.',
+        'Kuasai cara membaca dan menjelaskan arsitektur kode di repositori GitHub fluffy-chick agar siap menghadapi sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Fluffy Chicken karya Kelompok 2 Kelas R5A telah berhasil diimplementasikan dan di-deploy ke hosting InfinityFree (fluffychicken123456.rf.gd). Sistem menyajikan etalase kuliner ayam yang responsif dan pemesanan yang berfungsi. Namun aspek otentikasi admin dan user masih memerlukan perbaikan mendesak karena belum dilindungi kata sandi.',
+      strengths: [
+        'Desain antarmuka etalase kuliner ayam menarik, segar, dan responsif',
+        'Alur pemesanan makanan dari memilih menu hingga keranjang berjalan lancar',
+        'Repositori GitHub publik aktif memuat source code aplikasi',
+        'Telah berhasil dipublikasikan di internet dan dapat diakses publik'
+      ],
+      weaknesses: [
+        'Panel admin saat ini tidak memiliki proteksi kata sandi yang memadai (no password), berisiko keamanan tinggi',
+        'Pemesanan pelanggan belum mewajibkan registrasi akun (noname) sehingga riwayat transaksi sulit dilacak',
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi belum dibuat'
+      ],
+      finalVerdict: 'DITERIMA BERSYARAT (WAJIB PERBAIKI AUTENTIKASI ADMIN & USER SEBELUM SIDANG)',
+      recommendations: 'Kelompok 2 Kelas R5A dinyatakan lulus sementara (Nilai 74, Grade B). Mahasiswa diwajibkan menyelesaikan PR penambahan proteksi kata sandi admin dan sistem autentikasi pengguna sebelum tanggal pelaksanaan sidang pertanggungjawaban akademik.'
     }
   },
 
