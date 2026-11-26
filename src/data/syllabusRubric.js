@@ -855,6 +855,66 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5a-kelompok-5') {
+    // Kelas R5A - Kelompok 5 (Streetwear AMBOKO): 84 / 100 - Grade B+
+    const res = createBase(94, 'Aplikasi E-Commerce Model ERP Streetwear AMBOKO aktif di InfinityFree (amboko.rf.gd).');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Landing page etalase fashion streetwear AMBOKO responsif dan estetis.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil brand streetwear AMBOKO dan konsep katalog jelas.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak pemesanan dan layanan pelanggan tertera.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 96, note: 'Katalog pakaian (hoodie, t-shirt, celana streetwear) lengkap dengan varian ukuran (S, M, L, XL).' };
+    res.fe_keranjang = { status: 'PASSED', score: 94, note: 'Keranjang belanja produk apparel berfungsi dengan baik.' };
+    res.fe_checkout = { status: 'PASSED', score: 92, note: 'Alur checkout pesanan pakaian tervalidasi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Instruksi pembayaran transfer/bank.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 80, note: 'Upload bukti transfer manual.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 80, note: 'Pengiriman kurir ekspedisi lokal.' };
+    res.erp_produk = { status: 'PASSED', score: 95, note: 'Manajemen master produk streetwear dan varian ukuran di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 92, note: 'Kategori apparel (hoodie, t-shirt, aksesoris).' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen pesanan masuk dan status pengiriman paket.' };
+    res.erp_stok = { status: 'PASSED', score: 92, note: 'Notifikasi stok baju/hoodie menipis per ukuran.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Otentikasi dua pintu (user pelanggan dan admin toko).' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 88, note: 'Rekapitulasi omzet penjualan pakaian harian/bulanan.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik produk paling laris (best seller).' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok baju otomatis saat pesanan dikonfirmasi.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir ke pembukuan keuangan toko.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ size chart panduan ukuran belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian apparel belum tersedia.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/fashion lookbook belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist baju favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur ukuran baju tidak pas.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Database pembeli tercatat namun belum ada loyalty member point.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5a-kelompok-8') {
+    // Kelas R5A - Kelompok 8 (Web HomieCozie): 78 / 100 - Grade B+
+    const res = createBase(92, 'Aplikasi web HomieCozie aktif di InfinityFree (homiecozie.free.nf).');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Etalase produk perlengkapan rumah/lifestyle HomieCozie aktif dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil UMKM HomieCozie dan konsep living cozy.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak toko dan alamat operasional tertera jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 94, note: 'Katalog produk dekorasi dan perlengkapan rumah tertata rapi.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja pemesanan produk rumah aktif.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pesanan barang berfungsi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Informasi metode pembayaran/transfer tertera.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Pengiriman paket logistik barang rumah tangga.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD manajemen produk homeware di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori produk rumah dan dekorasi ruang.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Manajemen antrean pesanan pelanggan.' };
+    res.erp_users_admin = { status: 'PASSED', score: 90, note: 'Pemisahan hak akses user pembeli dan admin.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 80, note: 'Laporan omzet penjualan produk homeware.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik rekapitulasi transaksi sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok barang saat checkout terkonfirmasi.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir ke buku kas.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian belum dibuat.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum tersedia.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/artikel dekorasi rumah belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist barang favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur barang pecah/rusak di jalan.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Database pembeli tercatat namun belum ada loyalty poin.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -1509,6 +1569,192 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
       recommendations: 'Kelompok 9 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 82, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan tugas pendalaman alur kode sebelum pelaksanaan sidang KP.'
+    }
+  },
+
+  // 0g. Kelas R5A - Kelompok 5 (UMKM Streetwear AMBOKO)
+  {
+    id: 'project-r5a-kelompok-5',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 5',
+    studentName: 'Kelas R5A - Kelompok 5 (Streetwear AMBOKO: Sekar, Syilvani, Mushthafa, Diva)',
+    studentNim: '202433500026 / 027 / 028 / 032',
+    teamMembers: [
+      { nim: '202433500026', name: 'Sekar Ayu Namira' },
+      { nim: '202433500027', name: 'Syilvani Amanda' },
+      { nim: '202433500028', name: 'Mushthafa' },
+      { nim: '202433500032', name: 'Diva Nur Aulia' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Streatwear AMBOKO',
+    targetUrl: 'http://amboko.rf.gd/',
+    adminUrl: 'http://amboko.rf.gd/admin',
+    orderUrl: 'http://amboko.rf.gd/',
+    portals: [
+      { title: 'Storefront AMBOKO', url: 'http://amboko.rf.gd/', badge: 'InfinityFree (rf.gd)' },
+      { title: 'Login Pembeli', url: 'http://amboko.rf.gd/login', badge: 'User Portal' },
+      { title: 'Backoffice Admin Toko', url: 'http://amboko.rf.gd/admin', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@amboko.com', password: 'admin123' },
+      user: { username: 'Syilvani@gmail.com', password: 'customer123' }
+    },
+    githubRepoUrl: 'https://github.com/Syilvyamanda/amboko-website',
+    hostingPlatform: 'InfinityFree (rf.gd)',
+    framework: 'PHP, MySQL / MariaDB, CSS',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-5', 'Streetwear AMBOKO ERP'),
+    lecturerNotes: 'Aplikasi AMBOKO dari Kelas R5A Kelompok 5 berhasil menyajikan platform e-commerce fashion streetwear yang menarik dan tematik. Variasi produk pakaian (hoodie, kaos, celana streetwear) dengan atribut ukuran (size S, M, L, XL) serta panel admin pengelolaan stok berjalan baik di InfinityFree (rf.gd).',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 68,
+      classification: 'Kombinasi AI & Kustomisasi Mandiri yang Baik (Moderate AI-Assisted, 68%)',
+      summaryAnalysis: 'Aplikasi AMBOKO menunjukkan sentuhan desain visual fashion yang kuat. Asisten AI dimanfaatkan secara efektif dalam merancang layout grid katalog produk pakaian, palet warna bergaya streetwear gelap/modern, dan struktur dasar form checkout. Mahasiswa melengkapinya dengan logika varian ukuran produk dan manajemen transaksi di MySQL.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Fashion & Pilihan Varian Ukuran Apparel',
+          aiPercentage: 70,
+          reason: 'Komponen tampilan grid baju dengan opsi pilihan ukuran dan foto produk streetwear memiliki struktur HTML/CSS responsif hasil panduan AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Alur Checkout Pakaian',
+          aiPercentage: 66,
+          reason: 'Session keranjang yang menyimpan data produk beserta atribut ukuran (size S/M/L/XL) terkonfigurasi dengan baik.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Manajemen Inventori Stok per Varian Ukuran',
+          aiPercentage: 64,
+          reason: 'Logika pengelolaan stok pakaian berdasarkan ukuran di panel admin mencerminkan kebutuhan operasional riil brand apparel.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Autentikasi Session User Pelanggan & Admin',
+          aiPercentage: 72,
+          reason: 'Otentikasi PHP session standar memisahkan akses belanja Syilvani@gmail.com dan admin@amboko.com.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk mempercantik katalog streetwear AMBOKO sudah sangat tepat. Yang terpenting: Sekar, Syilvani, Mushthafa, dan Diva harus benar-benar menguasai alur datanya saat pembeli memilih ukuran baju, masuk ke session keranjang, hingga tersimpan di tabel transaksi MySQL, serta bagaimana logika pengurangan stok per ukuran bekerja. Jangan hanya menerima hasil generate AI tanpa tahu cara membaca dan menuliskan kodenya dari nol.',
+      studentHomework: [
+        'Pelajari alur penyimpanan atribut ukuran (size) dari session keranjang ke tabel detail_transaksi di MySQL.',
+        'Pahami cara kerja session login pelanggan dan admin agar halaman admin terisolasi dari akses publik.',
+        'Pelajari pencegahan SQL Injection menggunakan PDO Prepared Statements pada halaman login dan checkout.',
+        'Kuasai struktur repositori GitHub amboko-website agar siap menjawab pertanyaan dosen penguji saat sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Streatwear AMBOKO oleh Kelompok 5 Kelas R5A berhasil menyajikan antarmuka toko online fashion yang representatif dan fungsional di hosting InfinityFree. Pengguna dapat login atau registrasi akun baru, memilih varian baju, dan melakukan checkout dengan lancar.',
+      strengths: [
+        'Desain antarmuka etalase streetwear tematik, modern, dan sangat sesuai dengan identitas produk fashion anak muda',
+        'Katalog produk dilengkapi variasi ukuran (size) pakaian yang terintegrasi dengan keranjang belanja',
+        'Kredensial pengguna dan admin teruji aktif dan dapat diverifikasi langsung',
+        'Repositori GitHub publik aktif memuat source code proyek'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ (panduan ukuran / size chart) dan kebijakan privasi belum dibuat',
+        'Pembayaran masih menggunakan konfirmasi transfer manual tanpa gateway instan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 5 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 84, Grade B+). Seluruh anggota tim diwajibkan menyelesaikan PR pendalaman kode sebelum pelaksanaan sidang akademik.'
+    }
+  },
+
+  // 0h. Kelas R5A - Kelompok 8 (Web HomieCozie)
+  {
+    id: 'project-r5a-kelompok-8',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 8',
+    studentName: 'Kelas R5A - Kelompok 8 (HomieCozie: Lukas, Febru, Sayid, Aisyah)',
+    studentNim: '202433500043 / 044 / 050 / 052',
+    teamMembers: [
+      { nim: '202433500043', name: 'Lukas Dwi Bramantha' },
+      { nim: '202433500044', name: 'Febru Rakha Ardiona' },
+      { nim: '202433500050', name: 'Sayid Farhan' },
+      { nim: '202433500052', name: 'Aisyah Yuliana Putri' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Web HomieCozie - Sistem Informasi E-Commerce Perlengkapan Rumah',
+    targetUrl: 'https://homiecozie.free.nf/',
+    adminUrl: 'https://homiecozie.free.nf/admin',
+    orderUrl: 'https://homiecozie.free.nf/',
+    portals: [
+      { title: 'Storefront HomieCozie', url: 'https://homiecozie.free.nf/', badge: 'InfinityFree (free.nf)' },
+      { title: 'Login Pelanggan / User', url: 'https://homiecozie.free.nf/login', badge: 'User Portal' },
+      { title: 'Backoffice Admin ERP', url: 'https://homiecozie.free.nf/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'Admin2', password: 'Admin123' },
+      user: { username: 'Testing', password: 'Testing1' }
+    },
+    githubRepoUrl: 'https://github.com/aisyahyuliana77-ui/Rekayasa-E-Bisnis-Kelompok8',
+    hostingPlatform: 'InfinityFree (free.nf)',
+    framework: 'PHP Native, HTML, CSS, JavaScript & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-8', 'HomieCozie Homeware'),
+    lecturerNotes: 'Aplikasi Web HomieCozie dari Kelas R5A Kelompok 8 menyajikan toko perlengkapan rumah tangga dan dekorasi ruang yang rapi. Memiliki otentikasi pelanggan dan panel admin pengelola katalog barang yang aktif di InfinityFree (free.nf).',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 76%)',
+      summaryAnalysis: 'Aplikasi HomieCozie memanfaatkan asisten generative AI dalam perancangan estetika etalase dekorasi rumah, struktur formulir login dan pendaftaran pengguna, serta query dasar database MySQL. Alur belanja pelanggan dari pemilihan barang hingga checkout pesanan berjalan dengan baik.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Produk Homeware & Dekorasi Ruang',
+          aiPercentage: 75,
+          reason: 'Layout card katalog produk dengan gambar dan harga barang menggunakan styling CSS umum hasil template AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Akun Pengguna & Admin',
+          aiPercentage: 72,
+          reason: 'Skrip otentikasi login/registrasi PHP session standar untuk kredensial Testing dan Admin2.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Form Transaksi Pesanan',
+          aiPercentage: 76,
+          reason: 'Pola penyimpanan item pesanan ke session keranjang sebelum disimpan ke database.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Skema Database Relasional Produk & Transaksi',
+          aiPercentage: 70,
+          reason: 'Struktur tabel MySQL produk_homie, kategori, dan pesanan mengikuti arsitektur dasar.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk menyusun tampilan HomieCozie sudah cukup rapi. Namun Lukas, Febru, Sayid, dan Aisyah harus benar-benar menguasai alur kodenya: bagaimana data produk ditampilkan, alur session keranjang belanja, serta bagaimana membedakan hak akses Admin2 dan akun pelanggan biasa. Jadikan kode yang sudah dibuat ini sebagai materi belajar mandiri agar siap menjawab pertanyaan penguji sidang.',
+      studentHomework: [
+        'Pelajari alur siklus PHP session ($_SESSION) dalam mengelola isi keranjang belanja dan membedakan role admin.',
+        'Pahami implementasi Prepared Statements MySQLi/PDO untuk melindungi form login dan pencarian produk dari celah keamanan.',
+        'Pelajari alur pengurangan stok barang otomatis saat checkout berhasil dilakukan.',
+        'Kuasai alur kode di repositori GitHub Rekayasa-E-Bisnis-Kelompok8 agar lancar saat sesi tanya jawab sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Web HomieCozie karya Kelompok 8 Kelas R5A berhasil merealisasikan website e-commerce perlengkapan rumah tangga yang responsif dan aktif di hosting InfinityFree. Pengguna dapat membuat akun baru atau login dengan akun demo, melihat etalase produk, dan melakukan pemesanan.',
+      strengths: [
+        'Desain antarmuka etalase produk dekorasi rumah bersih dan mudah dinavigasi oleh pengunjung',
+        'Kredensial pengguna dan admin teruji aktif di hosting publik',
+        'Repositori GitHub publik aktif memuat source code aplikasi',
+        'Fitur keranjang belanja dan manajemen katalog produk berfungsi'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi belum dibuat',
+        'Sistem pembayaran masih berupa instruksi transfer manual'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 8 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 78, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan PR pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
     }
   },
 
