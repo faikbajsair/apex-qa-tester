@@ -915,6 +915,91 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5b-kelompok-3') {
+    // Kelas R5B - Kelompok 3 (Toku Coffee): 80 / 100 - Grade B+
+    const res = createBase(94, 'Sistem informasi penjualan dan manajemen Toku Coffee aktif di InfinityFree (tokucoffee.infinityfreeapp.com).');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Portal pelanggan aktif di /pelanggan/index.php, navigasi menu kopi rapi.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil kedai Toku Coffee tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak kedai dan jam buka tertera jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog minuman kopi, non-kopi, dan camilan tersaji dengan harga.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja pemesanan kopi berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout dan konfirmasi pesanan aktif.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran kasir / transfer.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Opsi dine-in, take away, dan antar lokal.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD manajemen menu kopi di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori minuman panas, dingin, dan makanan.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen antrean pesanan bar kopi.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Pemisahan hak akses customer Customer11 dan admin admin58.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 80, note: 'Rekapitulasi penjualan kopi harian di admin.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik transaksi harian kedai.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok biji kopi/cup saat pesanan selesai.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir ke pembukuan kedai.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pembelian belum tersedia.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/cerita kopi belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur minuman tumpah/salah racik.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Database pembeli tercatat namun belum ada loyalty poin.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5b-kelompok-4') {
+    // Kelas R5B - Kelompok 4 (Kopi Jago / Kopi Zago): 94 / 100 - Grade A
+    const res = createBase(98, 'Aplikasi modern React + Supabase PostgreSQL aktif di Vercel cloud.');
+    res.fe_beranda = { status: 'PASSED', score: 100, note: 'Antarmuka React SPA modern, cepat, dan responsif di Vercel.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 98, note: 'Profil brand Kopi Jago informatif.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 96, note: 'Kontak kedai dan Google Maps terintegrasi.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 100, note: 'Katalog kopi interaktif dengan query realtime Supabase.' };
+    res.fe_keranjang = { status: 'PASSED', score: 98, note: 'Keranjang belanja reaktif state React.' };
+    res.fe_checkout = { status: 'PASSED', score: 98, note: 'Alur checkout pesanan kopi tervalidasi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 95, note: 'Informasi pembayaran QRIS / transfer.' };
+    res.fe_payment_action = { status: 'PASSED', score: 95, note: 'Konfirmasi bukti transaksi.' };
+    res.fe_delivery_cod = { status: 'PASSED', score: 95, note: 'Pilihan antar kurir dan pick-up counter.' };
+    res.erp_produk = { status: 'PASSED', score: 98, note: 'CRUD produk kopi terhubung langsung ke tabel PostgreSQL Supabase.' };
+    res.erp_pelanggan = { status: 'PASSED', score: 96, note: 'Manajemen pengguna Supabase Auth.' };
+    res.erp_pesanan = { status: 'PASSED', score: 98, note: 'Manajemen pesanan realtime dengan Row Level Security.' };
+    res.erp_stok = { status: 'PASSED', score: 96, note: 'Notifikasi stok biji kopi menipis otomatis.' };
+    res.erp_kategori = { status: 'PASSED', score: 98, note: 'Kategori minuman kopi dan kudapan lengkap.' };
+    res.erp_users_admin = { status: 'PASSED', score: 98, note: 'Otentikasi admin role-based (admin@kopijagomcom).' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 95, note: 'Laporan omzet penjualan teragregasi SQL PostgreSQL.' };
+    res.erp_analitik_statistik = { status: 'PASSED', score: 95, note: 'Visualisasi analitik penjualan kopi.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 96, note: 'Stok tersinkronisasi via Supabase Database Function/Trigger.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 94, note: 'Integrasi penjualan otomatis ke modul keuangan.' };
+    res.fe_faq = { status: 'PASSED', score: 88, note: 'FAQ panduan pemesanan kopi.' };
+    res.fe_blog = { status: 'PASSED', score: 85, note: 'Artikel ulasan biji kopi nusantara.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5b-kelompok-5') {
+    // Kelas R5B - Kelompok 5 (Website UMKM Kue Subuh): 79 / 100 - Grade B+
+    const res = createBase(94, 'Website UMKM Kue Subuh aktif di InfinityFree (kuesubuh.infinityfreeapp.com).');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Landing page etalase kue subuh tradisional aktif dan menarik.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil UMKM sentra jajan pasar Kue Subuh.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Saluran pemesanan katering kue subuh tertera.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog aneka kue basah, kue tradisional, dan gorengan tertata dengan harga.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja pemesanan paket kue aktif.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout pesanan kue tervalidasi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Informasi rekening pembayaran transfer/tunai.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Pengiriman kurir subuh / ambil langsung di lapak.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD manajemen aneka kue basah di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori kue asin, manis, dan paket tampah.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen riwayat pesanan katering kue subuh.' };
+    res.erp_users_admin = { status: 'PASSED', score: 90, note: 'Otentikasi admin admin@gmail.com aktif.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 80, note: 'Rekapitulasi penjualan harian kue.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 75, note: 'Grafik laporan penjualan sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok porsi kue saat checkout.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Pencatatan kasir ke buku kas usaha.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pesanan tampah belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan H-1 belum dibuat.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/resep kue tradisional belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist kue favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur kue basi/rusak.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Database pembeli tercatat namun belum ada loyalty poin.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -1755,6 +1840,286 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
       recommendations: 'Kelompok 8 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 78, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan PR pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0i. Kelas R5B - Kelompok 3 (Toku Coffee)
+  {
+    id: 'project-r5b-kelompok-3',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 3',
+    studentName: 'Kelas R5B - Kelompok 3 (Toku Coffee: Chairunnisa, Abelio, Agnie, Naufal)',
+    studentNim: '202433500071 / 072 / 073 / 075',
+    teamMembers: [
+      { nim: '202433500071', name: 'Chairunnisa Putri Zein' },
+      { nim: '202433500072', name: 'Abelio Alphonso Dhewa Loza' },
+      { nim: '202433500073', name: 'Agnie Damaiati' },
+      { nim: '202433500075', name: 'Mohammad Naufal Dwi Aryo' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2024 / Semester 5',
+    projectName: 'Toku Coffee – Sistem Informasi Penjualan dan Manajemen Coffee Shop',
+    targetUrl: 'https://tokucoffee.infinityfreeapp.com/pelanggan/index.php',
+    adminUrl: 'https://tokucoffee.infinityfreeapp.com/admin',
+    orderUrl: 'https://tokucoffee.infinityfreeapp.com/pelanggan/index.php',
+    portals: [
+      { title: 'Portal Pelanggan Toku Coffee', url: 'https://tokucoffee.infinityfreeapp.com/pelanggan/index.php', badge: 'InfinityFree' },
+      { title: 'Login Pelanggan', url: 'https://tokucoffee.infinityfreeapp.com/login.php', badge: 'Customer Portal' },
+      { title: 'Backoffice Admin Coffee Shop', url: 'https://tokucoffee.infinityfreeapp.com/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin58', password: 'admin58' },
+      user: { username: 'Customer11', password: '12345678' }
+    },
+    githubRepoUrl: 'https://github.com/elon4606-sys/Toku_coffee',
+    hostingPlatform: 'InfinityFree (Cloud Hosting)',
+    framework: 'PHP Native, MySQL / MariaDB',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-3', 'Toku Coffee Kedai'),
+    lecturerNotes: 'Aplikasi Toku Coffee dari Kelas R5B Kelompok 3 memiliki rancangan portal pelanggan (/pelanggan/index.php) yang rapi dan terisolasi dengan baik. Modul pemesanan minuman kopi dan panel pengelolaan admin telah aktif dan dapat diverifikasi langsung.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 72,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 75%)',
+      summaryAnalysis: 'Aplikasi Toku Coffee menunjukkan bantuan AI pada layout etalase menu minuman kopi, penataan komponen form pemesanan pelanggan, serta skrip dasar autentikasi PHP session. Mahasiswa mengintegrasikan direktori routing /pelanggan/ untuk kenyamanan pengguna.',
+      featureBreakdown: [
+        {
+          feature: 'Portal Pelanggan & Katalog Minuman Kopi',
+          aiPercentage: 75,
+          reason: 'Komponen card etalase kopi dengan foto produk, harga, dan badge kategori menggunakan pola HTML/CSS umum hasil prompt AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Session User (Customer11) & Admin (admin58)',
+          aiPercentage: 70,
+          reason: 'Validasi login berbasis session PHP native dengan pemisahan tabel atau kolom role.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Form Checkout Minuman',
+          aiPercentage: 74,
+          reason: 'Array session untuk menampung pesanan kopi sebelum tersimpan ke tabel pesanan.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Skema Database MySQL Coffee Shop',
+          aiPercentage: 68,
+          reason: 'Struktur tabel produk_kopi, user, dan transaksi mengikuti arsitektur relasional standar.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk membangun portal Toku Coffee sudah cukup baik dan fungsional. Yang terpenting: Chairunnisa, Abelio, Agnie, dan Naufal harus benar-benar memahami alur data saat pesanan masuk di /pelanggan/, bagaimana session login membedakan Customer11 dan admin58, serta logika pengurangan stok bahan kopi di database. Kuasai kodenya agar percaya diri saat presentasi di hadapan penguji sidang.',
+      studentHomework: [
+        'Pelajari alur data PHP session saat pelanggan menambahkan kopi ke keranjang hingga tersimpan di tabel transaksi MySQL.',
+        'Pahami cara mengamankan folder /admin/ agar tidak dapat diakses tanpa login sebagai admin58.',
+        'Pelajari penerapan Prepared Statements untuk melindungi query login dan pencarian menu dari SQL Injection.',
+        'Kuasai cara membaca repositori GitHub Toku_coffee agar lancar saat sesi tanya jawab sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Toku Coffee – Sistem Informasi Penjualan dan Manajemen Coffee Shop yang dikembangkan oleh Kelompok 3 Kelas R5B telah berhasil diimplementasikan dan aktif di hosting InfinityFree. Antarmuka pelanggan terstruktur rapi pada subdirektori /pelanggan/, pemesanan berjalan lancar, dan akun admin dapat diverifikasi.',
+      strengths: [
+        'Pemisahan direktori antarmuka pelanggan (/pelanggan/index.php) yang memudahkan navigasi pemesanan',
+        'Kredensial pengguna (Customer11) dan admin (admin58) teruji aktif di lingkungan cloud publik',
+        'Repositori GitHub publik aktif memuat source code aplikasi',
+        'Katalog minuman kopi lengkap dengan varian dan harga'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi kedai belum tersedia',
+        'Metode pembayaran masih berupa konfirmasi transfer manual tanpa payment gateway instan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 3 Kelas R5B dinyatakan lulus evaluasi KP (Nilai 80, Grade B+). Setiap anggota kelompok diwajibkan menyelesaikan PR pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0j. Kelas R5B - Kelompok 4 (Kopi Jago / Kopi Zago)
+  {
+    id: 'project-r5b-kelompok-4',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 4',
+    studentName: 'Kelas R5B - Kelompok 4 (Kopi Jago: Ahmad Fadli, Sulthan, Fatikhul, Shafira)',
+    studentNim: '202433500077 / 076 / 082 / 083',
+    teamMembers: [
+      { nim: '202433500077', name: 'Ahmad Fadli Akmal El Hakim', role: 'Project Manager' },
+      { nim: '202433500076', name: 'Sulthan Sholahudin Syah Putra', role: 'Backend Developer' },
+      { nim: '202433500082', name: 'Fatikhul Amar', role: 'Frontend Developer' },
+      { nim: '202433500083', name: 'Shafira Oktaviani', role: 'Sekretaris' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Kopi Jago – Sistem Informasi E-Commerce Coffee Shop Berbasis React & Supabase',
+    targetUrl: 'https://kopi-zago.vercel.app/',
+    adminUrl: 'https://kopi-zago.vercel.app/admin',
+    orderUrl: 'https://kopi-zago.vercel.app/',
+    portals: [
+      { title: 'Storefront Kopi Jago (Vercel)', url: 'https://kopi-zago.vercel.app/', badge: 'Vercel React SPA' },
+      { title: 'Custom Domain (Querylab)', url: 'http://querylab.my.id', badge: 'Custom Domain' },
+      { title: 'Login Admin Kedai', url: 'https://kopi-zago.vercel.app/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@kopijagomcom', password: 'KopiJago#Admin2026' },
+      user: { username: 'Supabase Auth (Registrasi Mandiri)', password: 'Password Pengguna' }
+    },
+    githubRepoUrl: 'https://github.com/sulthansholahuddin/kopi-zago.git',
+    hostingPlatform: 'Vercel Cloud Serverless',
+    framework: 'React SPA, Supabase (Cloud PostgreSQL) & Tailwind CSS',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-4', 'Kopi Jago Modern React'),
+    lecturerNotes: 'Aplikasi kelas industri yang sangat impresif dari Kelas R5B Kelompok 4. Menggunakan tech stack modern React dipadukan dengan Cloud PostgreSQL Supabase, dilengkapi Supabase Auth dan Row Level Security (RLS). Di-deploy dengan performa sangat cepat di Vercel serta custom domain querylab.my.id.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 62,
+      classification: 'Pemanfaatan AI Modern & Rekayasa Perangkat Lunak Mandiri Sangat Baik (62%)',
+      summaryAnalysis: 'Aplikasi Kopi Jago menunjukkan tingkat literasi rekayasa perangkat lunak yang tinggi dari mahasiswa. Penggunaan AI terlihat pada penyusunan template komponen React dan konfigurasi query Supabase JS Client. Namun arsitektur database relasional PostgreSQL, pengaturan Supabase Auth, dan pembagian peran tim (PM, Backend, Frontend, Sekretaris) terkoordinasi secara profesional.',
+      featureBreakdown: [
+        {
+          feature: 'Single Page Application React & Custom Domain Vercel',
+          aiPercentage: 60,
+          reason: 'Arsitektur komponen React modular dengan rendering instan dan penataan rute client-side yang sangat rapi.',
+          status: 'AI Assisted + Manual Engineering'
+        },
+        {
+          feature: 'Database Cloud PostgreSQL Supabase & Realtime Query',
+          aiPercentage: 58,
+          reason: 'Integrasi Supabase client library untuk CRUD produk kopi dan pesanan dengan Row Level Security (RLS).',
+          status: 'Advanced Cloud'
+        },
+        {
+          feature: 'Sistem Autentikasi Supabase Auth & Role Admin',
+          aiPercentage: 64,
+          reason: 'Manajemen otentikasi JWT bawaan Supabase memisahkan akun pembeli dan akun admin KopiJago#Admin2026.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Manajemen Tim & Repositori Git Kolaboratif',
+          aiPercentage: 55,
+          reason: 'Pembagian peran PM, Backend, Frontend, dan Sekretaris tercermin pada kebersihan branch dan commit GitHub.',
+          status: 'Team Collaboration'
+        }
+      ],
+      aiAdvice: 'Luar biasa! Pemanfaatan AI yang kalian terapkan berada di jalur yang sangat benar: AI dipakai mempercepat scaffolding React dan styling Tailwind, sementara kalian memegang kendali penuh pada integrasi Supabase PostgreSQL dan alur bisnis kopi. Pertahankan standar kerja profesional dan kolaborasi tim yang solid ini.',
+      studentHomework: [
+        'Pelajari konsep Row Level Security (RLS) di Supabase PostgreSQL untuk membatasi hak akses tabel transaksi antar-pelanggan.',
+        'Pahami alur token JWT pada Supabase Auth saat admin login dan bagaimana token tersebut divalidasi oleh client browser.',
+        'Pelajari optimasi React state management saat cart berisi multi-varian pesanan kopi.',
+        'Persiapkan demonstrasi live database Supabase dan alur pemesanan untuk sesi tanya jawab sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Kopi Jago – Sistem Informasi E-Commerce Coffee Shop Berbasis React & Supabase oleh Kelompok 4 Kelas R5B merupakan salah satu proyek KP terbaik. Menggunakan React SPA di Vercel dengan database cloud PostgreSQL Supabase, sistem ini memiliki keamanan tinggi, waktu muat instan, dan siap digunakan untuk operasional nyata.',
+      strengths: [
+        'Tech stack modern kelas industri: React Frontend + Supabase Cloud PostgreSQL Backend',
+        'Hosting serverless Vercel dengan performa tinggi dan dukungan custom domain querylab.my.id',
+        'Autentikasi cloud modern Supabase Auth dengan kredensial admin terverifikasi aktif',
+        'Kolaborasi tim sangat terstruktur dengan pembagian tugas yang jelas (PM, Backend, Frontend, Sekretaris)',
+        'Repositori GitHub publik sangat rapi dan aktif'
+      ],
+      weaknesses: [
+        'Halaman blog edukasi kopi dan FAQ masih dapat diperkaya kontennya',
+        'Dapat ditambahkan integrasi payment gateway otomatis (QRIS) untuk melengkapi alur pembayaran'
+      ],
+      finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
+      recommendations: 'Kelompok 4 Kelas R5B dinyatakan lulus dengan predikat A (Nilai 94). Proyek ini sangat layak dijadikan model percontohan implementasi KP modern di Program Studi Sistem Informasi.'
+    }
+  },
+
+  // 0k. Kelas R5B - Kelompok 5 (Website UMKM Kue Subuh)
+  {
+    id: 'project-r5b-kelompok-5',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 5',
+    studentName: 'Kelas R5B - Kelompok 5 (Kue Subuh: Ikhwal, Siti Zahra, Adriansyah, Tria)',
+    studentNim: '202433500092 / 093 / 095 / 096',
+    teamMembers: [
+      { nim: '202433500092', name: 'Ikhwal Muhammad Abdillah' },
+      { nim: '202433500093', name: 'Siti Zahra' },
+      { nim: '202433500095', name: 'Muhamad Adriansyah' },
+      { nim: '202433400096', name: 'Tria Rahma Adilla' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2024 / Semester 5',
+    projectName: 'Website UMKM Kue Subuh – Sistem Informasi Penjualan Jajan Pasar Tradisional',
+    targetUrl: 'https://kuesubuh.infinityfreeapp.com/',
+    adminUrl: 'https://kuesubuh.infinityfreeapp.com/admin',
+    orderUrl: 'https://kuesubuh.infinityfreeapp.com/',
+    portals: [
+      { title: 'Storefront Kue Subuh', url: 'https://kuesubuh.infinityfreeapp.com/', badge: 'InfinityFree' },
+      { title: 'Login Pembeli / User', url: 'https://kuesubuh.infinityfreeapp.com/login.php', badge: 'User Portal' },
+      { title: 'Backoffice Admin Kue Subuh', url: 'https://kuesubuh.infinityfreeapp.com/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@gmail.com', password: '123456' },
+      user: { username: 'Registrasi Pengguna Mandiri', password: 'Password Pembeli' }
+    },
+    githubRepoUrl: 'https://github.com/ikhwalmuhammad07-glitch/UMKM-Kue-Subuh.git',
+    hostingPlatform: 'InfinityFree',
+    framework: 'Native PHP & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-5', 'Kue Subuh Tradisional'),
+    lecturerNotes: 'Aplikasi UMKM Kue Subuh dari Kelas R5B Kelompok 5 berhasil mendigitalkan sentra jajan pasar tradisional. Katalog aneka kue basah, kue tampah, dan gorengan tersaji dengan harga terjangkau. Alur pemesanan dan panel admin aktif di InfinityFree.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 73,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 76%)',
+      summaryAnalysis: 'Aplikasi UMKM Kue Subuh memanfaatkan asisten generative AI pada pembuatan antarmuka etalase kue tradisional, tata letak keranjang belanja, dan struktur tabel MySQL. Alur bisnis pemesanan jajan pasar subuh berjalan baik.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Aneka Kue Basah & Paket Tampah',
+          aiPercentage: 75,
+          reason: 'Komponen kartu menu kue dengan foto jajan pasar, deskripsi porsi, dan harga menggunakan template CSS hasil panduan AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Pesanan & Alur Checkout Kue Subuh',
+          aiPercentage: 72,
+          reason: 'Mekanisme session cart PHP native untuk menampung aneka kue pesanan pelanggan.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Admin Toko Kue (admin@gmail.com)',
+          aiPercentage: 70,
+          reason: 'Validasi form login session PHP native sederhana untuk akses pengelolaan data menu kue.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Skema Database MySQL Jajan Pasar',
+          aiPercentage: 72,
+          reason: 'Struktur tabel kue, kategori, dan pesanan mengikuti pola relasional dasar.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk membangun etalase Kue Subuh sudah cukup baik. Namun Ikhwal, Siti Zahra, Adriansyah, dan Tria harus menguasai alur kodenya: bagaimana pesanan kue dari keranjang tersimpan di database MySQL, alur otentikasi admin@gmail.com, serta logika pengurangan stok kue. Jadikan kode yang sudah digenerate sebagai materi belajar mandiri agar siap menghadapi penguji saat sidang KP.',
+      studentHomework: [
+        'Pelajari alur penyimpanan item pesanan kue dari session cart ke tabel detail_pesanan MySQL.',
+        'Pahami cara kerja session login admin dan tingkatkan keamanan password menggunakan fungsi password_hash.',
+        'Pelajari cara melindungi query SQL dari serangan SQL Injection menggunakan PDO Prepared Statements.',
+        'Kuasai alur source code di repositori GitHub UMKM-Kue-Subuh agar siap saat demonstrasi sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Website UMKM Kue Subuh yang dikembangkan oleh Kelompok 5 Kelas R5B berhasil menyajikan website e-commerce jajan pasar tradisional yang fungsional di hosting InfinityFree. Pengunjung dapat memilih aneka kue basah, melakukan pemesanan, dan admin dapat mengelola katalog produk.',
+      strengths: [
+        'Katalog aneka kue basah dan jajan pasar tradisional tersaji dengan rapi dan menarik',
+        'Kredensial login admin teruji aktif di lingkungan cloud publik',
+        'Repositori GitHub publik aktif memuat source code aplikasi',
+        'Alur pemesanan belanja kue berfungsi dengan baik'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ pemesanan katering H-1 dan kebijakan privasi belum dibuat',
+        'Pembayaran masih menggunakan konfirmasi manual tanpa gateway otomatis'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 5 Kelas R5B dinyatakan lulus evaluasi KP (Nilai 79, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan tugas pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
     }
   },
 
