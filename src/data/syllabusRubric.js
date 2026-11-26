@@ -1085,6 +1085,30 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5b-kelompok-9') {
+    // Kelas R5B - Kelompok 9 (Warung Maem Jadoel): 62 / 100 - Grade C+ (Belum Ada Live Hosting Aktif)
+    const res = createBase(80, 'Verifikasi berbasis berkas source code repositori GitHub (live hosting publik belum di-deploy).');
+    res.fe_beranda = { status: 'PARTIAL', score: 65, note: 'Source code landing page etalase warung jadoel lengkap di GitHub, namun tautan live hosting belum tersedia.' };
+    res.fe_tentang_kami = { status: 'PARTIAL', score: 65, note: 'Profil UMKM kuliner jadoel terverifikasi di repositori.' };
+    res.fe_kontak_kami = { status: 'PARTIAL', score: 65, note: 'Informasi kontak warung tertera pada berkas kode.' };
+    res.fe_katalog_produk = { status: 'PARTIAL', score: 68, note: 'Katalog menu masakan jadoel terstruktur pada file view dan SQL.' };
+    res.fe_keranjang = { status: 'PARTIAL', score: 65, note: 'Logika keranjang belanja PHP session terverifikasi di source code.' };
+    res.fe_checkout = { status: 'PARTIAL', score: 60, note: 'Alur checkout tersedia namun belum dapat diuji interaksi langsung di cloud.' };
+    res.erp_produk = { status: 'PARTIAL', score: 65, note: 'Skrip CRUD produk menu makanan jadoel tersedia di berkas admin.' };
+    res.erp_users_admin = { status: 'PARTIAL', score: 65, note: 'Kredensial admin (admin@maemjadoel.test) terkonfigurasi di source code.' };
+    res.erp_pesanan = { status: 'PARTIAL', score: 60, note: 'Tabel dan controller pesanan makanan tersedia.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 60, note: 'Pengurangan stok menu belum otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 55, note: 'Pencatatan kasir ke laporan keuangan belum terintegrasi otomatis.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Wajib deploy ke hosting publik aktif (Vercel / InfinityFree) sebelum sidang KP.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Wajib deploy ke hosting publik aktif (Vercel / InfinityFree) sebelum sidang KP.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Wajib deploy ke hosting publik aktif (Vercel / InfinityFree) sebelum sidang KP.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog kuliner jadoel belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada modul komplain/retur pesanan.' };
+    res.erp_crm = { status: 'MISSING', score: 0, note: 'Belum ada sistem loyalitas pelanggan.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -2496,6 +2520,106 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
       recommendations: 'Kelompok 8 Kelas R5B dinyatakan lulus dengan predikat A (Nilai 96). Proyek ini sangat layak dijadikan rujukan utama penerapan E-Commerce ERP pada UMKM kuliner di Program Studi Sistem Informasi.'
+    }
+  },
+
+  // 0n. Kelas R5B - Kelompok 9 (Warung Maem Jadoel)
+  {
+    id: 'project-r5b-kelompok-9',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5B',
+    groupNumber: 'Kelompok 9',
+    studentName: 'Kelas R5B - Kelompok 9 (Warung Maem Jadoel: Nazwa, Herdi, Zaskia, Arya)',
+    studentNim: '202433500118 / 119 / 120 / 121',
+    teamMembers: [
+      { nim: '202433500118', name: 'Nazwa Dwi Rahmawati' },
+      { nim: '202433500119', name: 'Muhammad Herdi Rangga' },
+      { nim: '202433500120', name: 'Zaskia Nazwa Nabila' },
+      { nim: '202433500121', name: 'Arya Maulana' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Warung Maem Jadoel – Sistem Informasi Penjualan Kuliner Tradisional Berbasis Web',
+    targetUrl: 'https://github.com/aryamln4/Warung-Maem-Jadoel',
+    adminUrl: '',
+    orderUrl: '',
+    portals: [
+      { title: 'Source Code Repositori Git', url: 'https://github.com/aryamln4/Warung-Maem-Jadoel.git', badge: 'GitHub Publik' },
+      { title: 'Status Live Hosting', url: '', badge: 'Belum di-Deploy Publik' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@maemjadoel.test', password: 'Admin123!' },
+      user: { username: 'Pemesanan Mandiri / Guest', password: '-' }
+    },
+    githubRepoUrl: 'https://github.com/aryamln4/Warung-Maem-Jadoel.git',
+    hostingPlatform: 'Vercel / Cloud (Belum Aktif)',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5b-kelompok-9', 'Warung Maem Jadoel'),
+    lecturerNotes: 'Aplikasi Warung Maem Jadoel dari Kelas R5B Kelompok 9 memiliki source code yang lengkap dan terstruktur di repositori GitHub publik. Namun, tautan live hosting saat ini belum di-deploy aktif (URL pengumpulan masih kosong: "https://"). Mahasiswa diwajibkan melakukan deployment ke hosting publik (seperti Vercel atau InfinityFree) sebelum tanggal sidang KP.',
+    vulnerabilities: [
+      {
+        id: 'vuln-maem-no-live-hosting',
+        title: 'Tautan Live Hosting Belum Di-deploy Publik',
+        severity: 'MEDIUM',
+        category: 'Deployment Missing',
+        description: 'Aplikasi belum dipublikasikan ke server cloud aktif sehingga pengujian interaksi pengguna dan pengujian performa hanya dapat diverifikasi melalui analisis statis kode repositori GitHub.'
+      }
+    ],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 78%)',
+      summaryAnalysis: 'Aplikasi Warung Maem Jadoel menunjukkan pemanfaatan generative AI pada pembuatan antarmuka etalase masakan tradisional, styling CSS, dan struktur dasar form transaksi pesanan. Source code di GitHub sudah memuat fungsionalitas dasar, namun mahasiswa belum menuntaskan tahapan deployment cloud.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Menu Masakan Tradisional Jadoel',
+          aiPercentage: 75,
+          reason: 'Komponen card makanan dengan foto menu kuliner khas, nama masakan, dan harga memiliki pola CSS layout template AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Pesanan & Alur Checkout Makanan',
+          aiPercentage: 72,
+          reason: 'Array session PHP native untuk mengumpulkan item menu makanan sebelum konfirmasi pesanan.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Panel Manajemen Admin (admin@maemjadoel.test)',
+          aiPercentage: 70,
+          reason: 'Skrip PHP CRUD untuk menambah, mengedit, dan menghapus daftar menu serta memantau pesanan masuk.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Skema Database MySQL Warung Jadoel',
+          aiPercentage: 70,
+          reason: 'Rancangan tabel menu, kategori, pesanan, dan users terkonfigurasi pada file SQL repositori.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk menyusun kode Warung Maem Jadoel sudah cukup membantu. Namun perhatian penting: Nazwa, Herdi, Zaskia, dan Arya harus segera menuntaskan tahapan deployment ke live hosting (seperti InfinityFree, Vercel, atau 000webhost)! Jangan hanya berhenti di repositori GitHub lokal. Dosen penguji di sidang KP mewajibkan aplikasi bisa diuji secara online. Kuasai juga alur kodenya agar siap saat ditanya.',
+      studentHomework: [
+        'Deploy aplikasi ke hosting publik aktif (misal InfinityFree atau cloud PaaS) agar aplikasi dapat diakses secara live oleh dewan penguji.',
+        'Pahami alur session login admin@maemjadoel.test dan bagaimana session tersebut membatasi akses ke modul admin.',
+        'Pelajari cara mengamankan query database menggunakan PDO Prepared Statements untuk mencegah celah SQL Injection.',
+        'Kuasai cara membaca dan menjelaskan alur source code di repositori GitHub Warung-Maem-Jadoel saat presentasi sidang.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Warung Maem Jadoel yang dikembangkan oleh Kelompok 9 Kelas R5B memiliki repositori GitHub publik yang aktif dan memuat berkas source code PHP Native & MySQL secara lengkap. Namun, tautan live hosting belum di-deploy aktif ke cloud. Aplikasi telah memenuhi syarat dasar struktur kode namun mahasiswa wajib mengunggahnya ke hosting publik sebelum sidang.',
+      strengths: [
+        'Source code aplikasi di repositori GitHub publik lengkap dan memuat rancangan antarmuka etalase kuliner tradisional',
+        'Kredensial admin (admin@maemjadoel.test) terkonfigurasi jelas di source code',
+        'Struktur relasi database MySQL untuk menu dan pesanan telah dirancang dengan baik'
+      ],
+      weaknesses: [
+        'Tautan live hosting publik belum di-deploy aktif (URL pengumpulan masih kosong: "https://")',
+        'Pengujian otomatis end-to-end belum dapat dilakukan pada domain live',
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi belum dibuat'
+      ],
+      finalVerdict: 'DITERIMA DENGAN CATATAN (LULUS EVALUASI STATIS - WAJIB DEPLOY SEBELUM SIDANG)',
+      recommendations: 'Kelompok 9 Kelas R5B dinyatakan lulus evaluasi berkas statis (Nilai 62, Grade C+). Mahasiswa diwajibkan menyelesaikan proses live hosting publik dan memahami alur logika kodenya sebelum tanggal pelaksanaan sidang KP.'
     }
   },
 
