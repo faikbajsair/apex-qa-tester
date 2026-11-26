@@ -742,6 +742,119 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5a-kelompok-7') {
+    // Kelas R5A - Kelompok 7 (UMKM Kedai MADIN): 78 / 100 - Grade B+
+    const res = createBase(94, 'Aplikasi web sistem informasi penjualan Kedai MADIN aktif di InfinityFree (wuaze.com).');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Landing page dan etalase menu makanan/minuman Kedai MADIN rapi.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil UMKM Kedai MADIN dan informasi gerai tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak pemesanan dan lokasi kedai tertera.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Daftar menu kedai tertata dengan foto, harga, dan tombol pesan.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja pemesanan menu berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout dan konfirmasi pesanan aktif.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran transfer/tunai.' };
+    res.fe_payment_action = { status: 'PARTIAL', score: 75, note: 'Upload bukti pembayaran manual.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Opsi dine-in, take away, dan delivery lokal.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ kedai belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan belum tersedia.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Belum ada blog/artikel kuliner.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu belum tersedia.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD master menu makanan/minuman aktif di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori makanan dan minuman.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Manajemen riwayat pesanan pelanggan.' };
+    res.erp_users_admin = { status: 'PASSED', score: 90, note: 'Manajemen akun admin dan otentikasi user.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain makanan.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Data pelanggan tersimpan namun belum ada program loyalitas poin.' };
+    res.erp_laporan_keuangan = { status: 'PARTIAL', score: 75, note: 'Rekapitulasi penjualan harian/bulanan kedai.' };
+    res.erp_analitik_statistik = { status: 'PARTIAL', score: 70, note: 'Grafik laporan penjualan sederhana.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Pengurangan stok bahan/menu belum otomatis terhubung ke dapur.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 70, note: 'Omzet kasir belum tersinkronisasi otomatis ke jurnal buku besar.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5a-kelompok-4') {
+    // Kelas R5A - Kelompok 4 (Sembako Bersaudara): 91 / 100 - Grade A
+    const res = createBase(95, 'Aplikasi Sembako Bersaudara aktif di Vercel cloud serverless.');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Landing page katalog sembako aktif di Vercel, cepat dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil UMKM Sembako Bersaudara tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak toko kelontong/sembako tertera jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog sembako lengkap (beras, minyak, gula, tepung).' };
+    res.fe_keranjang = { status: 'PASSED', score: 94, note: 'Keranjang belanja produk sembako berfungsi dengan baik.' };
+    res.fe_checkout = { status: 'PASSED', score: 92, note: 'Alur checkout pesanan sembako tervalidasi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Informasi rekening dan transfer aktif.' };
+    res.fe_delivery_cod = { status: 'PASSED', score: 92, note: 'Opsi pengiriman kurir lokal dan pick-up toko.' };
+    res.erp_produk = { status: 'PASSED', score: 95, note: 'Manajemen master data produk sembako dan varian gram/kg.' };
+    res.erp_kategori = { status: 'PASSED', score: 92, note: 'Manajemen kategori sembako.' };
+    res.erp_pesanan = { status: 'PASSED', score: 94, note: 'Manajemen pesanan masuk dan status kirim.' };
+    res.erp_stok = { status: 'PASSED', score: 92, note: 'Peringatan stok karung beras/minyak menipis.' };
+    res.erp_users_admin = { status: 'PASSED', score: 94, note: 'Pemisahan otentikasi user dan admin lancar.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 90, note: 'Rekapitulasi omzet penjualan sembako harian/bulanan.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 92, note: 'Stok berkurang otomatis saat checkout terkonfirmasi.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 88, note: 'Pencatatan kasir otomatis ke buku besar kas.' };
+    res.fe_faq = { status: 'PARTIAL', score: 75, note: 'FAQ belanja sembako perlu dilengkapi.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/artikel belum dibuat.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist sembako belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur barang sembako rusak/pecah.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Database pelanggan tercatat tanpa program poin loyalitas.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5a-kelompok-6') {
+    // Kelas R5A - Kelompok 6 (GA'KS DOYAN Rice Bowl): 80 / 100 - Grade B+
+    const res = createBase(92, 'Sistem informasi menu, promo dan pengeluaran GA\'KS DOYAN aktif di Wasmer cloud.');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Etalase menu rice bowl dan promo aktif di Wasmer Edge.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil UMKM kuliner rice bowl GA\'KS DOYAN lengkap.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Saluran pemesanan dan alamat outlet jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 94, note: 'Katalog paket rice bowl, minuman, dan menu promo tertata rapi.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja pemesanan rice bowl aktif.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pesanan rice bowl berfungsi.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran dan transfer tertera.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 75, note: 'Opsi take-away dan antar kurir lokal.' };
+    res.erp_produk = { status: 'PASSED', score: 92, note: 'CRUD manajemen menu rice bowl di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 90, note: 'Kategori menu makanan utama dan minuman.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Manajemen antrean pesanan dapur rice bowl.' };
+    res.erp_users_admin = { status: 'PASSED', score: 90, note: 'Pemisahan hak akses user pembeli dan admin.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 90, note: 'Pencatatan pengeluaran modal bahan baku dan omzet harian.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Pengurangan stok porsi manual/semi-otomatis.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Laporan pengeluaran operasional warung tercatat di database.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan belum ada.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum tersedia.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/cerita kuliner belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain makanan tumpah.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Database pembeli tercatat namun belum ada loyalty poin.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5a-kelompok-9') {
+    // Kelas R5A - Kelompok 9 (UMKM Geprek Mantul): 82 / 100 - Grade B+
+    const res = createBase(94, 'Aplikasi E-Commerce Model ERP Geprek Mantul aktif di Wasmer cloud.');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Landing page dan etalase ayam geprek mantul responsif dan aktif di Wasmer.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil UMKM ayam geprek mantul tersedia lengkap.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak kedai geprek dan Google Maps lokasi jelas.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog paket ayam geprek (level pedas, topping keju, minuman) lengkap.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja pesanan ayam geprek berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout dan konfirmasi pesanan aktif.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Instruksi pembayaran QRIS / transfer.' };
+    res.fe_delivery_cod = { status: 'PARTIAL', score: 80, note: 'Pilihan antar kurir lokal dan ambil di kedai.' };
+    res.erp_produk = { status: 'PASSED', score: 94, note: 'CRUD paket menu ayam geprek dan topping di panel admin.' };
+    res.erp_kategori = { status: 'PASSED', score: 92, note: 'Kategori paket geprek, lauk tambahan, dan minuman.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen status pesanan (menunggu, dimasak, siap antar).' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Manajemen otentikasi admin kedai dan akun user.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 85, note: 'Rekapitulasi penjualan geprek harian/bulanan.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 80, note: 'Pengurangan stok ayam dan cabe saat pemesanan selesai.' };
+    res.erp_sync_keuangan = { status: 'PARTIAL', score: 75, note: 'Integrasi penjualan kasir ke buku kas kedai.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan belum ada.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum dibuat.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur pesanan salah racik.' };
+    res.erp_crm = { status: 'PARTIAL', score: 72, note: 'Data pelanggan tercatat tanpa program loyalitas pelanggan.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -1025,6 +1138,377 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
       recommendations: 'Kelompok 3 Kelas R5A dinyatakan lulus dengan predikat A (Nilai 95). Proyek ini sangat layak dijadikan model percontohan implementasi Kerja Praktik modern di Program Studi Sistem Informasi.'
+    }
+  },
+
+  // 0c. Kelas R5A - Kelompok 7 (UMKM Kedai MADIN)
+  {
+    id: 'project-r5a-kelompok-7',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 7',
+    studentName: 'Kelas R5A - Kelompok 7 (Kedai MADIN: Andini, Suci, Annis, Gholi)',
+    studentNim: '202433500040 / 039 / 041 / 042',
+    teamMembers: [
+      { nim: '202433500040', name: 'Andini Nintias Savitri' },
+      { nim: '202433500039', name: 'Suci Oktapia' },
+      { nim: '202433500041', name: 'Annis Dwi Safitri' },
+      { nim: '202433500042', name: 'Gholi Syabib Nibros' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan dan Implementasi Sistem Informasi Penjualan Berbasis Website pada UMKM Kedai MADIN',
+    targetUrl: 'https://umkmkedaimadin.wuaze.com/',
+    adminUrl: 'https://umkmkedaimadin.wuaze.com/admin',
+    orderUrl: 'https://umkmkedaimadin.wuaze.com/',
+    portals: [
+      { title: 'Storefront Kedai MADIN', url: 'https://umkmkedaimadin.wuaze.com/', badge: 'InfinityFree (wuaze.com)' },
+      { title: 'Login Pembeli & Admin', url: 'https://umkmkedaimadin.wuaze.com/login', badge: 'User/Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'Bagol@admin.com', password: 'bagol123' },
+      user: { username: 'anis@madin.com', password: 'anis12345' }
+    },
+    githubRepoUrl: 'https://github.com/gholisyabib/Proyek-UMKM',
+    hostingPlatform: 'InfinityFree (wuaze.com)',
+    framework: 'PHP Native dan MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-7', 'Kedai MADIN Penjualan'),
+    lecturerNotes: 'Aplikasi penjualan makanan dan minuman pada UMKM Kedai MADIN karya Kelompok 7 Kelas R5A berjalan lancar di InfinityFree (wuaze.com). Modul etalase kuliner, pemesanan, dan pengelolaan menu di backoffice sudah terhubung ke basis data MySQL.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 73,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 76%)',
+      summaryAnalysis: 'Aplikasi Kedai MADIN menunjukkan penggunaan generative AI yang cukup kental pada penataan tata letak etalase menu kuliner, form registrasi/login, dan pola session cart pemesanan. Mahasiswa telah berhasil menyusun struktur database MySQL yang sesuai dengan kebutuhan penjualan kedai makanan, namun perlu memperdalam pemahaman logika session dan proteksi query.',
+      featureBreakdown: [
+        {
+          feature: 'Landing Page & Etalase Menu Kedai',
+          aiPercentage: 74,
+          reason: 'Komponen card makanan/minuman dengan foto, harga, dan tombol "Tambah ke Keranjang" memakai boilerplate HTML/CSS responsif yang umum dihasilkan AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Akun Pembeli & Admin',
+          aiPercentage: 72,
+          reason: 'Pola otentikasi login berbasis PHP session standar. Diperlukan pemahaman terkait password hashing dan pemisahan hak akses admin kedai.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Belanja & Alur Pemesanan Menu',
+          aiPercentage: 75,
+          reason: 'Array session PHP untuk menampung item pesanan makanan/minuman sebelum checkout.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Manajemen Data Menu & Riwayat Pesanan di MySQL',
+          aiPercentage: 70,
+          reason: 'Skema tabel kategori, menu, pesanan, dan users mengikuti arsitektur relasional standar.',
+          status: 'AI Assisted'
+        }
+      ],
+      aiAdvice: 'Memanfaatkan AI untuk menyusun antarmuka etalase Kedai MADIN dan keranjang belanja sangat membantu mempercepat pengerjaan KP. Yang terpenting: kalian berempat harus benar-benar menguasai alur data dari menu dipilih, masuk ke session keranjang, hingga tersimpan di tabel pesanan MySQL, serta bagaimana membedakan sesi login anis@madin.com dan Bagol@admin.com. Jangan sampai hanya bergantung pada kode hasil generate AI tanpa memahami logikanya.',
+      studentHomework: [
+        'Pelajari alur data PHP session ($_SESSION[\'cart\']) saat menambah porsi, mengurangi, atau menghapus menu makanan.',
+        'Pahami cara kerja otentikasi berbasis session untuk mengunci halaman admin kedai agar tidak bisa diakses langsung via URL tanpa login.',
+        'Pelajari implementasi validasi input dan Prepared Statements MySQLi/PDO untuk menjaga keamanan data pesanan.',
+        'Pastikan seluruh anggota kelompok memahami struktur file di repositori GitHub Proyek-UMKM agar lancar saat demonstrasi sidang KP.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan dan Implementasi Sistem Informasi Penjualan Berbasis Website pada UMKM Kedai MADIN yang dikembangkan oleh Kelompok 7 Kelas R5A telah berhasil diimplementasikan dan di-deploy ke cloud hosting publik InfinityFree (wuaze.com). Sistem memiliki etalase menu yang menarik, alur pemesanan jelas, serta panel admin untuk mengelola katalog menu kedai.',
+      strengths: [
+        'Etalase menu kedai makanan/minuman responsif dan mudah digunakan oleh pelanggan',
+        'Kredensial login pengguna (anis@madin.com) dan admin (Bagol@admin.com) terverifikasi aktif',
+        'Tautan repositori GitHub publik aktif dan memuat source code aplikasi dengan rapi'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, kebijakan privasi, dan syarat ketentuan pemesanan kedai belum tersedia',
+        'Mekanisme pembayaran masih berupa konfirmasi manual tanpa gateway otomatis',
+        'Perlu penambahan sanitasi input query dan proteksi token CSRF pada form pemesanan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS DENGAN TUGAS PENDALAMAN LOGIKA)',
+      recommendations: 'Kelompok 7 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 78, Grade B+). Seluruh anggota tim diwajibkan mempelajari arsitektur session dan query database agar siap menjawab pertanyaan penguji pada sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0d. Kelas R5A - Kelompok 4 (UMKM Sembako Bersaudara)
+  {
+    id: 'project-r5a-kelompok-4',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 4',
+    studentName: 'Kelas R5A - Kelompok 4 (Sembako Bersaudara: Ahmad Zakaria, Feli, Ferry, Faizal)',
+    studentNim: '202433500017 / 022 / 024 / 021',
+    teamMembers: [
+      { nim: '202433500017', name: 'Ahmad Zakaria' },
+      { nim: '202433500022', name: 'Feli Febri Anggraini' },
+      { nim: '202433500024', name: 'Ferry Fajri Adhinugraha' },
+      { nim: '202433500021', name: 'Faizal H' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Sembako Bersaudara',
+    targetUrl: 'https://sembako-bersaudara-vercel.vercel.app/',
+    adminUrl: 'https://sembako-bersaudara-vercel.vercel.app/admin',
+    orderUrl: 'https://sembako-bersaudara-vercel.vercel.app/',
+    portals: [
+      { title: 'Storefront Sembako', url: 'https://sembako-bersaudara-vercel.vercel.app/', badge: 'Vercel Serverless' },
+      { title: 'Login Pelanggan', url: 'https://sembako-bersaudara-vercel.vercel.app/login', badge: 'User Portal' },
+      { title: 'Backoffice Admin ERP', url: 'https://sembako-bersaudara-vercel.vercel.app/admin', badge: 'Admin Portal' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@sembako.com', password: 'admin123' },
+      user: { username: 'budi@gmail.com', password: 'customer123' }
+    },
+    githubRepoUrl: 'https://github.com/ahmdzkr/Sembako-Bersaudara-Vercel',
+    hostingPlatform: 'Vercel',
+    framework: 'Node.js / Fullstack & MySQL Cloud Database',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-4', 'Sembako Bersaudara ERP'),
+    lecturerNotes: 'Aplikasi Sembako Bersaudara dari Kelas R5A Kelompok 4 berhasil di-deploy ke Vercel dengan performa tinggi. Alur pemesanan sembako (beras, minyak, kebutuhan pokok) dan pemisahan hak akses admin-pelanggan berjalan sangat mulus. Fitur stok dan transaksi tervalidasi dengan baik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 66,
+      classification: 'Kombinasi AI & Kustomisasi Mandiri yang Baik (Moderate AI-Assisted, 66%)',
+      summaryAnalysis: 'Aplikasi Sembako Bersaudara menunjukkan kolaborasi kode yang solid. Penggunaan generative AI terdeteksi pada penataan layout komponen antarmuka responsif dan konfigurasi deployment serverless Vercel. Namun logika bisnis sembako (varian timbangan, kuantiti grosir/eceran, dan session keranjang) dikembangkan dengan pemahaman logika yang baik.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Sembako & Filter Kebutuhan Pokok',
+          aiPercentage: 68,
+          reason: 'Grid produk sembako responsif dengan badge stok dan harga menggunakan struktur komponen modern yang rapi.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Alur Keranjang & Checkout Pesanan',
+          aiPercentage: 65,
+          reason: 'Logika kalkulasi total belanja sembako dan validasi form alamat kirim terstruktur jelas.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Manajemen Inventori & Stok Minimum Sembako',
+          aiPercentage: 62,
+          reason: 'Logika peringatan stok beras/minyak menipis menunjukkan analisis kebutuhan riil toko kelontong mitra.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Deployment Modern Serverless Vercel',
+          aiPercentage: 65,
+          reason: 'Konfigurasi file vercel.json dan routing static/serverless API berjalan optimal dengan SSL HTTPS otomatis.',
+          status: 'Advanced DevOps'
+        }
+      ],
+      aiAdvice: 'Penggunaan AI yang kalian terapkan sudah sangat positif untuk mempercepat penyusunan antarmuka dan konfigurasi deployment Vercel. Yang terpenting: Ahmad Zakaria dan kawan-kawan harus benar-benar paham alur data saat pesanan masuk, bagaimana vercel serverless berkomunikasi dengan cloud MySQL, serta cara membaca dan menjelaskan arsitektur kodenya di meja sidang KP.',
+      studentHomework: [
+        'Pelajari cara Vercel serverless function menangani connection pool ke database MySQL agar tidak terjadi connection timeout.',
+        'Pahami alur sanitasi input pada form login budi@gmail.com dan admin@sembako.com dari ancaman SQL Injection.',
+        'Pelajari logika pengurangan stok otomatis saat pesanan sembako berhasil di-checkout.',
+        'Kuasai struktur repositori GitHub Sembako-Bersaudara-Vercel agar siap menjelaskan detail fungsi kode saat demonstrasi.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Sembako Bersaudara oleh Kelas R5A Kelompok 4 menunjukkan kualitas implementasi perangkat lunak yang sangat baik. Di-deploy pada platform Vercel dengan respon cepat dan desain antarmuka bersih, sistem ini siap mendukung digitalisasi operasional toko sembako mitra.',
+      strengths: [
+        'Hosting cloud serverless Vercel modern dengan waktu muat instan dan sertifikat SSL HTTPS aktif',
+        'Katalog sembako lengkap dan responsif pada perangkat mobile maupun desktop',
+        'Autentikasi dua pintu (user dan admin) aktif dengan kredensial teruji',
+        'Repositori GitHub publik tertata rapi dengan commit history yang mencerminkan kerja tim'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ dan blog edukasi sembako belum tersedia',
+        'Perlu penambahan payment gateway instan (QRIS) untuk melengkapi opsi transfer manual'
+      ],
+      finalVerdict: 'SANGAT MEMUASKAN - LULUS DENGAN PREDIKAT TERBAIK (PRODUCTION READY)',
+      recommendations: 'Kelompok 4 Kelas R5A dinyatakan lulus dengan predikat A (Nilai 91). Aplikasi ini sangat layak dipresentasikan dalam sidang Kerja Praktik.'
+    }
+  },
+
+  // 0e. Kelas R5A - Kelompok 6 (GA'KS DOYAN Rice Bowl)
+  {
+    id: 'project-r5a-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelas R5A - Kelompok 6 (GA\'KS DOYAN: Hafizhun, Debora, Dafa, Dzakky)',
+    studentNim: '202433500033 / 034 / 035 / 036',
+    teamMembers: [
+      { nim: '202433500033', name: 'Muhammad Hafizhun Nabil' },
+      { nim: '202433500034', name: 'Debora Maria Wismandaru' },
+      { nim: '202433500035', name: 'Dafa Favian Firtajullah' },
+      { nim: '202433500036', name: 'Dzakky Favian Firtajullah' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi Katalog Menu, Promo dan Pengeluaran Berbasis Web pada GA\'KS DOYAN',
+    targetUrl: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/',
+    adminUrl: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/admin',
+    orderUrl: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/',
+    portals: [
+      { title: 'Katalog Rice Bowl GA\'KS DOYAN', url: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/', badge: 'Wasmer Cloud' },
+      { title: 'Login User Pelanggan', url: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/login', badge: 'User Portal' },
+      { title: 'Backoffice Admin Pengeluaran', url: 'https://gaksdoyan-rice-bowl-kelompok6.wasmer.app/admin', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@gaksdoyan.com', password: 'admin123' },
+      user: { username: 'budi@gmail.com', password: 'budi123' }
+    },
+    githubRepoUrl: 'https://github.com/hafizhunnabil1105/gaks-doyan',
+    hostingPlatform: 'Wasmer Edge Cloud',
+    framework: 'PHP Native (tanpa framework) & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-6', 'GA\'KS DOYAN Rice Bowl'),
+    lecturerNotes: 'Aplikasi GA\'KS DOYAN dari Kelas R5A Kelompok 6 memiliki fokus unik yang sangat relevan untuk UMKM kuliner: pencatatan katalog menu, penawaran promo, serta pelaporan pengeluaran operasional. Di-deploy secara inovatif pada cloud Wasmer Edge.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 72,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 70% - 75%)',
+      summaryAnalysis: 'Aplikasi GA\'KS DOYAN memanfaatkan asisten generative AI terutama dalam perancangan antarmuka visual menu rice bowl dan skrip dasar pelaporan pengeluaran modal. Mahasiswa menunjukkan kreativitas dalam pemilihan platform hosting Wasmer dan perancangan modul promo yang sesuai kebutuhan gerai rice bowl.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Menu Rice Bowl & Banner Promo',
+          aiPercentage: 75,
+          reason: 'Komponen card makanan dengan badge harga promo dan foto rice bowl menggunakan pola template CSS modern hasil prompt AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Modul Pencatatan Pengeluaran Operasional',
+          aiPercentage: 68,
+          reason: 'Form input pengeluaran bahan baku dapur dan rekapitulasi biaya bulanan menunjukkan rancangan kebutuhan UMKM mandiri.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Autentikasi Session User & Admin',
+          aiPercentage: 72,
+          reason: 'Pola autentikasi PHP session standar memisahkan portal kasir dan pelanggan.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Deployment Wasmer Edge Container',
+          aiPercentage: 70,
+          reason: 'Konfigurasi wasmer.toml untuk menjalankan PHP runtime di cloud edge container Wasmer.',
+          status: 'AI Assisted + DevOps'
+        }
+      ],
+      aiAdvice: 'Inisiatif menggunakan Wasmer Edge Cloud sangat menarik! Namun kalian berempat harus memastikan bahwa kalian menguasai logika di balik kode PHP native-nya: alur pencatatan pengeluaran ke database MySQL, validasi form login, dan cara kerja session-nya. Pahami betul kode yang sudah digenerate agar kalian bisa menjawab dengan percaya diri saat diuji.',
+      studentHomework: [
+        'Pelajari alur query SQL saat admin menambahkan catatan pengeluaran belanja bahan dapur rice bowl.',
+        'Pahami cara mengamankan session login admin@gaksdoyan.com agar tidak bisa di-bypass tanpa password.',
+        'Pelajari cara membaca konfigurasi Wasmer container (wasmer.toml) dan alur deploy-nya dari GitHub.',
+        'Pastikan seluruh anggota kelompok mampu menjelaskan relasi tabel menu, promo, dan pengeluaran di database MySQL.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Perancangan Sistem Informasi Katalog Menu, Promo dan Pengeluaran Berbasis Web pada GA\'KS DOYAN karya Kelompok 6 Kelas R5A berhasil merealisasikan aplikasi web kuliner fungsional di cloud Wasmer Edge. Modul pencatatan pengeluaran memberikan nilai tambah nyata bagi manajemen keuangan gerai rice bowl.',
+      strengths: [
+        'Inovasi platform hosting cloud Wasmer Edge yang cepat dan modern',
+        'Terdapat fitur pencatatan pengeluaran operasional yang sangat dibutuhkan UMKM kuliner',
+        'Kredensial login pengguna dan admin teruji aktif',
+        'Repositori GitHub publik aktif memuat source code aplikasi'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, syarat ketentuan, dan kebijakan privasi belum dibuat',
+        'Mekanisme pemesanan masih memerlukan penyempurnaan alur payment gateway instan'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 6 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 80, Grade B+). Setiap anggota kelompok diwajibkan menyelesaikan PR pemahaman logika kode sebelum sidang pertanggungjawaban akademik.'
+    }
+  },
+
+  // 0f. Kelas R5A - Kelompok 9 (UMKM Geprek Mantul)
+  {
+    id: 'project-r5a-kelompok-9',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5A',
+    groupNumber: 'Kelompok 9',
+    studentName: 'Kelas R5A - Kelompok 9 (Geprek Mantul: Syifa, Zahra, Rizky, Putri)',
+    studentNim: '202433500053 / 054 / 055 / 056',
+    teamMembers: [
+      { nim: '202433500053', name: 'Syifa Ramadhani' },
+      { nim: '202433500054', name: 'Zahra Raniah Fajari' },
+      { nim: '202433500055', name: 'Rizky Dwi Alvanto' },
+      { nim: '202433500056', name: 'Putri Indiani' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Sistem Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Geprek Mantul',
+    targetUrl: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/',
+    adminUrl: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/admin',
+    orderUrl: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/',
+    portals: [
+      { title: 'E-Commerce Geprek Mantul', url: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/', badge: 'Wasmer Cloud' },
+      { title: 'Login Pembeli', url: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/login', badge: 'User Portal' },
+      { title: 'Backoffice Admin Kedai', url: 'https://ecommerce-geprek-mantul-kelompok9.wasmer.app/admin', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@geprekmantul.com', password: 'admin123' },
+      user: { username: 'Rizky@gmail.com', password: 'Rizky27' }
+    },
+    githubRepoUrl: 'https://github.com/zahraaraniah/Ecommerce-Geprek-Mantul-Kelompok9.git',
+    hostingPlatform: 'Wasmer Cloud',
+    framework: 'Native PHP (tanpa framework) & MySQL',
+    evaluationDate: '2026-11-26',
+    scores: generateGroupSpecificScores('project-r5a-kelompok-9', 'Geprek Mantul ERP'),
+    lecturerNotes: 'Aplikasi Geprek Mantul dari Kelas R5A Kelompok 9 memiliki variasi menu ayam geprek (level pedas, topping keju, minuman pendukung) yang lengkap dengan alur pemesanan jelas. Di-hosting di platform modern Wasmer Cloud dengan panel admin yang berfungsi baik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 70,
+      classification: 'Dominan Dibantu AI (High AI-Assisted, 68% - 74%)',
+      summaryAnalysis: 'Aplikasi Geprek Mantul menunjukkan pemanfaatan AI yang baik pada perancangan layout etalase kuliner ayam geprek, form pilihan level pedas, dan struktur tabel MySQL. Alur proses transaksi pesanan makanan dari pelanggan hingga admin kasir berjalan lancar.',
+      featureBreakdown: [
+        {
+          feature: 'Etalase Menu Paket Geprek & Pilihan Level Pedas',
+          aiPercentage: 72,
+          reason: 'Komponen pemilihan level kepedasan cabai dan varian topping menggunakan pola form UI interaktif hasil panduan prompt AI.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Keranjang Pesanan & Alur Checkout Makanan',
+          aiPercentage: 70,
+          reason: 'Mekanisme session cart PHP native untuk menampung pesanan ayam geprek dan minuman.',
+          status: 'AI Assisted'
+        },
+        {
+          feature: 'Manajemen Status Order Dapur & Kasir Admin',
+          aiPercentage: 66,
+          reason: 'Panel admin untuk memperbarui status pesanan (menunggu, dimasak, siap saji) mencerminkan kebutuhan operasional kedai nyata.',
+          status: 'Custom Logic'
+        },
+        {
+          feature: 'Deployment Wasmer Edge Serverless',
+          aiPercentage: 68,
+          reason: 'Penerapan container PHP di Wasmer Cloud menjamin aplikasi mudah diakses tanpa kendala downtime.',
+          status: 'AI Assisted + DevOps'
+        }
+      ],
+      aiAdvice: 'Pemanfaatan AI untuk membangun etalase Geprek Mantul dan panel admin sudah cukup baik. Yang terpenting: Syifa, Zahra, Rizky, dan Putri harus memahami bagaimana logika pilihan level pedas dan topping tersimpan di rincian transaksi, bagaimana session cart bekerja, serta bagaimana data pesanan terhubung ke database MySQL. Jadikan hasil AI ini sebagai bahan belajar mandiri agar siap menghadapi pertanyaan saat sidang KP.',
+      studentHomework: [
+        'Pelajari alur penyimpanan data transaksi multi-item (pesanan ayam + pilihan level pedas + topping) ke tabel detail_pesanan MySQL.',
+        'Pahami cara kerja session login Rizky@gmail.com dan pemisahannya dengan role admin@geprekmantul.com.',
+        'Pelajari cara mencegah SQL Injection menggunakan PDO Prepared Statements pada form pencarian dan pemesanan menu.',
+        'Kuasai cara membaca alur kode di repositori GitHub Ecommerce-Geprek-Mantul-Kelompok9 agar lancar saat demo sidang.'
+      ]
+    },
+    descriptiveEvaluation: {
+      overallSummary: 'Aplikasi Sistem Perancangan Sistem Informasi E-Commerce Model ERP pada UMKM Geprek Mantul yang dikembangkan oleh Kelompok 9 Kelas R5A telah berhasil diimplementasikan dan di-deploy ke Wasmer Cloud. Sistem memiliki katalog menu yang menarik, pilihan level pedas interaktif, serta panel admin untuk mengontrol operasional pemesanan kedai.',
+      strengths: [
+        'Katalog paket menu ayam geprek interaktif dengan fitur kustomisasi level pedas dan topping',
+        'Hosting cloud Wasmer yang responsif dan dapat diakses publik dengan lancar',
+        'Autentikasi dua pintu (user dan admin) aktif dengan kredensial teruji',
+        'Repositori GitHub publik aktif memuat source code aplikasi dengan rapi'
+      ],
+      weaknesses: [
+        'Halaman informasi FAQ, kebijakan privasi, dan syarat ketentuan pemesanan belum tersedia',
+        'Integrasi pembayaran masih bersifat konfirmasi transfer manual tanpa gateway otomatis'
+      ],
+      finalVerdict: 'DITERIMA SEBAGAI PROYEK KERJA PRAKTIK (LULUS EVALUASI KUALITAS)',
+      recommendations: 'Kelompok 9 Kelas R5A dinyatakan lulus evaluasi KP (Nilai 82, Grade B+). Seluruh anggota kelompok diwajibkan menyelesaikan tugas pendalaman alur kode sebelum pelaksanaan sidang KP.'
     }
   },
 

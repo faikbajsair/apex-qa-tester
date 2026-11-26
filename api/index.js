@@ -41,11 +41,11 @@ async function fetchWithBypass(rawUrl, options = {}) {
   const urlsToTry = [];
   if (targetUrl.startsWith('http://') || targetUrl.startsWith('https://')) {
     urlsToTry.push(targetUrl);
-    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('infinityfree'))) {
+    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('infinityfree'))) {
       urlsToTry.push(targetUrl.replace('https://', 'http://'));
     }
   } else {
-    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('infinityfree')) {
+    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('infinityfree')) {
       urlsToTry.push('http://' + targetUrl);
       urlsToTry.push('https://' + targetUrl);
     } else {
@@ -217,7 +217,7 @@ function detectHostingPlatform(targetUrl, headers) {
   const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
   const serverHeader = (headers['server'] || '').toLowerCase();
 
-  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('infinityfree')) {
+  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('.wuaze.com') || urlLower.includes('infinityfree')) {
     return {
       provider: 'InfinityFree / Free Web Hosting',
       badge: 'InfinityFree Web Server',
@@ -231,6 +231,14 @@ function detectHostingPlatform(targetUrl, headers) {
       badge: 'Railway Cloud PaaS',
       isModernCloud: true,
       description: 'Aplikasi dideploy pada platform cloud Railway PaaS modern dengan container environment dan koneksi database terisolasi.'
+    };
+  }
+  if (urlLower.includes('wasmer.app') || urlLower.includes('.wasmer.app')) {
+    return {
+      provider: 'Wasmer Edge Cloud',
+      badge: 'Wasmer Edge Serverless',
+      isModernCloud: true,
+      description: 'Aplikasi dideploy pada platform cloud Wasmer Edge dengan WebAssembly / container virtualized server environment.'
     };
   }
   if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
