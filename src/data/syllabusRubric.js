@@ -1112,6 +1112,126 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5d-kelompok-1') {
+    // Kelas R5D - Kelompok 1 (RM Rajosalero): 82 / 100 - Grade B+
+    const res = createBase(93, 'Aplikasi web pemesanan dan manajemen restoran RM Rajosalero aktif di InfinityFree.');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Landing page restoran RM Rajosalero rapi dengan banner masakan Padang.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Informasi profil rumah makan dan keunggulan cita rasa Minang tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak WhatsApp dan alamat outlet RM Rajosalero tercantum.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog aneka lauk rendang, ayam pop, gulai tunjang, dan minuman tertata jelas.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Fitur keranjang belanja dan pilihan porsi pesanan berfungsi.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pemesanan meja dan takeaway berjalan lancar.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran transfer kasir dan tunai.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Otentikasi admin terpisah di /admin/login.php berfungsi baik.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen status pesanan masuk dan konfirmasi kasir terintegrasi.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 88, note: 'Rekapitulasi omset harian dan transaksi kasir restoran.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Sinkronisasi bahan baku dapur masih semi-manual.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Data pelanggan tercatat berdasarkan nomor telepon namun belum ada sistem kupon loyalitas.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pemesanan katering/meja belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan dan pembatalan belum ada.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum dibuat.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/cerita kuliner Padang belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada modul komplain/retur pesanan makanan.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-4') {
+    // Kelas R5D - Kelompok 4 (Wasibu): 82 / 100 - Grade B+
+    const res = createBase(93, 'Aplikasi web sistem pemesanan makanan & minuman Wasibu aktif di domain Wasibu.site.je.');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Antarmuka web Wasibu bersih, modern, dan informatif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Informasi latar belakang usaha kuliner Wasibu tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Informasi kontak dan layanan pemesanan tersedia.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 94, note: 'Daftar menu makanan dan minuman tersusun dengan foto dan harga.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja interaktif dan kalkulasi total harga akurat.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form checkout data pemesan dan metode pengambilan.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Petunjuk transfer pembayaran manual dan konfirmasi pesanan.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal admin di /admin dengan kredensial wasibu/wasibu123 aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Dashboard antrean pesanan pelanggan real-time.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 86, note: 'Laporan ringkasan penjualan makanan dan minuman.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Pengurangan stok menu porsi masih perlu dioptimalkan.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Data pelanggan tersimpan namun belum ada integrasi poin member.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman bantuan dan FAQ belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Ketentuan layanan pemesanan makanan belum ada.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum tersedia.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/artikel belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist produk belum diimplementasikan.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem penanganan pesanan batal/rusak.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-5') {
+    // Kelas R5D - Kelompok 5 (Nasi Uduk Betawi Hj.Mina): 79 / 100 - Grade B+
+    const res = createBase(92, 'Aplikasi web UMKM Nasi Uduk Betawi Hj.Mina aktif di InfinityFree (nasiuduk.rf.gd).');
+    res.fe_beranda = { status: 'PASSED', score: 92, note: 'Etalase kuliner khas Betawi Nasi Uduk Hj. Mina tersaji menarik.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Profil sejarah dan resep turun temurun Nasi Uduk Hj. Mina tertera.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 88, note: 'Kontak pemesanan katering dan lokasi warung tersedia.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 92, note: 'Pilihan paket nasi uduk komplit, semur jengkol, ayam goreng, dan aneka lauk.' };
+    res.fe_keranjang = { status: 'PASSED', score: 90, note: 'Keranjang belanja berfungsi baik untuk penambahan lauk.' };
+    res.fe_checkout = { status: 'PASSED', score: 88, note: 'Form checkout pesanan pelanggan dapat diakses.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Panel admin dengan login fahri@nasiudukhjmina.local aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 88, note: 'Pencatatan daftar pesanan katering dan takeaway di admin.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 85, note: 'Rekapitulasi penjualan warung nasi uduk.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 70, note: 'Stok beras dan lauk pauk belum tersinkronisasi otomatis.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Akun pelanggan umum belum disiapkan default (bisa daftar mandiri).' };
+    res.fe_pengaturan_pengiriman = { status: 'PARTIAL', score: 70, note: 'Pengaturan opsi antar kurir lokal masih sederhana.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pesanan katering belum ada.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan minimal katering belum tertera.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Artikel tradisi kuliner Betawi belum dibuat.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur simpan paket favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada modul komplain pengantaran/pesanan basi.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-6') {
+    // Kelas R5D - Kelompok 6 (Mochi-time): 87 / 100 - Grade A
+    const res = createBase(95, 'Aplikasi web pemesanan snack Mochi-time aktif di InfinityFree dengan sistem multi-role.');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Tampilan etalase snack mochi sangat menarik, ceria, dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil brand Mochi-time dan varian tekstur kenyal tersaji.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 92, note: 'Informasi kontak pemesanan dan media sosial lengkap.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 96, note: 'Katalog mochi isi daifuku stroberi, matcha, cokelat, dan boba lengkap dengan foto.' };
+    res.fe_keranjang = { status: 'PASSED', score: 94, note: 'Keranjang belanja interaktif dengan opsi pilihan isi box mochi.' };
+    res.fe_checkout = { status: 'PASSED', score: 92, note: 'Alur checkout pesanan snack mochi berjalan mulus.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Petunjuk pembayaran QRIS dan transfer manual.' };
+    res.erp_users_admin = { status: 'PASSED', score: 96, note: 'Sangat baik: Memiliki pembagian 3 role (User, Owner, dan Staff).' };
+    res.erp_pesanan = { status: 'PASSED', score: 94, note: 'Monitoring status pesanan mochi diproses oleh Staff dan dipantau Owner.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 92, note: 'Laporan laba kotor dan grafik penjualan box mochi untuk Owner.' };
+    res.erp_crm = { status: 'PASSED', score: 85, note: 'Basis data member dan histori transaksi pelanggan tercatat rapi.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 88, note: 'Stok box dan varian rasa otomatis berkurang saat pesanan lunas.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 70, note: 'Prosedur penanganan retur mochi rusak saat ekspedisi masih manual.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ masa tahan/kedaluwarsa mochi belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pengiriman luar kota belum lengkap.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Belum ada blog cerita resep mochi.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist belum diimplementasikan.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-8') {
+    // Kelas R5D - Kelompok 8 (Pangeran Condet): 88 / 100 - Grade A
+    const res = createBase(96, 'Aplikasi web e-commerce ERP UMKM Pangeran Condet berbasis PHP 8.2 PDO aktif di InfinityFree.');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Tampilan etalase UMKM Pangeran Condet sangat profesional dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 94, note: 'Profil UMKM khas Condet dan sejarah produk terstruktur rapi.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 92, note: 'Kontak resmi, peta lokasi outlet Condet, dan link chat terintegrasi.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 96, note: 'Katalog produk UMKM tersaji komprehensif dengan filter kategori dan stok.' };
+    res.fe_keranjang = { status: 'PASSED', score: 95, note: 'Keranjang belanja dinamis berbasis session dengan kalkulasi diskon.' };
+    res.fe_checkout = { status: 'PASSED', score: 94, note: 'Form checkout multi-step dengan validasi input data pelanggan yang ketat.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 92, note: 'Instruksi pembayaran rekening bank dan e-wallet yang jelas.' };
+    res.erp_users_admin = { status: 'PASSED', score: 95, note: 'Arsitektur PHP 8.2 PDO dengan isolasi autentikasi admin & pelanggan yang kokoh.' };
+    res.erp_pesanan = { status: 'PASSED', score: 95, note: 'Manajemen workflow pesanan dari konfirmasi, packing, hingga selesai.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 94, note: 'Laporan laba rugi dan rekapitulasi penjualan berkala otomatis.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 92, note: 'Integrasi stok realtime saat checkout terverifikasi dengan baik.' };
+    res.erp_crm = { status: 'PASSED', score: 88, note: 'Manajemen data pelanggan loyal dan histori belanja terdata di MySQL.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 75, note: 'Formulir pengajuan retur barang cacat sudah ada namun belum berstatus otomatis.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pengiriman produk Condet belum dibuat.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Ketentuan layanan retur belum dituangkan dalam halaman tersendiri.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pengguna belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog UMKM belum dibuat.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist produk belum ada.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -3677,6 +3797,434 @@ const RAW_PRESET_PROJECTS = [
     scores: generateGroupSpecificScores('project-r5i-kelompok-8', 'Mampir Kopi UMKM'),
     lecturerNotes: 'Aplikasi Mampir Kopi memiliki konsep e-commerce ERP kedai kopi lokal dengan alur belanja, katalog minuman, dan manajemen kasir.',
     vulnerabilities: []
+  },
+
+  // 5. KELAS R5D (5 Kelompok Proyek)
+  // 5a. Kelas R5D - Kelompok 1 (RM Rajosalero)
+  {
+    id: 'project-r5d-kelompok-1',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 1',
+    studentName: 'Kelas R5D - Kelompok 1 (RM Rajosalero: Habibi, Dzeyka, Syaskia, Tiara, Nur Azizah)',
+    studentNim: '202433500181 / 184 / 185 / 186 / 232',
+    teamMembers: [
+      { nim: '202433500181', name: 'Habibi Fazl' },
+      { nim: '202433500184', name: 'Muhamad Dzeyka Alia Dzaki' },
+      { nim: '202433500185', name: 'Syaskia Putri Azhira' },
+      { nim: '202433500186', name: 'Tiara Febriza' },
+      { nim: '202433500232', name: 'Nur Azizah Riyanto' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5 (Ganjil)',
+    projectName: 'RM Rajosalero (Sistem Pemesanan dan Manajemen Restoran)',
+    targetUrl: 'http://rajosalero.rf.gd',
+    adminUrl: 'http://rajosalero.rf.gd/admin/login.php',
+    orderUrl: 'http://rajosalero.rf.gd',
+    portals: [
+      { title: 'Website RM Rajosalero (Pelanggan)', url: 'http://rajosalero.rf.gd', badge: 'Public Web' },
+      { title: 'Backoffice Admin & Kasir', url: 'http://rajosalero.rf.gd/admin/login.php', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin', password: 'admin123' },
+      user: { username: 'pelanggan (no telp: 123456)', password: '123456' }
+    },
+    githubRepoUrl: 'https://github.com/syaskiaazhira-bit/RM_Rajosalero',
+    hostingPlatform: 'InfinityFree (Cloud / hosting PHP & MySQL)',
+    framework: 'PHP native + MySQL (MariaDB)',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-1', 'RM Rajosalero Restoran Padang'),
+    lecturerNotes: 'Aplikasi sistem pemesanan dan manajemen restoran RM Rajosalero memiliki etalase menu masakan Padang yang rapi, alur pemesanan meja dan takeaway, serta dashboard admin kasir aktif di InfinityFree.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Aplikasi RM Rajosalero memanfaatkan bantuan generative AI untuk menghasilkan layout tampilan etalase menu masakan Padang dan struktur query CRUD PHP dasar. Alur pemesanan meja dan kasir sudah disesuaikan dengan kebutuhan rumah makan.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Etalase Menu Rumah Makan Padang',
+          aiPercentage: 75,
+          indicator: 'Pola card menu makanan dengan label harga dan tombol pesan responsif.',
+          whatAiDid: 'Menyusun komponen grid katalog makanan Padang dan navigasi pemesanan.'
+        },
+        {
+          feature: 'Autentikasi & Backoffice Kasir',
+          aiPercentage: 72,
+          indicator: 'Pemisahan autentikasi user (pelanggan no telp) dan admin kasir di subfolder /admin/.',
+          whatAiDid: 'Menyusun session login dan pengalihan hak akses kasir.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Kuasai mekanisme pengelolaan session PHP dan keamanan validasi input pada form pemesanan makanan.',
+      homeworkScope: [
+        {
+          topic: 'Keamanan Autentikasi dan Sanitasi Form',
+          description: 'Pelajari implementasi prepared statements PDO/mysqli dan pencegahan SQL Injection pada input form nomor telepon/login.',
+          guidingQuestions: 'Mengapa validasi nomor telepon dan sanitasi input form krusial sebelum query dieksekusi ke database?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek RM Rajosalero karya Kelompok 1 Kelas R5D (Habibi, Dzeyka, Syaskia, Tiara, Nur Azizah) berhasil mengimplementasikan sistem pemesanan kuliner Padang yang fungsional dengan portal pelanggan dan admin aktif.',
+      businessModelEvaluation: 'Model bisnis pemesanan restoran RM Rajosalero relevan bagi operasional UMKM kuliner untuk mendokumentasikan antrean pesanan makan di tempat maupun bawa pulang.',
+      technicalArchitectureEvaluation: 'Struktur PHP Native dan MySQL berjalan stabil di InfinityFree dengan pemisahan direktori publik dan admin login.',
+      strengths: [
+        'Live hosting aktif dan responsif di InfinityFree (rajosalero.rf.gd)',
+        'Repositori GitHub publik lengkap dan tertata rapi',
+        'Tersedia kredensial user dan admin untuk pengujian langsung'
+      ],
+      weaknesses: [
+        'Belum terintegrasi dengan payment gateway otomatis (masih manual transfer/kasir)',
+        'Sinkronisasi bahan baku dapur masih memerlukan otomatisasi stok'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Tingkatkan keamanan autentikasi dengan hashing password yang lebih kuat dan tambahkan laporan neraca laba rugi periodik pada panel admin.'
+    }
+  },
+
+  // 5b. Kelas R5D - Kelompok 4 (Wasibu)
+  {
+    id: 'project-r5d-kelompok-4',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 4',
+    studentName: 'Kelas R5D - Kelompok 4 (Wasibu: Laila, Ayuni, Ade Aulia, Zya Aqilla)',
+    studentNim: '202433500199 / 200 / 201 / 202',
+    teamMembers: [
+      { nim: '202433500199', name: 'Laila Suryani Tanjung' },
+      { nim: '202433500200', name: 'Ayuni' },
+      { nim: '202433500201', name: 'Ade Aulia Rahman' },
+      { nim: '202433500202', name: 'Zya Aqilla Zhifa' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5 (Ganjil)',
+    projectName: 'Wasibu (Sistem Pemesanan Makanan & Minuman Berbasis Web)',
+    targetUrl: 'https://wasibu.site.je',
+    adminUrl: 'https://wasibu.site.je/admin',
+    orderUrl: 'https://wasibu.site.je',
+    portals: [
+      { title: 'Website Pemesanan Wasibu', url: 'https://wasibu.site.je', badge: 'Public Web' },
+      { title: 'Portal Admin Wasibu', url: 'https://wasibu.site.je/admin', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'wasibu', password: 'wasibu123' },
+      user: { username: 'janedoe', password: 'janedoe123' }
+    },
+    githubRepoUrl: 'https://github.com/qwertzee/Wasibu.git',
+    hostingPlatform: 'InfinityFree (Cloud / hosting PHP & MySQL)',
+    framework: 'PHP native + MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-4', 'Wasibu Food & Drink'),
+    lecturerNotes: 'Aplikasi Wasibu menghadirkan sistem pemesanan makanan dan minuman berbasis web dengan antarmuka yang bersih pada domain custom site.je, dilengkapi panel admin untuk pemrosesan order.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 75,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Aplikasi Wasibu menggunakan generator AI untuk menyusun kerangka antarmuka HTML/CSS pemesanan makanan dan modul PHP session keranjang belanja. Mahasiswa menunjukkan adaptasi yang baik dalam penyesuaian domain dan kredensial demo.',
+      featureBreakdown: [
+        {
+          feature: 'Antarmuka Katalog Makanan & Minuman',
+          aiPercentage: 78,
+          indicator: 'Styling CSS card dan tombol kuantitas item yang konsisten.',
+          whatAiDid: 'Menghasilkan layout responsif katalog produk kuliner.'
+        },
+        {
+          feature: 'Panel Administrasi Wasibu',
+          aiPercentage: 72,
+          indicator: 'Tabel daftar pesanan masuk dengan status dropdown dan aksi update.',
+          whatAiDid: 'Membuat alur manajemen status transaksi di dashboard admin.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa harus memahami alur lifecycle session keranjang belanja saat pelanggan melakukan checkout.',
+      homeworkScope: [
+        {
+          topic: 'Manajemen State Session dan Transaksi Database',
+          description: 'Pelajari konsep ACID transactions pada MySQL saat mengurangi stok produk makanan setelah pesanan dikonfirmasi.',
+          guidingQuestions: 'Bagaimana mencegah race condition jika dua pelanggan memesan porsi makanan terakhir secara bersamaan?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Wasibu karya Kelompok 4 Kelas R5D (Laila, Ayuni, Ade Aulia, Zya Aqilla) berhasil menghadirkan solusi e-commerce makanan & minuman dengan domain site.je yang unik serta alur belanja yang lengkap.',
+      businessModelEvaluation: 'Sangat cocok untuk kafe atau kedai makan modern yang membutuhkan pemesanan digital mandiri tanpa antrean kasir konvensional.',
+      technicalArchitectureEvaluation: 'Integrasi PHP Native dan MySQL bekerja lancar di live server, struktur tabel relasional pesanan dan menu terdefinisi dengan baik.',
+      strengths: [
+        'Domain live hosting aktif dan mudah diingat (wasibu.site.je)',
+        'Akun pengujian user dan admin lengkap dan valid',
+        'Desain antarmuka bersih dan user-friendly'
+      ],
+      weaknesses: [
+        'Belum tersedia fitur pelacakan pengiriman kurir eksternal',
+        'Belum ada halaman FAQ dan syarat ketentuan pemesanan'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Tambahkan fitur cetak struk nota belanja PDF dan notifikasi status pesanan via WhatsApp/Email.'
+    }
+  },
+
+  // 5c. Kelas R5D - Kelompok 5 (Nasi Uduk Betawi Hj.Mina)
+  {
+    id: 'project-r5d-kelompok-5',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 5',
+    studentName: 'Kelas R5D - Kelompok 5 (Nasi Uduk Betawi: Dhea, Rafsanjani, Firzi, Fahri)',
+    studentNim: '202433500203 / 204 / 205 / 206',
+    teamMembers: [
+      { nim: '202433500203', name: 'Dhea rohaya' },
+      { nim: '202433500204', name: 'M Rafsanjani' },
+      { nim: '202433500205', name: 'M Firzi alfarizi' },
+      { nim: '202433500206', name: 'Fahri akbar komara' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5 (Ganjil)',
+    projectName: 'Nasi Uduk Betawi Hj.Mina',
+    targetUrl: 'https://nasiuduk.rf.gd/',
+    adminUrl: 'https://nasiuduk.rf.gd/admin/',
+    orderUrl: 'https://nasiuduk.rf.gd/',
+    portals: [
+      { title: 'Website Nasi Uduk Hj. Mina', url: 'https://nasiuduk.rf.gd/', badge: 'Public Web' },
+      { title: 'Dashboard Admin ERP', url: 'https://nasiuduk.rf.gd/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'fahri@nasiudukhjmina.local', password: 'Fahri123!' },
+      user: { username: 'Belum ada (Bisa registrasi mandiri)', password: '-' }
+    },
+    githubRepoUrl: 'https://github.com/mfirzialfarizi-prog/nasi-uduk-erp',
+    hostingPlatform: 'InfinityFree (Cloud / hosting PHP & MySQL)',
+    framework: 'PHP native + MySQL (MariaDB)',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-5', 'Nasi Uduk Betawi'),
+    lecturerNotes: 'Aplikasi Nasi Uduk Betawi Hj. Mina menghadirkan digitalisasi pemesanan makanan tradisional khas Betawi dengan manajemen pesanan dan menu di dashboard admin.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 76,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Proyek Nasi Uduk Betawi Hj. Mina mengadopsi bantuan AI pada penataan visual katalog kuliner tradisional Betawi dan skrip PHP admin operasional. Alur data dan pengelolaan menu disesuaikan dengan skema paket katering.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Paket Kuliner Nasi Uduk Betawi',
+          aiPercentage: 78,
+          indicator: 'Grid tampilan menu paket nasi uduk komplit dan opsi lauk tambahan.',
+          whatAiDid: 'Menyusun layout komponen etalase makanan dan form kuantitas.'
+        },
+        {
+          feature: 'Otentikasi Admin ERP',
+          aiPercentage: 74,
+          indicator: 'Implementasi login admin menggunakan email lokal dan verifikasi password.',
+          whatAiDid: 'Menyusun modul proteksi halaman admin dan dashboard ringkasan.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa disarankan menyediakan akun pelanggan default siap pakai agar proses QA tester lebih efisien.',
+      homeworkScope: [
+        {
+          topic: 'Otomatisasi Seeding Data Uji',
+          description: 'Pelajari cara membuat migration dan seeder database untuk akun demo pelanggan dan produk awal.',
+          guidingQuestions: 'Mengapa seeder akun demo sangat penting dalam pengujian software profesional?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Nasi Uduk Betawi Hj. Mina karya Kelompok 5 Kelas R5D (Dhea, Rafsanjani, Firzi, Fahri) berhasil mendigitalkan UMKM kuliner Betawi dengan fitur katalog dan manajemen pesanan yang baik.',
+      businessModelEvaluation: 'Potensial untuk dikembangkan menjadi platform pesanan katering nasi kotak harian dan acara keluarga.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan di InfinityFree, struktur kode di GitHub rapi dan mudah ditelusuri.',
+      strengths: [
+        'Konsep kearifan lokal kuliner Betawi yang otentik',
+        'Repositori GitHub publik aktif dengan riwayat commit yang jelas',
+        'Admin dashboard fungsional untuk rekap transaksi'
+      ],
+      weaknesses: [
+        'Belum menyertakan akun user default (penguji harus register mandiri)',
+        'Opsi pengantaran kurir dan ongkir masih bersifat statis'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Sediakan data akun user default dan kembangkan integrasi hitung ongkos kirim berbasis jarak (Biteship/RajaOngkir).'
+    }
+  },
+
+  // 5d. Kelas R5D - Kelompok 6 (Mochi-time)
+  {
+    id: 'project-r5d-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelas R5D - Kelompok 6 (Mochi-time: Ade Surya, Nazwa, Hubertus, Rifha)',
+    studentNim: '202433500213 / 207 / 231 / 210',
+    teamMembers: [
+      { nim: '202433500213', name: 'Ade surya bintang widodo' },
+      { nim: '202433500207', name: 'Nazwa aulia' },
+      { nim: '202433500231', name: 'Hubertus surya B' },
+      { nim: '202433500210', name: 'Rifha fadillah' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5 (Ganjil)',
+    projectName: 'Mochi-time (Aplikasi berbasis website pemesanan snack mochi)',
+    targetUrl: 'https://mochitime.infinityfree.io/?i=1',
+    adminUrl: 'https://mochitime.infinityfree.io/login.php',
+    orderUrl: 'https://mochitime.infinityfree.io/?i=1',
+    portals: [
+      { title: 'Website Mochi-time', url: 'https://mochitime.infinityfree.io/?i=1', badge: 'Public Web' },
+      { title: 'Login Multi-Role (Owner/Staff/User)', url: 'https://mochitime.infinityfree.io/login.php', badge: 'Multi-Role ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'owner@gmail.com (Owner) / staff@gmail.com (Staff)', password: 'password123' },
+      user: { username: 'budi@gmail.com', password: 'password123' }
+    },
+    githubRepoUrl: 'https://github.com/Evelry/Mochi-time',
+    hostingPlatform: 'InfinityFree (Cloud / hosting PHP & MySQL)',
+    framework: 'PHP native + MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-6', 'Mochi-time Snack'),
+    lecturerNotes: 'Aplikasi Mochi-time memiliki keunggulan pada arsitektur otentikasi multi-role (Owner, Staff, dan Customer), katalog varian mochi yang menarik, dan pelaporan operasional.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 70,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Mochi-time mendemonstrasikan implementasi role-based access control (RBAC) yang sangat baik untuk 3 tingkatan (Owner, Staff, User). AI digunakan sebagai asisten styling antarmuka bertema manis/ceria dan query rekap laporan.',
+      featureBreakdown: [
+        {
+          feature: 'Role-Based Access Control (Owner, Staff, User)',
+          aiPercentage: 68,
+          indicator: 'Pembedaan hak akses view dan controller yang rapi antara staf operasional dan pemilik usaha.',
+          whatAiDid: 'Menyusun percabangan kondisi otentikasi hak akses role.'
+        },
+        {
+          feature: 'Etalase Produk Snack Mochi Interaktif',
+          aiPercentage: 72,
+          indicator: 'Desain visual pastel bertema dessert modern Jepang dengan detail varian rasa.',
+          whatAiDid: 'Menyusun layout responsif katalog mochi dan animasi hover card.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pembagian hak akses multi-role (Owner vs Staff) ini sudah sangat baik dan harus terus dipertahankan saat menjelaskan sidang KP.',
+      homeworkScope: [
+        {
+          topic: 'Audit Keamanan RBAC (Role-Based Access Control)',
+          description: 'Pelajari cara mencegah Privilege Escalation pada session pengguna sehingga user tidak bisa mengakses menu owner via URL tampering.',
+          guidingQuestions: 'Bagaimana memastikan middleware pengecekan level role dieksekusi sebelum konten halaman di-render?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Mochi-time karya Kelompok 6 Kelas R5D (Ade Surya, Nazwa, Hubertus, Rifha) sangat memuaskan dengan integrasi multi-role yang lengkap (Owner, Staff, Customer) serta UI yang memikat.',
+      businessModelEvaluation: 'Sangat cocok untuk bisnis kekinian F&B makanan penutup dan hampers oleh-oleh dengan segmentasi anak muda.',
+      technicalArchitectureEvaluation: 'Penerapan multi-role login pada PHP native berjalan mulus, struktur tabel database memisahkan hak akses secara konsisten.',
+      strengths: [
+        'Fitur Multi-Role lengkap (Owner, Staff, User) dengan kredensial jelas',
+        'Desain antarmuka modern, responsif, dan konsisten',
+        'Live hosting dan repositori GitHub aktif dan siap uji'
+      ],
+      weaknesses: [
+        'Belum ada modul informasi masa kedaluwarsa/penyimpanan mochi di halaman detail',
+        'Penanganan retur pesanan rusak masih dilakukan manual'
+      ],
+      finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN)',
+      recommendations: 'Pertahankan kualitas arsitektur RBAC ini dan tambahkan modul inventory bahan baku tepung/isian mochi untuk staf dapur.'
+    }
+  },
+
+  // 5e. Kelas R5D - Kelompok 8 (Pangeran Condet)
+  {
+    id: 'project-r5d-kelompok-8',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 8',
+    studentName: 'Kelas R5D - Kelompok 8 (Pangeran Condet: Shella, Ramlihot, Raihan, Zidan)',
+    studentNim: '202433500221 / 222 / 224 / 225',
+    teamMembers: [
+      { nim: '202433500221', name: 'Shella Putri Novianti' },
+      { nim: '202433500222', name: 'Ramlihot Marholong Sarumpaet' },
+      { nim: '202433500224', name: 'Muhammad Raihan Setiawan' },
+      { nim: '202433500225', name: 'Zidan Mulya Pratama' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP Pada UMKM Pangeran Condet',
+    targetUrl: 'https://pangerancondet.rf.gd',
+    adminUrl: 'https://pangerancondet.rf.gd/admin/',
+    orderUrl: 'https://pangerancondet.rf.gd',
+    portals: [
+      { title: 'Website E-Commerce Pangeran Condet', url: 'https://pangerancondet.rf.gd', badge: 'Public Web' },
+      { title: 'Dashboard ERP Admin', url: 'https://pangerancondet.rf.gd/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@pangerancondet.id', password: 'password123' },
+      user: { username: 'Mulya.Zidan@gmail.com', password: 'password123' }
+    },
+    githubRepoUrl: 'https://github.com/zidanmulya/pangeran-condet-erp',
+    hostingPlatform: 'InfinityFree (Cloud Shared Hosting)',
+    framework: 'PHP Native (PHP 8.2, PDO) & MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-8', 'UMKM Pangeran Condet'),
+    lecturerNotes: 'Aplikasi UMKM Pangeran Condet mengimplementasikan PHP 8.2 PDO yang modern, alur transaksi e-commerce lengkap, manajemen persediaan, serta neraca keuangan yang baik.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 68,
+      classification: 'Kolaborasi Mandiri & AI Terarah (Balanced AI & Student Coding, 65% - 75%)',
+      summaryAnalysis: 'Aplikasi Pangeran Condet menunjukkan kematangan teknis yang tinggi dengan adopsi PHP 8.2 dan PDO. Bantuan AI dimanfaatkan secara proporsional untuk optimasi query dan komponen UI dashboard tanpa mengorbankan pemahaman struktur database.',
+      featureBreakdown: [
+        {
+          feature: 'Arsitektur PHP 8.2 PDO Database Layer',
+          aiPercentage: 65,
+          indicator: 'Penggunaan class koneksi PDO dengan error handling TRY-CATCH dan prepared statements anti SQL Injection.',
+          whatAiDid: 'Membantu formatting boilerplate koneksi PDO dan wrapper query.'
+        },
+        {
+          feature: 'Modul ERP Persediaan & Laporan Penjualan',
+          aiPercentage: 70,
+          indicator: 'Kalkulasi otomatis pengurangan stok produk saat transaksi berstatus lunas.',
+          whatAiDid: 'Menyusun logika perhitungan omset dan rekapitulasi grafik penjualan.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pemilihan PHP 8.2 PDO patut diapresiasi karena menerapkan standar penulisan kode modern yang aman.',
+      homeworkScope: [
+        {
+          topic: 'Optimalisasi Indeks Database dan Profiling Query',
+          description: 'Pelajari cara menambahkan INDEX pada kolom foreign key (id_produk, id_pesanan) di MySQL untuk menjamin performa saat data bertambah ribuan.',
+          guidingQuestions: 'Mengapa perintah EXPLAIN pada query SELECT membantu mendeteksi bottleneck performa database?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek UMKM Pangeran Condet karya Kelompok 8 Kelas R5D (Shella, Ramlihot, Raihan, Zidan) merupakan salah satu karya terbaik di kelasnya dengan penggunaan PHP 8.2 PDO yang terstruktur, aman, dan berorientasi produksi.',
+      businessModelEvaluation: 'Model e-commerce ERP terintegrasi ini siap diaplikasikan langsung pada UMKM Pangeran Condet untuk mendongkrak omset penjualan daring.',
+      technicalArchitectureEvaluation: 'Fondasi teknis sangat solid dengan pemanfaatan PDO, isolasi kredensial, dan modul inventaris stok otomatis.',
+      strengths: [
+        'Arsitektur backend modern menggunakan PHP 8.2 dengan PDO abstraction',
+        'Live hosting aktif, stabil, dan cepat diakses (pangerancondet.rf.gd)',
+        'Kredensial lengkap untuk akun pelanggan dan admin ERP',
+        'Repositori GitHub publik dengan dokumentasi commit yang rapi'
+      ],
+      weaknesses: [
+        'Belum terpasang sertifikat SSL HTTPS custom (masih default shared hosting)',
+        'Modul retur barang masih memerlukan alur persetujuan admin bertingkat'
+      ],
+      finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN)',
+      recommendations: 'Tingkatkan menjadi arsitektur MVC sederhana atau integrasikan dengan API WhatsApp Gateway untuk pengiriman notifikasi resi otomatis kepada pelanggan.'
+    }
   }
 ];
 
