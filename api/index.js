@@ -30,22 +30,22 @@ function saveDomainSession(targetUrl, cookie, userAgent) {
       userAgent: userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)',
       timestamp: Date.now()
     });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // Helper: Universal Fetcher with Auto-Fallback (HTTPS -> HTTP) and InfinityFree Anti-Bot Solver
 async function fetchWithBypass(rawUrl, options = {}) {
   let targetUrl = rawUrl.trim();
   const timeoutMs = options.timeoutMs || 8000;
-  
+
   const urlsToTry = [];
   if (targetUrl.startsWith('http://') || targetUrl.startsWith('https://')) {
     urlsToTry.push(targetUrl);
-    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree'))) {
+    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.free.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree'))) {
       urlsToTry.push(targetUrl.replace('https://', 'http://'));
     }
   } else {
-    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree')) {
+    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.free.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree')) {
       urlsToTry.push('http://' + targetUrl);
       urlsToTry.push('https://' + targetUrl);
     } else {
@@ -59,9 +59,9 @@ async function fetchWithBypass(rawUrl, options = {}) {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), timeoutMs);
-      
+
       const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)';
-      
+
       const resp = await fetch(url, {
         signal: controller.signal,
         headers: {
@@ -175,7 +175,7 @@ async function fetchAssetWithBypass(assetUrl, referer = '') {
     clearTimeout(timeout);
 
     const contentType = resp.headers.get('content-type') || '';
-    
+
     // Check if challenge HTML was returned instead of the real asset
     if (contentType.includes('text/html') || contentType.includes('application/xhtml+xml')) {
       const text = await resp.text();
@@ -217,7 +217,7 @@ function detectHostingPlatform(targetUrl, headers) {
   const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
   const serverHeader = (headers['server'] || '').toLowerCase();
 
-  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('.wuaze.com') || urlLower.includes('.site.je') || urlLower.includes('.ct.ws') || urlLower.includes('infinityfree')) {
+  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('.wuaze.com') || urlLower.includes('.site.je') || urlLower.includes('.free.je') || urlLower.includes('.ct.ws') || urlLower.includes('infinityfree')) {
     return {
       provider: 'InfinityFree / Free Web Hosting',
       badge: 'InfinityFree Web Server',

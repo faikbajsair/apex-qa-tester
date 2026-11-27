@@ -43,22 +43,22 @@ function saveDomainSession(targetUrl, cookie, userAgent) {
       userAgent: userAgent || 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)',
       timestamp: Date.now()
     });
-  } catch (e) {}
+  } catch (e) { }
 }
 
 // Helper: Universal Fetcher with Auto-Fallback (HTTPS -> HTTP) and InfinityFree Anti-Bot Solver
 async function fetchWithBypass(rawUrl, options = {}) {
   let targetUrl = rawUrl.trim();
   const timeoutMs = options.timeoutMs || 8000;
-  
+
   const urlsToTry = [];
   if (targetUrl.startsWith('http://') || targetUrl.startsWith('https://')) {
     urlsToTry.push(targetUrl);
-    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree'))) {
+    if (targetUrl.startsWith('https://') && (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.free.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree'))) {
       urlsToTry.push(targetUrl.replace('https://', 'http://'));
     }
   } else {
-    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree')) {
+    if (targetUrl.includes('.free.nf') || targetUrl.includes('.epizy.') || targetUrl.includes('.rf.gd') || targetUrl.includes('.gamer.gd') || targetUrl.includes('.page.gd') || targetUrl.includes('.42web.io') || targetUrl.includes('.wuaze.com') || targetUrl.includes('.site.je') || targetUrl.includes('.free.je') || targetUrl.includes('.ct.ws') || targetUrl.includes('infinityfree')) {
       urlsToTry.push('http://' + targetUrl);
       urlsToTry.push('https://' + targetUrl);
     } else {
@@ -72,9 +72,9 @@ async function fetchWithBypass(rawUrl, options = {}) {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), timeoutMs);
-      
+
       const userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 APEX-QA-Auditor/1.0 (Lecturer Evaluation Engine; Faik Bajsair, S.Kom., M.Kom.)';
-      
+
       const resp = await fetch(url, {
         signal: controller.signal,
         headers: {
@@ -188,7 +188,7 @@ async function fetchAssetWithBypass(assetUrl, referer = '') {
     clearTimeout(timeout);
 
     const contentType = resp.headers.get('content-type') || '';
-    
+
     // Check if challenge HTML was returned instead of the real asset
     if (contentType.includes('text/html') || contentType.includes('application/xhtml+xml')) {
       const text = await resp.text();
@@ -230,7 +230,7 @@ function detectHostingPlatform(targetUrl, headers) {
   const headerKeys = Object.keys(headers).map(k => k.toLowerCase());
   const serverHeader = (headers['server'] || '').toLowerCase();
 
-  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('.wuaze.com') || urlLower.includes('.site.je') || urlLower.includes('.ct.ws') || urlLower.includes('infinityfree')) {
+  if (urlLower.includes('.free.nf') || urlLower.includes('.epizy.') || urlLower.includes('.rf.gd') || urlLower.includes('.gamer.gd') || urlLower.includes('.page.gd') || urlLower.includes('.42web.io') || urlLower.includes('.wuaze.com') || urlLower.includes('.site.je') || urlLower.includes('.free.je') || urlLower.includes('.ct.ws') || urlLower.includes('infinityfree')) {
     return {
       provider: 'InfinityFree / Free Web Hosting',
       badge: 'InfinityFree Web Server',
@@ -368,7 +368,7 @@ app.post('/api/scan-url', async (req, res) => {
     const hasTitle = /<title>(.*?)<\/title>/i.test(html);
     const pageTitle = hasTitle ? html.match(/<title>(.*?)<\/title>/i)[1].trim() : 'Tidak ditemukan judul';
     const hasCharset = /charset=["']?utf-8["']?/i.test(html);
-    
+
     // Security Header checks
     const securityHeaders = {
       xFrameOptions: !!headers['x-frame-options'],
@@ -381,7 +381,7 @@ app.post('/api/scan-url', async (req, res) => {
     // Button & Link Auditing
     const allButtons = (html.match(/<button\b[^>]*>([\s\S]*?)<\/button>/gi) || []);
     const deadButtons = allButtons.filter(b => !/onclick|type=["']submit["']|data-|wire:|@click|v-on/i.test(b));
-    
+
     const allLinks = (html.match(/<a\b[^>]*href=["']([^"']*)["'][^>]*>/gi) || []);
     const hashLinks = (html.match(/href=["']#["']/gi) || []).length;
     const javascriptVoidLinks = (html.match(/href=["']javascript:void\(0\)["']/gi) || []).length;
@@ -836,7 +836,7 @@ app.post('/api/scan-github-repo', async (req, res) => {
     const repoResp = await fetch(apiUrl, {
       headers: { 'User-Agent': 'APEX-QA-Auditor (Faik Bajsair, S.Kom., M.Kom.)' }
     });
-    
+
     if (!repoResp.ok) {
       return res.status(404).json({ error: `Repository GitHub "${owner}/${repo}" tidak ditemukan atau bersifat Private. Pastikan mahasiswa telah menyetel repositori ke Publik.` });
     }
@@ -1026,8 +1026,8 @@ function analyzeFileContent(fileName, filePath, content, vulnerabilities, erp, m
 
   // 1. SQL Injection Checks
   if (/\b(?:query|raw|whereRaw|selectRaw)\s*\(\s*["'`][^"'`]*\$[a-zA-Z_]/i.test(content) ||
-      /\$db->query\s*\(\s*["'].*\.(?:\$_GET|\$_POST|\$id)/i.test(content) ||
-      /execute\s*\(\s*f["'].*SELECT.*\{/i.test(content)) {
+    /\$db->query\s*\(\s*["'].*\.(?:\$_GET|\$_POST|\$id)/i.test(content) ||
+    /execute\s*\(\s*f["'].*SELECT.*\{/i.test(content)) {
     vulnerabilities.push({
       rule: 'SQL_INJECTION_RISK',
       severity: 'CRITICAL',

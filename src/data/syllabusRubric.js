@@ -1355,6 +1355,54 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5c-kelompok-1') {
+    // Kelas R5C - Kelompok 1 (Roos & Fleur): 82 / 100 - Grade B+
+    const res = createBase(93, 'Aplikasi web e-commerce florist & gift shop Roos & Fleur aktif di InfinityFree (roosfleur.rf.gd).');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Tampilan etalase buket bunga dan gift shop Roos & Fleur bertema floral elegan dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil florist, layanan kustomisasi buket, dan lokasi workshop bunga tersedia.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak WhatsApp florist dan form konsultasi buket wisuda/pernikahan.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog aneka buket mawar, lily, bunga kering, parcel, dan kartu ucapan kustom.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja dinamis dengan input pesan kartu ucapan untuk penerima.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pemesanan bunga dengan tanggal dan waktu pengantaran spesifik.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran rekening bank florist dan e-wallet.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal admin dengan kredensial ismailjuventino10@gmail.com aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen workflow pesanan buket bunga dari perangkaian, packing, hingga kurir jalan.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 88, note: 'Laporan ringkasan omset penjualan buket dan rekap kasir.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Stok tangkai bunga segar dan bahan pembungkus kertas (wrapping paper) masih semi-manual.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Data pelanggan tercatat di database namun belum ada sistem pengingat hari ulang tahun/anniversary.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ kesegaran bunga dan garansi pengiriman belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan H-1 belum dicantumkan jelas.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pengguna belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Artikel/blog seputar arti warna bunga dan tips merawat buket belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist buket favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain bunga layu saat diterima.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5c-kelompok-6') {
+    // Kelas R5C - Kelompok 6 (Sweetbites): 83 / 100 - Grade B+
+    const res = createBase(94, 'Aplikasi web sistem pemesanan kue & dessert Sweetbites aktif di domain sweetbites.free.je.');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Tampilan etalase bakery & pastry Sweetbites manis, cerah, menarik, dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Informasi latar belakang toko kue Sweetbites dan standar bahan premium.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak pemesanan kue ulang tahun dan lokasi outlet Sweetbites.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog aneka cake, cookies, dessert box, pastry, dan roti terorganisir rapi.' };
+    res.fe_keranjang = { status: 'PASSED', score: 94, note: 'Keranjang belanja responsif dengan opsi lilin dan tulisan topper kue.' };
+    res.fe_checkout = { status: 'PASSED', score: 92, note: 'Alur checkout pemesanan kue dengan jadwal pick-up atau antar kurir.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Instruksi pembayaran transfer kasir dan konfirmasi pesanan.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal admin di /admin dengan kredensial admin@sweetbites.com aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Monitoring status antrean produksi kue dapur dan jadwal pengiriman.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 90, note: 'Rekapitulasi penjualan kue dan laporan omset harian kasir.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 80, note: 'Pengurangan stok kue ready stock dan bahan kue terintegrasi baik.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Histori pemesanan pelanggan tersimpan di database MySQL.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ daya tahan simpan kue dan saran pendinginan belum ada.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan kue custom H-3 belum dituangkan tertulis.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum tersedia.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/resep kue belum diimplementasikan.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist kue favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/ganti rugi kue rusak saat ekspedisi.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -4782,6 +4830,178 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
       recommendations: 'Tambahkan fitur cetak tiket pesanan dapur otomatis dan integrasikan pilihan level kepedasan cabai pada opsi checkout.'
+    }
+  },
+
+  // 6. KELAS R5C (2 Kelompok Proyek)
+  // 6a. Kelas R5C - Kelompok 1 (Roos & Fleur)
+  {
+    id: 'project-r5c-kelompok-1',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5C',
+    groupNumber: 'Kelompok 1',
+    studentName: 'Kelas R5C - Kelompok 1 (Roos & Fleur: Rakhi, Lintang, Jessyka, Rizky, Ismail)',
+    studentNim: '202433500123 / 125 / 126 / 128 / 179',
+    teamMembers: [
+      { nim: '202433500123', name: 'Rakhi Dul Fitra Novian' },
+      { nim: '202433500125', name: 'Lintang Naina Sari' },
+      { nim: '202433500126', name: 'Jessyka Septiany' },
+      { nim: '202433500128', name: 'Rizky Amirudin' },
+      { nim: '202433500179', name: 'Muhammad Ismail Juventino' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026-2027 / 5',
+    projectName: 'Roos & Fleur (E-Commerce Florist & Gift Shop)',
+    targetUrl: 'https://roosfleur.rf.gd/',
+    adminUrl: 'https://roosfleur.rf.gd/admin/',
+    orderUrl: 'https://roosfleur.rf.gd/',
+    portals: [
+      { title: 'Website Florist Roos & Fleur', url: 'https://roosfleur.rf.gd/', badge: 'Public Store' },
+      { title: 'Portal Admin Toko Bunga', url: 'https://roosfleur.rf.gd/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'ismailjuventino10@gmail.com', password: 'mismailjvtno21' },
+      user: { username: 'email bebas (registrasi mandiri)', password: '-' }
+    },
+    githubRepoUrl: 'https://github.com/rizkyamirudinamirudin252-alt/Roos-Fleur',
+    hostingPlatform: 'InfinityFree (Cloud Shared Hosting)',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5c-kelompok-1', 'Roos & Fleur Florist'),
+    lecturerNotes: 'Aplikasi e-commerce florist dan gift shop Roos & Fleur memiliki desain bertema floral yang estetik, katalog buket bunga terstruktur, dan portal admin kasir aktif di InfinityFree.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Proyek Roos & Fleur memanfaatkan bantuan AI pada penataan visual katalog buket bunga yang elegan dan skrip PHP session keranjang belanja. Mahasiswa telah melengkapi repositori GitHub dengan source code publik dan akun admin toko.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Buket Bunga & Hadiah Kustom',
+          aiPercentage: 75,
+          indicator: 'Grid etalase bunga responsif dengan foto produk, filter kategori buket, dan form kartu ucapan.',
+          whatAiDid: 'Menyusun komponen tampilan etalase florist dan input pesan hadiah.'
+        },
+        {
+          feature: 'Portal Admin Toko Florist',
+          aiPercentage: 72,
+          indicator: 'Pencatatan daftar pesanan masuk dengan status perangkaian buket dan verifikasi kasir.',
+          whatAiDid: 'Menyusun dashboard manajemen transaksi dan ringkasan omset harian.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa disarankan menyediakan akun pelanggan default siap pakai agar proses QA tester lebih efisien.',
+      homeworkScope: [
+        {
+          topic: 'Otomatisasi Seeding Akun Pelanggan Uji',
+          description: 'Pelajari cara menyisipkan akun demo user langsung pada query database seeder agar penguji tidak perlu register mandiri.',
+          guidingQuestions: 'Mengapa seeder akun demo sangat penting dalam pengujian software profesional?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Roos & Fleur karya Kelompok 1 Kelas R5C (Rakhi, Lintang, Jessyka, Rizky, Ismail) berhasil menghadirkan solusi e-commerce toko bunga dan hadiah yang estetik, fungsional, dan terorganisir.',
+      businessModelEvaluation: 'Sangat cocok untuk bisnis retail florist, buket wisuda, parcel hari raya, dan hampers hadiah kustom.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan stabil di hosting InfinityFree, repositori GitHub publik aktif dan dapat ditinjau.',
+      strengths: [
+        'Desain visual floral yang anggun, responsif, dan rapi',
+        'Live hosting aktif di roosfleur.rf.gd',
+        'Repositori GitHub publik lengkap dan tertata'
+      ],
+      weaknesses: [
+        'Belum menyertakan akun user default (penguji harus register mandiri)',
+        'Belum terintegrasi API ongkos kirim kurir instan (GrabExpress/GoSend)'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Sediakan akun user demo default dan tambahkan fitur kalender pemilihan tanggal pengantaran buket pada form checkout.'
+    }
+  },
+
+  // 6b. Kelas R5C - Kelompok 6 (Sweetbites)
+  {
+    id: 'project-r5c-kelompok-6',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5C',
+    groupNumber: 'Kelompok 6',
+    studentName: 'Kelas R5C - Kelompok 6 (Sweetbites: Ardy, Alika, Sohib, Putri Nuril)',
+    studentNim: '202433500158 / 159 / 160 / 165',
+    teamMembers: [
+      { nim: '202433500158', name: 'Ardy Agustiar' },
+      { nim: '202433500159', name: 'Alika Putri Septiani' },
+      { nim: '202433500160', name: 'Muhammad Sohib Dwi Putra' },
+      { nim: '202433500165', name: 'Putri Nuril Manzily' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / 5',
+    projectName: 'Sweetbites (Sistem Pemesanan Kue & Dessert)',
+    targetUrl: 'https://sweetbites.free.je',
+    adminUrl: 'https://sweetbites.free.je/admin',
+    orderUrl: 'https://sweetbites.free.je',
+    portals: [
+      { title: 'Website Bakery Sweetbites', url: 'https://sweetbites.free.je', badge: 'Public Store' },
+      { title: 'Portal Admin Sweetbites', url: 'https://sweetbites.free.je/admin', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@sweetbites.com', password: '12345' },
+      user: { username: 'dwi@gmail.com', password: '123456' }
+    },
+    githubRepoUrl: 'https://github.com/ArdyAgustiar16/Kelompok-6-Rekaya-E-Bisnis',
+    hostingPlatform: 'InfinityFree (domain .free.je)',
+    framework: 'Php Native dan MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5c-kelompok-6', 'Sweetbites Bakery'),
+    lecturerNotes: 'Aplikasi Sweetbites menghadirkan sistem pemesanan kue dan dessert berbasis web pada domain free.je dengan antarmuka yang bersih, katalog bakery lengkap, dan panel admin kasir.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 75,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Proyek Sweetbites memanfaatkan bantuan AI untuk merancang etalase kue dan dessert yang menggugah selera dan penataan modul session keranjang belanja. Repositori GitHub publik dan akun uji pelanggan serta admin disediakan dengan baik.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Kue, Pastry & Dessert Box',
+          aiPercentage: 78,
+          indicator: 'Grid menu responsif dengan foto kue, pilihan rasa/topper, dan kalkulasi total belanja.',
+          whatAiDid: 'Menyusun komponen tampilan etalase bakery dan keranjang belanja.'
+        },
+        {
+          feature: 'Portal Admin Toko Kue',
+          aiPercentage: 72,
+          indicator: 'Manajemen antrean produksi kue dapur dan laporan penjualan harian.',
+          whatAiDid: 'Menyusun alur pemrosesan pesanan dan session login admin.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pahami mekanisme pengurangan stok kue ready stock saat transaksi checkout diselesaikan.',
+      homeworkScope: [
+        {
+          topic: 'Manajemen Stok Kue dan Tanggal Kadaluwarsa',
+          description: 'Pelajari cara menambahkan atribut masa simpan (shelf life) kue pada tabel produk database untuk menjamin kesegaran produk kue basah.',
+          guidingQuestions: 'Bagaimana query database menampilkan daftar kue yang harus dijual lebih dulu berdasarkan tanggal pembuatan?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Sweetbites karya Kelompok 6 Kelas R5C (Ardy, Alika, Sohib, Putri Nuril) berhasil menghadirkan solusi e-commerce toko kue dan dessert yang manis, fungsional, dan lengkap dengan akun demo kredensial.',
+      businessModelEvaluation: 'Sangat cocok untuk bisnis bakery, kue ulang tahun custom, dessert box, dan hampers kue kering.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan stabil di hosting InfinityFree pada domain free.je, repositori GitHub publik tertata rapi.',
+      strengths: [
+        'Desain antarmuka toko kue yang bersih, cerah, dan ramah pengguna',
+        'Live hosting aktif di sweetbites.free.je',
+        'Akun demo kredensial user dan admin lengkap dan valid'
+      ],
+      weaknesses: [
+        'Belum terintegrasi payment gateway otomatis (masih simulasi transfer kasir manual)',
+        'Belum ada modul pemilihan jam pick-up kue di outlet'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Tambahkan fitur pilihan jam pengambilan kue (pick-up time) dan integrasikan opsi lilin/ucapan ulang tahun pada form checkout.'
     }
   }
 ];
