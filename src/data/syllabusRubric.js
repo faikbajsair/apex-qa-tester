@@ -1232,6 +1232,79 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5d-kelompok-2') {
+    // Kelas R5D - Kelompok 2 (Aeris Beaute): 88 / 100 - Grade A
+    const res = createBase(96, 'Aplikasi web e-commerce kosmetik Aeris Beaute aktif di InfinityFree dengan 4 role terpisah (User, Admin, Kasir, Gudang).');
+    res.fe_beranda = { status: 'PASSED', score: 96, note: 'Tampilan etalase kosmetik & skincare sangat elegan, rapi, dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 94, note: 'Profil brand kecantikan Aeris Beaute dan sertifikasi produk tertera jelas.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 92, note: 'Informasi customer care, WhatsApp konsultasi kecantikan, dan lokasi gerai.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 96, note: 'Katalog kosmetik lengkap dengan filter shade/warna, kategori, dan stok produk.' };
+    res.fe_keranjang = { status: 'PASSED', score: 95, note: 'Keranjang belanja responsif dengan ringkasan subtotal harga yang presisi.' };
+    res.fe_checkout = { status: 'PASSED', score: 94, note: 'Alur checkout pemesanan kosmetik dengan input alamat pengiriman detail.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 92, note: 'Instruksi pembayaran virtual account bank dan transfer e-wallet.' };
+    res.erp_users_admin = { status: 'PASSED', score: 98, note: 'Istimewa: Memiliki 4 role hak akses terisolasi (User, Admin, Kasir, dan Gudang).' };
+    res.erp_stok = { status: 'PASSED', score: 96, note: 'Modul role Petugas Gudang khusus untuk input batch kedatangan dan opname stok kosmetik.' };
+    res.erp_pesanan = { status: 'PASSED', score: 95, note: 'Modul role Kasir memvalidasi transaksi dan admin memantau status pesanan.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 94, note: 'Rekapitulasi omset penjualan kosmetik harian/bulanan terinci.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 92, note: 'Sinkronisasi stok kosmetik otomatis berkurang saat kasir memproses pesanan.' };
+    res.erp_crm = { status: 'PASSED', score: 85, note: 'Database member pelanggan loyal kosmetik tercatat dengan histori belanja.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 80, note: 'Modul pengajuan retur kosmetik rusak/pecah saat pengiriman sudah ada.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ kecocokan jenis kulit belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan garansi produk belum dibuat.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul tips kecantikan/skincare blog belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist kosmetik favorit belum tersedia.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-7') {
+    // Kelas R5D - Kelompok 7 (Struggle For Victory): 85 / 100 - Grade A
+    const res = createBase(94, 'Aplikasi web e-commerce fashion streetwear Struggle For Victory aktif di domain struggle-for-victory.ct.ws.');
+    res.fe_beranda = { status: 'PASSED', score: 95, note: 'Desain visual tema fashion streetwear modern, dinamis, dan bernuansa apparel urban.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Filosofi brand Struggle For Victory (SFV) dan lookbook fashion tertera.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak studio SFV, media sosial Instagram, dan link chat terintegrasi.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog apparel kaos, hoodie, celana, dan aksesoris dengan pilihan ukuran (S/M/L/XL).' };
+    res.fe_keranjang = { status: 'PASSED', score: 94, note: 'Keranjang belanja interaktif dengan kalkulasi berat dan total harga.' };
+    res.fe_checkout = { status: 'PASSED', score: 92, note: 'Form checkout data penerima pesanan streetwear.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 90, note: 'Petunjuk transfer pembayaran rekening studio SFV.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal admin di /admin dengan kredensial admin@sfv.demo aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen antrean order rilisan artikel streetwear dan status packing.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 90, note: 'Laporan omset penjualan dropship/pre-order dan artikel ready stock.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 80, note: 'Stok per varian ukuran pakaian tersinkronisasi saat checkout.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Histori pemesanan pelanggan tercatat di database.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 70, note: 'Alur penukaran size pakaian masih dilakukan via chat konfirmasi.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Panduan size chart dan FAQ penukaran size belum dibuat terpisah.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pre-order apparel belum dituangkan.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pelanggan belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog kultur streetwear belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist wishlist artikel drop belum ada.' };
+    return res;
+  }
+
+  if (projectId === 'project-r5d-kelompok-9') {
+    // Kelas R5D - Kelompok 9 (Crunchy Chicken): 82 / 100 - Grade B+
+    const res = createBase(93, 'Aplikasi web e-commerce model ERP UMKM Crunchy Chicken aktif di crunchychicken.site.je.');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Tampilan etalase ayam krispi modern, eye-catching, dan menggugah selera.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 90, note: 'Informasi latar belakang UMKM kuliner ayam geprek/krispi Crunchy Chicken.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak outlet Crunchy Chicken dan nomor WhatsApp pemesanan.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 94, note: 'Katalog paket ayam krispi, burger, saus keju/pedas, dan minuman.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Keranjang belanja interaktif dengan opsi pilihan saus dan level pedas.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Form pemesanan takeaway/dine-in dan input data pembeli.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran kasir tunai dan transfer QRIS.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal admin dengan kredensial admin@crunchychicken.id aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 90, note: 'Dashboard antrean pesanan dapur kasir real-time.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 88, note: 'Rekapitulasi penjualan paket ayam harian/mingguan.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Stok potongan ayam dan bumbu masih semi-otomatis.' };
+    res.erp_crm = { status: 'PARTIAL', score: 70, note: 'Data pelanggan tercatat namun belum ada fitur poin loyalty.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pemesanan partai besar/ulang tahun belum ada.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat pemesanan minimal katering belum tertera.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Artikel/blog seputar kuliner ayam belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum ada.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain pesanan makanan.' };
+    return res;
+  }
+
   return generateRubricScores({ domain: domain || 'E-Commerce ERP' });
 }
 
@@ -4224,6 +4297,262 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN)',
       recommendations: 'Tingkatkan menjadi arsitektur MVC sederhana atau integrasikan dengan API WhatsApp Gateway untuk pengiriman notifikasi resi otomatis kepada pelanggan.'
+    }
+  },
+
+  // 5f. Kelas R5D - Kelompok 2 (Aeris Beaute)
+  {
+    id: 'project-r5d-kelompok-2',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 2',
+    studentName: 'Kelas R5D - Kelompok 2 (Aeris Beaute: Jesica, Rafael, Bagas, Aisyah, Aisa)',
+    studentNim: '202433500188 / 189 / 191 / 192 / 515',
+    teamMembers: [
+      { nim: '202433500188', name: 'Jesica Az Zahra' },
+      { nim: '202433500189', name: 'M.Rafael Jibran' },
+      { nim: '202433500191', name: 'Bagas Budi Wardhanah' },
+      { nim: '202433500192', name: 'Aisyah Putri Salsabilah' },
+      { nim: '202433500515', name: 'Aisa loilatu' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Aeris Beaute (Pemesanan kosmetik online)',
+    targetUrl: 'https://aerisbeaute.rf.gd',
+    adminUrl: 'https://aerisbeaute.rf.gd/admin/',
+    orderUrl: 'https://aerisbeaute.rf.gd',
+    portals: [
+      { title: 'Website E-Commerce Kosmetik', url: 'https://aerisbeaute.rf.gd', badge: 'Public Web' },
+      { title: 'Portal 4-Role ERP (Admin/Kasir/Gudang)', url: 'https://aerisbeaute.rf.gd/admin/', badge: 'Multi-Role ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@aerisbeaute.id (Admin) / kasir@aerisbeaute.id (Kasir) / gudang@aerisbeaute.id (Gudang)', password: 'password123' },
+      user: { username: 'bagas123@gmail.com', password: '12345678' }
+    },
+    githubRepoUrl: 'https://github.com/mrjibran04/AERIS_BEAUTE.git',
+    hostingPlatform: 'InfinityFree (Cloud Shared Hosting)',
+    framework: 'PHP native & mysql',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-2', 'Aeris Beaute Kosmetik'),
+    lecturerNotes: 'Aplikasi Aeris Beaute memiliki keunggulan arsitektur ERP komprehensif dengan pemisahan 4 hak akses (User, Admin, Kasir, dan Gudang), manajemen stok batch kecantikan, dan laporan penjualan.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 69,
+      classification: 'Kolaborasi Mandiri & AI Terarah (Balanced AI & Student Coding, 65% - 75%)',
+      summaryAnalysis: 'Aeris Beaute menunjukkan perancangan sistem yang matang dengan integrasi 4 level hak akses pengguna (RBAC). AI digunakan untuk menyusun estetika visual e-commerce kosmetik yang lembut dan elegan, sementara logika isolasi hak akses kasir dan gudang dikembangkan secara struktural.',
+      featureBreakdown: [
+        {
+          feature: 'Arsitektur 4 Role ERP (Admin, Kasir, Gudang, User)',
+          aiPercentage: 65,
+          indicator: 'Pemisahan navigasi sidebar dan kontrol aksi yang terisolasi per level peran pengguna.',
+          whatAiDid: 'Menyusun boilerplate session check dan redirect hak akses per role.'
+        },
+        {
+          feature: 'Desain Etalase Produk Kosmetik & Skincare',
+          aiPercentage: 72,
+          indicator: 'Layout responsif modern dengan palet warna rose-gold feminin dan filter kategori kosmetik.',
+          whatAiDid: 'Menghasilkan komponen card produk, badge stok, dan keranjang belanja.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pemisahan peran Petugas Gudang untuk stok dan Kasir untuk transaksi adalah nilai tambah besar dalam implementasi ERP.',
+      homeworkScope: [
+        {
+          topic: 'Audit Alur Barang Gudang ke Kasir (Supply Chain ERP)',
+          description: 'Pelajari konsep First-In First-Out (FIFO) pada batch kadaluwarsa produk kosmetik di sistem pergudangan.',
+          guidingQuestions: 'Bagaimana tabel stok di database mencatat tanggal kadaluwarsa (expired date) per batch produk kosmetik?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Aeris Beaute karya Kelompok 2 Kelas R5D (Jesica, Rafael, Bagas, Aisyah, Aisa) merupakan implementasi ERP yang sangat baik dengan pembagian peran operasional 4-role (User, Admin, Kasir, Gudang) yang siap pakai.',
+      businessModelEvaluation: 'Sangat cocok untuk bisnis retail kecantikan modern yang memiliki toko fisik (POS Kasir) sekaligus gudang persediaan dan penjualan daring.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan stabil di hosting InfinityFree, alur pemisahan hak akses admin, kasir, dan gudang teruji lancar.',
+      strengths: [
+        'Dukungan 4 Role lengkap: User, Admin, Kasir, dan Gudang dengan kredensial jelas',
+        'Desain UI/UX e-commerce kosmetik yang elegan dan ramah pengguna',
+        'Repositori GitHub publik lengkap dan live hosting aktif'
+      ],
+      weaknesses: [
+        'Belum terintegrasi payment gateway otomatis (masih simulasi transfer manual)',
+        'Belum ada modul konsultasi shade tester kosmetik interaktif'
+      ],
+      finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN)',
+      recommendations: 'Tambahkan fitur pencatatan expired date kosmetik di modul Gudang dan cetak nota struk thermal pada modul Kasir.'
+    }
+  },
+
+  // 5g. Kelas R5D - Kelompok 7 (Struggle For Victory)
+  {
+    id: 'project-r5d-kelompok-7',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 7',
+    studentName: 'Kelas R5D - Kelompok 7 (Struggle For Victory: Rafli, Mukhsin, Zefa, Aditya)',
+    studentNim: '202433500216 / 218 / 219 / 220',
+    teamMembers: [
+      { nim: '202433500216', name: 'Rafli Gumilang' },
+      { nim: '202433500218', name: 'Mukhsin Ramdani' },
+      { nim: '202433500219', name: 'Zefa Putra Adipradana' },
+      { nim: '202433500220', name: 'Aditya Maulana' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5',
+    projectName: 'Pengembangan Sistem Informasi E-Commerce Fashion Streetwear Berbasis Web Pada Brand Struggle For Victory',
+    targetUrl: 'https://struggle-for-victory.ct.ws',
+    adminUrl: 'https://struggle-for-victory.ct.ws/admin/',
+    orderUrl: 'https://struggle-for-victory.ct.ws',
+    portals: [
+      { title: 'Website Brand Streetwear SFV', url: 'https://struggle-for-victory.ct.ws', badge: 'Public Web' },
+      { title: 'Dashboard Admin SFV Studio', url: 'https://struggle-for-victory.ct.ws/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@sfv.demo', password: 'sfv-demo' },
+      user: { username: 'Pelanggan01@sfv.studio', password: 'uwWyWkSVxU' }
+    },
+    githubRepoUrl: 'https://github.com/mukhsinramdani4-art/STRUGGLE-SFV-FULLSTACK-V2',
+    hostingPlatform: 'InfinityFree (Cloud Shared Hosting)',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-7', 'Struggle For Victory Streetwear'),
+    lecturerNotes: 'Aplikasi e-commerce brand streetwear Struggle For Victory memiliki estetika desain visual urban yang kuat pada domain ct.ws, sistem varian ukuran apparel, dan portal admin studio.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 73,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Struggle For Victory memanfaatkan bantuan generative AI untuk merancang tema gelap (dark mode) streetwear yang stylish dan fungsionalitas keranjang belanja multi-ukuran. Dokumentasi GitHub dan kredensial demo disediakan dengan sangat terstruktur.',
+      featureBreakdown: [
+        {
+          feature: 'Desain Visual Apparel Streetwear Urban',
+          aiPercentage: 75,
+          indicator: 'Tipografi modern, dark aesthetic, dan layout lookbook koleksi artikel pakaian.',
+          whatAiDid: 'Menyusun styling CSS responsif dan interaksi visual katalog pakaian.'
+        },
+        {
+          feature: 'Manajemen Varian Ukuran & Order Admin',
+          aiPercentage: 70,
+          indicator: 'Penanganan atribut ukuran (S, M, L, XL) pada form pemesanan dan tabel order.',
+          whatAiDid: 'Membantu query relasi produk ke varian ukuran pakaian.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Mahasiswa harus menguasai relasi tabel stok per varian size pakaian agar tidak terjadi minus stock.',
+      homeworkScope: [
+        {
+          topic: 'Normalisasi Database Varian Produk',
+          description: 'Pelajari konsep normalisasi 1NF hingga 3NF untuk produk fashion yang memiliki banyak ukuran dan warna.',
+          guidingQuestions: 'Mengapa stok ukuran baju harus dipisah ke tabel relasional produk_varian dan bukan digabung dalam satu kolom string?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Struggle For Victory karya Kelompok 7 Kelas R5D (Rafli, Mukhsin, Zefa, Aditya) berhasil menyajikan e-commerce fashion streetwear yang stylish, responsif, dan lengkap dengan akun demo kredensial studio.',
+      businessModelEvaluation: 'Sangat potensial diaplikasikan pada industri distro fashion independen dan rilisan artikel pakaian berkala (limited drop).',
+      technicalArchitectureEvaluation: 'Implementasi PHP Native dan MySQL berjalan baik pada domain custom ct.ws, repositori GitHub terorganisir dengan rapi.',
+      strengths: [
+        'Identitas visual branding streetwear yang kuat dan memikat',
+        'Domain live hosting aktif di struggle-for-victory.ct.ws',
+        'Kredensial akun uji admin dan user unik terkonfigurasi dengan baik'
+      ],
+      weaknesses: [
+        'Belum terintegrasi API ongkos kirim real-time (JNE/SiCepat/J&T)',
+        'Belum ada halaman panduan size chart ukuran pakaian'
+      ],
+      finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN)',
+      recommendations: 'Integrasikan API RajaOngkir untuk perhitungan tarif pengiriman ekspedisi dan tambahkan modal panduan size chart pada halaman detail pakaian.'
+    }
+  },
+
+  // 5h. Kelas R5D - Kelompok 9 (Crunchy Chicken)
+  {
+    id: 'project-r5d-kelompok-9',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 9',
+    studentName: 'Kelas R5D - Kelompok 9 (Crunchy Chicken: Fariz, Raisi, Leonel, Herlina)',
+    studentNim: '202433500230 / 226 / 228 / 229',
+    teamMembers: [
+      { nim: '202433500230', name: 'Fariz Putra Ramadhan' },
+      { nim: '202433500226', name: 'Raisi Putriana Harsyid' },
+      { nim: '202433500228', name: 'Leonel Indra leimena' },
+      { nim: '202433500229', name: 'Herlina Nurul Sa\'diah' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / Semester 5 (Ganjil)',
+    projectName: 'PERANCANGAN SISTEM INFORMASI E-COMMERCE MODEL ERP PADA UMKM CRUNCHY CHICKEN',
+    targetUrl: 'http://crunchychicken.site.je',
+    adminUrl: 'http://crunchychicken.site.je/admin/',
+    orderUrl: 'http://crunchychicken.site.je',
+    portals: [
+      { title: 'Website Pemesanan Crunchy Chicken', url: 'http://crunchychicken.site.je', badge: 'Public Web' },
+      { title: 'Dashboard Admin Kasir Dapur', url: 'http://crunchychicken.site.je/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@crunchychicken.id', password: 'miwacantik!' },
+      user: { username: 'garowgariw@gmail.com', password: 'garow123' }
+    },
+    githubRepoUrl: 'https://github.com/farizputraaaaaa/crunchychickennn',
+    hostingPlatform: 'InfinityFree (Cloud Share Hosting)',
+    framework: 'PHP Native Dan MYSQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-9', 'Crunchy Chicken UMKM'),
+    lecturerNotes: 'Aplikasi e-commerce ERP UMKM Crunchy Chicken memiliki katalog paket ayam krispi yang menggugah selera pada domain site.je, fitur keranjang belanja, dan panel admin kasir.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 75,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Proyek Crunchy Chicken memanfaatkan bantuan AI pada penataan antarmuka etalase kuliner cepat saji dan query dasar manajemen pesanan kasir. Mahasiswa melakukan penyesuaian domain hosting site.je dan alur input data pesanan.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Menu Paket Ayam Krispi & Saus',
+          aiPercentage: 76,
+          indicator: 'Komponen visual card makanan dengan tombol pilihan porsi dan saus pedas/keju.',
+          whatAiDid: 'Menyusun grid menu makanan cepat saji dan interaksi keranjang.'
+        },
+        {
+          feature: 'Panel Kasir dan Antrean Pesanan Admin',
+          aiPercentage: 72,
+          indicator: 'Pencatatan daftar pesanan masuk dengan status proses dan verifikasi pembayaran kasir.',
+          whatAiDid: 'Menyusun tampilan antrean transaksi dan rekapitulasi penjualan harian.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pahami mekanisme session dan validasi form checkout makanan agar data pesanan tidak hilang saat koneksi lambat.',
+      homeworkScope: [
+        {
+          topic: 'Penanganan Transaksi Kasir dan Laporan Penjualan',
+          description: 'Pelajari cara membuat query agregasi (SUM, COUNT, GROUP BY) untuk rekapitulasi laba kotor harian outlet ayam krispi.',
+          guidingQuestions: 'Bagaimana query SQL menghasilkan laporan menu terlaris dalam rentang tanggal tertentu?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Crunchy Chicken karya Kelompok 9 Kelas R5D (Fariz, Raisi, Leonel, Herlina) menghadirkan solusi e-commerce kuliner cepat saji yang fungsional dengan antarmuka yang bersih pada domain site.je.',
+      businessModelEvaluation: 'Relevan untuk UMKM makanan siap saji yang ingin melayani pemesanan bawa pulang (takeaway) dan pesan antar mandiri.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan lancar di InfinityFree, kredensial demo user dan admin aktif dan siap diuji.',
+      strengths: [
+        'Live hosting aktif di domain crunchychicken.site.je',
+        'Kredensial lengkap dan valid untuk akun customer dan admin',
+        'Desain antarmuka katalog menu makanan yang jelas dan informatif'
+      ],
+      weaknesses: [
+        'Belum ada modul pilihan pengantaran kurir ojek online lokal',
+        'Sinkronisasi bahan baku dapur potongan ayam masih semi-manual'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Tambahkan fitur cetak tiket pesanan dapur otomatis dan integrasikan pilihan level kepedasan cabai pada opsi checkout.'
     }
   }
 ];
