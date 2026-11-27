@@ -1162,6 +1162,30 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-r5d-kelompok-3') {
+    // Kelas R5D - Kelompok 3 (Taichan Bara): 82 / 100 - Grade B+
+    const res = createBase(93, 'Aplikasi web e-commerce ERP UMKM Taichan Bara aktif di InfinityFree (taichanbara.rf.gd).');
+    res.fe_beranda = { status: 'PASSED', score: 94, note: 'Landing page etalase sate taichan bara menarik, berkonsep kuliner pedas modern, dan responsif.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 92, note: 'Profil UMKM kuliner Taichan Bara dan keunggulan sambal bara tertera jelas.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 90, note: 'Kontak pemesanan WhatsApp dan lokasi kedai sate Taichan Bara tersedia.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 95, note: 'Katalog varian sate dada ayam, paha, kulit, usus, lontong, dan aneka sambal bara.' };
+    res.fe_keranjang = { status: 'PASSED', score: 92, note: 'Fitur keranjang belanja interaktif dengan pemilihan jumlah tusuk dan level pedas.' };
+    res.fe_checkout = { status: 'PASSED', score: 90, note: 'Alur checkout pemesanan takeaway/dine-in dengan input data pelanggan.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 88, note: 'Instruksi pembayaran kasir tunai dan transfer rekening bank.' };
+    res.erp_users_admin = { status: 'PASSED', score: 92, note: 'Portal login SuperAdmin dengan kredensial halisaamelia18@gmail.com aktif.' };
+    res.erp_pesanan = { status: 'PASSED', score: 92, note: 'Manajemen status pemrosesan pesanan bakar taichan dan verifikasi kasir.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 88, note: 'Rekapitulasi penjualan sate harian dan omset kedai.' };
+    res.erp_sync_inventaris = { status: 'PARTIAL', score: 75, note: 'Stok tusuk sate dan bahan daging ayam masih semi-manual.' };
+    res.erp_crm = { status: 'PARTIAL', score: 75, note: 'Data pelanggan tercatat di database namun belum ada sistem poin member.' };
+    res.fe_faq = { status: 'MISSING', score: 0, note: 'Halaman FAQ pemesanan katering/acara belum tersedia.' };
+    res.fe_terms = { status: 'MISSING', score: 0, note: 'Syarat dan ketentuan pemesanan belum dibuat.' };
+    res.fe_privacy = { status: 'MISSING', score: 0, note: 'Kebijakan privasi pengguna belum ada.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul blog/artikel seputar kuliner sate belum ada.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist menu favorit belum tersedia.' };
+    res.erp_pengembalian = { status: 'MISSING', score: 0, note: 'Belum ada sistem retur/komplain pesanan makanan.' };
+    return res;
+  }
+
   if (projectId === 'project-r5d-kelompok-4') {
     // Kelas R5D - Kelompok 4 (Wasibu): 82 / 100 - Grade B+
     const res = createBase(93, 'Aplikasi web sistem pemesanan makanan & minuman Wasibu aktif di domain Wasibu.site.je.');
@@ -4076,6 +4100,91 @@ const RAW_PRESET_PROJECTS = [
       ],
       finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
       recommendations: 'Tingkatkan keamanan autentikasi dengan hashing password yang lebih kuat dan tambahkan laporan neraca laba rugi periodik pada panel admin.'
+    }
+  },
+
+  // 5c. Kelas R5D - Kelompok 3 (Taichan Bara)
+  {
+    id: 'project-r5d-kelompok-3',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas R5D',
+    groupNumber: 'Kelompok 3',
+    studentName: 'Kelas R5D - Kelompok 3 (Taichan Bara: Halisa, Ega, Jose, Zalva)',
+    studentNim: '202433500193 / 196 / 197 / 198',
+    teamMembers: [
+      { nim: '202433500193', name: 'Halisa Amalia' },
+      { nim: '202433500196', name: 'Ega Pramudiya' },
+      { nim: '202433500197', name: 'Jose Fernando' },
+      { nim: '202433500198', name: 'Zalva Ayu Febriyanti Putri' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026 / 5 (Ganjil)',
+    projectName: 'Perancangan Sistem Informasi E-Commerce Model ERP Pada UMKM Taichan Bara',
+    targetUrl: 'http://taichanbara.rf.gd',
+    adminUrl: 'http://taichanbara.rf.gd/admin/',
+    orderUrl: 'http://taichanbara.rf.gd',
+    portals: [
+      { title: 'Website Pemesanan Taichan Bara', url: 'http://taichanbara.rf.gd', badge: 'Public Web' },
+      { title: 'Portal SuperAdmin Kasir', url: 'http://taichanbara.rf.gd/admin/', badge: 'Admin ERP' }
+    ],
+    demoCredentials: {
+      admin: { username: 'halisaamelia18@gmail.com', password: 'halisadanbill' },
+      user: { username: 'billskarsgard@gmail.com', password: 'billdanhalisa' }
+    },
+    githubRepoUrl: 'https://github.com/halisaamalia/Kelompok-3-UMKM-Taichan-Bara.git',
+    hostingPlatform: 'Shared Web Hosting PHP & MySQL (InfinityFree)',
+    framework: 'PHP Native & MySQL',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-r5d-kelompok-3', 'UMKM Taichan Bara'),
+    lecturerNotes: 'Aplikasi e-commerce ERP UMKM Taichan Bara memiliki alur pemesanan sate taichan dengan opsi level pedas sambal bara, keranjang dinamis, dan portal SuperAdmin kasir aktif di InfinityFree.',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 74,
+      classification: 'Dibantu AI Terarah (Targeted AI Assistance, 70% - 80%)',
+      summaryAnalysis: 'Proyek Taichan Bara memanfaatkan bantuan AI untuk merancang etalase kuliner sate taichan pedas yang atraktif dan skrip PHP session keranjang belanja. Mahasiswa telah melengkapi repositori GitHub dengan source code publik dan akun uji SuperAdmin.',
+      featureBreakdown: [
+        {
+          feature: 'Katalog Varian Sate Taichan & Sambal Bara',
+          aiPercentage: 76,
+          indicator: 'Grid menu responsif dengan foto makanan, opsi jumlah tusuk, dan variasi sambal.',
+          whatAiDid: 'Menyusun layout komponen etalase makanan dan form pemesanan.'
+        },
+        {
+          feature: 'Portal SuperAdmin Kasir Kedai',
+          aiPercentage: 72,
+          indicator: 'Tabel daftar pesanan masuk dengan status bakar/siap saji dan verifikasi kasir.',
+          whatAiDid: 'Menyusun alur antrean pesanan dan session login SuperAdmin.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Pahami mekanisme pengelolaan stok bahan baku daging ayam per tusuk sate saat pesanan masuk.',
+      homeworkScope: [
+        {
+          topic: 'Manajemen Inventaris Bahan Baku Sate (ERP Sederhana)',
+          description: 'Pelajari cara menghitung estimasi kebutuhan bahan baku (tusuk sate, gramasi daging ayam, cabai) berdasarkan riwayat penjualan harian.',
+          guidingQuestions: 'Bagaimana sistem ERP dapat memberikan notifikasi alert ketika stok daging ayam mendekati batas minimum?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek UMKM Taichan Bara karya Kelompok 3 Kelas R5D (Halisa, Ega, Jose, Zalva) berhasil menghadirkan solusi e-commerce kuliner sate taichan yang fungsional dengan antarmuka yang bersih dan akun demo SuperAdmin yang valid.',
+      businessModelEvaluation: 'Sangat relevan untuk kedai kuliner malam / UMKM sate taichan yang ingin melayani pesan antar dan reservasi dine-in mandiri.',
+      technicalArchitectureEvaluation: 'PHP Native dan MySQL berjalan stabil di live hosting InfinityFree, repositori GitHub publik tertata rapi.',
+      strengths: [
+        'Live hosting aktif dan responsif di taichanbara.rf.gd',
+        'Repositori GitHub publik lengkap dengan struktur kode yang jelas',
+        'Kredensial lengkap untuk akun pelanggan dan SuperAdmin kasir'
+      ],
+      weaknesses: [
+        'Belum terintegrasi payment gateway otomatis (masih konfirmasi kasir manual)',
+        'Belum ada modul pilihan tingkat kepedasan sambal secara bertingkat di checkout'
+      ],
+      finalVerdict: 'DITERIMA (GRADE B+ / BAIK SEKALI)',
+      recommendations: 'Tambahkan opsi kustomisasi level sambal bara pada form pemesanan dan kembangkan modul rekapitulasi stok tusuk sate otomatis di panel admin.'
     }
   },
 
