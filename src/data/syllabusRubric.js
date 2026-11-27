@@ -674,17 +674,20 @@ export function generateGroupSpecificScores(projectId, domain = '') {
   }
 
   if (projectId === 'project-s5a-kelompok-8') {
-    // Kelompok 8 (Ayam Cabe Ijo): 46 / 100 - Grade D (Belum di-Hosting & Tanpa Git)
+    // Kelompok 8 (Ayam Cabe Ijo): 47 / 100 - Grade D (Belum di-Hosting & Tanpa Git)
     const res = createBase(0, 'Belum diimplementasikan.');
     allIds.forEach(id => {
       res[id] = { status: 'MISSING', score: 0, note: 'Aplikasi belum di-hosting di cloud dan tidak menggunakan repositori git publik.' };
     });
     [
-      'fe_beranda', 'fe_tentang_kami', 'fe_kontak_kami', 'fe_katalog_produk', 'fe_keranjang', 'fe_checkout',
-      'fe_pengaturan_akun', 'erp_produk', 'erp_pesanan', 'erp_stok', 'erp_kategori',
-      'ux_responsif', 'ux_ui_bersih', 'ux_intuitif', 'ux_informasi_jelas', 'erp_sync_inventaris'
+      'fe_beranda', 'fe_tentang_kami', 'fe_kontak_kami', 'fe_promo', 'fe_testimoni',
+      'fe_katalog_produk', 'fe_keranjang', 'fe_checkout', 'fe_pembayaran_info', 'fe_pengaturan_akun', 'fe_delivery_cod', 'fe_riwayat_pesanan',
+      'erp_produk', 'erp_pesanan', 'erp_stok', 'erp_kategori', 'erp_pelanggan', 'erp_pembayaran', 'erp_pengiriman',
+      'erp_users_admin', 'erp_laporan_keuangan', 'erp_lacak_pesanan',
+      'ux_responsif', 'ux_ui_bersih', 'ux_intuitif', 'ux_informasi_jelas',
+      'erp_sync_inventaris', 'erp_sync_logistik', 'erp_sync_keuangan'
     ].forEach(id => {
-      res[id] = { status: 'PARTIAL', score: 50, note: 'Rancangan PHP Native & Bootstrap offline (wajib deploy sebelum sidang).' };
+      res[id] = { status: 'PARTIAL', score: 60, note: 'Rancangan PHP Native & Bootstrap offline (wajib deploy ke hosting publik dan Git sebelum sidang).' };
     });
     return res;
   }
@@ -3132,7 +3135,7 @@ const RAW_PRESET_PROJECTS = [
     classGroup: 'Kelas S5A',
     groupNumber: 'Kelompok 8',
     studentName: 'Kelas S5A - Kelompok 8 (Ayam Cabe Ijo: Nauraleza & Rofiatul Lutfi)',
-    studentNim: '202433500105 / 104',
+    studentNim: '202433500105 / 202433500104',
     teamMembers: [
       { nim: '202433500105', name: 'Muhammad Nauraleza Nadjad' },
       { nim: '202433500104', name: 'Rofiatul Lutfi' }
@@ -3153,8 +3156,8 @@ const RAW_PRESET_PROJECTS = [
     },
     githubRepoUrl: '',
     hostingPlatform: 'Belum di-Hosting (Lokal)',
-    framework: 'Bootstrap 5, PHP Native, MySQL',
-    evaluationDate: '2026-11-25',
+    framework: 'Bootstrap 5, PHP native, MySQL',
+    evaluationDate: '2026-11-27',
     scores: generateGroupSpecificScores('project-s5a-kelompok-8', 'Ayam Cabe Ijo'),
     lecturerNotes: 'Aplikasi Ayam Cabe Ijo karya Kelompok 8 Kelas S5A dibangun menggunakan Bootstrap 5 dan PHP Native secara offline/lokal. Mahasiswa belum melakukan deployment cloud dan tidak menyertakan repositori Git publik.',
     vulnerabilities: [],
@@ -3207,7 +3210,7 @@ const RAW_PRESET_PROJECTS = [
         'Belum ada akun admin yang aktif'
       ],
       finalVerdict: 'DITERIMA DENGAN CATATAN WAJIB DEPLOY KE CLOUD HOSTING',
-      recommendations: 'Kelompok 8 diberikan nilai pembinaan (46, Grade D). Mahasiswa diwajibkan segera men-deploy aplikasi ke cloud dan membuat repositori GitHub sebelum sidang Kerja Praktik.'
+      recommendations: 'Kelompok 8 diberikan nilai pembinaan (47, Grade D). Mahasiswa diwajibkan segera men-deploy aplikasi ke cloud dan membuat repositori GitHub publik sebelum sidang Kerja Praktik.'
     }
   },
 
