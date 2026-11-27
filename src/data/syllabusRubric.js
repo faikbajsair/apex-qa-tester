@@ -638,6 +638,32 @@ export function generateGroupSpecificScores(projectId, domain = '') {
     return res;
   }
 
+  if (projectId === 'project-s5a-kelompok-5') {
+    // Kelas S5A - Kelompok 5 (Bengkel Nexus): 94 / 100 - Grade A (Production-Ready ERP)
+    const res = createBase(98, 'Aplikasi web enterprise Bengkel Nexus aktif di nexus-demo.kanalab.live dengan Laravel 13, Midtrans Sandbox, Leaflet Maps, dan multi-portal.');
+    res.fe_beranda = { status: 'PASSED', score: 98, note: 'Tampilan etalase suku cadang dan booking servis bengkel sangat profesional dengan Tailwind CSS.' };
+    res.fe_tentang_kami = { status: 'PASSED', score: 98, note: 'Company profile lengkap di /profil-perusahaan dengan Leaflet Maps lokasi bengkel interaktif.' };
+    res.fe_kontak_kami = { status: 'PASSED', score: 96, note: 'Form kontak, integrasi peta digital Leaflet, dan nomor darurat servis montir keliling.' };
+    res.fe_katalog_produk = { status: 'PASSED', score: 98, note: 'Katalog spare part motor/mobil, oli mesin, aksesoris, dan paket jasa servis bengkel terstruktur rapi.' };
+    res.fe_keranjang = { status: 'PASSED', score: 96, note: 'Keranjang belanja dinamis berbasis AlpineJS dengan kalkulasi subtotal dan jasa pasang.' };
+    res.fe_checkout = { status: 'PASSED', score: 96, note: 'Alur checkout multi-opsi (ambil di bengkel atau pengiriman) terintegrasi Midtrans Snap API.' };
+    res.fe_pembayaran_info = { status: 'PASSED', score: 98, note: 'Istimewa: Pembayaran otomatis dengan Payment Gateway Midtrans Sandbox (Virtual Account, QRIS, GoPay).' };
+    res.erp_users_admin = { status: 'PASSED', score: 98, note: 'Panel Backoffice ERP terisolasi di /erp/login dengan autentikasi Laravel yang kokoh.' };
+    res.erp_pesanan = { status: 'PASSED', score: 96, note: 'Manajemen workflow servis bengkel dari booking antrean montir, perbaikan, hingga invoice lunas.' };
+    res.erp_stok = { status: 'PASSED', score: 96, note: 'Manajemen inventaris suku cadang, stok minimum alert, dan pencatatan nomor part.' };
+    res.erp_laporan_keuangan = { status: 'PASSED', score: 95, note: 'Laporan laba kotor suku cadang dan omset jasa servis montir terperinci.' };
+    res.erp_sync_inventaris = { status: 'PASSED', score: 96, note: 'Stok spare part otomatis terpotong saat pesanan spare part atau pekerjaan servis diselesaikan.' };
+    res.erp_sync_keuangan = { status: 'PASSED', score: 95, note: 'Webhook notifikasi Midtrans otomatis memperbarui status transaksi menjadi lunas.' };
+    res.erp_crm = { status: 'PASSED', score: 90, note: 'Riwayat servis kendaraan pelanggan tercatat berdasarkan plat nomor dan akun user.' };
+    res.erp_pengembalian = { status: 'PARTIAL', score: 85, note: 'Prosedur klaim garansi servis bengkel sudah ada di database.' };
+    res.fe_faq = { status: 'PASSED', score: 90, note: 'Informasi FAQ seputar estimasi waktu servis dan garansi suku cadang.' };
+    res.fe_terms = { status: 'PASSED', score: 90, note: 'Syarat dan ketentuan garansi servis dan pembatalan booking montir.' };
+    res.fe_privacy = { status: 'PASSED', score: 90, note: 'Kebijakan privasi data kendaraan dan pelanggan.' };
+    res.fe_blog = { status: 'MISSING', score: 0, note: 'Modul artikel/tips perawatan mesin kendaraan belum tersedia.' };
+    res.fe_wishlist = { status: 'MISSING', score: 0, note: 'Fitur wishlist spare part belum diaktifkan.' };
+    return res;
+  }
+
   if (projectId === 'project-s5a-kelompok-6') {
     // Kelompok 6 (Aplikasi Pemesanan Warjo): 71 / 100 - Grade B
     const res = createBase(86, 'Aplikasi pemesanan warung kopi warjo di Vercel dengan Cloudflare Workers.');
@@ -3147,7 +3173,101 @@ const RAW_PRESET_PROJECTS = [
     }
   },
 
-  // 1d. Kelas S5A - Kelompok 6 (Aplikasi Pemesanan Warjo)
+  // 1d. Kelas S5A - Kelompok 5 (Bengkel Nexus)
+  {
+    id: 'project-s5a-kelompok-5',
+    isGroup: true,
+    groupType: 'Kerja Praktik (KP)',
+    classGroup: 'Kelas S5A',
+    groupNumber: 'Kelompok 5',
+    studentName: 'Kelas S5A - Kelompok 5 (Bengkel Nexus: Rahmat, Sinta, Siti, Kanny)',
+    studentNim: '202433500060 / 081 / 080 / 074',
+    teamMembers: [
+      { nim: '202433500060', name: 'Rahmat' },
+      { nim: '202433500081', name: 'Sinta Sulastri' },
+      { nim: '202433500080', name: 'Siti Nurohmah' },
+      { nim: '202433500074', name: 'Kanny Indira Baihaqi' }
+    ],
+    courseName: 'Kerja Praktik (KP)',
+    prodi: 'Sistem Informasi',
+    academicYear: '2026/2027 / Semester 5',
+    projectName: 'Rancangan Sistem Informasi E-Commerce Model Erp Pada Bengkel Nexus',
+    targetUrl: 'https://nexus-demo.kanalab.live/ecommerce',
+    adminUrl: 'https://nexus-demo.kanalab.live/erp/login',
+    orderUrl: 'https://nexus-demo.kanalab.live/profil-perusahaan',
+    portals: [
+      { title: 'E-Commerce Bengkel Nexus', url: 'https://nexus-demo.kanalab.live/ecommerce', badge: 'Public Store' },
+      { title: 'Backoffice / ERP Admin', url: 'https://nexus-demo.kanalab.live/erp/login', badge: 'Admin ERP' },
+      { title: 'Company Profile Perusahaan', url: 'https://nexus-demo.kanalab.live/profil-perusahaan', badge: 'Company Profile' }
+    ],
+    demoCredentials: {
+      admin: { username: 'admin@nexus.test', password: 'password' },
+      user: { username: 'siti@nexus.test', password: 'password' }
+    },
+    githubRepoUrl: '',
+    hostingPlatform: 'Hostinger + Cloudflare (nexus-demo.kanalab.live)',
+    framework: 'Laravel 13, Tailwind CSS, AlpineJS, MySQL, Midtrans Sandbox, Leaflet Maps',
+    evaluationDate: '2026-11-27',
+    scores: generateGroupSpecificScores('project-s5a-kelompok-5', 'Bengkel Nexus Otomotif ERP'),
+    lecturerNotes: 'Aplikasi Bengkel Nexus memiliki arsitektur enterprise modern dengan Laravel 13, Tailwind CSS, AlpineJS, integrasi payment gateway Midtrans Sandbox, modul peta digital Leaflet Maps, dan pemisahan triple portal (Company Profile, E-Commerce, dan ERP Admin).',
+    vulnerabilities: [],
+    aiAudit: {
+      overallPercentage: 62,
+      classification: 'Kombinasi Rekayasa Mahasiswa & AI Tingkat Lanjut (Advanced Integration, 60% - 70%)',
+      summaryAnalysis: 'Proyek Bengkel Nexus menunjukkan pemahaman rekayasa perangkat lunak yang sangat tinggi. Mahasiswa mengadopsi stack enterprise Laravel 13, AlpineJS, integrasi API Midtrans payment gateway, dan library geolokasi Leaflet Maps. Pemanfaatan AI digunakan secara profesional untuk scaffolding komponen Tailwind dan helper script integrasi webhook.',
+      featureBreakdown: [
+        {
+          feature: 'Integrasi Payment Gateway Midtrans Sandbox',
+          aiPercentage: 60,
+          indicator: 'Implementasi Midtrans Snap token generator, callback webhook handler, dan verifikasi signature hash yang aman.',
+          whatAiDid: 'Membantu formatting SDK wrapper Midtrans dan controller response.'
+        },
+        {
+          feature: 'Peta Lokasi Bengkel Interaktif (Leaflet Maps)',
+          aiPercentage: 58,
+          indicator: 'Inisialisasi peta OpenStreetMap via Leaflet JS dengan custom pin marker lokasi bengkel.',
+          whatAiDid: 'Menyusun komponen container peta dan event click coordinate.'
+        },
+        {
+          feature: 'Arsitektur Triple Portal (Company Profile, E-Commerce, ERP Backoffice)',
+          aiPercentage: 65,
+          indicator: 'Pemisahan route group, middleware otentikasi admin/pelanggan, dan layout blade modular.',
+          whatAiDid: 'Menghasilkan layout responsif Tailwind CSS dan state AlpineJS.'
+        }
+      ],
+      dosenAdvice: 'Kamu boleh menggunakan AI, tapi yang paling penting kamu harus tahu Alur, Logika, Tujuan, Cara Membaca Coding-nya, dan Cara Membangun Coding-nya dari nol. Upaya mahasiswa membeli domain kanalab.live dan hosting VPS mandiri serta mengintegrasikan Midtrans & Leaflet Maps patut diapresiasi tinggi!',
+      homeworkScope: [
+        {
+          topic: 'Keamanan Webhook Payment Gateway dan Idempotency',
+          description: 'Pelajari cara menangani duplicate webhook callbacks dari Midtrans menggunakan idempotency key atau database lock.',
+          guidingQuestions: 'Mengapa verifikasi SHA512 signature key dari Midtrans wajib dilakukan sebelum mengubah status order menjadi SUCCESS?'
+        }
+      ]
+    },
+    descriptiveEvaluation: {
+      evaluator: 'Faik Bajsair, S.Kom., M.Kom.',
+      prodi: 'Program Studi Sistem Informasi',
+      academicRole: 'Dosen Penguji / Academic Quality Analyst',
+      executiveSummary: 'Proyek Bengkel Nexus karya Kelompok 5 Kelas S5A (Rahmat, Sinta, Siti, Kanny) adalah proyek percontohan (benchmark) luar biasa dengan penerapan Laravel 13, Tailwind CSS, AlpineJS, Midtrans Sandbox, dan Leaflet Maps.',
+      businessModelEvaluation: 'Sangat siap diproduksi untuk digitalisasi bengkel otomotif modern: booking servis montir, penjualan suku cadang online, dan pelacakan riwayat servis berkala.',
+      technicalArchitectureEvaluation: 'Arsitektur triple portal (Company Profile, E-Commerce Store, dan ERP Backoffice) sangat solid dengan deployment di Hostinger dan perlindungan Cloudflare CDN.',
+      strengths: [
+        'Stack modern: Laravel 13, Tailwind CSS, dan AlpineJS yang reaktif dan cepat',
+        'Integrasi Payment Gateway nyata: Midtrans Sandbox aktif',
+        'Integrasi Peta Digital: Leaflet Maps untuk lokasi fisik bengkel',
+        'Domain custom live hosting aktif dan terlindungi Cloudflare (nexus-demo.kanalab.live)',
+        'Akun demo kredensial user dan admin berfungsi'
+      ],
+      weaknesses: [
+        'Belum menyertakan tautan repositori GitHub publik pada form pengumpulan',
+        'Modul blog tips perawatan mesin kendaraan belum tersedia'
+      ],
+      finalVerdict: 'DITERIMA (GRADE A / SANGAT MEMUASKAN - PRODUCTION READY)',
+      recommendations: 'Segera cantumkan tautan repositori GitHub publik sebelum sidang KP untuk melengkapi berkas portofolio kode.'
+    }
+  },
+
+  // 1e. Kelas S5A - Kelompok 6 (Aplikasi Pemesanan Warjo)
   {
     id: 'project-s5a-kelompok-6',
     isGroup: true,

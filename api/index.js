@@ -241,6 +241,14 @@ function detectHostingPlatform(targetUrl, headers) {
       description: 'Aplikasi dideploy pada platform cloud Wasmer Edge dengan WebAssembly / container virtualized server environment.'
     };
   }
+  if (urlLower.includes('cloudflare') || serverHeader.includes('cloudflare') || headerKeys.includes('cf-ray') || urlLower.includes('kanalab.live')) {
+    return {
+      provider: 'Hostinger + Cloudflare CDN',
+      badge: 'Cloudflare Protected VPS',
+      isModernCloud: true,
+      description: 'Aplikasi dideploy pada Cloud Hosting / VPS Hostinger dengan akselerasi dan proteksi Cloudflare CDN global.'
+    };
+  }
   if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
     return {
       provider: 'Vercel',

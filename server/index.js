@@ -260,6 +260,16 @@ function detectHostingPlatform(targetUrl, headers) {
     };
   }
 
+  if (urlLower.includes('cloudflare') || serverHeader.includes('cloudflare') || headerKeys.includes('cf-ray') || urlLower.includes('kanalab.live')) {
+    return {
+      provider: 'Hostinger + Cloudflare CDN',
+      badge: 'Cloudflare Protected VPS',
+      icon: 'shield',
+      isModernCloud: true,
+      description: 'Aplikasi dideploy pada Cloud Hosting / VPS Hostinger dengan akselerasi dan proteksi Cloudflare CDN global.'
+    };
+  }
+
   if (urlLower.includes('.vercel.app') || headerKeys.includes('x-vercel-id')) {
     return {
       provider: 'Vercel',
